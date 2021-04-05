@@ -796,6 +796,21 @@ localdoc:
 	        PACKAGE_BOOK=file://${abs_builddir}/html/book.pdf \
 	    stamp-doc
 
+# The following target makes links point to a non-official repository.
+# Might be useful for trying out the documentation online on another
+# account.
+# Call like:
+## make GITHUB_ACCOUNT="YOUR_ACCOUNT" GITHUB_BRANCH="your-branch-name" \
+##      githubdoc
+GITHUB_ACCOUNT=hemmecke
+GITHUB_BRANCH=wip/rstdoc-hemmecke
+githubdoc:
+	make PACKAGE_SOURCE=https://github.com/${GITHUB_ACCOUNT}/fricas \
+        BRANCH=${GITHUB_BRANCH} \
+        PACKAGE_URL=https://${GITHBUB_ACCOUNT}.github.io/fricas \
+        doc
+
+
 clean-html:
 	-rm -rf html tmp/sphinx
 	-rm -rf stamp-sphinx stamp-api stamp-html stamp-doc
