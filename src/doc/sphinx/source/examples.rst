@@ -1,7 +1,7 @@
 Examples
 ========
 
-* `FriCAS Demos and Tutorials <fricas-notebooks/index.html>`_
+* `FriCAS Demos and Tutorials <https://fricas.github.io/fricas-notebooks/index.html>`_
 
 * `Status of Implementation of Risch's Integration algorithm
   <http://fricas-wiki.math.uni.wroc.pl/RischImplementationStatus>`_
