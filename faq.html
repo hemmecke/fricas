@@ -4,17 +4,17 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FriCAS FAQ &#8212; FriCAS</title>
-    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/style.css" type="text/css" />
     
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -34,6 +34,7 @@
           <a href="help.html" title="Help"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">FriCAS</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="help.html" accesskey="U">Help</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">FriCAS FAQ</a></li> 
       </ul>
     </div>  
@@ -59,17 +60,17 @@
 <li><p><a class="reference internal" href="#how-to-find-where-an-exported-function-is-implemented" id="id9">How to find where an exported function is implemented?</a></p></li>
 <li><p><a class="reference internal" href="#clef-does-not-work-is-there-an-alternative" id="id10">Clef does not work.  Is there an alternative?</a></p></li>
 <li><p><a class="reference internal" href="#default-hyperdoc-window-is-too-small-how-to-enlarge-it" id="id11">Default HyperDoc window is too small.  How to enlarge it?</a></p></li>
+<li><p><a class="reference internal" href="#why-does-fricas-behave-differently-after-loading-new-code" id="id12">Why does FriCAS behave differently after loading new code?</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#old-axiom-faq" id="id12">Old Axiom FAQ</a></p>
+<li><p><a class="reference internal" href="#old-axiom-faq" id="id13">Old Axiom FAQ</a></p>
 <ul>
-<li><p><a class="reference internal" href="#the-fricas-command-fails" id="id13">The fricas command fails.</a></p></li>
-<li><p><a class="reference internal" href="#how-can-i-create-and-access-lisp-functions-from-fricas" id="id14">How can I create and access Lisp functions from FriCAS?</a></p></li>
-<li><p><a class="reference internal" href="#how-can-i-see-what-the-interpreter-is-trying-to-do" id="id15">How can I see what the interpreter is trying to do?</a></p></li>
-<li><p><a class="reference internal" href="#how-can-i-record-console-output" id="id16">How can I record console output?</a></p></li>
-<li><p><a class="reference internal" href="#graphics-don-t-work-or-sman-fails-to-start" id="id17">Graphics don’t work or sman fails to start ?</a></p></li>
-<li><p><a class="reference internal" href="#what-is-the-purpose-of-the-domain-hackpi" id="id18">What is the purpose of the domain HACKPI?</a></p></li>
-<li><p><a class="reference internal" href="#how-can-i-input-an-equation-as-a-string" id="id19">How can I input an equation as a string?</a></p></li>
+<li><p><a class="reference internal" href="#the-fricas-command-fails" id="id14">The fricas command fails.</a></p></li>
+<li><p><a class="reference internal" href="#how-can-i-create-and-access-lisp-functions-from-fricas" id="id15">How can I create and access Lisp functions from FriCAS?</a></p></li>
+<li><p><a class="reference internal" href="#how-can-i-see-what-the-interpreter-is-trying-to-do" id="id16">How can I see what the interpreter is trying to do?</a></p></li>
+<li><p><a class="reference internal" href="#how-can-i-record-console-output" id="id17">How can I record console output?</a></p></li>
+<li><p><a class="reference internal" href="#graphics-doesn-t-work-or-sman-fails-to-start" id="id18">Graphics doesn’t work or sman fails to start ?</a></p></li>
+<li><p><a class="reference internal" href="#what-is-the-purpose-of-the-domain-hackpi" id="id19">What is the purpose of the domain HACKPI?</a></p></li>
 <li><p><a class="reference internal" href="#why-do-fricas-input-defined-functions-fail-in-fricas" id="id20">Why do .fricas.input defined functions fail in fricas?</a></p></li>
 <li><p><a class="reference internal" href="#how-can-i-debug-algebra-code" id="id21">How can I debug algebra code?</a></p></li>
 <li><p><a class="reference internal" href="#how-can-i-access-lisp-code-from-the-fricas-command-line" id="id22">How can I access lisp code from the FriCAS command line?</a></p></li>
@@ -92,7 +93,7 @@ methodology and after fork removed several unused parts (without
 removing functionality). FriCAS fixed a lot of bugs and added new
 functionality. As of April 2013, in the src/algebra subdirectory,
 which hosts mathematical functionality about 25% of code was added
-after fork.</p>
+after the fork.</p>
 </div>
 <div class="section" id="what-does-the-fricas-name-mean">
 <h3>What does the FriCAS name mean?<a class="headerlink" href="#what-does-the-fricas-name-mean" title="Permalink to this headline">¶</a></h3>
@@ -106,7 +107,7 @@ word “fricassee” and the German “Frikassee” name a particular food.</p>
 <h3>Where can I find online information about FriCAS?<a class="headerlink" href="#where-can-i-find-online-information-about-fricas" title="Permalink to this headline">¶</a></h3>
 <p>The main entrance point to documentation about FriCAS is
 <a class="reference external" href="http://fricas.github.io">http://fricas.github.io</a>.</p>
-<p>There is a mailing list
+<p>The mailing list
 <a class="reference external" href="https://groups.google.com/group/fricas-devel?hl=en">https://groups.google.com/group/fricas-devel?hl=en</a>
 is intended both for users and developers.
 Please sign up before posting a message.</p>
@@ -116,7 +117,7 @@ Please sign up before posting a message.</p>
 <p>The main source of information about FriCAS is the “Axiom book” by
 Jenks and Sutor in its adaptation for FriCAS. FriCAS continues to
 update that contents of that book along with its development and calls
-it <a class="reference external" href="https://fricas.github.io/book.pdf">FriCAS Book</a>. Its content is shown by the integrated HyperDoc
+it <a class="reference external" href="https://.github.io/fricas/book.pdf">FriCAS Book</a>. Its content is shown by the integrated HyperDoc
 help system. You can also access the book in .pdf form at
 <a class="reference external" href="http://fricas.github.io/book.pdf">http://fricas.github.io/book.pdf</a>.
 An older version is available in in .xhtml form at
@@ -134,9 +135,9 @@ should not be used anymore.</p>
 </div>
 <div class="section" id="how-one-can-use-fricas-in-a-pipe-or-in-batch-mode">
 <h3>How one can use FriCAS in a pipe or in batch mode?<a class="headerlink" href="#how-one-can-use-fricas-in-a-pipe-or-in-batch-mode" title="Permalink to this headline">¶</a></h3>
-<p>Currently trying to run plain ‘fricas’ command in a pipe hangs
+<p>Currently trying to run plain <code class="docutils literal notranslate"><span class="pre">fricas</span></code> command in a pipe hangs
 (this is a bug, but fix requires substantial change).
-Instead, one needs to pass ‘-nosman’ option.</p>
+Instead, one needs to pass <code class="docutils literal notranslate"><span class="pre">-nosman</span></code> option.</p>
 <p>There several ways to let FriCAS process commands from a file.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fricas -nosman &lt; tst.input &gt; tst.output
 cat tst.input | fricas -nosman &gt; tst.output
@@ -176,9 +177,45 @@ FriCAS.hyperdoc.Geometry: =1200x700+40+40
 </div>
 <p>They should take effect the next time you log in. If not
 you may have to manually run</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>xrdb ~/.Xresources
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>xrdb -m ~/.Xresources
 </pre></div>
 </div>
+<p>If you work with a 4K-display and want to make the font bigger, you
+can add the following to your <code class="docutils literal notranslate"><span class="pre">.Xresources</span></code> file.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>FriCAS.hyperdoc.Geometry: =1500x800+0+0
+FriCAS.hyperdoc.RmFont: -adobe-courier-bold-r-*-*-34-*-*-*-*-*-*-*
+FriCAS.hyperdoc.RmColor: black
+FriCAS.hyperdoc.ActiveFont: -adobe-courier-bold-r-*-*-34-*-*-*-*-*-*-*
+FriCAS.hyperdoc.ActiveColor: blue
+FriCAS.hyperdoc.FriCASFont: -adobe-courier-bold-r-*-*-34-*-*-*-*-*-*-*
+FriCAS.hyperdoc.FriCASColor: #008000
+FriCAS.hyperdoc.BoldFont: -adobe-courier-bold-r-*-*-34-*-*-*-*-*-*-*
+FriCAS.hyperdoc.BoldColor: red
+FriCAS.hyperdoc.TtFont: -adobe-courier-bold-r-*-*-34-*-*-*-*-*-*-*
+FriCAS.hyperdoc.TtColor: black
+FriCAS.hyperdoc.EmphasizeFont: -adobe-courier-bold-r-*-*-34-*-*-*-*-*-*-*
+FriCAS.hyperdoc.EmphasizeColor: #800080
+FriCAS.hyperdoc.InputBackground: #FFFF80
+FriCAS.hyperdoc.InputForeground: black
+FriCAS.hyperdoc.BorderColor: black
+FriCAS.hyperdoc.Background: white
+</pre></div>
+</div>
+<p>Of course, you might want to choose other fonts that are available on
+your computer. Use <code class="docutils literal notranslate"><span class="pre">xfontsel</span></code> to find out.</p>
+</div>
+<div class="section" id="why-does-fricas-behave-differently-after-loading-new-code">
+<h3>Why does FriCAS behave differently after loading new code?<a class="headerlink" href="#why-does-fricas-behave-differently-after-loading-new-code" title="Permalink to this headline">¶</a></h3>
+<p>When FriCAS loads new code, current variables become invalid.
+This happens when you use</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>)lib SOMELIB
+</pre></div>
+</div>
+<p>or automatically when you compile a file via</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>)compile foo.spad
+</pre></div>
+</div>
+<p>You have to load and compile code before you start your computation.</p>
 </div>
 </div>
 <div class="section" id="old-axiom-faq">
@@ -271,20 +308,20 @@ able to achieve almost everything you need.</p>
 </div>
 <p>stops sending output to the file.</p>
 </div>
-<div class="section" id="graphics-don-t-work-or-sman-fails-to-start">
-<h3>Graphics don’t work or sman fails to start ?<a class="headerlink" href="#graphics-don-t-work-or-sman-fails-to-start" title="Permalink to this headline">¶</a></h3>
-<p>First try running sman as</p>
+<div class="section" id="graphics-doesn-t-work-or-sman-fails-to-start">
+<h3>Graphics doesn’t work or sman fails to start ?<a class="headerlink" href="#graphics-doesn-t-work-or-sman-fails-to-start" title="Permalink to this headline">¶</a></h3>
+<p>First try running <code class="docutils literal notranslate"><span class="pre">sman</span></code> as</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sman -debug -noclef -nonag -noht
 </pre></div>
 </div>
-<p>If graphics still don’t work or sman fails to start then look at the
+<p>If graphics still doesn’t work or sman fails to start then look at the
 error messages.</p>
 </div>
 <div class="section" id="what-is-the-purpose-of-the-domain-hackpi">
 <h3>What is the purpose of the domain HACKPI?<a class="headerlink" href="#what-is-the-purpose-of-the-domain-hackpi" title="Permalink to this headline">¶</a></h3>
 <p>HACKPI is a hack provided for the benefit of the FriCAS interpreter.
 As a mathematical type, it is the simple transcendental extension
-math:<cite>Q(pi)</cite> of the rational numbers. This type allows interactive users to
+<span class="math notranslate nohighlight">\(Q(\pi)\)</span> of the rational numbers. This type allows interactive users to
 use the name <code class="docutils literal notranslate"><span class="pre">%pi</span></code> without a type both where a numerical value is
 expected as in</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>draw(sin x,x=-%pi..%pi)
@@ -297,32 +334,6 @@ it further as required by the context.</p>
 constants, but it occurs frequently enough in school examples
 (specially for graphs) so it was worth a special hack. In a
 non-interactive environment (library), HACKPI would not exist.</p>
-</div>
-<div class="section" id="how-can-i-input-an-equation-as-a-string">
-<h3>How can I input an equation as a string?<a class="headerlink" href="#how-can-i-input-an-equation-as-a-string" title="Permalink to this headline">¶</a></h3>
-<p>There is an embedded command server within <code class="docutils literal notranslate"><span class="pre">FRICASsys</span></code>.
-Look at</p>
-<p><a class="reference external" href="http://daly.axiom-developer.org/TimothyDaly_files/lisptalk/pages/lisp35.html">http://daly.axiom-developer.org/TimothyDaly_files/lisptalk/pages/lisp35.html</a></p>
-<p>In particular, see the function</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>parseAndInterpret stringBuf
-</pre></div>
-</div>
-<p>(which is boot language code. So in lisp I have
-to tack on the | | onto the function name and then I can
-call it like this</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>(1) -&gt; )lisp (|parseAndInterpret| &quot;integrate(sin x,x)&quot;)
-
-(1)  - cos(x)
-                       Type: Union(Expression Integer,...)
-
-Value = ((|Union| (|Expression| (|Integer|)) (|List| (|Expression| (|Integer|)))
-) WRAPPED 0 (1 #&lt;vector 10ccde54&gt; (1 0 . -1)) 0 . 1)
-</pre></div>
-</div>
-<p>and sure enough! FriCAS parses and interprets the string.</p>
-<p>The result appears as stdout and the value returned seems to contain
-the type information. The “WRAPPED” information is the lisp data
-structure.</p>
 </div>
 <div class="section" id="why-do-fricas-input-defined-functions-fail-in-fricas">
 <h3>Why do .fricas.input defined functions fail in fricas?<a class="headerlink" href="#why-do-fricas-input-defined-functions-fail-in-fricas" title="Permalink to this headline">¶</a></h3>
@@ -376,13 +387,14 @@ mrandom(3,3,3)   -- compiles and runs the function
 defined in the “initial” frame (because you defined it in the
 <code class="docutils literal notranslate"><span class="pre">.fricas.input</span></code> file) and is not known in the frame created by
 <code class="docutils literal notranslate"><span class="pre">sman</span></code>. The “)frame next” command will move you around the ring of
-frames. (See the hardcopy book on page 579).</p>
+frames. (See the <code class="docutils literal notranslate"><span class="pre">)frame</span></code> command in the appendix of the
+<a class="reference external" href="https://.github.io/fricas/book.pdf">FriCAS Book</a>).</p>
 </div>
 <div class="section" id="how-can-i-debug-algebra-code">
 <h3>How can I debug algebra code?<a class="headerlink" href="#how-can-i-debug-algebra-code" title="Permalink to this headline">¶</a></h3>
 <p>FriCAS contains some powerful commands to help with testing and
 debugging library modules written in Spad and also the FriCAS system
-itself. The most important of these commands is ‘)trace’.</p>
+itself. The most important of these commands is <code class="docutils literal notranslate"><span class="pre">)trace</span></code>.</p>
 <p>This command is used to trace the execution of functions that make
 up the FriCAS system, functions defined by users, and functions from
 the system library. Almost all options are available for each type
@@ -402,7 +414,7 @@ exited. Other information can be displayed or collected when a
 function is traced and this is controlled by the various options. If a
 domain or package is traced, the default action is to trace all
 functions exported. Individual interpreter, lisp or boot functions can
-be traced by listing their names after ‘)trace’. Any options that are
+be traced by listing their names after <code class="docutils literal notranslate"><span class="pre">)trace</span></code>. Any options that are
 present must follow the functions to be traced. For example</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>)trace f
 </pre></div>
@@ -418,23 +430,23 @@ be necessary to escape the character with an underscore</p>
 </div>
 <p>To trace all domains or packages that are or will be created from a
 particular constructor, give the constructor name or abbreviation
-after ‘)trace’</p>
+after <code class="docutils literal notranslate"><span class="pre">)trace</span></code></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>)trace MATRIX
 )trace List Integer
 </pre></div>
 </div>
 <p>The first command traces all domains currently instantiated with
-Matrix. If additional domains are instantiated with this constructor
-(for example, if you have used ‘Matrix(Integer)’ and ‘Matrix(Float)’),
+<code class="docutils literal notranslate"><span class="pre">Matrix</span></code>. If additional domains are instantiated with this constructor
+(for example, if you have used <code class="docutils literal notranslate"><span class="pre">Matrix(Integer)</span></code> and <code class="docutils literal notranslate"><span class="pre">Matrix(Float)</span></code>),
 they will be automatically traced. The second command traces
-‘List(Integer)’.</p>
-<p>The following are the general options for the ‘)trace’ command.</p>
-<p>‘)break after’ – causes a Common Lisp break loop to be entered after
+<code class="docutils literal notranslate"><span class="pre">List(Integer)</span></code>.</p>
+<p>The following are the general options for the <code class="docutils literal notranslate"><span class="pre">)trace</span></code> command.</p>
+<p><code class="docutils literal notranslate"><span class="pre">)break</span> <span class="pre">after</span></code> – causes a Common Lisp break loop to be entered after
 exiting the traced function.</p>
-<p>‘)break before’ – causes a Common Lisp break loop to be entered before
+<p><code class="docutils literal notranslate"><span class="pre">)break</span> <span class="pre">before</span></code> – causes a Common Lisp break loop to be entered before
 entering the traced function.</p>
-<p>‘)break’ – is the same as )break before.</p>
-<p>‘)count’ – causes the system to keep a count of the number of times the
+<p><code class="docutils literal notranslate"><span class="pre">)break</span></code> – is the same as <code class="docutils literal notranslate"><span class="pre">)break</span> <span class="pre">before</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">)count</span></code> – causes the system to keep a count of the number of times the
 traced function is entered.</p>
 <p>The total can be displayed with:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>)trace )stats
@@ -444,10 +456,10 @@ traced function is entered.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>)trace )stats reset
 </pre></div>
 </div>
-<p>‘)count n’ – causes information about the traced function to be displayed
+<p><code class="docutils literal notranslate"><span class="pre">)count</span> <span class="pre">n</span></code> – causes information about the traced function to be displayed
 for the first n executions. After the n-th execution, the function is
 untraced.</p>
-<p>‘)depth n’ – causes trace information to be shown for only n levels of
+<p><code class="docutils literal notranslate"><span class="pre">)depth</span> <span class="pre">n</span></code> – causes trace information to be shown for only n levels of
 recursion of the traced function.</p>
 <p>The command:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>)trace fib )depth 10
@@ -455,48 +467,48 @@ recursion of the traced function.</p>
 </div>
 <p>will cause the display of only 10 levels of trace information for the
 recursive execution of a user function fib.</p>
-<p>‘)math’ causes – the function arguments and return value to be displayed
+<p><code class="docutils literal notranslate"><span class="pre">)math</span></code> causes – the function arguments and return value to be displayed
 in the FriCAS monospace two-dimensional math format.</p>
-<p>‘)nonquietly’ – causes the display of additional messages when a function
+<p><code class="docutils literal notranslate"><span class="pre">)nonquietly</span></code> – causes the display of additional messages when a function
 is traced.</p>
-<p>‘)nt’ – This suppresses all normal trace information. This option is useful
-if the ‘)count’ or ‘)timer’ options are used and you are interested in the
+<p><code class="docutils literal notranslate"><span class="pre">)nt</span></code> – This suppresses all normal trace information. This option is useful
+if the <code class="docutils literal notranslate"><span class="pre">)count</span></code> or <code class="docutils literal notranslate"><span class="pre">)timer</span></code> options are used and you are interested in the
 statistics but not the function calling information.</p>
-<p>‘)off’ – causes untracing of all or specific functions. Without an argument,
+<p><code class="docutils literal notranslate"><span class="pre">)off</span></code> – causes untracing of all or specific functions. Without an argument,
 all functions, constructors, domains and packages are untraced. Otherwise,
 the given functions and other objects are untraced.</p>
 <p>To immediately retrace the untraced functions, issue:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>)trace )restore
 </pre></div>
 </div>
-<p>‘)only listOfDataToDisplay’ – causes only specific trace information to be
+<p><code class="docutils literal notranslate"><span class="pre">)only</span> <span class="pre">listOfDataToDisplay</span></code> – causes only specific trace information to be
 shown.</p>
-<p>‘)restore’ – causes the last untraced functions to be retraced. If
+<p><code class="docutils literal notranslate"><span class="pre">)restore</span></code> – causes the last untraced functions to be retraced. If
 additional options are present, they are added to those previously in
 effect.</p>
-<p>‘)stats’ – causes the display of statistics collected by the use of the
-‘)count’ and ‘)timer’ options.</p>
-<p>‘)stats reset’ – resets to 0 the statistics collected by the use of the
-‘)count’ and ‘)timer’ options.</p>
-<p>‘)timer’ – causes the system to keep a count of execution times for the
-traced function. The total can be displayed with ‘)trace )stats’ and
-cleared with ‘)trace )stats reset’.</p>
-<p>‘)varbreak var1 … varN’ – causes a Common Lisp break loop to be
+<p><code class="docutils literal notranslate"><span class="pre">)stats</span></code> – causes the display of statistics collected by the use of the
+<code class="docutils literal notranslate"><span class="pre">)count</span></code> and <code class="docutils literal notranslate"><span class="pre">)timer</span></code> options.</p>
+<p><code class="docutils literal notranslate"><span class="pre">)stats</span> <span class="pre">reset</span></code> – resets to 0 the statistics collected by the use of the
+<code class="docutils literal notranslate"><span class="pre">)count</span></code> and <code class="docutils literal notranslate"><span class="pre">)timer</span></code> options.</p>
+<p><code class="docutils literal notranslate"><span class="pre">)timer</span></code> – causes the system to keep a count of execution times for the
+traced function. The total can be displayed with <code class="docutils literal notranslate"><span class="pre">)trace</span> <span class="pre">)stats</span></code> and
+cleared with <code class="docutils literal notranslate"><span class="pre">)trace</span> <span class="pre">)stats</span> <span class="pre">reset</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">)varbreak</span> <span class="pre">var1</span> <span class="pre">...</span> <span class="pre">varN</span></code> – causes a Common Lisp break loop to be
 entered after the assignment to any of the listed variables in the
 traced function.</p>
-<p>‘)vars’ – causes the display of the value of any variable after it is
+<p><code class="docutils literal notranslate"><span class="pre">)vars</span></code> – causes the display of the value of any variable after it is
 assigned in the traced function. Note that library code must have been
-compiled using the ‘)vartrace’ option in order to support this option.</p>
-<p>‘)vars var1  … varN’ – causes the display of the value of any of
+compiled using the <code class="docutils literal notranslate"><span class="pre">)vartrace</span></code> option in order to support this option.</p>
+<p><code class="docutils literal notranslate"><span class="pre">)vars</span> <span class="pre">var1</span>&#160; <span class="pre">...</span> <span class="pre">varN</span></code> – causes the display of the value of any of
 the specified variables after they are assigned in the traced function.
-Note that library code must have been compiled using the ‘)vartrace’
+Note that library code must have been compiled using the <code class="docutils literal notranslate"><span class="pre">)vartrace</span></code>
 option in order to support this option.</p>
-<p>‘)within executingFunction’ – causes the display of trace information
+<p><code class="docutils literal notranslate"><span class="pre">)within</span> <span class="pre">executingFunction</span></code> – causes the display of trace information
 only if the traced function is called when the given executingFunction
 is running.</p>
 <p>The following are the options for tracing constructors, domains and
 packages.</p>
-<p>‘)local op1 … opN’ – causes local functions of the constructor to
+<p><code class="docutils literal notranslate"><span class="pre">)local</span> <span class="pre">op1</span> <span class="pre">...</span> <span class="pre">opN</span></code> – causes local functions of the constructor to
 be traced. Note that to untrace an individual local function, you must
 use the fully qualified internal name, using the escape character before
 the semicolon. For example:</p>
@@ -504,7 +516,7 @@ the semicolon. For example:</p>
 )trace FRAC_;cancelGcd )off
 </pre></div>
 </div>
-<p>‘)ops op1 … opN’ – By default, all operations from a domain or package
+<p><code class="docutils literal notranslate"><span class="pre">)ops</span> <span class="pre">op1</span> <span class="pre">...</span> <span class="pre">opN</span></code> – By default, all operations from a domain or package
 are traced when the domain or package is traced. This option allows you
 to specify that only particular operations should be traced.</p>
 <p>The command:</p>
@@ -513,7 +525,7 @@ to specify that only particular operations should be traced.</p>
 </div>
 <p>traces four operations from the domain Integer. Since + and - are special
 characters, it is necessary to escape them with an underscore.</p>
-<p>Also See: ‘)boot’, ‘)lisp’ , and ‘)ltrace’. Please refer to the
+<p>Also See: <code class="docutils literal notranslate"><span class="pre">)boot</span></code>, <code class="docutils literal notranslate"><span class="pre">)lisp</span></code> , and <code class="docutils literal notranslate"><span class="pre">)ltrace</span></code>. Please refer to the
 FriCAS Book section “FriCAS System Commands” for more detailed information.</p>
 </div>
 <div class="section" id="how-can-i-access-lisp-code-from-the-fricas-command-line">
@@ -568,11 +580,9 @@ the BOOT package. To restart FriCAS type</p>
 <li class="toctree-l1"><a class="reference internal" href="api/index.html">FriCAS API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="features.html">Features</a></li>
 <li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
-<li class="toctree-l1"><a class="reference internal" href="install.html">Installation Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="help.html">Help</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">FriCAS FAQ</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="help.html">Help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
 </ul>
@@ -581,9 +591,9 @@ the BOOT package. To restart FriCAS type</p>
   <ul class="this-page-menu">
     <li><a href="_sources/faq.rst.txt"
            rel="nofollow">Show Source</a></li>
-    <li><a href="https://github.com/fricas/fricas/blob/master/src/doc/sphinx/source/faq.rst"
+    <li><a href="https://github.com/hemmecke/fricas/blob/wip/rstdoc-hemmecke/src/doc/sphinx/source/faq.rst"
            rel="nofollow">Show on GitHub</a></li>
-    <li><a href="https://github.com/fricas/fricas/edit/master/src/doc/sphinx/source/faq.rst"
+    <li><a href="https://github.com/hemmecke/fricas/edit/wip/rstdoc-hemmecke/src/doc/sphinx/source/faq.rst"
            rel="nofollow">Edit on GitHub</a></li>
   </ul>
 <div id="searchbox" style="display: none" role="search">
@@ -613,6 +623,7 @@ the BOOT package. To restart FriCAS type</p>
           <a href="help.html" title="Help"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">FriCAS</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="help.html" >Help</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">FriCAS FAQ</a></li> 
       </ul>
     </div>

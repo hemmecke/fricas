@@ -27,7 +27,7 @@ methodology and after fork removed several unused parts (without
 removing functionality). FriCAS fixed a lot of bugs and added new
 functionality. As of April 2013, in the src/algebra subdirectory,
 which hosts mathematical functionality about 25% of code was added
-after fork.
+after the fork.
 
 
 What does the FriCAS name mean?
@@ -47,7 +47,7 @@ Where can I find online information about FriCAS?
 The main entrance point to documentation about FriCAS is
 http://fricas.github.io.
 
-There is a mailing list
+The mailing list
 https://groups.google.com/group/fricas-devel?hl=en
 is intended both for users and developers.
 Please sign up before posting a message.
@@ -82,9 +82,9 @@ should not be used anymore.
 How one can use FriCAS in a pipe or in batch mode?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Currently trying to run plain 'fricas' command in a pipe hangs
+Currently trying to run plain ``fricas`` command in a pipe hangs
 (this is a bug, but fix requires substantial change).
-Instead, one needs to pass '-nosman' option.
+Instead, one needs to pass ``-nosman`` option.
 
 There several ways to let FriCAS process commands from a file.
 ::
@@ -127,6 +127,7 @@ Default HyperDoc window is too small.  How to enlarge it?
 
 Put the lines like below in file called ``~/.Xresources``.
 ::
+
     FriCAS.hyperdoc.FormGeometry: =1200x700+40+40
     FriCAS.hyperdoc.Geometry: =1200x700+40+40
 
@@ -134,10 +135,49 @@ They should take effect the next time you log in. If not
 you may have to manually run
 ::
 
-   xrdb ~/.Xresources
+   xrdb -m ~/.Xresources
+
+If you work with a 4K-display and want to make the font bigger, you
+can add the following to your ``.Xresources`` file.
+::
+
+   FriCAS.hyperdoc.Geometry: =1500x800+0+0
+   FriCAS.hyperdoc.RmFont: -adobe-courier-bold-r-*-*-34-*-*-*-*-*-*-*
+   FriCAS.hyperdoc.RmColor: black
+   FriCAS.hyperdoc.ActiveFont: -adobe-courier-bold-r-*-*-34-*-*-*-*-*-*-*
+   FriCAS.hyperdoc.ActiveColor: blue
+   FriCAS.hyperdoc.FriCASFont: -adobe-courier-bold-r-*-*-34-*-*-*-*-*-*-*
+   FriCAS.hyperdoc.FriCASColor: #008000
+   FriCAS.hyperdoc.BoldFont: -adobe-courier-bold-r-*-*-34-*-*-*-*-*-*-*
+   FriCAS.hyperdoc.BoldColor: red
+   FriCAS.hyperdoc.TtFont: -adobe-courier-bold-r-*-*-34-*-*-*-*-*-*-*
+   FriCAS.hyperdoc.TtColor: black
+   FriCAS.hyperdoc.EmphasizeFont: -adobe-courier-bold-r-*-*-34-*-*-*-*-*-*-*
+   FriCAS.hyperdoc.EmphasizeColor: #800080
+   FriCAS.hyperdoc.InputBackground: #FFFF80
+   FriCAS.hyperdoc.InputForeground: black
+   FriCAS.hyperdoc.BorderColor: black
+   FriCAS.hyperdoc.Background: white
+
+Of course, you might want to choose other fonts that are available on
+your computer. Use ``xfontsel`` to find out.
 
 
+Why does FriCAS behave differently after loading new code?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+When FriCAS loads new code, current variables become invalid.
+This happens when you use
+::
+
+   )lib SOMELIB
+
+or automatically when you compile a file via
+::
+
+   )compile foo.spad
+
+You have to load and compile code before you start your computation.
 
 
 
@@ -256,15 +296,15 @@ starts sending output to the file called ``filename`` and
 stops sending output to the file.
 
 
-Graphics don't work or sman fails to start ?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Graphics doesn't work or sman fails to start ?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-First try running sman as
+First try running ``sman`` as
 ::
 
    sman -debug -noclef -nonag -noht
 
-If graphics still don't work or sman fails to start then look at the
+If graphics still doesn't work or sman fails to start then look at the
 error messages.
 
 
@@ -273,7 +313,7 @@ What is the purpose of the domain HACKPI?
 
 HACKPI is a hack provided for the benefit of the FriCAS interpreter.
 As a mathematical type, it is the simple transcendental extension
-math:`Q(\pi)` of the rational numbers. This type allows interactive users to
+:math:`Q(\pi)` of the rational numbers. This type allows interactive users to
 use the name ``%pi`` without a type both where a numerical value is
 expected as in
 ::
@@ -288,39 +328,6 @@ One could argue that it is unfair to single ``%pi`` out from other
 constants, but it occurs frequently enough in school examples
 (specially for graphs) so it was worth a special hack. In a
 non-interactive environment (library), HACKPI would not exist.
-
-
-How can I input an equation as a string?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-There is an embedded command server within ``FRICASsys``.
-Look at
-
-http://daly.axiom-developer.org/TimothyDaly_files/lisptalk/pages/lisp35.html
-
-In particular, see the function
-::
-
-   parseAndInterpret stringBuf
-
-(which is boot language code. So in lisp I have
-to tack on the | | onto the function name and then I can
-call it like this
-::
-
-   (1) -> )lisp (|parseAndInterpret| "integrate(sin x,x)")
-
-   (1)  - cos(x)
-                          Type: Union(Expression Integer,...)
-
-   Value = ((|Union| (|Expression| (|Integer|)) (|List| (|Expression| (|Integer|)))
-   ) WRAPPED 0 (1 #<vector 10ccde54> (1 0 . -1)) 0 . 1)
-
-and sure enough! FriCAS parses and interprets the string.
-
-The result appears as stdout and the value returned seems to contain
-the type information. The "WRAPPED" information is the lisp data
-structure.
 
 
 Why do .fricas.input defined functions fail in fricas?
@@ -385,7 +392,8 @@ So your function was read and it is defined. However the function got
 defined in the "initial" frame (because you defined it in the
 ``.fricas.input`` file) and is not known in the frame created by
 ``sman``. The ")frame next" command will move you around the ring of
-frames. (See the hardcopy book on page 579).
+frames. (See the ``)frame`` command in the appendix of the
+|PACKAGE_BOOK|).
 
 
 How can I debug algebra code?
@@ -393,7 +401,7 @@ How can I debug algebra code?
 
 FriCAS contains some powerful commands to help with testing and
 debugging library modules written in Spad and also the FriCAS system
-itself. The most important of these commands is ')trace'.
+itself. The most important of these commands is ``)trace``.
 
 This command is used to trace the execution of functions that make
 up the FriCAS system, functions defined by users, and functions from
@@ -417,7 +425,7 @@ exited. Other information can be displayed or collected when a
 function is traced and this is controlled by the various options. If a
 domain or package is traced, the default action is to trace all
 functions exported. Individual interpreter, lisp or boot functions can
-be traced by listing their names after ')trace'. Any options that are
+be traced by listing their names after ``)trace``. Any options that are
 present must follow the functions to be traced. For example
 ::
 
@@ -436,29 +444,29 @@ be necessary to escape the character with an underscore
 
 To trace all domains or packages that are or will be created from a
 particular constructor, give the constructor name or abbreviation
-after ')trace'
+after ``)trace``
 ::
 
    )trace MATRIX
    )trace List Integer
 
 The first command traces all domains currently instantiated with
-Matrix. If additional domains are instantiated with this constructor
-(for example, if you have used 'Matrix(Integer)' and 'Matrix(Float)'),
+``Matrix``. If additional domains are instantiated with this constructor
+(for example, if you have used ``Matrix(Integer)`` and ``Matrix(Float)``),
 they will be automatically traced. The second command traces
-'List(Integer)'.
+``List(Integer)``.
 
-The following are the general options for the ')trace' command.
+The following are the general options for the ``)trace`` command.
 
-')break after' -- causes a Common Lisp break loop to be entered after
+``)break after`` -- causes a Common Lisp break loop to be entered after
 exiting the traced function.
 
-')break before' -- causes a Common Lisp break loop to be entered before
+``)break before`` -- causes a Common Lisp break loop to be entered before
 entering the traced function.
 
-')break' -- is the same as )break before.
+``)break`` -- is the same as ``)break before``.
 
-')count' -- causes the system to keep a count of the number of times the
+``)count`` -- causes the system to keep a count of the number of times the
 traced function is entered.
 
 The total can be displayed with::
@@ -469,11 +477,11 @@ and cleared with::
 
    )trace )stats reset
 
-')count n' -- causes information about the traced function to be displayed
+``)count n`` -- causes information about the traced function to be displayed
 for the first n executions. After the n-th execution, the function is
 untraced.
 
-')depth n' -- causes trace information to be shown for only n levels of
+``)depth n`` -- causes trace information to be shown for only n levels of
 recursion of the traced function.
 
 The command::
@@ -483,17 +491,17 @@ The command::
 will cause the display of only 10 levels of trace information for the
 recursive execution of a user function fib.
 
-')math' causes -- the function arguments and return value to be displayed
+``)math`` causes -- the function arguments and return value to be displayed
 in the FriCAS monospace two-dimensional math format.
 
-')nonquietly' -- causes the display of additional messages when a function
+``)nonquietly`` -- causes the display of additional messages when a function
 is traced.
 
-')nt' -- This suppresses all normal trace information. This option is useful
-if the ')count' or ')timer' options are used and you are interested in the
+``)nt`` -- This suppresses all normal trace information. This option is useful
+if the ``)count`` or ``)timer`` options are used and you are interested in the
 statistics but not the function calling information.
 
-')off' -- causes untracing of all or specific functions. Without an argument,
+``)off`` -- causes untracing of all or specific functions. Without an argument,
 all functions, constructors, domains and packages are untraced. Otherwise,
 the given functions and other objects are untraced.
 
@@ -501,44 +509,44 @@ To immediately retrace the untraced functions, issue::
 
   )trace )restore
 
-')only listOfDataToDisplay' -- causes only specific trace information to be
+``)only listOfDataToDisplay`` -- causes only specific trace information to be
 shown.
 
-')restore' -- causes the last untraced functions to be retraced. If
+``)restore`` -- causes the last untraced functions to be retraced. If
 additional options are present, they are added to those previously in
 effect.
 
-')stats' -- causes the display of statistics collected by the use of the
-')count' and ')timer' options.
+``)stats`` -- causes the display of statistics collected by the use of the
+``)count`` and ``)timer`` options.
 
-')stats reset' -- resets to 0 the statistics collected by the use of the
-')count' and ')timer' options.
+``)stats reset`` -- resets to 0 the statistics collected by the use of the
+``)count`` and ``)timer`` options.
 
-')timer' -- causes the system to keep a count of execution times for the
-traced function. The total can be displayed with ')trace )stats' and
-cleared with ')trace )stats reset'.
+``)timer`` -- causes the system to keep a count of execution times for the
+traced function. The total can be displayed with ``)trace )stats`` and
+cleared with ``)trace )stats reset``.
 
-')varbreak var1 ... varN' -- causes a Common Lisp break loop to be
+``)varbreak var1 ... varN`` -- causes a Common Lisp break loop to be
 entered after the assignment to any of the listed variables in the
 traced function.
 
-')vars' -- causes the display of the value of any variable after it is
+``)vars`` -- causes the display of the value of any variable after it is
 assigned in the traced function. Note that library code must have been
-compiled using the ')vartrace' option in order to support this option.
+compiled using the ``)vartrace`` option in order to support this option.
 
-')vars var1  ... varN' -- causes the display of the value of any of
+``)vars var1  ... varN`` -- causes the display of the value of any of
 the specified variables after they are assigned in the traced function.
-Note that library code must have been compiled using the ')vartrace'
+Note that library code must have been compiled using the ``)vartrace``
 option in order to support this option.
 
-')within executingFunction' -- causes the display of trace information
+``)within executingFunction`` -- causes the display of trace information
 only if the traced function is called when the given executingFunction
 is running.
 
 The following are the options for tracing constructors, domains and
 packages.
 
-')local op1 ... opN' -- causes local functions of the constructor to
+``)local op1 ... opN`` -- causes local functions of the constructor to
 be traced. Note that to untrace an individual local function, you must
 use the fully qualified internal name, using the escape character before
 the semicolon. For example::
@@ -546,7 +554,7 @@ the semicolon. For example::
   )trace FRAC )local
   )trace FRAC_;cancelGcd )off
 
-')ops op1 ... opN' -- By default, all operations from a domain or package
+``)ops op1 ... opN`` -- By default, all operations from a domain or package
 are traced when the domain or package is traced. This option allows you
 to specify that only particular operations should be traced.
 
@@ -557,7 +565,7 @@ The command::
 traces four operations from the domain Integer. Since + and - are special
 characters, it is necessary to escape them with an underscore.
 
-Also See: ')boot', ')lisp' , and ')ltrace'. Please refer to the
+Also See: ``)boot``, ``)lisp`` , and ``)ltrace``. Please refer to the
 FriCAS Book section "FriCAS System Commands" for more detailed information.
 
 

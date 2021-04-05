@@ -4,17 +4,17 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JFriCASSupport &#8212; FriCAS</title>
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -47,7 +47,7 @@
             
   <div class="section" id="jfricassupport">
 <span id="l4a467269434153537570706f7274"></span><span id="index-0"></span><h1>JFriCASSupport<a class="headerlink" href="#jfricassupport" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://github.com/fricas/fricas/blob/master/src/algebra/fmtjfricas.spad#L137">fmtjfricas.spad line 137</a> <a class="reference external" href="https://github.com/fricas/fricas/edit/master/src/algebra/fmtjfricas.spad#L137">[edit on github]</a></p>
+<p><a class="reference external" href="https://github.com/hemmecke/fricas/blob/wip/rstdoc-hemmecke/src/algebra/fmtjfricas.spad#L137">fmtjfricas.spad line 137</a> <a class="reference external" href="https://github.com/hemmecke/fricas/edit/wip/rstdoc-hemmecke/src/algebra/fmtjfricas.spad#L137">[edit on github]</a></p>
 <p>The package <code class="docutils literal notranslate"><span class="pre">JFriCASSupport</span></code> provides a number of service functions to more easily switch on/off certain formats, in particular the use of the FormatMathJax formatter. Use <code class="docutils literal notranslate"><span class="pre">setFormat!</span> <span class="pre">FormatMathJax</span></code> to switch on MathJax output or <code class="docutils literal notranslate"><span class="pre">setFormats</span> <span class="pre">[FormatMathJax,</span> <span class="pre">Format1D]</span></code> to enable several output formats.</p>
 <span class="target" id="l4a467269434153537570706f7274-736574466f726d617421"></span><dl class="simple" id="index-1">
 <dt><span class="spadfun">setFormat!</span>: <a class="reference internal" href="Type.html#l54797065"><span class="std std-ref">Type</span></a> -&gt; <a class="reference internal" href="Void.html#l566f6964"><span class="std std-ref">Void</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">setFormat!</span> <span class="pre">f</span></code> returns <code class="docutils literal notranslate"><span class="pre">setFormats!</span> <span class="pre">[f]</span></code>.</p>
@@ -71,11 +71,9 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">FriCAS API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../features.html">Features</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../help.html">Help</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../faq.html">FriCAS FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../contribute.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../history.html">History</a></li>
 </ul>
