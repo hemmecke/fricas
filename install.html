@@ -79,11 +79,11 @@
 <div class="section" id="quick-installation">
 <h2><a class="toc-backref" href="#id1">Quick installation</a><a class="headerlink" href="#quick-installation" title="Permalink to this headline">¶</a></h2>
 <p>FriCAS now tries to support standard GNU build/installation
-conventions. So if you have sources and all prerequisites, then</p>
+conventions.  So if you have sources and all prerequisites, then</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>configure &amp;&amp; make &amp;&amp; sudo make install
 </pre></div>
 </div>
-<p>should work. The above will install FriCAS files into
+<p>should work.  The above will install FriCAS files into
 <code class="docutils literal notranslate"><span class="pre">/usr/local/lib/fricas/</span></code>  and put the <code class="docutils literal notranslate"><span class="pre">fricas</span></code> command into
 <code class="docutils literal notranslate"><span class="pre">/usr/local/bin/</span></code>.
 You can give arguments to <code class="docutils literal notranslate"><span class="pre">configure</span></code> to change those locations.</p>
@@ -112,18 +112,18 @@ make.</p>
 <li><p><a class="reference external" href="http://clisp.cons.org">CLISP</a> 2.41 or later</p></li>
 <li><p><a class="reference external" href="https://www.cons.org/cmucl/">CMUCL</a></p></li>
 <li><p>FriCAS builds also using <a class="reference external" href="https://www.gnu.org/software/gcl">GCL</a>, at least build using released version
-2.6.12 works. Build using newer GCL versions from git repository
+2.6.12 works.  Build using newer GCL versions from git repository
 fails.</p></li>
 </ul>
 <p>All Lisp implementations should give essentially the same
-functionality, however performance (speed) may differ quite a lot. ATM
+functionality, however performance (speed) may differ quite a lot.  ATM
 CMU CL port should be considered experimental, it received only little
-testing. Also CMU CL seem to have problems on some machines. By
-default FriCAS tries to use SBCL, since it is fast and reliable. On
+testing.  Also CMU CL seem to have problems on some machines.  By
+default FriCAS tries to use SBCL, since it is fast and reliable.  On
 64-bit AMD64 on average SBCL is the fastest one (9 times faster than
 CLISP), Clozure CL the second (about 1.5 times slower than SBCL), than
 GCL and ECL (about 3 times slower than SBCL) and CLISP is the slowest
-one. Note: very old versions of ECL were much (about 4 times) slower, you
+one.  Note: very old versions of ECL were much (about 4 times) slower, you
 should use reasonably new version if you care about speed.</p>
 <p>Some computation work much faster on 64-bit machines, especially
 when using SBCL.</p>
@@ -140,7 +140,7 @@ when using SBCL.</p>
 <h3><a class="toc-backref" href="#id6">xvfb (optional, but highly recommended)</a><a class="headerlink" href="#xvfb-optional-but-highly-recommended" title="Permalink to this headline">¶</a></h3>
 <p>If you compile FriCAS from the <a class="reference external" href="https://github.com/hemmecke/fricas">FriCAS git repository</a>, and <code class="docutils literal notranslate"><span class="pre">configure</span></code>
 does not detect the <code class="docutils literal notranslate"><span class="pre">xvfb-run</span></code> program, then graphic examples will
-not be built. See Section <a class="reference internal" href="#hyperdoc-and-graphics">HyperDoc and graphics</a> for more detail.</p>
+not be built.  See Section <a class="reference internal" href="#hyperdoc-and-graphics">HyperDoc and graphics</a> for more detail.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sudo apt install xvfb
 </pre></div>
 </div>
@@ -161,7 +161,7 @@ except for Clozure CL on Power PC.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>)set output tex on
 </pre></div>
 </div>
-<p>to show rendered TeX output. For that to work, you need the following.</p>
+<p>to show rendered TeX output.  For that to work, you need the following.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sudo apt install texlive auctex dvipng
 </pre></div>
 </div>
@@ -208,34 +208,33 @@ configure options when you compile FriCAS.</p>
 <h2><a class="toc-backref" href="#id12">Detailed installations instructions</a><a class="headerlink" href="#detailed-installations-instructions" title="Permalink to this headline">¶</a></h2>
 <p>We assume that you have installed all necessary prerequisittes.</p>
 <ol class="arabic" start="0">
-<li><p>Change to a directory with enough (0.8 GB) free space</p></li>
-<li><p>Fetch sources</p>
+<li><p>Change to a directory with enough (0.8 GB) free space.</p></li>
+<li><p>Fetch sources.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git clone --depth 1 https://github.com/fricas/fricas
-cd fricas
 </pre></div>
 </div>
 <p>Remove the <code class="docutils literal notranslate"><span class="pre">--depth</span> <span class="pre">1</span></code> option for access to the change history.</p>
 </li>
 <li><p>Create build directory and change to it</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mkdir fricas-build
-cd fricas-build
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mkdir fr-build
+cd fr-build
 </pre></div>
 </div>
 </li>
 <li><p>Configure.  Assuming that you want fricas files to be installed in
-<code class="docutils literal notranslate"><span class="pre">//tmp/usr</span></code>.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>../configure --with-lisp=/path/to/your/lisp --prefix=/tmp/usr
+<code class="docutils literal notranslate"><span class="pre">/tmp/usr</span></code>.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>../fricas/configure --with-lisp=/path/to/your/lisp --prefix=/tmp/usr
 </pre></div>
 </div>
-<p>where <code class="docutils literal notranslate"><span class="pre">/path/to/your/lisp</span></code> is name of your Lisp. For example,
+<p>where <code class="docutils literal notranslate"><span class="pre">/path/to/your/lisp</span></code> is name of your Lisp.  For example,
 type</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>../configure --with-lisp=&quot;sbcl --dynamic-space-size 4096&quot; --prefix=/tmp/usr --enable-gmp --enable-aldor
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>../fricas/configure --with-lisp=&quot;sbcl --dynamic-space-size 4096&quot; --prefix=/tmp/usr --enable-gmp --enable-aldor
 </pre></div>
 </div>
 <p>to build with SBCL and 4 GiB dynamic space, use GMP, and enable the
 build of the Aldor library <code class="docutils literal notranslate"><span class="pre">libfricas.al</span></code>.</p>
 <p>Type</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>../configure --help
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>../fricas/configure --help
 </pre></div>
 </div>
 <p>to see all possible options.</p>
@@ -255,7 +254,7 @@ run tests</p>
 <div class="section" id="extra-information">
 <h3><a class="toc-backref" href="#id13">Extra information</a><a class="headerlink" href="#extra-information" title="Permalink to this headline">¶</a></h3>
 <p>The preferred way to build FriCAS is to use an already installed Lisp.
-Also, it is preferable to use a separate build directory. Assuming
+Also, it is preferable to use a separate build directory.  Assuming
 that the source tree is in <code class="docutils literal notranslate"><span class="pre">$HOME/fricas</span></code>, you build in
 <code class="docutils literal notranslate"><span class="pre">$HOME/fricas-build</span></code> subdirectory and your Lisp is called
 <code class="docutils literal notranslate"><span class="pre">sbcl</span></code> the following should just work.</p>
@@ -264,7 +263,7 @@ $HOME/fricas/configure --with-lisp=sbcl &amp;&amp; make &amp;&amp; sudo make ins
 </pre></div>
 </div>
 <p>Currently <code class="docutils literal notranslate"><span class="pre">--with-lisp</span></code> option accepts all supported lisp variants,
-namely SBCL, CLISP, ECL, GCL and Clozure CL (openmcl). Note: the
+namely SBCL, CLISP, ECL, GCL and Clozure CL (openmcl).  Note: the
 argument is just a command to invoke the respective Lisp variant.
 Build machinery will automatically detect which Lisp is in use and
 adjust as needed.</p>
@@ -273,7 +272,7 @@ adjust as needed.</p>
 <h3><a class="toc-backref" href="#id14">HyperDoc and graphics</a><a class="headerlink" href="#hyperdoc-and-graphics" title="Permalink to this headline">¶</a></h3>
 <p>If you compile FriCAS from the <a class="reference external" href="https://github.com/hemmecke/fricas">FriCAS git repository</a>, and <code class="docutils literal notranslate"><span class="pre">configure</span></code>
 does not detect the <code class="docutils literal notranslate"><span class="pre">xvfb-run</span></code> program, then graphic examples will
-not be built. This results in broken HyperDoc pages – all graphic
+not be built.  This results in broken HyperDoc pages – all graphic
 examples will be missing (and trying to access them will crash
 hypertex).</p>
 <p>The get working graphic examples login into X and replace <code class="docutils literal notranslate"><span class="pre">make</span></code>
@@ -286,11 +285,11 @@ above by the following</p>
 </pre></div>
 </div>
 <p><em>Important</em>: building graphic examples accesses the X server, so it
-will not work on text console. During build drawings will temporarily
-appear on the screen. Redirecting X via <code class="docutils literal notranslate"><span class="pre">ssh</span></code> should work fine, but
+will not work on text console.  During build drawings will temporarily
+appear on the screen.  Redirecting X via <code class="docutils literal notranslate"><span class="pre">ssh</span></code> should work fine, but
 may be slow.</p>
-<p>It is possible to use the <code class="docutils literal notranslate"><span class="pre">xvfb-run</span></code> program, replacing <code class="docutils literal notranslate"><span class="pre">make</span>
-<span class="pre">viewports</span></code> above by</p>
+<p>It is possible to use the <code class="docutils literal notranslate"><span class="pre">xvfb-run</span></code> program, replacing
+<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">viewports</span></code> above by</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>xvfb-run -a -n 0 -s &#39;-screen 0 1024x768x24&#39; make viewports
 </pre></div>
 </div>
@@ -298,23 +297,23 @@ may be slow.</p>
 <div class="section" id="algebra-optimization">
 <h3><a class="toc-backref" href="#id15">Algebra optimization</a><a class="headerlink" href="#algebra-optimization" title="Permalink to this headline">¶</a></h3>
 <p>When writing/compiling programs there is always tradeoff between speed
-and safety. Programs may include many checks to detect errors early
-(and allow recovery). Such programs are safe but checks take time so
-the program is slower. Or a program may just blindly goes forward
-hoping that everything goes well. Typically the second program will be
+and safety.  Programs may include many checks to detect errors early
+(and allow recovery).  Such programs are safe but checks take time so
+the program is slower.  Or a program may just blindly goes forward
+hoping that everything goes well.  Typically the second program will be
 faster, but in case of problems it may crash without any hint why and
 take user data with it.</p>
 <p>Safety checks may be written by programmers, but another possibility
 is to have a compiler which automatically inserts various checks.
 FriCAS is compiled by a Lisp compiler and Lisp compilers may insert
-safety checks. How many checks are inserted may be controlled by the
-user. By default FriCAS tries to strike good balance between speed and
-safety. However, some FriCAS users want different tradeoff. The</p>
+safety checks.  How many checks are inserted may be controlled by the
+user.  By default FriCAS tries to strike good balance between speed and
+safety.  However, some FriCAS users want different tradeoff.  The</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--enable-algebra-optimization=S
 </pre></div>
 </div>
 <p>option to configure allows changing this setting: S is a Lisp
-expression specifying speed/safety tradeoff used by Lisp compiler. For
+expression specifying speed/safety tradeoff used by Lisp compiler.  For
 example:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--enable-algebra-optimization=&quot;((speed 3) (safety 0))&quot;
 </pre></div>
@@ -325,7 +324,7 @@ example:</p>
 </div>
 <p>should be very safe (but possibly slow).</p>
 <p>Note: this setting affects only algebra (that is mathematical code).
-The rest of FriCAS always uses default setting. Rationale for this is
+The rest of FriCAS always uses default setting.  Rationale for this is
 that mathematical code is unlikely to contain errors which can crash
 the whole system.</p>
 </div>
@@ -333,14 +332,14 @@ the whole system.</p>
 <h3><a class="toc-backref" href="#id16">Using GMP with SBCL or Clozure CL</a><a class="headerlink" href="#using-gmp-with-sbcl-or-clozure-cl" title="Permalink to this headline">¶</a></h3>
 <p>Currently on average FriCAS is fastest when compiled using <a class="reference external" href="http://sbcl.sourceforge.net/platform-table.html">SBCL</a>.
 However, SBCL normally uses its own routines for computations with
-large numbers and those routines are slower than <a class="reference external" href="https://gmplib.org">GMP</a>. FriCAS now has
-special support to replace sbcl arithmetic routines by GMP. To use
+large numbers and those routines are slower than <a class="reference external" href="https://gmplib.org">GMP</a>.  FriCAS now has
+special support to replace sbcl arithmetic routines by GMP.  To use
 this support install GMP including header files (development package
-if you install via a package manager). Currently there are two
-available <a class="reference external" href="https://gmplib.org">GMP</a> versions, version 5 is much faster than version 4. Then
+if you install via a package manager).  Currently there are two
+available <a class="reference external" href="https://gmplib.org">GMP</a> versions, version 5 is much faster than version 4.  Then
 configure FriCAS adding <code class="docutils literal notranslate"><span class="pre">--enable-gmp</span></code> option to the <code class="docutils literal notranslate"><span class="pre">configure</span></code>
 arguments.</p>
-<p>FriCAS also has support for using <a class="reference external" href="https://gmplib.org">GMP</a> with <a class="reference external" href="http://ccl.clozure.com/manual/chapter2.2.html">Clozure CL</a>. Currently
+<p>FriCAS also has support for using <a class="reference external" href="https://gmplib.org">GMP</a> with <a class="reference external" href="http://ccl.clozure.com/manual/chapter2.2.html">Clozure CL</a>.  Currently
 Clozure CL with GMP works on 32/64 bit Intel/AMD processors and ARM
 (using Clozure CL with GMP is not supported on Power PC processors).</p>
 <p>When you have GMP installed in a non-standard location (this usually
@@ -350,14 +349,14 @@ specify the location with</p>
 </pre></div>
 </div>
 <p>This supposes that the include file is in <code class="docutils literal notranslate"><span class="pre">PATH/include</span></code> and libgmp
-is in <code class="docutils literal notranslate"><span class="pre">PATH/lib</span></code>. If you have a different setup, then you can
+is in <code class="docutils literal notranslate"><span class="pre">PATH/lib</span></code>.  If you have a different setup, then you can
 specify</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--with-gmp-include=INCLUDEPATH --with-gmp-lib=LIBPATH
 </pre></div>
 </div>
 <p>(specify the directories where the include files and libgmp are found,
 respectively).</p>
-<p>These options also implicitly set <code class="docutils literal notranslate"><span class="pre">--enable-gmp</span></code>. However, if
+<p>These options also implicitly set <code class="docutils literal notranslate"><span class="pre">--enable-gmp</span></code>.  However, if
 <code class="docutils literal notranslate"><span class="pre">--enable-gmp=no</span></code> is given, then <code class="docutils literal notranslate"><span class="pre">--with-gmp=...</span></code>,
 <code class="docutils literal notranslate"><span class="pre">--with-gmp-include=...</span></code> and <code class="docutils literal notranslate"><span class="pre">--with-gmp-lib=...</span></code> is ignored.</p>
 </div>
@@ -377,7 +376,7 @@ directory <code class="docutils literal notranslate"><span class="pre">src/doc/h
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>firefox src/doc/html/index.html
 </pre></div>
 </div>
-<p>but some links point to the web. If you want the links referring only
+<p>but some links point to the web.  If you want the links referring only
 to the data on your computer, you call the compilation like this</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cd $BUILD/src/doc
 make localdoc
@@ -385,7 +384,7 @@ make localdoc
 </div>
 <p>This will have broken references to the
 <a class="reference external" href="https://fricas.github.io/fricas-notebooks/">FriCAS Demos and Tutorials</a>
-as they live in a separate repository. Do the following to get a local
+as they live in a separate repository.  Do the following to get a local
 copy and thus have working references.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cd $BUILD/src/doc/html
 git clone -b gh-pages https://github.com/fricas/fricas-notebooks
@@ -411,7 +410,7 @@ PACKAGE_VERSION=&quot;1.3.6+ `date +&#39;%Y-%m-%d %H:%M&#39;`&quot;
 </pre></div>
 </div>
 <p>Then, checkout the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch and put the data from
-<code class="docutils literal notranslate"><span class="pre">$BUILD?src/doc/html</span></code> into your <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch.</p>
+<code class="docutils literal notranslate"><span class="pre">$BUILD/src/doc/html</span></code> into your <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git clone git@github.com:hemmecke/fricas.git
 git checkout gh-pages
 git rm -rf .
@@ -437,7 +436,7 @@ in in this editor.</p>
 <div class="section" id="aldor-library-libfricas-al">
 <h3><a class="toc-backref" href="#id18">Aldor library libfricas.al</a><a class="headerlink" href="#aldor-library-libfricas-al" title="Permalink to this headline">¶</a></h3>
 <p>You can not only extend the FriCAS library by <code class="docutils literal notranslate"><span class="pre">.spad</span></code> files (SPAD
-programs), but also by <code class="docutils literal notranslate"><span class="pre">.as</span></code> files (<a class="reference external" href="https://github.com/aldorlang/aldor">Aldor</a> programs). For the latter
+programs), but also by <code class="docutils literal notranslate"><span class="pre">.as</span></code> files (<a class="reference external" href="https://github.com/aldorlang/aldor">Aldor</a> programs).  For the latter
 to work FriCAS needs a library <code class="docutils literal notranslate"><span class="pre">libfricas.al</span></code>.</p>
 <p>This library can be build as follows.
 (An Aldor compiler is of course a prerequisite.)</p>
@@ -482,26 +481,26 @@ sieve(n: N): N  == {
 <ul>
 <li><p>currently on when using case insensitive filesystem (typically on
 Mac OSX and Windows), the git version can be only build in a
-separate directory (in-tree build will fail). This does not affect
+separate directory (in-tree build will fail).  This does not affect
 release tarball.</p></li>
 <li><p>In general, any error when generating documentation will cause build
 to hang.</p></li>
 <li><p>32-bit sbcl from 1.5.9 to 2.1.3 may miscompile floating point
-comparisons.  Due to this most plots wil fail.  The problem is
-fixed in developement version of sbcl.  Alternatively, use older
-version of sbcl.  64-bit sbcl works OK.</p></li>
+comparisons.   Due to this most plots wil fail.   The problem is
+fixed in developement version of sbcl.   Alternatively, use older
+version of sbcl.   64-bit sbcl works OK.</p></li>
 <li><p>by default sbcl 1.0.54 and newer limits memory use to 1GB, which is
-too small for heavy use. To work around this one can pass
+too small for heavy use.  To work around this one can pass
 <code class="docutils literal notranslate"><span class="pre">--dynamic-space-size</span></code> argument during sbcl build to increase
 default limit.
 We recommend limit slightly smaller than amount of
 available RAM (in this way FriCAS will be able to use almost all
 RAM, but limit should prevent thrashing).</p></li>
 <li><p>Some Linux versions, notably SuSE, by default seem to have very
-small limit on virtual memory. This causes build failure when using
-sbcl or Clozure CL. Also if limit on virtual memory is too small
+small limit on virtual memory.  This causes build failure when using
+sbcl or Clozure CL.  Also if limit on virtual memory is too small
 sbcl-based or Clozure CL-based FriCAS binary will silently fail at
-startup. The simplest workaround is to increase limit, in the shell
+startup.  The simplest workaround is to increase limit, in the shell
 typing</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ulimit -v unlimited
 </pre></div>
@@ -509,47 +508,47 @@ typing</p>
 <p>Alternatively for sbcl one can use <code class="docutils literal notranslate"><span class="pre">--dynamic-space-size</span></code> argument
 to decrease use of virtual memory.</p>
 </li>
-<li><p>On new Linux kernel build using Clisp may take very long time. This
+<li><p>On new Linux kernel build using Clisp may take very long time.  This
 is caused by frequent calls to <code class="docutils literal notranslate"><span class="pre">fsync</span></code> performed without need by
 Clisp.</p></li>
 <li><p>on some systems (notably MAC OSX) when using sbcl default limit of
-open files may be too low. To workaround increase limit (experiments
-suggest that 512 open files is enough). This should not be needed in
+open files may be too low.  To workaround increase limit (experiments
+suggest that 512 open files is enough).  This should not be needed in
 FriCAS 1.1.7.</p></li>
 <li><p>sbcl from 1.3.1 to 1.3.4 runs out of memory when compiling FriCAS.
 This is fixed in newer versions of sbcl.</p></li>
 <li><p>using sbcl from 1.0.47 to 1.0.49 compilation is very slow (few hours
-on fast machine). This is fixed in newer versions of sbcl.</p></li>
+on fast machine).  This is fixed in newer versions of sbcl.</p></li>
 <li><p>sbcl-1.0.29 has a bug in the <code class="docutils literal notranslate"><span class="pre">directory</span></code> function which causes
-build failure. This problem is fixed in 1.0.29.54.rc1.</p></li>
+build failure.  This problem is fixed in 1.0.29.54.rc1.</p></li>
 <li><p>1.0.29.54.rc1 has broken complex <code class="docutils literal notranslate"><span class="pre">tanh</span></code> function – you will get
 wrong results when applying <code class="docutils literal notranslate"><span class="pre">tanh</span></code> to <code class="docutils literal notranslate"><span class="pre">Complex</span> <span class="pre">DoubleFloat</span></code>.</p></li>
-<li><p>in sbcl 1.0.35 and up Control-C handling did not work. This should
+<li><p>in sbcl 1.0.35 and up Control-C handling did not work.  This should
 be fixed in current FriCAS.</p></li>
 <li><p>prerelease gcl from gcl git repository is incompatible with FriCAS
 and build will fail.</p></li>
 <li><p>older gcl had serious problems on Macs and Windows.</p></li>
 <li><p>released gcl-2.6.9 has a bug which causes failure of FriCAS build.
 This problem is fixed in 2.6.10 and later but but there is a
-different one. Namely, FriCAS builds but apparently on some machines
+different one.  Namely, FriCAS builds but apparently on some machines
 is miscompiled using released 2.6.10 or 2.6.11 or 2.6.12.</p></li>
 <li><p>On Gentoo system installed gcl probably will not work, one need to
 build own one.</p></li>
 <li><p>Older version of gcl are incompatible with Fedora “exec-shield” and
 strong address space randomization (setting randomize_va_space to
-2). Newest CVS version of 2.6.8 branch of gcl fixes this problem.</p></li>
-<li><p>gcl needs bfd library. Many Linux systems include version of bfd
-library which is incompatible with gcl. In the past we advised to
+2).  Newest CVS version of 2.6.8 branch of gcl fixes this problem.</p></li>
+<li><p>gcl needs bfd library.  Many Linux systems include version of bfd
+library which is incompatible with gcl.  In the past we advised to
 use in such case the following configure line</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./configure --disable-xgcl --disable-dynsysbfd --disable-statsysbfd --enable-locbfd
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>configure --disable-xgcl --disable-dynsysbfd --disable-statsysbfd --enable-locbfd
 </pre></div>
 </div>
 </li>
 <li><p>Boehm garbage collector included in old ECL (version 6.8) is incompatible
 with Fedora strong address space randomization (setting randomize_va_space
-to 2).  Using newer version of Boehm garbage collector (7.0 or 7.1) or
+to 2).   Using newer version of Boehm garbage collector (7.0 or 7.1) or
 newer ECL should solve this problem.</p></li>
-<li><p>Striping FriCAS binaries is likely to break them. In particular
+<li><p>Striping FriCAS binaries is likely to break them.  In particular
 Clisp based FriCAS may crash with message</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>module &#39;syscalls&#39; requires package OS.
 </pre></div>
@@ -565,20 +564,20 @@ build stopped with the message</p>
 </li>
 <li><p>ECL 9.6.2 (and probably also 9.6.1 and 9.6.0) has a bug with
 handling string constants which causes build based on this version
-to fail. This bugs is fixed in newer versions. ECL 9.7.1 generates
-wrong C code, so that build fails. This is fixed in newer versions.</p></li>
+to fail.  This bugs is fixed in newer versions.  ECL 9.7.1 generates
+wrong C code, so that build fails.  This is fixed in newer versions.</p></li>
 <li><p>Unicode-enabled ECL before 9.8.4 is unable to build FriCAS.</p></li>
-<li><p>ECL up to version 0.9l may segfault at exit. This is usually
+<li><p>ECL up to version 0.9l may segfault at exit.  This is usually
 harmless, but may cause build to hang (for example when generating
 <code class="docutils literal notranslate"><span class="pre">ug13.pht</span></code>).</p></li>
 <li><p>Clozure CL 1.10 apparently miscompiles some operations on U32Matrix.
 Version 1.11 works OK.</p></li>
-<li><p>Clozure CL 1.7 and 1.6 apparently miscompiles FriCAS. Versions 1.8
+<li><p>Clozure CL 1.7 and 1.6 apparently miscompiles FriCAS.  Versions 1.8
 and newer and 1.5 and earlier work OK.</p></li>
 <li><p>Clozure CL earlier than release 1.2 (former Openmcl) has a bug in
-Lisp printer. This bug causes incorrect printing of FriCAS types.
+Lisp printer.  This bug causes incorrect printing of FriCAS types.
 Also, Clozure CL earlier than release 1.2 has bug in complex cosine
-function. Those bugs are fixed in release 1.2. If you want to use
+function.  Those bugs are fixed in release 1.2.  If you want to use
 earlier version you can work around the bugs applying the
 <code class="docutils literal notranslate"><span class="pre">contib/omcl.diff</span></code> patch and recompiling the compiler (see the
 patch or Clozure CL documentation for instructions).</p></li>
