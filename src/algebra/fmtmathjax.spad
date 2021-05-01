@@ -1,7 +1,7 @@
 -------------------------------------------------------------------
 ---
 --- FriCAS FormatMathJax
---- Copyright (C) 2020  Ralf Hemmecke <ralf@hemmecke.org>
+--- Copyright (C) 2020-2021  Ralf Hemmecke <ralf@hemmecke.org>
 ---
 -------------------------------------------------------------------
 -- Redistribution and use in source and binary forms, with or without
@@ -102,8 +102,23 @@ FormatMathJax: Exports == Implementation where
       ++ with name \spad{env}. The string \spad{x} is put right after
       ++ the start of the environment.
       ++ The arguments are separated by the string \spad{sep}.
+    setPrettySymbols!: Boolean -> Boolean
+      ++ setPrettySymbols(true) sets the internal state in such a way
+      ++ that a symbol of the for "\abc", i.e. starting with a
+      ++ backslash and only ASCII letters following it ([a-zA-Z]),
+      ++ will not replace the backslash, but rather hands the symbol
+      ++ as is for interpretation by MathJax.
+      ++ setPrettySymbols(false) switches this feature off.
+      ++ The return value is the state before it was set anew.
 
   Implementation ==> add
+    -- domain variable
+    prettySymbols?: Reference Boolean := ref false
+    setPrettySymbols!(b: Boolean): Boolean ==
+        oldState: Boolean := deref prettySymbols?
+        prettySymbols? := ref b
+        oldState
+
     Rep ==> Record(prolog: BOX, fmt: BOX, epilog: BOX)
     import from Rep
     rep x ==> (x@%) pretend Rep
@@ -179,10 +194,17 @@ In order to keep spaces, we also escape spaces by a backslash.
     formatString(s: S): BOX ==
         -- The backslash must be escaped by a second backslash.
         tex1("\texttt", box duplicateBackslashes s)
-    formatSymbol(s: S): BOX == box texEscapeString s
+
+    formatSymbol(s: S): BOX ==
+        deref prettySymbols? and not empty? s and s.1 = char "\" =>
+            box s
+        box texEscapeString s
+
     formatFunctionSymbol(s: S): BOX ==
-        b := box texEscapeString s
-        if one? width b then b else tex1("\operatorname", b)
+        b := formatSymbol s
+        deref prettySymbols? and not empty? b and lines(b).1.1 = char "\" => b
+        one? width b => b
+        tex1("\operatorname", b)
 
     -- If a is of the form (* x (CONCAT d y)) then replace it
     -- by (INTSEP x (CONCAT d y)).
