@@ -1,5 +1,6 @@
 WEBSPAD_REQUIREMENTS = @WEBSPAD_REQUIREMENTS@
 SBCL_HOME = @SBCL_HOME@
+export SBCL_HOME
 
 subdir = src/interp/
 
