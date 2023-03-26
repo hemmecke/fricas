@@ -142,6 +142,19 @@ In the following we list publications mentioning FriCAS.
   (DOI: `10.1007/978-3-030-04480-0_11
   <https://doi.org/10.1007/978-3-030-04480-0_11>`_)
 
+* **Ralf Hemmecke**, **Peter Paule**, and  **Silviu Radu**
+  (2021):
+  `Construction of an Integral Basis for $M^\infty(121)$
+  <https://doi.org/10.1080/10652469.2020.1806261>`_
+  (DOI: `10.1080/10652469.2020.1806261
+  <https://doi.org/10.1080/10652469.2020.1806261>`_)
+
+* **Konrad Schrempf**
+  (2021):
+  `Free (rational) derivations
+  <https://arxiv.org/abs/1809.05425>`_
+  (DOI: `10.17398/2605-5686.36.1.25
+  <https://doi.org/10.17398/2605-5686.36.1.25>`_
 
 * `Sage <http://www.sagemath.org>`_ provides an
   `interface to FriCAS

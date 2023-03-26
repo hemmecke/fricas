@@ -1,25 +1,26 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>U8Matrix &#8212; FriCAS</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="U8Vector" href="U8Vector.html" />
-    <link rel="prev" title="U32Vector" href="U32Vector.html" /> 
+    <link rel="prev" title="U64Int" href="U64Int.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -31,7 +32,7 @@
           <a href="U8Vector.html" title="U8Vector"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="U32Vector.html" title="U32Vector"
+          <a href="U64Int.html" title="U64Int"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">FriCAS</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" >FriCAS API</a> &#187;</li>
@@ -45,10 +46,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="u8matrix">
-<span id="l55384d6174726978"></span><span id="index-0"></span><h1>U8Matrix<a class="headerlink" href="#u8matrix" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://github.com/hemmecke/fricas/blob/wip/rstdoc-hemmecke/src/algebra/u32vec.spad#L150">u32vec.spad line 150</a> <a class="reference external" href="https://github.com/hemmecke/fricas/edit/wip/rstdoc-hemmecke/src/algebra/u32vec.spad#L150">[edit on github]</a></p>
-<p>This is a low-level domain which implements matrices (two dimensional arrays) of 8-bit integers. Indexing is 0 based, there is no bound checking (unless provided by lower level).</p>
+  <section id="u8matrix">
+<span id="l55384d6174726978"></span><span id="index-0"></span><h1>U8Matrix<a class="headerlink" href="#u8matrix" title="Permalink to this heading">¶</a></h1>
+<p><a class="reference external" href="https://github.com/hemmecke/fricas/blob/wip/fricas-sbcl-hunchentoot/src/algebra/u32vec.spad#L158">u32vec.spad line 158</a> <a class="reference external" href="https://github.com/hemmecke/fricas/edit/wip/fricas-sbcl-hunchentoot/src/algebra/u32vec.spad#L158">[edit on github]</a></p>
+<p>This is a low-level domain which implements matrices (two dimensional arrays) of unsigned 8-bit integers. Indexing is 0 based, there is no bound checking (unless provided by lower level).</p>
 <dl class="simple" id="l55384d6174726978-23">
 <dt><a class="reference internal" href="Aggregate.html#l416767726567617465-23"><span class="std std-ref">#</span></a>: % -&gt; <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a></dt><dd><p>from <a class="reference internal" href="Aggregate.html#l416767726567617465"><span class="std std-ref">Aggregate</span></a></p>
 </dd>
@@ -503,7 +504,7 @@
 <p><a class="reference internal" href="SetCategory.html#l53657443617465676f7279"><span class="std std-ref">SetCategory</span></a></p>
 <p><a class="reference internal" href="shallowlyMutable.html#l7368616c6c6f776c794d757461626c65"><span class="std std-ref">shallowlyMutable</span></a></p>
 <p><a class="reference internal" href="TwoDimensionalArrayCategory.html#l54776f44696d656e73696f6e616c417272617943617465676f7279"><span class="std std-ref">TwoDimensionalArrayCategory</span></a>(<a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>, <a class="reference internal" href="U8Vector.html#l5538566563746f72"><span class="std std-ref">U8Vector</span></a>, <a class="reference internal" href="U8Vector.html#l5538566563746f72"><span class="std std-ref">U8Vector</span></a>)</p>
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -528,12 +529,12 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -548,7 +549,7 @@
           <a href="U8Vector.html" title="U8Vector"
              >next</a> |</li>
         <li class="right" >
-          <a href="U32Vector.html" title="U32Vector"
+          <a href="U64Int.html" title="U64Int"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">FriCAS</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" >FriCAS API</a> &#187;</li>

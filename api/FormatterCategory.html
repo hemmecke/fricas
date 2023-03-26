@@ -1,20 +1,21 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>FormatterCategory &#8212; FriCAS</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -45,9 +46,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="formattercategory">
-<span id="l466f726d617474657243617465676f7279"></span><span id="index-0"></span><h1>FormatterCategory<a class="headerlink" href="#formattercategory" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://github.com/hemmecke/fricas/blob/wip/rstdoc-hemmecke/src/algebra/fmt.spad#L416">fmt.spad line 416</a> <a class="reference external" href="https://github.com/hemmecke/fricas/edit/wip/rstdoc-hemmecke/src/algebra/fmt.spad#L416">[edit on github]</a></p>
+  <section id="formattercategory">
+<span id="l466f726d617474657243617465676f7279"></span><span id="index-0"></span><h1>FormatterCategory<a class="headerlink" href="#formattercategory" title="Permalink to this heading">¶</a></h1>
+<p><a class="reference external" href="https://github.com/hemmecke/fricas/blob/wip/fricas-sbcl-hunchentoot/src/algebra/fmt.spad#L416">fmt.spad line 416</a> <a class="reference external" href="https://github.com/hemmecke/fricas/edit/wip/fricas-sbcl-hunchentoot/src/algebra/fmt.spad#L416">[edit on github]</a></p>
 <p>undocumented</p>
 <span class="target" id="l466f726d617474657243617465676f7279-616c747375706572737562"></span><dl class="simple" id="index-1">
 <dt><span class="spadfun">altsupersub</span>: <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a> -&gt; (<a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>, <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> <a class="reference internal" href="OutputForm.html#l4f7574707574466f726d"><span class="std std-ref">OutputForm</span></a>) -&gt; <a class="reference internal" href="OutputBox.html#l4f7574707574426f78"><span class="std std-ref">OutputBox</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">altsupersub(p)</span></code> returns a handler such that <code class="docutils literal notranslate"><span class="pre">altsupersub(p)(prec,</span> <span class="pre">args)</span></code> formats the first argument with respect to the precedence <code class="docutils literal notranslate"><span class="pre">p</span></code>. The remaining arguments are formatted without parentheses and interpreted as subscript, superscript, subscript, superscript, etc. where the subscripts and superscripts are pairwise aligned. Outer parentheses are added if <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">&lt;</span> <span class="pre">prec</span></code>.</p>
@@ -230,7 +231,7 @@
 </dd>
 </dl>
 <p><a class="reference internal" href="CoercibleTo.html#l436f65726369626c65546f"><span class="std std-ref">CoercibleTo</span></a> <a class="reference internal" href="OutputForm.html#l4f7574707574466f726d"><span class="std std-ref">OutputForm</span></a></p>
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -255,12 +256,12 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>

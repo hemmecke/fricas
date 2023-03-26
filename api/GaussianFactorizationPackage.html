@@ -1,20 +1,21 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>GaussianFactorizationPackage &#8212; FriCAS</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -45,9 +46,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="gaussianfactorizationpackage">
-<span id="l476175737369616e466163746f72697a6174696f6e5061636b616765"></span><span id="index-0"></span><h1>GaussianFactorizationPackage<a class="headerlink" href="#gaussianfactorizationpackage" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://github.com/hemmecke/fricas/blob/wip/rstdoc-hemmecke/src/algebra/gaussfac.spad#L1">gaussfac.spad line 1</a> <a class="reference external" href="https://github.com/hemmecke/fricas/edit/wip/rstdoc-hemmecke/src/algebra/gaussfac.spad#L1">[edit on github]</a></p>
+  <section id="gaussianfactorizationpackage">
+<span id="l476175737369616e466163746f72697a6174696f6e5061636b616765"></span><span id="index-0"></span><h1>GaussianFactorizationPackage<a class="headerlink" href="#gaussianfactorizationpackage" title="Permalink to this heading">¶</a></h1>
+<p><a class="reference external" href="https://github.com/hemmecke/fricas/blob/wip/fricas-sbcl-hunchentoot/src/algebra/gaussfac.spad#L1">gaussfac.spad line 1</a> <a class="reference external" href="https://github.com/hemmecke/fricas/edit/wip/fricas-sbcl-hunchentoot/src/algebra/gaussfac.spad#L1">[edit on github]</a></p>
 <p>Package for the factorization of complex or gaussian integers.</p>
 <span class="target" id="l476175737369616e466163746f72697a6174696f6e5061636b616765-666163746f72"></span><dl class="simple" id="index-1">
 <dt><span class="spadfun">factor</span>: <a class="reference internal" href="Complex.html#l436f6d706c6578"><span class="std std-ref">Complex</span></a> <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a> -&gt; <a class="reference internal" href="Factored.html#l466163746f726564"><span class="std std-ref">Factored</span></a> <a class="reference internal" href="Complex.html#l436f6d706c6578"><span class="std std-ref">Complex</span></a> <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">factor(zi)</span></code> produces the complete factorization of the complex integer <code class="docutils literal notranslate"><span class="pre">zi</span></code>.</p>
@@ -61,7 +62,7 @@
 <dt><span class="spadfun">sumSquares</span>: <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a> -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">sumSquares(p)</span></code> construct <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> such that <code class="docutils literal notranslate"><span class="pre">a^2+b^2</span></code> is equal to the integer prime <code class="docutils literal notranslate"><span class="pre">p</span></code>, and otherwise returns an error. It will succeed if the prime number <code class="docutils literal notranslate"><span class="pre">p</span></code> is 2 or congruent to 1 mod 4.</p>
 </dd>
 </dl>
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -86,12 +87,12 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>

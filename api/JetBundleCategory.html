@@ -1,20 +1,21 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>JetBundleCategory &#8212; FriCAS</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -45,10 +46,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="jetbundlecategory">
-<span id="l4a657442756e646c6543617465676f7279"></span><span id="index-0"></span><h1>JetBundleCategory<a class="headerlink" href="#jetbundlecategory" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://github.com/hemmecke/fricas/blob/wip/rstdoc-hemmecke/src/algebra/jet.spad#L37">jet.spad line 37</a> <a class="reference external" href="https://github.com/hemmecke/fricas/edit/wip/rstdoc-hemmecke/src/algebra/jet.spad#L37">[edit on github]</a></p>
-<p><a class="reference internal" href="#l4a657442756e646c6543617465676f7279"><span class="std std-ref">JetBundleCategory</span></a> provides basic data structures and procedures for jet bundles. Nearly all necessary functions are implemented already here. Only the representation and functions which direct access to it must be implemented in a domain. Two notations of derivatives are supported. Default is multi-index notation, where the <code class="docutils literal notranslate"><span class="pre">i</span></code>-th entry of the index denotes the number of differentiations taken with respect to <code class="docutils literal notranslate"><span class="pre">x^i</span></code>. In repeated index notation each entry <code class="docutils literal notranslate"><span class="pre">i</span></code> in the index denotes a differentiation with respect to <code class="docutils literal notranslate"><span class="pre">x^i</span></code>. The choice affects, however, only in- and output. Internally, multi-index notation is used throughout.</p>
+  <section id="jetbundlecategory">
+<span id="l4a657442756e646c6543617465676f7279"></span><span id="index-0"></span><h1>JetBundleCategory<a class="headerlink" href="#jetbundlecategory" title="Permalink to this heading">¶</a></h1>
+<p><a class="reference external" href="https://github.com/hemmecke/fricas/blob/wip/fricas-sbcl-hunchentoot/src/algebra/jet.spad#L37">jet.spad line 37</a> <a class="reference external" href="https://github.com/hemmecke/fricas/edit/wip/fricas-sbcl-hunchentoot/src/algebra/jet.spad#L37">[edit on github]</a></p>
+<p><a class="reference internal" href="#l4a657442756e646c6543617465676f7279"><span class="std std-ref">JetBundleCategory</span></a> provides basic data structures and procedures for jet bundles. Nearly all necessary functions are implemented already here. Only the representation and functions which directly access it must be implemented in a domain. Two notations of derivatives are supported. Default is multi-index notation, where the <code class="docutils literal notranslate"><span class="pre">i</span></code>-th entry of the index denotes the number of differentiations taken with respect to <code class="docutils literal notranslate"><span class="pre">x^i</span></code>. In repeated index notation each entry <code class="docutils literal notranslate"><span class="pre">i</span></code> in the index denotes a differentiation with respect to <code class="docutils literal notranslate"><span class="pre">x^i</span></code>. The choice affects, however, only in- and output. Internally, multi-index notation is used throughout.</p>
 <span class="target" id="l4a657442756e646c6543617465676f7279-31"></span><dl class="simple" id="index-1">
 <dt><span class="spadfun">1</span>: %</dt><dd><p><code class="docutils literal notranslate"><span class="pre">1</span></code> generates the special “jet variable” 1, which is needed for the representation of linear functions.</p>
 </dd>
@@ -254,7 +255,7 @@
 <p><a class="reference internal" href="OrderedSet.html#l4f726465726564536574"><span class="std std-ref">OrderedSet</span></a></p>
 <p><a class="reference internal" href="PartialOrder.html#l5061727469616c4f72646572"><span class="std std-ref">PartialOrder</span></a></p>
 <p><a class="reference internal" href="SetCategory.html#l53657443617465676f7279"><span class="std std-ref">SetCategory</span></a></p>
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -279,12 +280,12 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
