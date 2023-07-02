@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>DrawComplex &#8212; FriCAS</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
@@ -16,6 +16,7 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -48,7 +49,7 @@
             
   <section id="drawcomplex">
 <span id="l44726177436f6d706c6578"></span><span id="index-0"></span><h1>DrawComplex<a class="headerlink" href="#drawcomplex" title="Permalink to this heading">¶</a></h1>
-<p><a class="reference external" href="https://github.com/hemmecke/fricas/blob/wip/fricas-sbcl-hunchentoot/src/algebra/drawpak.spad#L1">drawpak.spad line 1</a> <a class="reference external" href="https://github.com/hemmecke/fricas/edit/wip/fricas-sbcl-hunchentoot/src/algebra/drawpak.spad#L1">[edit on github]</a></p>
+<p><a class="reference external" href="https://github.com/hemmecke/fricas/blob/wip/rst/src/algebra/drawpak.spad#L1">drawpak.spad line 1</a> <a class="reference external" href="https://github.com/hemmecke/fricas/edit/wip/rst/src/algebra/drawpak.spad#L1">[edit on github]</a></p>
 <p><a class="reference internal" href="#l44726177436f6d706c6578"><span class="std std-ref">DrawComplex</span></a> provides some facilities for drawing complex functions.</p>
 <span class="target" id="l44726177436f6d706c6578-64726177436f6d706c6578"></span><dl class="simple" id="index-1">
 <dt><span class="spadfun">drawComplex</span>: (<a class="reference internal" href="Complex.html#l436f6d706c6578"><span class="std std-ref">Complex</span></a> <a class="reference internal" href="DoubleFloat.html#l446f75626c65466c6f6174"><span class="std std-ref">DoubleFloat</span></a> -&gt; <a class="reference internal" href="Complex.html#l436f6d706c6578"><span class="std std-ref">Complex</span></a> <a class="reference internal" href="DoubleFloat.html#l446f75626c65466c6f6174"><span class="std std-ref">DoubleFloat</span></a>, <a class="reference internal" href="Segment.html#l5365676d656e74"><span class="std std-ref">Segment</span></a> <a class="reference internal" href="DoubleFloat.html#l446f75626c65466c6f6174"><span class="std std-ref">DoubleFloat</span></a>, <a class="reference internal" href="Segment.html#l5365676d656e74"><span class="std std-ref">Segment</span></a> <a class="reference internal" href="DoubleFloat.html#l446f75626c65466c6f6174"><span class="std std-ref">DoubleFloat</span></a>, <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a>) -&gt; <a class="reference internal" href="ThreeDimensionalViewport.html#l546872656544696d656e73696f6e616c56696577706f7274"><span class="std std-ref">ThreeDimensionalViewport</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">drawComplex(f,</span> <span class="pre">rRange,</span> <span class="pre">iRange,</span> <span class="pre">arrows?)</span></code> draws a complex function as a height field. It uses the complex norm as the height and the complex argument as the color. It will optionally draw arrows on the surface indicating the direction of the complex value.  Sample call: <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">z</span> <span class="pre">==</span> <span class="pre">exp(1/z)</span></code> <code class="docutils literal notranslate"><span class="pre">drawComplex(f,</span> <span class="pre">0.3..3,</span> <span class="pre">0..2*\%pi,</span> <span class="pre">false)</span></code> Parameter descriptions: <code class="docutils literal notranslate"><span class="pre">f:</span></code> the function to draw <code class="docutils literal notranslate"><span class="pre">rRange</span></code> : the range of the real values <code class="docutils literal notranslate"><span class="pre">iRange</span></code> : the range of imaginary values arrows? : a flag indicating whether to draw the phase arrows for <code class="docutils literal notranslate"><span class="pre">f</span></code> Call the functions <a class="reference internal" href="#l44726177436f6d706c6578-7365745265616c5374657073"><span class="std std-ref">setRealSteps</span></a> and <a class="reference internal" href="#l44726177436f6d706c6578-736574496d61675374657073"><span class="std std-ref">setImagSteps</span></a> to change the number of steps used in each direction.</p>
@@ -124,7 +125,7 @@
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2007-2020, FriCAS Team.
+        &#169; Copyright 2007-2023, FriCAS Team.
     </div>
   </body>
 </html>

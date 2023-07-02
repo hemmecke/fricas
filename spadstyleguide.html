@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>SPAD Style Guide &#8212; FriCAS</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -16,6 +16,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -54,7 +55,7 @@ Try to avoid lines longer than 78 characters.</p>
 </section>
 <section id="file-splitting-during-compilation">
 <h2>File splitting during compilation<a class="headerlink" href="#file-splitting-during-compilation" title="Permalink to this heading">¶</a></h2>
-<p>There is a script <a class="reference external" href="https://github.com/hemmecke/fricas/blob/wip/fricas-sbcl-hunchentoot/src/scripts/unpack_file">src/scripts/unpack_file</a> that splits
+<p>There is a script <a class="reference external" href="https://github.com/hemmecke/fricas/blob/wip/rst/src/scripts/unpack_file">src/scripts/unpack_file</a> that splits
 <code class="docutils literal notranslate"><span class="pre">.spad</span></code> source files at <code class="docutils literal notranslate"><span class="pre">)abbrev</span></code> boundaries. As a result,
 everything before the first <code class="docutils literal notranslate"><span class="pre">)abbrev</span></code> will be discarded.</p>
 <p>In particular, it means that there cannot be a global macro definition
@@ -74,11 +75,11 @@ included and typeset via the
 <a class="reference external" href="https://www.ctan.org/pkg/listings/">listings package</a>.</p>
 <p>To support a weak form of literate programming, the two files</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://github.com/hemmecke/fricas/blob/wip/fricas-sbcl-hunchentoot/src/doc/literatedoc.sty">src/doc/literatedoc.sty</a></p></li>
-<li><p><a class="reference external" href="https://github.com/hemmecke/fricas/blob/wip/fricas-sbcl-hunchentoot/src/doc/literatedoc.awk">src/doc/literatedoc.awk</a></p></li>
+<li><p><a class="reference external" href="https://github.com/hemmecke/fricas/blob/wip/rst/src/doc/literatedoc.sty">src/doc/literatedoc.sty</a></p></li>
+<li><p><a class="reference external" href="https://github.com/hemmecke/fricas/blob/wip/rst/src/doc/literatedoc.awk">src/doc/literatedoc.awk</a></p></li>
 </ul>
 <p>are provided.</p>
-<p>The file <a class="reference external" href="https://github.com/hemmecke/fricas/blob/wip/fricas-sbcl-hunchentoot/src/algebra/fmt.spad">fmt.spad</a> can be taken as an example.</p>
+<p>The file <a class="reference external" href="https://github.com/hemmecke/fricas/blob/wip/rst/src/algebra/fmt.spad">fmt.spad</a> can be taken as an example.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cd fricas
 awk -f src/doc/literatedoc.awk src/algebra/fmt.spad &gt; fmt.tex
 TEXINPUTS=:src/doc pdflatex fmt.tex
@@ -228,9 +229,9 @@ but not for end-users.</p>
   <ul class="this-page-menu">
     <li><a href="_sources/spadstyleguide.rst.txt"
            rel="nofollow">Show Source</a></li>
-    <li><a href="https://github.com/hemmecke/fricas/blob/wip/fricas-sbcl-hunchentoot/src/doc/sphinx/source/spadstyleguide.rst"
+    <li><a href="https://github.com/hemmecke/fricas/blob/wip/rst/src/doc/sphinx/source/spadstyleguide.rst"
            rel="nofollow">Show on GitHub</a></li>
-    <li><a href="https://github.com/hemmecke/fricas/edit/wip/fricas-sbcl-hunchentoot/src/doc/sphinx/source/spadstyleguide.rst"
+    <li><a href="https://github.com/hemmecke/fricas/edit/wip/rst/src/doc/sphinx/source/spadstyleguide.rst"
            rel="nofollow">Edit on GitHub</a></li>
   </ul>
 <div id="searchbox" style="display: none" role="search">
@@ -265,7 +266,7 @@ but not for end-users.</p>
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2007-2020, FriCAS Team.
+        &#169; Copyright 2007-2023, FriCAS Team.
     </div>
   </body>
 </html>

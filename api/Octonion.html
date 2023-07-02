@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>Octonion R &#8212; FriCAS</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
@@ -16,6 +16,7 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -48,7 +49,7 @@
             
   <section id="octonion-r">
 <span id="l4f63746f6e696f6e"></span><span id="index-0"></span><h1>Octonion R<a class="headerlink" href="#octonion-r" title="Permalink to this heading">¶</a></h1>
-<p><a class="reference external" href="https://github.com/hemmecke/fricas/blob/wip/fricas-sbcl-hunchentoot/src/algebra/oct.spad#L261">oct.spad line 261</a> <a class="reference external" href="https://github.com/hemmecke/fricas/edit/wip/fricas-sbcl-hunchentoot/src/algebra/oct.spad#L261">[edit on github]</a></p>
+<p><a class="reference external" href="https://github.com/hemmecke/fricas/blob/wip/rst/src/algebra/oct.spad#L261">oct.spad line 261</a> <a class="reference external" href="https://github.com/hemmecke/fricas/edit/wip/rst/src/algebra/oct.spad#L261">[edit on github]</a></p>
 <ul class="simple">
 <li><p>R: <a class="reference internal" href="CommutativeRing.html#l436f6d6d7574617469766552696e67"><span class="std std-ref">CommutativeRing</span></a></p></li>
 </ul>
@@ -244,11 +245,11 @@
 </dd>
 </dl>
 <dl class="simple" id="l4f63746f6e696f6e-68617368">
-<dt><a class="reference internal" href="SetCategory.html#l53657443617465676f7279-68617368"><span class="std std-ref">hash</span></a>: % -&gt; <a class="reference internal" href="SingleInteger.html#l53696e676c65496e7465676572"><span class="std std-ref">SingleInteger</span></a></dt><dd><p>from <a class="reference internal" href="SetCategory.html#l53657443617465676f7279"><span class="std std-ref">SetCategory</span></a></p>
+<dt><a class="reference internal" href="Hashable.html#l4861736861626c65-68617368"><span class="std std-ref">hash</span></a>: % -&gt; <a class="reference internal" href="SingleInteger.html#l53696e676c65496e7465676572"><span class="std std-ref">SingleInteger</span></a> if R has <a class="reference internal" href="Hashable.html#l4861736861626c65"><span class="std std-ref">Hashable</span></a></dt><dd><p>from <a class="reference internal" href="Hashable.html#l4861736861626c65"><span class="std std-ref">Hashable</span></a></p>
 </dd>
 </dl>
 <dl class="simple" id="l4f63746f6e696f6e-6861736855706461746521">
-<dt><a class="reference internal" href="SetCategory.html#l53657443617465676f7279-6861736855706461746521"><span class="std std-ref">hashUpdate!</span></a>: (<a class="reference internal" href="HashState.html#l486173685374617465"><span class="std std-ref">HashState</span></a>, %) -&gt; <a class="reference internal" href="HashState.html#l486173685374617465"><span class="std std-ref">HashState</span></a></dt><dd><p>from <a class="reference internal" href="SetCategory.html#l53657443617465676f7279"><span class="std std-ref">SetCategory</span></a></p>
+<dt><a class="reference internal" href="Hashable.html#l4861736861626c65-6861736855706461746521"><span class="std std-ref">hashUpdate!</span></a>: (<a class="reference internal" href="HashState.html#l486173685374617465"><span class="std std-ref">HashState</span></a>, %) -&gt; <a class="reference internal" href="HashState.html#l486173685374617465"><span class="std std-ref">HashState</span></a> if R has <a class="reference internal" href="Hashable.html#l4861736861626c65"><span class="std std-ref">Hashable</span></a></dt><dd><p>from <a class="reference internal" href="Hashable.html#l4861736861626c65"><span class="std std-ref">Hashable</span></a></p>
 </dd>
 </dl>
 <dl class="simple" id="l4f63746f6e696f6e-696d616745">
@@ -590,6 +591,7 @@
 <p><a class="reference internal" href="FullyEvalableOver.html#l46756c6c794576616c61626c654f766572"><span class="std std-ref">FullyEvalableOver</span></a> R</p>
 <p><a class="reference internal" href="FullyRetractableTo.html#l46756c6c795265747261637461626c65546f"><span class="std std-ref">FullyRetractableTo</span></a> <a class="reference internal" href="Quaternion.html#l5175617465726e696f6e"><span class="std std-ref">Quaternion</span></a> R</p>
 <p><a class="reference internal" href="FullyRetractableTo.html#l46756c6c795265747261637461626c65546f"><span class="std std-ref">FullyRetractableTo</span></a> R</p>
+<p><a class="reference internal" href="Hashable.html#l4861736861626c65"><span class="std std-ref">Hashable</span></a> if R has <a class="reference internal" href="Hashable.html#l4861736861626c65"><span class="std std-ref">Hashable</span></a></p>
 <p><a class="reference internal" href="InnerEvalable.html#l496e6e65724576616c61626c65"><span class="std std-ref">InnerEvalable</span></a>(R, R) if R has <a class="reference internal" href="Evalable.html#l4576616c61626c65"><span class="std std-ref">Evalable</span></a> R</p>
 <p><a class="reference internal" href="InnerEvalable.html#l496e6e65724576616c61626c65"><span class="std std-ref">InnerEvalable</span></a>(<a class="reference internal" href="Symbol.html#l53796d626f6c"><span class="std std-ref">Symbol</span></a>, R) if R has <a class="reference internal" href="InnerEvalable.html#l496e6e65724576616c61626c65"><span class="std std-ref">InnerEvalable</span></a>(<a class="reference internal" href="Symbol.html#l53796d626f6c"><span class="std std-ref">Symbol</span></a>, R)</p>
 <p><a class="reference internal" href="LeftModule.html#l4c6566744d6f64756c65"><span class="std std-ref">LeftModule</span></a> % if R has <a class="reference internal" href="CharacteristicNonZero.html#l43686172616374657269737469634e6f6e5a65726f"><span class="std std-ref">CharacteristicNonZero</span></a> or R has <a class="reference internal" href="CharacteristicZero.html#l43686172616374657269737469635a65726f"><span class="std std-ref">CharacteristicZero</span></a></p>
@@ -673,7 +675,7 @@
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2007-2020, FriCAS Team.
+        &#169; Copyright 2007-2023, FriCAS Team.
     </div>
   </body>
 </html>
