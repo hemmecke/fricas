@@ -6,6 +6,10 @@ Installation Guide
    :depth: 2
 
 
+Note: this text is mostly about installation from sources.
+If you fetched compiled binaries skip to section about
+binary distribution.
+
 Quick installation
 ------------------
 
@@ -20,99 +24,6 @@ should work.  The above will install FriCAS files into
 ``/usr/local/bin/``.
 You can give arguments to ``configure`` to change those locations.
 
-
-Installation of binary distribution
------------------------------------
-
-The binary distribution has been created via the following commands
-::
-
-   FDIR=$HOME/fricas
-   GITREPOS=$FDIR
-   FRICASBUILD=$FDIR/build
-   FRICASINSTALL=$FDIR/install
-   export PATH=$FRICASINSTALL/bin:$PATH
-   mkdir -p $FDIR $GITREPOS $FRICASBUILD $FRICASINSTALL
-   cd $FDIR
-   git clone --depth 1 https://github.com/fricas/fricas
-   cd $FRICASBUILD
-   $GITREPOS/fricas/configure --enable--gmp --with-lisp=/path/to/hsbcl
-   make -j 7 > makelog 2>&1
-   make DESTDIR=$FRICASINSTALL install
-   cd $FRICASINSTALL
-   tar -cjf $FDIR/fricas-x.y.z.amd64.tar.bz2 usr
-
-You can download the latex release of such a ``.tar.bz2`` from
-https://github.com/fricas/fricas/releases and install as follows (of
-course, you can set ``FDIR`` to anything you like).
-::
-
-   FDIR=$HOME/fricas
-   mkdir -p $FDIR
-   cd $FDIR
-   tar xjf fricas-x.y.z.amd64.tar.bz2
-
-You can install this binary distribution with ``sudo`` into
-``/usr/local``, but it can be run from anywhere in your file system
-without administrator right.
-
-Adapt the ``fricas`` and ``efricas`` scripts to point to the right paths.
-::
-
-   F=$FDIR
-   L=$F/usr/local
-   sed -i "s|^exec_prefix=|FRICAS_PREFIX=\"$L\"\nexport FRICAS_PREFIX\nexec_prefix=|" $L/bin/fricas
-   sed -i "s|^FRICASCMD='/usr/local|FRICAS_PREFIX=\"$L\"\nexport FRICAS_PREFIX\nexec_prefix=\"\${FRICAS_PREFIX:-/usr/local}\"\nFRICAS=\"\${exec_prefix}\"'|;s|^export FRICASCMD|export FRICAS\nFRICASCMD=\"\$FRICAS\"\nexport FRICASCMD|;s|quote \"/usr/local|quote \"$L|" $L/bin/efricas
-
-If you use the default setting of ``FDIR`` from above, the relevant
-lines in your ``$L/bin/fricas`` file should look like this.
-::
-
-   FRICAS_PREFIX="$HOME/fricas/usr/local"
-   export FRICAS_PREFIX
-   exec_prefix="${FRICAS_PREFIX:-/usr/local}"
-
-And in the ``efricas`` script like this.
-::
-
-   FRICAS_PREFIX="$HOME/fricas/usr/local"
-   export FRICAS_PREFIX
-   exec_prefix="${FRICAS_PREFIX:-/usr/local}"
-   FRICAS="${exec_prefix}"'/lib/fricas/target/x86_64-linux-gnu/bin/fricas'
-   export FRICAS
-   FRICASCMD="$FRICAS"
-   export FRICASCMD
-
-Start FriCAS with one of the following commands.
-::
-
-   $FDIR/usr/local/bin/fricas
-   $FDIR/usr/local/bin/efricas
-
-Of course, you must have Emacs_ installed for the ``efricas``
-script to work correctly.
-
-You might have to install
-::
-
-   sudo apt install xfonts-75dpi xfonts-100dpi
-
-and restart the X server (log out and log in again) in case the font
-in HyperDoc does not look pretty.
-
-That is, however, not necessary, if you do not intend to use HyperDoc
-a lot and rather look at the FriCAS_ homepage in order to find
-relavant information.
-
-Set the PATH in ``$HOME/.bashrc``.
-
-Edit the file ``$HOME/.bashrc`` (or whatever your shell initialization
-resource is) and put in somthing like the following in order to make
-all fricas scripts available.
-::
-
-   FDIR=$HOME/fricas
-   export PATH=$FDIR/usr/local/bin:$PATH
 
 
 Prerequisites
@@ -145,8 +56,6 @@ To *build* FriCAS you need *one* of the following Lisp variants:
 - CLISP_ 2.41 or later
 
 - CMUCL_
-
-- ABCL_
 
 - FriCAS builds also using GCL_, at least build using released version
   2.6.14 works.  Build using older GCL versions no longer works.
@@ -304,23 +213,13 @@ This only applies if you use Debian ECL.
 Detailed installation instructions
 ----------------------------------
 
-We assume that you have installed all necessary prerequisittes.
+We assume that you have installed all necessary prerequisites.
 
-0. Set the following environment variables (adapt the values of the
-   environment variables to your liking).
-   ::
-
-      FDIR=$HOME/fricas
-      GITREPOS=$FDIR
-      FRICASBUILD=$FDIR/build
-      FRICASINSTALL=$FDIR/install
-      export PATH=$FRICASINSTALL/bin:$PATH
-      mkdir -p $FDIR $GITREPOS $FRICASBUILD $FRICASINSTALL
+0. Change to a directory with enough (0.8 GB) free space.
 
 1. Fetch sources.
    ::
 
-      cd $FDIR
       git clone --depth 1 https://github.com/fricas/fricas
 
    Remove the ``--depth 1`` option for access to the change history.
@@ -328,24 +227,23 @@ We assume that you have installed all necessary prerequisittes.
 2. Create build directory and change to it
    ::
 
-      mkdir -p $FRICASBUILD
-      cd $FRICASBUILD
+      mkdir fr-build
+      cd fr-build
 
-3. Then compile FriCAS with an out-of-source build.
+3. Configure.  Assuming that you want fricas files to be installed in
+   ``/tmp/usr``.
    ::
 
-      cd $FRICASBUILD
-      $GITREPOS/fricas/configure --prefix=$FRICASINSTALL --with-lisp=sbcl
+      ../fricas/configure --with-lisp=/path/to/your/lisp --prefix=/tmp/usr
 
-   Replace ``sbcl`` by ``/path/to/your/lisp`` if you want to use
-   another Lisp.
-
-   For example, use
+   where ``/path/to/your/lisp`` is name of your Lisp.  For example,
+   type
    ::
 
-      --with-lisp="sbcl --dynamic-space-size 4096"
+      ../fricas/configure --with-lisp="sbcl --dynamic-space-size 4096" --prefix=/tmp/usr --enable-gmp --enable-aldor
 
-   to build with SBCL and 4 GiB dynamic space.
+   to build with SBCL_ and 4 GiB dynamic space, use GMP_, and enable the
+   build of the Aldor_ library ``libfricas.al``.
 
    Use
    ::
@@ -355,27 +253,10 @@ We assume that you have installed all necessary prerequisittes.
    to include the Hunchentoot_ webserver if you later want to install
    jFriCAS_.
 
-
-   Enable the use of GMP_ by adding
-   ::
-
-      --enable-gmp
-
-   Make FriCAS able to connect to Jupyter (jfricas) by adding
-   ::
-
-      --enable-webspad --with-quicklisp=$QUICKLISPINSTALL
-
-   If you want to build of the Aldor library ``libfricas.al``, then
-   add
-   ::
-
-      --enable-aldor
-
    Type
    ::
 
-      $GITREPOS/fricas/configure --help
+      ../fricas/configure --help
 
    to see all possible options.
 
@@ -385,7 +266,7 @@ We assume that you have installed all necessary prerequisittes.
       make
       make install
 
-   Optionaly, to gain confidence that your build works, you can
+   Optionally, to gain confidence that your build works, you can
    run tests
    ::
 
@@ -397,9 +278,13 @@ Extra information
 
 The preferred way to build FriCAS is to use an already installed Lisp.
 Also, it is preferable to use a separate build directory.  Assuming
-that the source tree is in ``$GITREPOS/fricas``, you build in the
-``$FRICASBUILD`` directory that can be anywhere outside the git
-repository and need only exist during compilation of FriCAS_ .
+that the source tree is in ``$HOME/fricas``, you build in
+``$HOME/fricas-build`` subdirectory and your Lisp is called
+``sbcl`` the following should just work.
+::
+
+   cd $HOME/fricas-build
+   $HOME/fricas/configure --with-lisp=sbcl && make && sudo make install
 
 Currently ``--with-lisp`` option accepts all supported lisp variants,
 namely SBCL, CLISP, ECL, GCL and Clozure CL (openmcl).  Note: the
@@ -527,18 +412,18 @@ Post-compilation steps (optional)
 ---------------------------------
 
 
-Build the documentation (book and website)
+Build extra documentation (book and website)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 After a build of FriCAS, (suppose your build directory is under
-``$FRICASBUILD``), you can build the documentation provided at
+``$BUILD``), you can build the documentation provided at
 the |home page| on your local installation.
 
-To build this documention you need working ``convert`` program from
-ImageMagick_.  Note that several Linux distribution currently disable
-ability to create ``.ps`` files via ``convert``.  If your distribution
-is doing this build of extra documention will fail.
+To build the extra documentation you need a working ``convert`` program
+from ImageMagick_.  Note that several Linux distribution currently disable
+the ability to create ``.ps`` files via ``convert``.  If your distribution
+is doing this, then the build of extra documentation will fail.
 
 In Ubuntu you can allow the creation of ``.ps`` files by editing
 ``/etc/ImageMagick-6/policy.xml`` as ``root`` and changing the
@@ -559,7 +444,7 @@ You must install Sphinx 5.3.0 (or smaller) or only build the
 The |home page| can be built via
 ::
 
-   cd $FRICASBUILD/src/doc
+   cd $BUILD/src/doc
    make doc
 
 This builds the full content of the |home page| including the
@@ -576,7 +461,7 @@ but some links point to the web.  If you want the links referring only
 to the data on your computer, you call the compilation like this
 ::
 
-   cd $FRICASBUILD/src/doc
+   cd $BUILD/src/doc
    make localdoc
 
 This will have broken references to the
@@ -585,7 +470,7 @@ as they live in a separate repository.  Do the following to get a local
 copy and thus have working references.
 ::
 
-   cd $FRICASBUILD/src/doc/html
+   cd $BUILD/src/doc/html
    git clone -b gh-pages https://github.com/fricas/fricas-notebooks
 
 
@@ -620,7 +505,7 @@ Then, checkout the ``gh-pages`` branch and put the data from
    git rm -rf .
    rm '.gitignore'
    echo 'https://help.github.com/articles/using-jekyll-with-pages' > .nojekyll
-   cp -a $FRICASBUILD/src/doc/html/* .
+   cp -a $BUILD/src/doc/html/* .
    rm -r _sources/api/
    git add .
    git commit -m "$PACKAGE_VERSION"
@@ -764,7 +649,7 @@ Create the script ``jfricas``.
    EOF
    chmod +x $FRICASINSTALL/bin/jfricas
 
-Start a new terminal or set the ``PATH`` on the commandline or inside
+Start a new terminal or set the ``PATH`` on the command line or inside
 your ``.bashrc`` file and start ``jfricas`` from any directory (after
 you have installed FriCAS_).
 ::
@@ -931,6 +816,101 @@ To start a FriCAS_ session use
 
 
 
+Creation of distribution tarballs
+---------------------------------
+
+The source distribution can be created as follows.  Fetch and
+build sources, taking care to build Hyperdoc pages and graphic
+examples.  Make sure that text of help pages is available in some
+directory (they are **not** part of source tree, some are generated,
+but the rest is copied to tarball).  Assuming that you build FriCAS
+in ``fr-build`` and ``$SRC`` point to FriCAS source tree do
+::
+
+   cd fr-build
+   $SRC/src/scripts/mkdist.sh --copy_lisp --copy_phts \
+     --copy_help=/full/path/to/help/files
+   mv dist ../fricas-X.Y.Z
+   cd ..
+   tar -cjf fricas-X.Y.Z.tar.bz2 fricas-X.Y.Z
+
+Note: FriCAS source distributions are created from a branch which
+differs from trunk, namely release branch has version number, trunk
+instead gives date of last update to ``configure.ac``.  If you
+wish you can create distribution tarballs from trunk.
+
+The binary distribution can be created as follows.  First fetch and
+unpack source tarball in work directory.  Then in work directory
+::
+   mkdir fr-build
+   ../fricas-X.Y.Z/configure --enable--gmp --with-lisp=/path/to/hsbcl
+   make -j 7 > makelog 2>&1
+   make DESTDIR=/full/path/to/auxiliary/dir install
+   cd /full/path/to/auxiliary/dir
+   tar -cjf fricas-x.y.z.amd64.tar.bz2 usr
+
+
+Installation from binary distribution
+-------------------------------------
+
+You can download the latest release as a ``.tar.bz2`` from
+https://github.com/fricas/fricas/releases and install as follows (of
+course, you can set ``FDIR`` to anything you like).
+::
+
+   FDIR=$HOME/fricas
+   mkdir -p $FDIR
+   cd $FDIR
+   tar xjf fricas-x.y.z.amd64.tar.bz2
+
+If before running ``tar`` you change to the root directory and do
+this command as ``root``, then you will get ready to run FriCAS in
+the ``/usr/local`` subtree of the filesystem.  This puts FriCAS files
+in the same places as running ``install`` after build from source
+using default settings.
+
+Alternatively, you can put FriCAS files anywhere in your file system,
+which is useful if you want to install FriCAS without administrator
+rights.
+
+For this to work you need to adapt the ``fricas`` and ``efricas`` scripts
+to point to the right paths.  This is explained in
+
+http://fricas.sourceforge.net/doc/INSTALL-bin.txt
+
+After installation you can start FriCAS with full path name
+like one of the following commands.
+::
+
+   $FDIR/usr/local/bin/fricas
+   $FDIR/usr/local/bin/efricas
+
+Of course, you must have Emacs_ installed for the ``efricas``
+script to work correctly.
+
+You might have to install
+::
+
+   sudo apt install xfonts-75dpi xfonts-100dpi
+
+and restart the X server (log out and log in again) in case the font
+in HyperDoc does not look pretty.
+
+That is, however, not necessary, if you do not intend to use HyperDoc
+a lot and rather look at the FriCAS_ homepage in order to find
+relevant information.
+
+Optionally, set the PATH in ``$HOME/.bashrc``:
+
+Edit the file ``$HOME/.bashrc`` (or whatever your shell initialization
+resource is) and put in something like the following in order to make
+all fricas scripts available.
+::
+
+   FDIR=$HOME/fricas
+   export PATH=$FDIR/usr/local/bin:$PATH
+
+
 
 Known problems
 --------------
@@ -995,13 +975,13 @@ Known problems
 - in sbcl 1.0.35 and up Control-C handling did not work.  This should
   be fixed in current FriCAS.
 
-- gcl-2.6.14 by defauls tries to use large fraction of available
-  memory.  However with defualt settings, it can only load code
+- gcl-2.6.14 by default tries to use large fraction of available
+  memory.  However with default settings, it can only load code
   into first 2Gb of memory.  If more than 2Gb of memory are
   available this is likely to lead to error when loading compiled
   code after longer computation.  Due to this, FriCAS build is
-  likely to fail.  One possible workaround is to limit amout of
-  memory available to gcl.  This can be done by setting enviroment
+  likely to fail.  One possible workaround is to limit amount of
+  memory available to gcl.  This can be done by setting environment
   variable GCL_MEM_MULTIPLE.  Set it to floating point value which
   multiplied by total memory gives about 2Gb.  For example, on
   32Gb machine set GCL_MEM_MULTIPLE to 0.07.
@@ -1068,7 +1048,6 @@ Known problems
   confused.
 
 
-.. _ABCL: https://abcl.org/
 .. _Aldor: https://github.com/aldorlang/aldor
 .. _CLISP: http://clisp.cons.org
 .. _Clozure CL: http://ccl.clozure.com/manual/chapter2.2.html
