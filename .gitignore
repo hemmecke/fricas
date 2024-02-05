@@ -4,8 +4,12 @@
 *.DAASE/
 *.erlib/
 *.fasl
+*.lx64fsl
 *.NRLIB/
 *.o
+*.output
+*.data
+*.fn
 
 build/
 

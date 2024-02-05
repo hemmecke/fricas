@@ -1,0 +1,263 @@
+)abbrev package JF64SF2 JuliaFloat64SpecialFunctions2
+++ Special functions computed using Julia's ecosystem.
+++ They are here essentially for "completeness" purpose with
+++ JuliaFloat64. You should use the DoubleFloat's special
+++ functions if available, calling Julia functions is costly.
+JuliaFloat64SpecialFunctions2() : Exports == Implementation where
+  JF64 ==> JuliaFloat64
+  JI64 ==> JuliaInt64
+  Exports ==> with
+
+    -- Gamma Function
+  
+    gamma : JF64 -> JF64
+    ++ gamma(z) computes gamma function \Gamma(z)
+    Gamma : JF64 -> JF64
+    ++ gamma(z) computes gamma function \Gamma(z)
+    loggamma : JF64 -> JF64
+    ++ loggamma(x) computes accurate log(gamma(x)) for large x
+    logabsgamma : JF64 -> JF64
+    ++ logabsgamma(x) computes accurate log(abs(gamma(x))) for large x
+    logfactorial : JF64 -> JF64
+    ++ logfactorial(x) computes accurate log(factorial(x)) for large x; same as loggamma(x+1) for x > 1, zero otherwise
+    digamma : JF64 -> JF64
+    ++ digamma(x) computes digamma function (i.e. the derivative of loggamma at x)
+    invdigamma : JF64 -> JF64
+    ++ invdigamma(x) computes invdigamma function (i.e. inverse of digamma function at x using fixed-point iteration algorithm)
+    trigamma : JF64 -> JF64
+    ++ trigamma(x) computes trigamma function (i.e the logarithmic second derivative of gamma at x)
+    polygamma : (JI64, JF64) -> JF64
+    ++ polygamma(m,x) computes polygamma function (i.e the (m+1)-th derivative of the loggamma function at x)
+    gamma : (JF64, JF64) -> JF64
+    ++ gamma(a,z) computes upper incomplete gamma function \Gamma(a,z)
+    Gamma : (JF64, JF64) -> JF64
+    ++ gamma(a,z) computes upper incomplete gamma function \Gamma(a,z)
+    loggamma : (JF64, JF64) -> JF64
+    ++ loggamma(a,z) computes accurate log(gamma(a,x)) for large arguments
+    --gamma_inc : (JF64, JF64, JF64) -> JF64
+    --++ gamma_inc(a,x,IND) computes incomplete gamma function ratio P(a,x)
+    --++ and Q(a,x) (i.e evaluates P(a,x) and Q(a,x) for accuracy specified by IND and returns tuple (p,q))
+    --beta_inc(a,b,x,y) : JF64 -> JF64
+    --++ beta_inc(a,b,x,y) computes incomplete beta function ratio Ix(a,b) and Iy(a,b) (i.e evaluates Ix(a,b) and Iy(a,b) and returns tuple (p,q))
+    gamma_inc_inv : (JF64, JF64, JF64) -> JF64
+    ++ gamma_inc_inv(a,p,q) computes inverse of incomplete gamma function ratio P(a,x) and Q(a,x) (i.e evaluates x given P(a,x)=p and Q(a,x)=q
+    beta : (JF64, JF64) -> JF64
+    ++ beta(x,y) computes beta function at x,y
+    logbeta : (JF64, JF64) -> JF64
+    ++ logbeta(x,y) computes accurate log(beta(x,y)) for large x or y
+    logabsbeta : (JF64, JF64) -> JF64
+    ++ logabsbeta(x,y) computes accurate log(abs(beta(x,y))) for large x or y
+    logabsbinomial : (JF64, JF64) -> JF64
+    ++ logabsbinomial(x,y) computes accurate log(abs(binomial(n,k))) for large n and k near n/2
+    
+    -- Exponential and Trigonometric Integrals
+    
+    expint : (JF64, JF64) -> JF64
+    ++ expint(nu, z) computes exponential integral E\nu(z)
+    expinti : JF64 -> JF64
+    ++ expinti(x) computes exponential integral Ei(x)
+    expintx : JF64 -> JF64
+    ++ expintx(x) computes scaled exponential integral e^z E \nu(z)
+    sinint : JF64 -> JF64
+    ++ sinint(x) computes sine integral - Si
+    cosint : JF64 -> JF64
+    ++ cosint(x) computes cosine integral Ci(x)
+
+    -- Error Functions, Dawson’s and Fresnel Integrals
+
+    erf : JF64 -> JF64
+    ++ erf(x) computes error function at x
+    erf : (JF64, JF64) -> JF64
+    ++ erf(x,y) computes accurate version of \operatorname{erf}(y) - \operatorname{erf}(x)
+    erfc : JF64 -> JF64
+    ++ erfc(x) computes complementary error function, i.e. the accurate version of 1-\operatorname{erf}(x) for large x
+    erfcinv : JF64 -> JF64
+    ++ erfcinv(x) computes inverse function to [erfc()](@ref SpecialFunctions.erfc)
+    erfcx : JF64 -> JF64
+    ++ erfcx(x) computes scaled complementary error function, i.e. accurate e^{x^2} \operatorname{erfc}(x) for large x
+    logerfc : JF64 -> JF64
+    ++ logerfc(x) computes log of the complementary error function, i.e. accurate \operatorname{ln}(\operatorname{erfc}(x)) for large x
+    logerfcx : JF64 -> JF64
+    ++ logerfcx(x) computes log of the scaled complementary error function, i.e. accurate \operatorname{ln}(\operatorname{erfcx}(x)) for large negative x
+    erfi : JF64 -> JF64
+    ++ erfi(x) computes imaginary error function defined as -i \operatorname{erf}(ix)
+    erfinv : JF64 -> JF64
+    ++ erfinv(x) computes inverse function to [erf()](@ref SpecialFunctions.erf)
+    dawson : JF64 -> JF64
+    ++ dawson(x) computes scaled imaginary error function, a.k.a. Dawson function, i.e. accurate \frac{\sqrt{\pi}}{2} e^{-x^2} \operatorname{erfi}(x) for large x
+
+    -- Airy and Related Functions
+
+    airyai : JF64 -> JF64
+    ++ airyai(z) computes Airy Ai function at z
+    airyaiprime : JF64 -> JF64
+    ++ airyaiprime(z) computes derivative of the Airy Ai function at z
+    airybi : JF64 -> JF64
+    ++ airybi(z) computes Airy Bi function at z
+    airybiprime : JF64 -> JF64
+    ++ airybiprime(z) computes derivative of the Airy Bi function at z
+    airyaix : JF64 -> JF64
+    ++ airyaix(z) computes scaled Airy Ai function and kth derivatives at z
+    airyaiprimex : JF64 -> JF64
+    ++ airyaiprimex(z) computes scaled derivative of the Airy Ai function at z
+    airybix : JF64 -> JF64
+    ++ airybix(z) computes scaled  Airy Bi function at z
+    airybiprimex : JF64 -> JF64
+    ++ airybiprimex(z) computes scaled derivative of the Airy Bi function at z
+
+    -- Bessel Functions
+
+    besselj : (JF64, JF64) -> JF64
+    ++ besselj(nu,z) computes Bessel function of the first kind of order nu at z
+    besselj0 : JF64 -> JF64
+    ++ besselj0(z) computes besselj(0,z)
+    besselj1 : JF64 -> JF64
+    ++ besselj1(z) computes besselj(1,z)
+    besseljx : (JF64, JF64) -> JF64
+    ++ besseljx(nu,z) computes scaled Bessel function of the first kind of order nu at z
+    sphericalbesselj : (JF64, JF64) -> JF64
+    ++ sphericalbesselj(nu,z) computes Spherical Bessel function of the first kind of order nu at z
+    bessely : (JF64, JF64) -> JF64
+    ++ bessely(nu,z) computes Bessel function of the second kind of order nu at z
+    bessely0 : JF64 -> JF64
+    ++ bessely0(z) computes bessely(0,z)
+    bessely1 : JF64 -> JF64
+    ++ bessely1(z) computes bessely(1,z)
+    besselyx : (JF64, JF64) -> JF64
+    ++ besselyx(nu,z) computes scaled Bessel function of the second kind of order nu at z
+    sphericalbessely : (JF64, JF64) -> JF64
+    ++ sphericalbessely(nu,z) computes Spherical Bessel function of the second kind of order nu at z
+    besselh : (JF64, JF64, JF64) -> JF64
+    ++ besselh(nu,k,z) computes Bessel function of the third kind (a.k.a. Hankel function) of order nu at z; k must be either 1 or 2
+    hankelh1 : (JF64, JF64) -> JF64
+    ++ hankelh1(nu,z) computes besselh(nu, 1, z)
+    hankelh1x : (JF64, JF64) -> JF64
+    ++ hankelh1x(nu,z) computes scaled besselh(nu, 1, z)
+    hankelh2 : (JF64, JF64) -> JF64
+    ++ hankelh2(nu,z) computes besselh(nu, 2, z)
+    hankelh2x : (JF64, JF64) -> JF64
+    ++ hankelh2x(nu,z) computes scaled besselh(nu, 2, z)
+    besseli : (JF64, JF64) -> JF64
+    ++ besseli(nu,z) computes modified Bessel function of the first kind of order nu at z
+    besselix : (JF64, JF64) -> JF64
+    ++ besselix(nu,z) computes scaled modified Bessel function of the first kind of order nu at z
+    besselk : (JF64, JF64) -> JF64
+    ++ besselk(nu,z) computes modified Bessel function of the second kind of order nu at z
+    besselkx : (JF64, JF64) -> JF64
+    ++ besselkx(nu,z) computes scaled modified Bessel function of the second kind of order nu at z
+    jinc : JF64 -> JF64
+    ++ jinc(x) computes scaled Bessel function of the first kind divided by x. A.k.a. sombrero or besinc
+ 
+    -- Elliptic Integrals
+ 
+    ellipk : JF64 -> JF64
+    ++ ellipk(m) computes complete elliptic integral of 1st kind K(m)
+    ellipe : JF64 -> JF64
+    ++ ellipe(m) computes complete elliptic integral of 2nd kind E(m)
+    
+    -- Zeta and Related Functions
+ 
+    eta : JF64 -> JF64
+    ++ eta(x) computes Dirichlet eta function at x
+    zeta : JF64 -> JF64
+    ++ zeta(x) computes Riemann zeta function at x
+
+  Implementation ==> add
+    import from JuliaString
+    import from JuliaUtilityFunctions
+
+    not jlUsing(coerce("SpecialFunctions"))
+      => error concat(["Could not load the Julia package SpecialFunctions.", _
+                 coerce(newline()$Character)@String,
+                 "   Use the jlAddPackage function or Julia",
+                 " itself to add it to your workspace."])$String
+
+    -- Gamma Functions
+
+    gamma(z) == jl_dbl_function_dbl("gamma", z)$Lisp
+    Gamma(z) == jl_dbl_function_dbl("gamma", z)$Lisp
+    loggamma(x) == jl_dbl_function_dbl("loggamma", x)$Lisp
+    logabsgamma(x) == jl_dbl_function_dbl("logabsgamma", x)$Lisp
+    logfactorial(x) == jl_dbl_function_dbl("logfactorial", x)$Lisp
+    digamma(x) == jl_dbl_function_dbl("digamma", x)$Lisp
+    invdigamma(x) == jl_dbl_function_dbl("invdigamma", x)$Lisp
+    trigamma(x) == jl_dbl_function_dbl("trigamma", x)$Lisp
+    polygamma(m,x) == jl_dbl_function_int_dbl("polygamma", m, x)$Lisp
+    gamma(a,z) == jl_dbl_function_dbl_dbl("gamma", a, z)$Lisp
+    Gamma(a,z) == jl_dbl_function_dbl_dbl("gamma", a, z)$Lisp
+    loggamma(a,z) == jl_dbl_function_dbl_dbl("loggamma", a, z)$Lisp
+    --gamma_inc(a,x,IND) == jl_dbl_function_dbl_dbl_dbl("gamma_inc", a, x, IND)$Lisp
+    --beta_inc(a,b,x,y) == jl_dbl_function_dbl("beta_inc", x)$Lisp
+    gamma_inc_inv(a,p,q) == jl_dbl_function_dbl_dbl_dbl("gamma_inc_inv", a, p, q)$Lisp
+    beta(x,y) == jl_dbl_function_dbl_dbl("beta", x, y)$Lisp
+    logbeta(x,y) == jl_dbl_function_dbl_dbl("logbeta", x, y)$Lisp
+    logabsbeta(x,y) == jl_dbl_function_dbl_dbl("logabsbeta", x, y)$Lisp
+    logabsbinomial(x,y) == jl_dbl_function_dbl_dbl("logabsbinomial", x, y)$Lisp
+
+    -- Exponential and Trigonometric Integrals
+
+    expint(nu, z) == jl_dbl_function_dbl_dbl("expint", nu, z)$Lisp
+    expinti(x) == jl_dbl_function_dbl("expinti", x)$Lisp
+    expintx(x) == jl_dbl_function_dbl("expintx", x)$Lisp
+    sinint(x) == jl_dbl_function_dbl("sinint", x)$Lisp
+    cosint(x) == jl_dbl_function_dbl("cosint", x)$Lisp
+    
+    -- Error Functions, Dawson’s and Fresnel Integrals
+
+    erf(x) == jl_dbl_function_dbl("erf", x)$Lisp
+    erf(x,y) == jl_dbl_function_dbl_dbl("erf", x, y)$Lisp
+    erfc(x) == jl_dbl_function_dbl("erfc", x)$Lisp
+    erfcinv(x) == jl_dbl_function_dbl("erfcinv", x)$Lisp
+    erfcx(x) == jl_dbl_function_dbl("erfcx", x)$Lisp
+    logerfc(x) == jl_dbl_function_dbl("logerfc", x)$Lisp
+    logerfcx(x) == jl_dbl_function_dbl("logerfcx", x)$Lisp
+    erfi(x) == jl_dbl_function_dbl("erfi", x)$Lisp
+    erfinv(x) == jl_dbl_function_dbl("erfinv", x)$Lisp
+    dawson(x) == jl_dbl_function_dbl("dawson", x)$Lisp
+
+    -- Airy and Related Functions
+
+    airyai(z) == jl_dbl_function_dbl("airyai", z)$Lisp
+    airyaiprime(z) == jl_dbl_function_dbl("airyaiprime", z)$Lisp
+    airybi(z) == jl_dbl_function_dbl("airybi", z)$Lisp
+    airybiprime(z) == jl_dbl_function_dbl("airybiprime", z)$Lisp
+    airyaix(z) == jl_dbl_function_dbl("airyaix", z)$Lisp
+    airyaiprimex(z) == jl_dbl_function_dbl("airyaiprimex", z)$Lisp
+    airybix(z) == jl_dbl_function_dbl("airybix", z)$Lisp
+    airybiprimex(z) == jl_dbl_function_dbl("airybiprimex", z)$Lisp
+  
+    -- Bessel Functions
+
+    besselj(nu,z) == jl_dbl_function_dbl_dbl("besselj", nu, z)$Lisp
+    besselj0(z) == jl_dbl_function_dbl("besselj0", z)$Lisp
+    besselj1(z) == jl_dbl_function_dbl("besselj1", z)$Lisp
+    besseljx(nu,z) == jl_dbl_function_dbl_dbl("besseljx", nu, z)$Lisp
+    sphericalbesselj(nu,z) == jl_dbl_function_dbl_dbl("sphericalbesselj", nu, z)$Lisp
+    bessely(nu,z) == jl_dbl_function_dbl_dbl("bessely", nu, z)$Lisp
+    bessely0(z) == jl_dbl_function_dbl("bessely0", z)$Lisp
+    bessely1(z) == jl_dbl_function_dbl("bessely1", z)$Lisp
+    besselyx(nu,z) == jl_dbl_function_dbl_dbl("besselyx", nu, z)$Lisp
+    sphericalbessely(nu,z) == jl_dbl_function_dbl_dbl("sphericalbessely", nu, z)$Lisp
+    besselh(nu,k,z) == jl_dbl_function_dbl_dbl_dbl("besselh", nu, k, z)$Lisp
+    hankelh1(nu,z) == jl_dbl_function_dbl_dbl("hankelh1", nu, z)$Lisp
+    hankelh1x(nu,z) == jl_dbl_function_dbl_dbl("hankelh1x", nu, z)$Lisp
+    hankelh2(nu,z) == jl_dbl_function_dbl_dbl("hankelh2", nu, z)$Lisp
+    hankelh2x(nu,z) == jl_dbl_function_dbl_dbl("hankelh2x", nu, z)$Lisp
+    besseli(nu,z) == jl_dbl_function_dbl_dbl("besseli", nu, z)$Lisp
+    besselix(nu,z) == jl_dbl_function_dbl_dbl("besselix", nu, z)$Lisp
+    besselk(nu,z) == jl_dbl_function_dbl_dbl("besselk", nu, z)$Lisp
+    besselkx(nu,z) == jl_dbl_function_dbl_dbl("besselkx", nu, z)$Lisp
+    jinc(x) == jl_dbl_function_dbl("jinc", x)$Lisp
+
+    -- Elliptic Integrals
+
+    ellipk(m) == jl_dbl_function_dbl("ellipk", m)$Lisp
+    ellipe(m) == jl_dbl_function_dbl("ellipe", m)$Lisp
+ 
+    -- Zeta and Related Functions
+
+    eta(x) == jl_dbl_function_dbl("eta", x)$Lisp
+    zeta(x) == jl_dbl_function_dbl("zeta", x)$Lisp
+
+
+

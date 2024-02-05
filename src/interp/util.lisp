@@ -282,6 +282,9 @@ After this function is called the image is clean and can be saved.
                     #+(or :sbcl :openmcl)
                     (fricas-lisp::init-gmp
                         (make-absolute-filename "/lib/gmp_wrap.so"))
+                    #+(and (or :sbcl :openmcl) :fricas_has_julia)
+ 	                (fricas-lisp::init-julia
+                        (make-absolute-filename "/lib/julia_wrap.so"))
                     #+(and :clisp :ffi)
                     (progn
                         (eval `(FFI:DEFAULT-FOREIGN-LIBRARY ,spad-lib))

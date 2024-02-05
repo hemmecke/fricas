@@ -1,0 +1,41 @@
+name: FriCAS CI on Linux (with Julia support - Clozure CL based)
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install libgmp-dev libxpm-dev python3 python3-pip && pip3 install -U Sphinx
+    - name: download Julia
+      run: wget -c https://julialang-s3.julialang.org/bin/linux/x64/1.10/julia-1.10.0-linux-x86_64.tar.gz
+    - name: install Julia
+      run: tar zxf julia-1.10.0-linux-x86_64.tar.gz && sudo cp -R julia-1.10.0/* /usr/local/ && sudo ldconfig
+    - name: download roswell
+      run: wget -c https://github.com/roswell/roswell/releases/download/v22.12.14.113/roswell_22.12.14.113-1_amd64.deb
+    - name: install roswell and dependencies
+      run: sudo dpkg -i roswell_22.12.14.113-1_amd64.deb && ros install ccl-bin && ros install hunchentoot  
+    - name: configure
+      run: ./configure --with-lisp='ros run' --enable-gmp --enable-julia --enable-hunchentoot|| cat config.log
+    - name: make
+      run: make -j2 --output-sync
+    - name: make html doc
+      run: make -j2 --output-sync htmldoc
+    - name: make check
+      run: make -j2 --output-sync check
+    - name: Create artifact archives
+      run: |
+        rm -r target/*/src
+        tar -cjf FriCAS-linux-x86_64-${{ github.sha }}.tar.bz2 target/
+    - name: Upload Linux binary
+      uses: actions/upload-artifact@v3
+      with:
+        name: FriCAS-linux-x86_64-binary
+        path: FriCAS-linux-x86_64-${{ github.sha }}.tar.bz2

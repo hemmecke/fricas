@@ -2,6 +2,7 @@
 subdir = src/input/
 
 IN=$(fricas_src_srcdir)/input
+JULIA_WRAP_SO_TARGET=@JULIA_WRAP_SO_TARGET@
 
 .PHONY: all all-ax all-input
 
@@ -153,6 +154,11 @@ REGRESS0 = agcd.output array.output bezout.output bugs2007.output \
       pgcd.output polylift.output polop.output psgenfcn.output \
       rsimp.output series3.output ssolve.output \
       table.output tensor.output vsbasis.output
+
+ifdef JULIA_WRAP_SO_TARGET
+REGRESS0 += julia.output
+endif
+
 
 ifeq (@BUILD_ALDOR_INTERFACE@,yes)
 

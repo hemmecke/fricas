@@ -363,10 +363,13 @@ with this hack and will try to convince the GCL crowd to fix this.
 )
 
 (defvar *c_type_as_string* '(
+    (void "void")
+    (bool "bool")
     (int "int")
     (c-string "char *")
     (double "double")
     (char-* "char *")
+    (double-* "double *")
 ))
 
 (defun c_type_as_string(c_type) (nth 1 (assoc c_type *c_type_as_string*)))
@@ -464,11 +467,21 @@ with this hack and will try to convince the GCL crowd to fix this.
 #+:sbcl
 (eval-when (:compile-toplevel :load-toplevel :execute)
 
+;(setf *c-type-to-ffi* '(
+;    (int SB-ALIEN::int)
+;    (c-string SB-ALIEN::c-string)
+;    (double SB-ALIEN::double)
+;    (char-* (sb-alien:* sb-alien:char))
+;))
+
 (setf *c-type-to-ffi* '(
-    (int SB-ALIEN::int)
-    (c-string SB-ALIEN::c-string)
-    (double SB-ALIEN::double)
-    (char-* (sb-alien:* sb-alien:char))
+    (void    sb-alien::void)
+    (bool    (sb-alien::boolean 8))
+    (int      sb-alien::int)
+    (c-string sb-alien::c-string)
+    (double   sb-alien::double-float)
+    (char-*   (sb-alien:* sb-alien:char))
+    (char-*   (sb-alien:* sb-alien:double-float))
 ))
 
 (defun c-args-to-sbcl (arguments)
@@ -489,11 +502,21 @@ with this hack and will try to convince the GCL crowd to fix this.
 #+:openmcl
 (eval-when (:compile-toplevel :load-toplevel :execute)
 
+;(setf *c-type-to-ffi* '(
+;    (int :int)
+;    (c-string :address)
+;    (double :double-float)
+;    (char-* :address)
+;))
+
 (setf *c-type-to-ffi* '(
+    (void :void)
+    (bool :signed-byte)
     (int :int)
     (c-string :address)
     (double :double-float)
     (char-* :address)
+    (double-* :address)
 ))
 
 (defun c-args-to-openmcl (arguments)
@@ -518,7 +541,7 @@ with this hack and will try to convince the GCL crowd to fix this.
                  `(ccl::external-call ,c-name ,@fargs ,l-ret))
                (fun-body
                   (if strs
-                     `(ccl::with-cstrs ,strs ,call-body)
+                     `(ccl::with-encoded-cstrs :utf-8  ,strs ,call-body)
                       call-body)))
                `(defun ,name ,largs ,fun-body))))
 
@@ -532,7 +555,7 @@ with this hack and will try to convince the GCL crowd to fix this.
 
 (setf *c-type-to-ffi* '(
                  (int :int)
-                 (c-string  :cstring )
+                 (c-string  :cstring)
                  (double :double)
                  (char-* :pointer-void)
                  ))

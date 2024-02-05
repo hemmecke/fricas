@@ -1019,11 +1019,11 @@ helpSpad2Cmd args ==
 
   sayBrightly '"Available help topics for system commands are:"
   sayBrightly '""
-  sayBrightly '" boot   cd     clear    close     compile   display"
-  sayBrightly '" edit   fin    frame    help      history   library"
-  sayBrightly '" lisp   load   ltrace   pquit     quit      read"
-  sayBrightly '" set    show   spool    synonym   system    trace"
-  sayBrightly '" undo   what"
+  sayBrightly '" boot    cd      clear    close    compile   display"
+  sayBrightly '" edit    fin     frame    help     history   jlapropos"
+  sayBrightly '" jldoc   julia   juliad   library  lisp      load"
+  sayBrightly '" ltrace  pquit   quit     read     set       show"
+  sayBrightly '" spool   synonym system   trace    undo      what"
   sayBrightly '""
   sayBrightly '"Issue _")help help_" for more information about the help command."
 
@@ -2897,6 +2897,16 @@ handleNoParseCommands(unab, string) ==
     else npsystem(unab, string)
   unab = "synonym" =>
     npsynonym(unab, (null spaceIndex => '""; SUBSEQ(string, spaceIndex+1)))
+  member(unab, '( jlapropos _
+    jldoc  _
+    julia  _
+    juliad  )) =>
+      if (null spaceIndex) then
+        sayKeyedMsg("S2IV0005", NIL)
+        nil
+      else
+        funName := INTERN CONCAT('"np",STRING unab)
+        FUNCALL(funName, SUBSEQ(string, spaceIndex+1)) 
   null spaceIndex =>
     FUNCALL unab
   member(unab, '( quit     _
@@ -2936,6 +2946,27 @@ nplisp str ==
 intnplisp s ==
   $currentLine := s
   nplisp $currentLine
+
+npjlapropos str ==
+  if not _*JULIA_-INITIALIZED_* then
+    init_julia_env() 
+  jl_eval_string CONCAT('"Base.Docs.apropos(",str,")")
+
+npjldoc str ==
+  if not _*JULIA_-INITIALIZED_* then
+    init_julia_env() 
+  jl_eval_string CONCAT('"display(@doc ",str,")")
+
+npjulia str ==
+  if not _*JULIA_-INITIALIZED_* then
+    init_julia_env()
+  jl_eval_string str
+  TERPRI()
+
+npjuliad str ==
+  if not _*JULIA_-INITIALIZED_* then
+    init_julia_env() 
+  jl_eval_string CONCAT('"display(",str,")")
 
 npsystem(unab, str) ==
   spaceIndex := SEARCH('" ", str)

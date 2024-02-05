@@ -1,0 +1,230 @@
+)abbrev domain JINT JuliaInteger
+++ Experimental domain for Julia Integers
+++ Author: G. Vanuxem
+++ Date Created: Jan. 2023
+++ Description:
+++  This domain allows the manipulation of Julia Integers
+++  using the Nemo package (Flint based).
+++ Purpose: Experimentation.
+JuliaInteger() : Exports == Implementation where
+  JSTR      ==> JuliaString
+  JI64      ==> JuliaInt64
+  jlrefVal  ==> JLREFVAL$Lisp
+  jlrefType ==> JLREFTYPE$Lisp
+  jlrefId   ==> JLREFID$Lisp
+  jliref    ==> make_jliref$Lisp
+  -- PARSE-INTEGER$Lisp
+  parsei    ==> parse_integer$ScanningUtilities
+  Exports ==> Join(JuliaType, EuclideanDomain) with
+    jlType   : % -> SExpression
+    jlRef    : % -> SExpression
+    jlValue  : % -> SExpression
+    jlId     : % -> SExpression
+    coerce  : JI64 -> %
+    coerce  : % -> JI64
+    coerce  : % -> Integer
+    coerce  : % -> Expression Integer
+    coerce  : % -> AlgebraicNumber
+    jint    : Integer -> %
+  Implementation ==> add
+    import from JuliaUtilityFunctions
+    
+    jlInitialize(true)
+    jlUsing(jstring "Nemo")
+ 
+    -- jliref CL class
+    Rep := SExpression
+
+    getind(a) ==> concat(["getindex(getindex(", "irefs,_"",string(jlId(a)), "_"))"])
+
+    ibinfunc(op,a,b) ==>
+      tmp : String := concat(["string(", getind(a), op, getind(b),")"])
+      jliref(concat(["ZZ(", jl_string_eval_string(tmp)$Lisp,")"]), "ZZ")
+
+    iunfunc(op, a) ==>
+      tmp : String := concat(["string(", op, getind(a),")"])
+      jliref(concat(["ZZ(",jl_string_eval_string(tmp)$Lisp, ")"]),"ZZ")
+  
+    0 == jliref("ZZ(0)", "ZZ")
+    1 == jliref("ZZ(1)", "ZZ")
+    x = y == 
+      tmp : String := concat(["string(", getind(x), "==", getind(y),")"])
+      jl_bool_eval_string(tmp)$Lisp  
+
+    x + y == ibinfunc("+", x, y)
+    x - y == ibinfunc("-", x, y)
+    - x   == iunfunc("-", x)
+    x : % * y : % == ibinfunc("*", x, y)
+
+    x ^ y : NonNegativeInteger ==
+      ibinfunc("^", x, jliref(concat(["ZZ(",string(coerce(y)),")"]), "ZZ"))
+    x ^ y : PositiveInteger ==
+      ibinfunc("^", x, jliref(concat(["ZZ(",string(coerce(y)),")"]), "ZZ"))
+
+    -- x quo y == ibinfunc("div", x, y)
+    x quo y == ibinfunc("÷", x, y)
+    x rem y == ibinfunc("%", x, y)
+    
+    jlType(x)  == jlrefType(x)
+    jlValue(x) == jlrefVal(x)
+    jlId(x)    == jlrefId(x)
+    jlRef(x)   == x pretend SExpression
+
+    coerce(jsi : %): JI64 ==
+        x := parsei(jlrefVal(jsi))
+        coerce(x)
+    coerce(i : Integer) ==
+      jliref(concat(["ZZ(",string(i),")"]), "ZZ")
+    coerce(i : %) : OutputForm == jlrefVal(i)
+    coerce(x : %) : Integer  == integer(jlrefVal x)
+    coerce(x : %) : Expression(Integer)  ==
+      coerce(parsei(jlrefVal x))$Expression(Integer)
+    coerce(x : %) : AlgebraicNumber  ==
+      coerce(parsei(jlrefVal x))$AlgebraicNumber
+    convert(x : %) : Integer  == parsei(jlrefVal(x))
+    jint(i : Integer) : % == jliref(concat(["ZZ(", string(i),")"]), "ZZ")
+
+)abbrev domain JFINT JuliaFractionInteger
+++ Experimental domain for Julia Fraction Integers
+++ Author: G. Vanuxem
+++ Date Created: Feb. 2024
+++ Description:
+++  This domain allows the manipulation of Julia Fraction Integers
+++  using the Nemo package (Flint based).
+++ Purpose: Experimentation.
+JuliaFractionInteger() : Exports == Implementation where
+  JSTR      ==> JuliaString
+  jlrefVal  ==> JLREFVAL$Lisp
+  jlrefType ==> JLREFTYPE$Lisp
+  jlrefId   ==> JLREFID$Lisp
+  jliref    ==> make_jliref$Lisp
+  Exports ==> Join(JuliaType, QuotientFieldCategory(JuliaInteger)) with
+    jlType   : % -> SExpression
+    jlRef    : % -> SExpression
+    jlValue  : % -> SExpression
+    jlId     : % -> SExpression
+    coerce  : Fraction(Integer) -> %
+    jfint   : Integer -> %
+    jfint   : Fraction(Integer) -> %
+  Implementation ==> LocalAlgebra(JuliaInteger,JuliaInteger) add
+    import from JuliaUtilityFunctions
+    
+    jlInitialize(true)
+    jlUsing(jstring "Nemo")
+ 
+    -- jliref CL class
+    Rep := SExpression
+
+    getind(a) ==> concat(["getindex(getindex(", "irefs,_"",string(jlId(a)), "_"))"])
+
+    fibinfunc(op,a,b) ==>
+      tmp : String := concat(["string(", getind(a), op, getind(b),")"])
+      jliref(concat(["QQ(", jl_string_eval_string(tmp)$Lisp,")"]), "QQ")
+
+    fiunfunc(op, a) ==>
+      tmp : String := concat(["string(", op, getind(a),")"])
+      jliref(concat(["QQ(",jl_string_eval_string(tmp)$Lisp, ")"]),"QQ")
+
+    0 == jliref("QQ(0)", "QQ")
+    1 == jliref("QQ(1)", "QQ")
+    x = y == 
+      tmp : String := concat(["string(", getind(x), "==", getind(y),")"])
+      jl_bool_eval_string(tmp)$Lisp  
+
+    x = y == jlValue(x) = jlValue(y) 
+    x + y == fibinfunc("+", x, y)
+    x - y == fibinfunc("-", x, y)
+    - x   == fiunfunc("-", x)
+    x : % * y : % == fibinfunc("*", x, y)
+    x : % / y : % == fibinfunc("/", x, y)
+    x : JuliaInteger / y : JuliaInteger == fibinfunc("//", x, y)
+
+    x ^ y : NonNegativeInteger == fibinfunc("^", x, coerce(y pretend Integer))
+    x ^ y : PositiveInteger == fibinfunc("^", x, coerce(y pretend Integer))
+
+    x quo y == fibinfunc("÷", x, y)
+    -- x quo y == ibinfunc("div", x, y)
+    x rem y == fibinfunc("%", x, y)
+    
+    jlType(x)  == jlrefType(x)
+    jlValue(x) == jlrefVal(x)
+    jlId(x)  == jlrefId(x)
+    jlRef(x)   == x pretend SExpression
+
+    coerce(x : JuliaInteger) : % ==
+      tmp : String := concat(["string(", getind(x), ")"])
+      jliref(concat(["QQ(", jl_string_eval_string(tmp)$Lisp, ")"]),"QQ")
+    coerce(i : Integer) ==
+      jliref(concat(["QQ(",string(i),")"]), "QQ")
+    coerce(i : %) : OutputForm == jlrefVal(i)
+    jfint(i : Integer) == coerce(i)
+      
+
+)abbrev package JUPF JuliaUnivariatePolynomialFunctions
+++ Test package
+JuliaUnivariatePolynomialFunctions(x: Symbol, R: Ring) : Exports == Implementation where
+  JSTR ==> JuliaString
+  Exports ==> with
+    jlUPToString : UnivariatePolynomial(x, R) -> JSTR
+    ++ jlUPToString(p) converts the 
+    --else
+    --  jlFac : UnivariatePolynomial(x, R) -> Void
+  Implementation ==> add
+    import from JuliaUtilityFunctions
+    import from UnivariatePolynomial
+
+    jlInitialize(true)
+    jlUsing(jstring "Nemo")
+
+    -- jliref CL class
+    -- Rep := SExpression
+
+    spjs(s) ==> s pretend JuliaString
+  
+    if R is Integer then
+      PRINGZZ ==> "=PolynomialRing(ZZ,_""
+      jlUPToString(up) : JSTR ==
+        var := jsym := string(x)
+        jlEvalString(concat(["R,", var, PRINGZZ, jsym, "_")"]))@Void
+        p:= concat(["string(",
+          first(lines formatExpression(up::OutputForm)$Format1D), ")"])
+        jlEvalString(p)
+    else if R is Fraction Integer then
+      PRINGQQ ==> "=PolynomialRing(QQ,_""
+      jlUPToString(up) : JSTR ==
+        var := jsym := string(x)
+        jlEvalString(concat(["R,", var, PRINGQQ, jsym, "_")"]))@Void
+        temp := concat(["string(",
+          first(lines formatExpression(up::OutputForm)$Format1D), ")"])
+        p := jlRegexReplace(spjs(temp), jlRegex(spjs "/"), jlSubstitute(spjs("//")))
+        jlEvalString(p)
+    else error "Unimplemented"
+   
+)abbrev domain JUP JuliaUnivariatePolynomial
+++ Test package
+JuliaUnivariatePolynomial(x : Symbol, R : Ring):
+  UnivariatePolynomialCategory(R) with
+    coerce : Variable(x) -> %
+      ++ coerce(x) converts the variable x to a Julia univariate polynomial.
+   == add
+    import from JuliaUtilityFunctions
+    import from OutputForm
+    import from JuliaUnivariatePolynomialFunctions
+
+    -- jlInitialize(true)
+    -- jlUsing(jstring "Nemo")
+
+    -- jliref CL class
+    Rep := SExpression
+    -- Rep := SparseUnivariatePolynomial(R)
+
+    -- spjs(s) ==> s pretend JuliaString
+    jsps(s) ==> s pretend String
+    juptup(s)  ==> s pretend UnivariatePolynomial(x,R)
+    JUPF(v, RR) ==> JuliaUnivariatePolynomialFunctions(v, RR)
+
+    coerce(p : %) : OutputForm  ==
+      message(jsps(jlUPToString(juptup(p))$JUPF(x, R)))
+      -- outputForm(jsps(jlUPToString(juptup(p))$JUPF(x, R)))
+    coerce(v : Variable(x)) : % == monomial(1, 1)
+

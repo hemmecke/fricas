@@ -1,4 +1,4 @@
-name: FriCAS CI on Windows
+name: FriCAS CI on Windows (with Julia support - SBCL based)
 
 on: [push, pull_request]
 
@@ -16,18 +16,23 @@ jobs:
     steps:
     - uses: msys2/setup-msys2@v2
       with:
-        install: make mingw-w64-x86_64-gcc mingw-w64-x86_64-gmp gmp-devel zip
+        install: make mingw-w64-x86_64-gcc mingw-w64-x86_64-gmp gmp-devel zip unzip
     - name: download and install SBCL
       run: |
         wget https://downloads.sourceforge.net/project/sbcl/sbcl/${SBCL_VER}/sbcl-${SBCL_VER}-x86-64-windows-binary.msi
         msiexec -i sbcl-${SBCL_VER}-x86-64-windows-binary.msi -passive
+    - name: download and install Julia
+      run: |
+        wget https://julialang-s3.julialang.org/bin/winnt/x64/1.10/julia-1.10.0-win64.zip
+        unzip julia-1.10.0-win64.zip
+        cp -rf julia-1.10.0/* /usr/local/
     - uses: actions/checkout@v4
     - name: configure and make
       run: |
         export SBCL_HOME="/c/Program Files/Steel Bank Common Lisp/"
         export PATH="$SBCL_HOME":$PATH
         mkdir ../build && cd ../build
-        ../fricas/configure --with-lisp="sbcl --dynamic-space-size 2048" --enable-gmp || cat config.log
+        ../fricas/configure --with-lisp="sbcl --dynamic-space-size 2048" --enable-gmp --enable-julia || cat config.log
         make -j2 --output-sync
     - name: make check
       run: cd ../build && make check -j2 --output-sync

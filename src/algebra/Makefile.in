@@ -22,10 +22,12 @@ DOC=$(fricas_target_docdir)/src/algebra
 OUTSRC=$(fricas_target_srcdir)/algebra
 # INPUT=${INT}/input
 INPUT=../input
-
+JULIA_WRAP_SO_TARGET=@JULIA_WRAP_SO_TARGET@
 
 INTERPSYS=FRICAS=${FRICAS} FRICAS_INITFILE='' $(fricas_build_bindir)/interpsys
 
+JULIALIST =
+JULIACATLIST =
 
 SPAD_SRCS= \
      acplot aggcat2 aggcat algcat algext algfact \
@@ -54,8 +56,8 @@ SPAD_SRCS= \
      groebsol gseries hashstate html ideal idecomp indexedp \
      intaf intalg intaux intclos intden intef integer \
      integrat interval intfact intlocp intpar intpm intrf intspec irexpand \
-     irsn ituple jet kl kovacic laplace laurent \
-     leadcdet lie limitps lindep lingrob linpen liouv \
+     irsn ituple jarray jla jplot jsf jsf2 julia julia2 jet kl kovacic \
+     laplace laurent leadcdet lie limitps lindep lingrob linpen liouv \
      listgcd list lll lmdict lodof lodof2 lodo logic \
      mama manip mantepse math_sym mathml mappkg matcat matfuns matrix \
      matstor mesh mfinfact mkfunc mkrecord \
@@ -386,6 +388,13 @@ GUESSLIST= SMPEXPR FAMR2 NEWTON UFPS GOPT GUESSF1 GUESSP1\
            UTSSOL FFFG UFPS1 GOPT0 EXPRSOL FFFGF \
            RECOP STNSR GUESS GUESSEB  GUESSINT GUESSF GUESSP GUESSPI GUESSAN
 
+ifdef JULIA_WRAP_SO_TARGET
+JULIALIST = JTYPE JVECCAT JMATCAT JUF JSTR JSYM JF64 JCF64 JF64VEC JF64MAT JCF64VEC \
+	    JCF64MAT JF64SMAT JCF64SMA JF64MTF JCF64MTF JF64SF JF64SF2 JDRAW JRLA JCLA \
+	    JPLOT JINT JFINT JI64 JI64VEC JUPF JUP 
+JULIACATLIST = JTYPE JVECCAT JMATCAT
+endif
+
 TESTLIST= TESTCNT TESTAUX TESTUNIT
 
 
@@ -402,7 +411,7 @@ all-ax all-algebra: abbrev.list
 	@ echo finished $(builddir)
 
 ifeq ($(BUILD_WAY),use_lisp)
-SPADLIST99=${EXTRASPADS} ${GUESSLIST} ${TESTLIST} \
+SPADLIST99=${EXTRASPADS} ${GUESSLIST} ${TESTLIST} ${JULIALIST} \
                $(patsubst %, %-, ${CATDOMS})
 
 FULL_FASL_LIST=${SPADLIST} ${SPADLIST99}
@@ -425,7 +434,8 @@ ${STAMP_FASLS}: stamp-fasls% :
 ${TARGET_FASLS}: ${STAMP_FASLS}
 endif
 
-NSPADLIST = ${SPADLIST} ${EXTRASPADS} ${GUESSLIST} ${TESTLIST}
+NSPADLIST = ${SPADLIST} ${EXTRASPADS} ${GUESSLIST} ${TESTLIST} \
+            ${JULIALIST}
 
 stamp-db: $(patsubst %, %.spad, ${NSPADLIST})
 	@echo doing stamp-db
@@ -436,7 +446,7 @@ stamp-db: $(patsubst %, %.spad, ${NSPADLIST})
               echo ")compile $$A.spad" >> komp_all.input ; \
           done ; \
           rm -f boot_doms.input ; \
-          for A in ${CATLIST} ${DOMLIST} ; do \
+          for A in ${CATLIST} ${JULIACATLIST} ${DOMLIST} ; do \
               echo ")compile $$A.spad" >> boot_doms.input ; \
           done ; \
           ${MKDIR_P} r1/algebra ; \
@@ -461,7 +471,7 @@ stamp-oboo3: stamp-db
 	@echo doing stamp-oboo3
 	@if [ ! -f stamp-oboo3 ] ; then \
            echo "Bootstrap object copy" ; \
-           for A in ${CATLIST} ${DOMLIST} ; do \
+           for A in ${CATLIST} ${JULIACATLIST} ${DOMLIST}; do \
               cp $$A.NRLIB/$$A.$(FASLEXT) ${OUT}/$$A.$(FASLEXT) || exit 1 ; \
            done; \
            for A in ${CATDOMS} ; do \

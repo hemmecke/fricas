@@ -796,7 +796,7 @@ localdoc:
 	    stamp-doc
 
 clean-html:
-	-rm -rf html tmp/sphinx
+	-rm -rf html tmp/sphinx sphinx/source/_ext/__pycache__
 	-rm -rf stamp-sphinx stamp-api stamp-html stamp-doc
 
 ###################################################################
