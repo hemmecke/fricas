@@ -37,6 +37,10 @@ JuliaString() : Exports == Implementation where
       ++ jlSubstitute(str) returns the JuliaString corresponding to a Julia
       ++ subtitute expression, that is, "s"str""". It is only a convenient
       ++ function.
+      jlLatex  : % -> %
+      ++ jlLatex(str) returns the JuliaString corresponding to a Julia
+      ++ LaTeX expression, that is, "L"str"" if your Julia support it
+      ++ (LaTeXStrings package). It is only a convenient function.
       jlRegexMatch?   : (%, %) -> Boolean
       ++ jlRegexMatch(regex,s) checks if the regular expression matches in s.
       jlRegexMatch    : (%, %) -> %
@@ -76,6 +80,9 @@ JuliaString() : Exports == Implementation where
 
       jlSubstitute(s)          ==
         concat(concat(jstring("s_""), s),jstring("_""))
+
+      jlLatex(s)          ==
+        concat(concat(jstring("L_""), s),jstring("_""))
 
       jlRegexMatch?(r, s)  ==
         estr : String := concat(

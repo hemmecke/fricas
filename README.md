@@ -9,7 +9,7 @@
 system (CAS).
 
 This work-in-progress repository includes some related [Julia](https://julialang.org)
-categories/domains/packages to use Julia for some specific operations.
+categories/domains/packages to use Julia for specific operations.
 It is only supported with SBCL or Clozure CL and Julia prior to 1.10.0 is
 not supported with a SBCL based FriCAS.
 
