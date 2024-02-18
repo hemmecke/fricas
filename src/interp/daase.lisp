@@ -34,9 +34,8 @@
 \section{Database structure}
 In order to understand this program you need to understand some details
 of the structure of the databases it reads. FriCAS has 5 databases,
-the interp.daase, operation.daase, category.daase, compress.daase, and
-browse.daase. The compress.daase is special and does not follow the
-normal database format.
+the interp.daase, operation.daase, category.daase, and
+browse.daase.
 
 \subsection{KAF File Format}
 This documentation refers to KAF files which are random access files.
@@ -64,15 +63,6 @@ For instance, see src/share/algebra/USERS.DAASE/index.KAF
 
 One existing optimization is that if the data is a simple thing like a
 symbol then the nth-entry-byte-address is replaced by immediate data.
-
-Another existing one is a compression algorithm applied to the
-data so that the very long names don't take up so much space.
-We could probably remove the compression algorithm as 64k is no
-longer considered 'huge'. The |database-abbreviation| routine
-handles this on read and write-compress handles this on write.
-The squeeze routine is used to compress the keys, the unsqueeze
-routine uncompresses them. Making these two routines disappear
-should remove all of the compression.
 
 Indeed, a faster optimization is to simply read the whole database
 into the image before it is saved. The system would be easier to
@@ -277,11 +267,6 @@ database.
 ; position information in the database then the database is NOT
 ; read in and is assumed to match the in-core version
 
-(defvar |$compress_vector| nil "a vector of things to compress in the databases")
-(defvar |$compress_vector_length| 0 "length of the compress vector")
-(defvar |$compress_stream| nil "an stream containing the compress vector")
-(defvar |$compress_stream_stamp| 0 "|$compress_stream| (position . time)")
-
 (defvar |$interp_stream| nil "an open stream to the interpreter database")
 (defvar |$interp_stream_stamp| 0 "|$interp_stream| (position . time)")
 
@@ -313,9 +298,6 @@ database.
  (setq |$has_category_hash| (make-hash-table :test #'equal))
  (setq |$operation_hash| (make-hash-table))
  (setq |$all_constructors| nil)
- (setq |$compress_vector| nil)
- (setq |$compress_stream_stamp| '(0 . 0))
- (|compressOpen| display_messages)
  (setq |$interp_stream_stamp| '(0 . 0))
  (|interpOpen| display_messages)
  (setq |$operation_stream_stamp| '(0 . 0))
@@ -488,7 +470,7 @@ database.
 ; system files is only the filename and extension. for user files it
 ; contains the full pathname. when the database is first opened the
 ; sourcefile slot contains system names. the lookup function
-; has to prefix the |$spadroot| information if the directory-namestring is
+; has to prefix the |$spadroot| information if the pathname-directory is
 ; null (we don't know the real root at database build time).
 ; a object-hash table is set up to look up nrlib and ao information.
 ; this slot is empty until a user does a )library call. we remember
@@ -790,7 +772,7 @@ database.
     (sourcefile          (setf (|database-sourcefile| struct) data))))
    (case key ; fixup the special cases
     (sourcefile
-     (when (and data (string= (directory-namestring data) "")
+     (when (and data (null (pathname-directory data))
              (string= (pathname-type data) "spad"))
       (setq data
        (concatenate 'string |$spadroot| "/../../src/algebra/" data))))
@@ -801,11 +783,11 @@ database.
     (object                                ; fix up system object pathname
      (if (consp data)
        (setq data
-             (if (string= (directory-namestring (car data)) "")
+             (if (null (pathname-directory (car data)))
                  (concatenate 'string |$spadroot| "/algebra/" (car data)
                                         "." |$lisp_bin_filetype|)
                (car data)))
-      (when (and data (string= (directory-namestring data) ""))
+      (when (and data (null (pathname-directory data)))
        (setq data (concatenate 'string |$spadroot| "/algebra/" data
                                           "." |$lisp_bin_filetype|)))))))
   data))
@@ -1118,7 +1100,6 @@ database.
   (setq |$has_category_hash| (make-hash-table :test #'equal))
   (setq |$operation_hash| (make-hash-table))
   (setq |$all_constructors| nil)
-  (setq |$compress_vector| nil)
   (setq |$all_operations| nil)
   (withSpecialConstructors)
   (localdatabase nil
@@ -1134,7 +1115,6 @@ database.
 ;browse.daase
   (if br_data
       (|save_browser_data|))
-  (write-compress)
   (if br_data
       (write-browsedb))
   (write-operationdb)
@@ -1158,9 +1138,6 @@ database.
           ; does gethash calls into it rather than doing a get_database call.
   (write-interpdb)
   (|createInitializers|)
-  (when (probe-file (final-name "compress"))
-        (delete-file (final-name "compress")))
-  (rename-file "compress.build" (final-name "compress"))
   (when (probe-file (final-name "interp"))
         (delete-file (final-name "interp")))
   (rename-file "interp.build" (final-name "interp"))
@@ -1185,69 +1162,6 @@ database.
     (format t "   Using local database ~a.." filename))
    (setq filename (concatenate 'string |$spadroot| "/algebra/" name)))
   filename))
-
-;; The compress database is special. It contains a list of symbols.
-;; The character string name of a symbol in the other databases is
-;; represented by a negative number. To get the real symbol back you
-;; take the absolute value of the number and use it as a byte index
-;; into the compress database. In this way long symbol names become
-;; short negative numbers.
-
-(defun |compressOpen| (display_messages)
- (let (lst stamp pos)
-  (setq |$compress_stream|
-    (open (DaaseName "compress.daase") :direction :input))
-  (setq stamp (read |$compress_stream|))
-  (unless (equal stamp |$compress_stream_stamp|)
-   (if display_messages
-       (format t "   Re-reading compress.daase"))
-   (setq |$compress_stream_stamp| stamp)
-   (setq pos (car stamp))
-   (file-position |$compress_stream| pos)
-   (setq lst (read |$compress_stream|))
-   (setq |$compress_vector_length| (car lst))
-   (setq |$compress_vector|
-     (make-array (car lst) :initial-contents (cdr lst)))))
-   (format t "~&"))
-
-(defun write-compress ()
- (let (compresslist masterpos out)
-  (close |$compress_stream|)
-  (setq out (open "compress.build" :direction :output :if-exists :supersede))
-  (princ "                              " out)
-  #+:GCL (force-output out)
-  (setq masterpos (file-position out))
-  (setq compresslist
-        (append (|allConstructors|) (|allOperations|)))
-  (push "algebra" compresslist)
-  (push "failed" compresslist)
-  (push 'signature compresslist)
-  (push '|ofType| compresslist)
-  (push '|Join| compresslist)
-  (push 'and compresslist)
-  (push '|nobranch| compresslist)
-  (push 'category compresslist)
-  (push '|category| compresslist)
-  (push '|domain| compresslist)
-  (push '|package| compresslist)
-  (push 'attribute compresslist)
-  (push '|isDomain| compresslist)
-  (push '|ofCategory| compresslist)
-  (push '|Union| compresslist)
-  (push '|Record| compresslist)
-  (push '|Mapping| compresslist)
-  (push '|Enumeration| compresslist)
-  ;;; dummy zero element
-  (push 0 compresslist)
-  (setq |$compress_vector_length| (length compresslist))
-  (setq |$compress_vector|
-    (make-array |$compress_vector_length| :initial-contents compresslist))
-  (print (cons (length compresslist) compresslist) out)
-  #+:GCL (force-output out)
-  (file-position out 0)
-  (print (cons masterpos (get-universal-time)) out)
-  #+:GCL (force-output out)
-  (close out)))
 
 (defun write-interpdb ()
  "build interp.daase from hash tables"
