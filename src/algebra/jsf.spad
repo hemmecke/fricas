@@ -13,26 +13,15 @@ JuliaFloat64SpecialFunctions() : Exports == Implementation where
     ++ exp2(x) computes the base 2 exponential of x.
     exp10   : JF64 -> JF64
     ++ exp10(x) computes the base 10 exponential of x.
-    expm1   : JF64 -> JF64
-    ++ expm1(x) computes accurately e^x-1. It avoids the loss of precision
-    ++ involved in the direct evaluation of exp(x)-1 for small values of x.
-    log2  : JF64 -> JF64
-    ++ log2(x) computes the base 2 logarithm of x.
-    log10 : JF64 -> JF64
-    ++ log10(x) computes the base 10 logarithm of x.
     log1p : JF64 -> JF64
     ++ log1p(x) computes accurately natural logarithm of 1+x.
 
-    sin    : JF64 -> JF64
-    ++ sin(x) computes sine of x.
     sind   : JF64 -> JF64
     ++ sind(x) computes sine of x, where x is in degrees.
     sinpi  : JF64 -> JF64
     ++ sinpi(x) computes sin(pi*x) more accurately.
     sinc   : JF64 -> JF64
     ++ sinc(x) computes sin(pi*x)/(pi*x) if x~=0, and 1 if x=0.
-    cos   : JF64 -> JF64
-    ++ cos(x) computes cosine of x.
     cosd  : JF64 -> JF64
     ++ cosd(x) computes cosine of x, where x is in degrees.
     cospi : JF64 -> JF64
@@ -40,107 +29,55 @@ JuliaFloat64SpecialFunctions() : Exports == Implementation where
     cosc  : JF64 -> JF64
     ++ cosc(x) computes cos(pi*x)/x−sin(pi*x)/(pi*x^2)
     ++ if x~=0, and 0 if x=0 i.e. the derivative of sinc(x).
-    tan   : JF64 -> JF64
-    ++ tan(x) computes tangent of x.
     tand  : JF64 -> JF64
     ++ tand(x) computes tangent of x, where x is in degrees.
     tanpi : JF64 -> JF64
     ++ tanpi(x) computes tan(pi*x) more accurately.
-    cot   : JF64 -> JF64
-    ++ cot(x) computes cotangent of x.
     cotd  : JF64 -> JF64
     ++ cotd(x) computes cotangent of x, where x is in degrees.
-    sec   : JF64 -> JF64
-    ++ sec(x) computes secant of x.
     secd  : JF64 -> JF64
     ++ secd(x) computes secant of x, where x is in degrees.
-    csc   : JF64 -> JF64
-    ++ csc(x) computes cosecant of x.
     cscd  : JF64 -> JF64
     ++ cscd(x) computes cosecant of x, where x is in degrees.
     hypot : (JF64, JF64) -> JF64
     ++ hypot(x,y) computes the hypotenuse avoiding overflow and underflow.
-  
-    asin  : JF64 -> JF64
-    ++ asin(x) computes the inverse sine of x.
+
     asind : JF64 -> JF64
     ++ asind(x) computes the inverse sine of x, where output is in degrees.
-    acos  : JF64 -> JF64
-    ++ acos(x) computes the inverse cosine of x.
     acosd : JF64 -> JF64
     ++ acosd(x) computes the inverse cosine of x, where output is in degrees.
-    atan  : JF64 -> JF64
-    ++ atan(x) computes the inverse tangent of x.
-    atan  : (JF64, JF64) -> JF64
-    ++ atan(x, y) computes the inverse tangent of x/y.
     atand : JF64 -> JF64
     ++ atand(x) computes the inverse tangent of x, where output is in degrees.
     atand  : (JF64, JF64) -> JF64
     ++ atand(x, y) computes the inverse tangent of x/y, where output is in degrees.
-    acot  : JF64 -> JF64
-    ++ acot(x) computes the inverse cotangent of x.
     acotd : JF64 -> JF64
     ++ acotd(x) computes the inverse cotangent of x, where output is in degrees.
-    asec  : JF64 -> JF64
-    ++ asec(x) computes the inverse secant of x.
     asecd : JF64 -> JF64
     ++ asecd(x) computes the inverse secant of x, where output is in degrees.
-    acsc  : JF64 -> JF64
-    ++ acsc(x) computes the inverse cosecant of x.
     acscd : JF64 -> JF64
     ++ acscd(x) computes the inverse cosecant of x, where output is in degrees.
-
-    sinh  : JF64 -> JF64
-    ++ sinh(x) computes the hyperbolic sine of x.
-    cosh  : JF64 -> JF64
-    ++ cosh(x) computes the hyperbolic cosine of x.
-    tanh  : JF64 -> JF64
-    ++ tanh(x) computes the hyperbolic tangent of x.
-    coth  : JF64 -> JF64
-    ++ coth(x) computes the hyperbolic cotangent of x.
-    sech  : JF64 -> JF64
-    ++ sech(x) computes the hyperbolic secant of x.
-    csch  : JF64 -> JF64
-    ++ csch(x) computes the hyperbolic cosecant of x.
-
-    asinh  : JF64 -> JF64
-    ++ asinh(x) computes the inverse hyperbolic sine of x.
-    acosh  : JF64 -> JF64
-    ++ acosh(x) computes the inverse hyperbolic cosine of x.
-    atanh  : JF64 -> JF64
-    ++ atanh(x) computes the inverse hyperbolic tangent of x.
-    acoth  : JF64 -> JF64
-    ++ acoth(x) computes the inverse hyperbolic cotangent of x.
-    asech  : JF64 -> JF64
-    ++ asech(x) computes the inverse hyperbolic secant of x.
-    acsch  : JF64 -> JF64
-    ++ acsch(x) computes inverse the hyperbolic cosecant of x.
-
     rad2Deg  : JF64 -> JF64
     ++ rad2deg(x) converts x to degrees, where x is in radians.
     deg2Rad  : JF64 -> JF64
     ++ deg2rad(x) converts x to radian, where x is in degrees.
 
   Implementation ==> add
+    import from JuliaString
+    import from JuliaUtilityFunctions
+
+    jlInitialize(true)
+    jlUsing(coerce("SpecialFunctions"))
+
 
     ldexp(x,n) == jl_dbl_function_dbl_int("ldexp", x, n)$Lisp
     exp2(x)    == jl_dbl_function_dbl("exp2", x)$Lisp
     exp10(x)   == jl_dbl_function_dbl("exp10", x)$Lisp
-    expm1(x)   == jl_dbl_function_dbl("expm1", x)$Lisp
-    log2(x)    == jl_dbl_function_dbl("log2", x)$Lisp
-    log10(x)   == jl_dbl_function_dbl("log10", x)$Lisp
     log1p(x)   == jl_dbl_function_dbl("log1p", x)$Lisp
 
-    sin(x)   == jl_dbl_function_dbl("sin", x)$Lisp
     sinpi(x) == jl_dbl_function_dbl("sinpi", x)$Lisp
     sinc(x)  == jl_dbl_function_dbl("sinc", x)$Lisp
-    cos(x)   == jl_dbl_function_dbl("cos", x)$Lisp
     cospi(x) == jl_dbl_function_dbl("cospi", x)$Lisp   
-    tan(x)   == jl_dbl_function_dbl("tan", x)$Lisp
     tanpi(x) == jl_dbl_function_dbl("tanpi", x)$Lisp
-    cot(x)   == jl_dbl_function_dbl("cot", x)$Lisp
-    sec(x)   == jl_dbl_function_dbl("sec", x)$Lisp
-    csc(x)   == jl_dbl_function_dbl("csc", x)$Lisp
     hypot(x,y) == jl_dbl_function_dbl_dbl("hypot", x, y)$Lisp
 
     sind(x) == jl_dbl_function_dbl("sind", x)$Lisp
@@ -150,15 +87,6 @@ JuliaFloat64SpecialFunctions() : Exports == Implementation where
     secd(x) == jl_dbl_function_dbl("secd", x)$Lisp
     cscd(x) == jl_dbl_function_dbl("cscd", x)$Lisp
 
-
-    asin(x) == jl_dbl_function_dbl("asin", x)$Lisp
-    acos(x) == jl_dbl_function_dbl("acos", x)$Lisp
-    atan(x) == jl_dbl_function_dbl("atan", x)$Lisp
-    atan(x,y) == jl_dbl_function_dbl_dbl("atan", x, y)$Lisp
-    acot(x) == jl_dbl_function_dbl("acot", x)$Lisp
-    asec(x) == jl_dbl_function_dbl("asec", x)$Lisp
-    acsc(x) == jl_dbl_function_dbl("acsc", x)$Lisp
-
     asind(x) == jl_dbl_function_dbl("asind", x)$Lisp
     acosd(x) == jl_dbl_function_dbl("acosd", x)$Lisp
     atand(x) == jl_dbl_function_dbl("atand", x)$Lisp
@@ -166,20 +94,6 @@ JuliaFloat64SpecialFunctions() : Exports == Implementation where
     acotd(x) == jl_dbl_function_dbl("acotd", x)$Lisp
     asecd(x) == jl_dbl_function_dbl("asecd", x)$Lisp
     acscd(x) == jl_dbl_function_dbl("acscd", x)$Lisp
-
-    sinh(x) == jl_dbl_function_dbl("sinh", x)$Lisp
-    cosh(x) == jl_dbl_function_dbl("cosh", x)$Lisp
-    tanh(x) == jl_dbl_function_dbl("tanh", x)$Lisp
-    coth(x) == jl_dbl_function_dbl("coth", x)$Lisp
-    sech(x) == jl_dbl_function_dbl("sech", x)$Lisp
-    csch(x) == jl_dbl_function_dbl("csch", x)$Lisp
-
-    asinh(x) == jl_dbl_function_dbl("asinh", x)$Lisp
-    acosh(x) == jl_dbl_function_dbl("acosh", x)$Lisp
-    atanh(x) == jl_dbl_function_dbl("atanh", x)$Lisp
-    acoth(x) == jl_dbl_function_dbl("acoth", x)$Lisp
-    asech(x) == jl_dbl_function_dbl("asech", x)$Lisp
-    acsch(x) == jl_dbl_function_dbl("acsch", x)$Lisp
 
     rad2Deg(x) == jl_dbl_function_dbl("rad2deg", x)$Lisp
     deg2Rad(x) == jl_dbl_function_dbl("deg2rad", x)$Lisp

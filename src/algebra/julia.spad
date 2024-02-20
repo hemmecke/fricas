@@ -187,7 +187,8 @@ JuliaSymbol() : Exports == Implementation where
 ++  they can differ between them. They will be passed as an Int64
 ++  to Julia nevertheless
 JuliaInt64() : Exports == Implementation where
-  Exports ==> Join(JuliaType, IntegerNumberSystem) with
+  Exports ==> Join(JuliaType, IntegerNumberSystem,
+          ConvertibleTo(String)) with
     min   : () -> %
     max   : () -> %
     coerce  : SingleInteger -> %
@@ -220,8 +221,8 @@ JuliaFloat64() : Exports == Implementation where
                       ConvertibleTo(InputForm),
                       FloatingPointSystem,
                       ElementaryFunctionCategory,
+                      TranscendentalFunctionCategory,
                       DifferentialRing, CommutativeRing) with
-                      -- TranscendentalFunctionCategory,
                       -- SpecialFunctionCategory) with
       jlF64Format : String -> String
       ++ change the output format using Lisp format strings.
@@ -232,10 +233,22 @@ JuliaFloat64() : Exports == Implementation where
       ++ jf64(x) coerces x to a Julia Float64.
       jf64    : Integer -> %
       ++ jf64(i) coerces i to a Julia Float64.
+      expm1   :  % -> %
+      ++ expm1(x) computes accurately e^x-1. It avoids the loss of precision
+      ++ involved in the direct evaluation of exp(x)-1 for small values of x.
+      log2  : % -> %
+      ++ log2(x) computes the base 2 logarithm of x.
+      log10 : % -> %
+      ++ log10(x) computes the base 10 logarithm of x.  
       exp1    : () -> %
       ++ exp1() returns the Julia Float64 exp(1).
       pi      : () -> %
       ++ pi() returns the Julia Float64 pi.
+      atan : % -> %
+      ++ atan(x) computes the inverse tangent of x.
+      atan : (%, %) -> %
+      ++ atan(x, y) computes the inverse tangent of x/y.
+
       nan: () -> %
       ++ nan() returns the Julia Float64 NaN (not a number) constant.
       positiveInfinity: () -> %
@@ -244,7 +257,9 @@ JuliaFloat64() : Exports == Implementation where
       negativeInfinity: () -> %
       ++ negativeInfinity() returns the Julia Float64
       ++ negtive infinity constant.
+
       hashUpdate! : (HashState, %) -> HashState
+
     Implementation ==> add
       import from JuliaUtilityFunctions
       jlInitialize(true)
@@ -325,12 +340,43 @@ JuliaFloat64() : Exports == Implementation where
       recip(x)         == (zero? x => "failed"; 1 / x)
       differentiate x  == 0
 
-      exp(x)           == jl_dbl_function_dbl("exp", x)$Lisp
-      log(x)           == jl_dbl_function_dbl("log", x)$Lisp
+      exp(x : %)     == jl_dbl_function_dbl("exp", x)$Lisp
+      expm1(x : %)   == jl_dbl_function_dbl("expm1", x)$Lisp
+      log(x : %)     == jl_dbl_function_dbl("log", x)$Lisp
+      log2(x : %)    == jl_dbl_function_dbl("log2", x)$Lisp
+      log10(x : %)   == jl_dbl_function_dbl("log10", x)$Lisp
+      sqrt(x : %)    == jl_dbl_function_dbl("sqrt", x)$Lisp
 
-      sqrt(x)          == jl_dbl_function_dbl("sqrt", x)$Lisp
+      sin(x : %)   == jl_dbl_function_dbl("sin", x)$Lisp
+      cos(x : %)   == jl_dbl_function_dbl("cos", x)$Lisp
+      tan(x : %)   == jl_dbl_function_dbl("tan", x)$Lisp
+      cot(x : %)   == jl_dbl_function_dbl("cot", x)$Lisp
+      sec(x : %)   == jl_dbl_function_dbl("sec", x)$Lisp
+      csc(x : %)   == jl_dbl_function_dbl("csc", x)$Lisp
 
-      exponent(x)      == jl_int64_function_dbl("exponent", x)$Lisp
+      asin(x : %) == jl_dbl_function_dbl("asin", x)$Lisp
+      acos(x : %) == jl_dbl_function_dbl("acos", x)$Lisp
+      atan(x : %) == jl_dbl_function_dbl("atan", x)$Lisp
+      atan(x : %, y : %) == jl_dbl_function_dbl_dbl("atan", x, y)$Lisp
+      acot(x : %) == jl_dbl_function_dbl("acot", x)$Lisp
+      asec(x : %) == jl_dbl_function_dbl("asec", x)$Lisp
+      acsc(x : %) == jl_dbl_function_dbl("acsc", x)$Lisp
+
+      sinh(x : %) == jl_dbl_function_dbl("sinh", x)$Lisp
+      cosh(x : %) == jl_dbl_function_dbl("cosh", x)$Lisp
+      tanh(x : %) == jl_dbl_function_dbl("tanh", x)$Lisp
+      coth(x : %) == jl_dbl_function_dbl("coth", x)$Lisp
+      sech(x : %) == jl_dbl_function_dbl("sech", x)$Lisp
+      csch(x : %) == jl_dbl_function_dbl("csch", x)$Lisp
+
+      asinh(x : %) == jl_dbl_function_dbl("asinh", x)$Lisp
+      acosh(x : %) == jl_dbl_function_dbl("acosh", x)$Lisp
+      atanh(x : %) == jl_dbl_function_dbl("atanh", x)$Lisp
+      acoth(x : %) == jl_dbl_function_dbl("acoth", x)$Lisp
+      asech(x : %) == jl_dbl_function_dbl("asech", x)$Lisp
+      acsch(x : %) == jl_dbl_function_dbl("acsch", x)$Lisp
+
+      --digamma(x : %) == jl_dbl_function_dbl("digamma", x)$Lisp
 
       base()           == FLOAT_-RADIX(0$%)$Lisp
       mantissa x       == manexp(x).MANTISSA
@@ -363,6 +409,7 @@ JuliaFloat64() : Exports == Implementation where
       convert(x : %) : Float == convert(x pretend DoubleFloat)$Float
       coerce(x : %) : OutputForm ==
         message(FORMAT(NIL$Lisp, format, x)$Lisp)
+
       jf64(x : DoubleFloat) : % == x pretend %
       jf64(x : Integer) : % == coerce(x)@DoubleFloat pretend %
 

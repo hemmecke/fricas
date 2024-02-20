@@ -165,12 +165,9 @@ JuliaFloat64SpecialFunctions2() : Exports == Implementation where
   Implementation ==> add
     import from JuliaString
     import from JuliaUtilityFunctions
-
-    not jlUsing(coerce("SpecialFunctions"))
-      => error concat(["Could not load the Julia package SpecialFunctions.", _
-                 coerce(newline()$Character)@String,
-                 "   Use the jlAddPackage function or Julia",
-                 " itself to add it to your workspace."])$String
+    
+    jlInitialize(true)
+    jlUsing(coerce("SpecialFunctions"))
 
     -- Gamma Functions
 

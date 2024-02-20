@@ -2,9 +2,9 @@
 ++ Author: G. Vanuxem
 ++ Date Created: march 2023
 ++ Basic Operations: jlPlot, jlSurface
-++ Keywords: plot
+++ Keywords: plot, surface
 ++ Description: low level plotting functions
-++ using the StatsPlots module from Julia.
+++ using the Plots module from Julia.
 JuliaPlotFunctions() : Exports == Implementation where
   NNI     ==> NonNegativeInteger
   JF64    ==> JuliaFloat64
@@ -150,27 +150,7 @@ JuliaPlotFunctions() : Exports == Implementation where
     pdf(x) ==> x pretend SF
     POINTS ==> 250
 
---    not jlDefined?("plot")
---        => error
---            concat(["You need to load a Julia data visualisation package.", _
---                coerce(newline()$Character)@String,
---                "   You can use Plots or StatsPlots.",-- or Mackie.",
---                --" The later does not support some routune defined here",
---                coerce(newline()$Character)@String,
---                "   Use the jlAddPackage function or Julia itself to add it.",
---                coerce(newline()$Character)@String,
---                "   If a data visualisation package is installed,",
---                " you can add it",
---                coerce(newline()$Character)@String,
---                "   to your worspace using jlUsing.",
---                coerce(newline()$Character)@String,
---                "   JlUsing(_"Plots_") should return true for example."])$String
-
-    not jlUsing(coerce("StatsPlots"))
-      => error concat(["Could not load the Julia package StatsPlots.", _
-                 coerce(newline()$Character)@String,
-                 "   Use the jlAddPackage function or Julia",
-                 " itself to add it to your workspace."])$String
+    jlUsing(coerce("Plots"))
 
     -- jlEvalString("gaston()")
     -- jlEvalString("WGLMakie.activate!()")
