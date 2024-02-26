@@ -27,9 +27,10 @@ JuliaInteger() : Exports == Implementation where
     jint    : Integer -> %
   Implementation ==> add
     import from JuliaUtilityFunctions
+    import from String
     
     jlInitialize(true)
-    jl_eval_string("@suppress_err using Nemo")
+    jl_eval_string("@suppress_err using Nemo")$Lisp
  
     Rep := SExpression
 
@@ -115,7 +116,7 @@ JuliaFractionInteger() : Exports == Implementation where
     import from String
     
     jlInitialize(true)
-    jl_eval_string("@suppress_err using Nemo")
+    jl_eval_string("@suppress_err using Nemo")$Lisp
 
     Rep := SExpression
 
@@ -200,16 +201,16 @@ JuliaUnivariatePolynomial(x : Symbol, R : Join(JuliaType, Ring)):
     Implementation ==> add
         import from JuliaUtilityFunctions
         import from JuliaString
+        import String
         --import from UnivariatePolynomial(x,R)
     
         jlInitialize(true)
-        jl_eval_string("@suppress_err using Nemo")
+        jl_eval_string("@suppress_err using Nemo")$Lisp
         -- jlref CL class
         Rep := SExpression
 
 
         spjs(str) ==> str pretend JuliaString
-        var := string(x)
 
         getind(a) ==> concat(["getindex(", "refs,_"", jlrefId(a), "_")"])
 
@@ -232,11 +233,11 @@ JuliaUnivariatePolynomial(x : Symbol, R : Join(JuliaType, Ring)):
               tmp : String := concat(["leading_coefficient(", getind(p),")"])
               jlref(tmp, "ZZ")
         else if R is JuliaFractionInteger then
-            jl_string_eval_string(concat(["R,", var, "=polynomial_ring(QQ,_"",
-                var, "_")"])$String)$Lisp
+            jl_eval_string(concat(["R,", string(x), "=polynomial_ring(QQ,_"",
+                string(x), "_")"])$String)$Lisp
             leadingCoefficient(p : %) ==
-                tmp : String := concat(["leading_coefficient(", getind(p),")"])
-                jlref(tmp, "QQ")
+              tmp : String := concat(["leading_coefficient(", getind(p),")"])
+              jlref(tmp, "QQ")
         else error "Unimplemented ring."
 
         1 == jlref("R(1)", "JUP")
