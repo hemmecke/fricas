@@ -28,6 +28,8 @@ jobs:
         sudo ln -sf /Applications/Julia-1.10.app/Contents/Resources/julia/lib/libjulia.dylib /usr/local/lib/libjulia.dylib
     - name: adjust lib search path
       run: export DYLD_FALLBACK_LIBRARY_PATH=/Applications/Julia-1.10.app/Contents/Resources/julia/lib:$DYLD_FALLBACK_LIBRARY_PATH  && sudo update_dyld_shared_cache
+    - name: install Julia libraries
+      run: julia -e "import Pkg;Pkg.add(\"Nemo\")"
     - name: configure
       run: |
         mkdir ../build && cd ../build

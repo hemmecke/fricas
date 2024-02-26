@@ -29,7 +29,7 @@ JuliaInteger() : Exports == Implementation where
     import from JuliaUtilityFunctions
     
     jlInitialize(true)
-    jlUsing(jstring "Nemo")
+    jl_eval_string("@suppress_err using Nemo")
  
     Rep := SExpression
 
@@ -115,7 +115,7 @@ JuliaFractionInteger() : Exports == Implementation where
     import from String
     
     jlInitialize(true)
-    jl_eval_string("@suppress_err using Nemo")$Lisp
+    jl_eval_string("@suppress_err using Nemo")
 
     Rep := SExpression
 
@@ -203,7 +203,7 @@ JuliaUnivariatePolynomial(x : Symbol, R : Join(JuliaType, Ring)):
         --import from UnivariatePolynomial(x,R)
     
         jlInitialize(true)
-        jl_eval_string("@suppress_err using Nemo")$Lisp
+        jl_eval_string("@suppress_err using Nemo")
         -- jlref CL class
         Rep := SExpression
 

@@ -18,6 +18,8 @@ jobs:
       run: wget -c https://julialang-s3.julialang.org/bin/linux/x64/1.10/julia-1.10.0-linux-x86_64.tar.gz
     - name: install Julia
       run: tar zxf julia-1.10.0-linux-x86_64.tar.gz && sudo cp -R julia-1.10.0/* /usr/local/ && sudo ldconfig
+    - name: install Julia libraries
+      run: julia -e "import Pkg;Pkg.add(\"Nemo\")"
     - name: configure
       run: ./configure --with-lisp="sbcl --dynamic-space-size 2048" --with-gmp --enable-julia --enable-hunchentoot || cat config.log
     - name: make
