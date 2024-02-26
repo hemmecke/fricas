@@ -56,7 +56,7 @@ SPAD_SRCS= \
      groebsol gseries hashstate html ideal idecomp indexedp \
      intaf intalg intaux intclos intden intef integer \
      integrat interval intfact intlocp intpar intpm intrf intspec irexpand \
-     irsn ituple jarray jla jplot jsf jsf2 julia julia2 jet kl kovacic \
+     irsn ituple jarray jla jnemo jplot jsf jsf2 julia jet kl kovacic \
      laplace laurent leadcdet lie limitps lindep lingrob linpen liouv \
      listgcd list lll lmdict lodof lodof2 lodo logic \
      mama manip mantepse math_sym mathml mappkg matcat matfuns matrix \
@@ -391,7 +391,7 @@ GUESSLIST= SMPEXPR FAMR2 NEWTON UFPS GOPT GUESSF1 GUESSP1\
 ifdef JULIA_WRAP_SO_TARGET
 JULIALIST = JTYPE JVECCAT JMATCAT JUF JSTR JSYM JF64 JCF64 JF64VEC JF64MAT JCF64VEC \
 	    JCF64MAT JF64SMAT JCF64SMA JF64MTF JCF64MTF JF64SF JF64SF2 JDRAW JRLA JCLA \
-	    JPLOT JINT JFINT JI64 JI64VEC JUPF JUP 
+	    JPLOT JINT JFINT JI64 JI64VEC JUP 
 JULIACATLIST = JTYPE JVECCAT JMATCAT
 endif
 

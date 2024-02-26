@@ -172,7 +172,6 @@
   (|JuliaRealLinearAlgebra| . JRLA) 
   (|JuliaString| . JSTR)
   (|JuliaUnivariatePolynomial| . JUP)
-  (|JuliaUnivariatePolynomialFunctions| . JUPF)
   (|JuliaUtilityFunctions| . JUF)
   (|KernelFunctions2| . KERNEL2)
   (|KeyedAccessFile| . KAFILE)

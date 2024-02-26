@@ -1,7 +1,7 @@
 )abbrev category JTYPE JuliaType
 ++ Category for Julia values
-++ Author: S.M.Watt, G.Vanuxem (Dec. 2022)
-++ Date Created: July 1997
+++ Author: G.Vanuxem (Dec. 2022)
+++ Date Created: December 2022
 ++ Description:
 ++  This category allows the manipulation of Julia values.
 JuliaType() : Category == SetCategory
@@ -542,6 +542,8 @@ JuliaUtilityFunctions() : Exports == Implementation where
     import from JuliaString
     init_julia_env()$Lisp
     jl_using_package("Random")$Lisp
+    jl_using_package("Suppressor")$Lisp
+
     defined?(func) ==>
       not jlDefined?(func)$JuliaUtilityFunctions =>
         error concat(string(func), " is not defined in Julia")

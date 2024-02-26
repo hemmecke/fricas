@@ -478,10 +478,10 @@ with this hack and will try to convince the GCL crowd to fix this.
     (void    sb-alien::void)
     (bool    (sb-alien::boolean 8))
     (int      sb-alien::int)
-    (c-string sb-alien::c-string)
+    (c-string (sb-alien::c-string))
     (double   sb-alien::double-float)
     (char-*   (sb-alien:* sb-alien:char))
-    (char-*   (sb-alien:* sb-alien:double-float))
+    (double-*   (sb-alien:* sb-alien:double-float))
 ))
 
 (defun c-args-to-sbcl (arguments)

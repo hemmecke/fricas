@@ -83,7 +83,7 @@ char* jl_string_eval_string(char* code)
     return(jl_string_data(result));
 }
 
-char* jl_setindex_wrap_eval_string(int immut, const char* code)
+char* jl_setindex_wrap_eval_string(int immut, const char* hash, const char* code)
 {
     char* nstr = "";
     jl_value_t *res, *var, *ret;
@@ -97,7 +97,7 @@ char* jl_setindex_wrap_eval_string(int immut, const char* code)
         return(nstr);
     }
     JL_GC_PUSH1(&var);
-    ret = jl_call1(str, jl_call1(jl_get_function(jl_main_module,"hash"),var));
+    ret = jl_cstr_to_string(hash);
     if (immut){
         res = jl_new_struct(reft, var);
         jl_call3(setind, irefs, res, ret);
@@ -108,12 +108,17 @@ char* jl_setindex_wrap_eval_string(int immut, const char* code)
     return(jl_string_data(ret));    
 }
 
-void jl_delete_wrapped_hash(int immut, char *hash)
+void jl_delete_wrapped_hash(int immut, const char *hash)
 {
-    if (immut)
-        jl_call2(del, irefs, jl_cstr_to_string(hash));
-    else
-        jl_call2(del, refs, jl_cstr_to_string(hash));
+    jl_value_t *res;
+
+    printf("Freeing... %s\n", hash);
+    if (immut){
+        res = jl_call2(del, irefs, jl_cstr_to_string(hash));
+    }else{
+        res = jl_call2(del, refs, jl_cstr_to_string(hash));
+    }
+    printf("Freed %\n", hash);
 
     if (jl_exception_occurred()) {
         jl_call2(jl_get_function(jl_base_module, "showerror"),
@@ -126,7 +131,7 @@ void jl_delete_wrapped_hash(int immut, char *hash)
     return;
 }
 
-char* jl_getindex_wrapped_hash(int immut, char *hash)
+char* jl_getindex_wrapped_hash(int immut, const char *hash)
 {
     char* nstr = "";
     jl_value_t *result;
@@ -151,7 +156,7 @@ char* jl_getindex_wrapped_hash(int immut, char *hash)
 ///////////////////////////////////////////////////////////
 // Scalars
 
-void jl_call_function_dbl(char* function, double arg){
+void jl_call_function_dbl(const char* function, double arg){
     jl_function_t *func = jl_get_function(jl_main_module, function);
     jl_value_t* argument = jl_box_float64(arg);
     jl_call1(func, argument);
@@ -166,7 +171,7 @@ void jl_call_function_dbl(char* function, double arg){
     return;
 }
 
-void jl_call_function_dbl_dbl(char* function, double arg1, double arg2){
+void jl_call_function_dbl_dbl(const char* function, double arg1, double arg2){
     jl_function_t *func = jl_get_function(jl_main_module, function);
     jl_value_t* argument1 = jl_box_float64(arg1);
     jl_value_t* argument2 = jl_box_float64(arg2);
@@ -182,7 +187,7 @@ void jl_call_function_dbl_dbl(char* function, double arg1, double arg2){
     return;
 }
 
-void jl_call_function_dbl_dbl_dbl(char* function, double arg1,
+void jl_call_function_dbl_dbl_dbl(const char* function, double arg1,
         double arg2, double arg3){
     jl_function_t *func = jl_get_function(jl_main_module, function);
     jl_value_t* argument1 = jl_box_float64(arg1);
@@ -200,7 +205,7 @@ void jl_call_function_dbl_dbl_dbl(char* function, double arg1,
     return;
 }
 
-int jl_call_int64_function_dbl(char* function, double arg){
+int jl_call_int64_function_dbl(const char* function, double arg){
     jl_function_t *func = jl_get_function(jl_main_module, function);
     jl_value_t* argument = jl_box_float64(arg);
     jl_value_t* ret = jl_call1(func, argument);
@@ -215,7 +220,7 @@ int jl_call_int64_function_dbl(char* function, double arg){
     return jl_unbox_int64(ret);
 }
 
-double jl_call_dbl_function_dbl(char* function, double arg){
+double jl_call_dbl_function_dbl(const char* function, double arg){
     jl_function_t *func = jl_get_function(jl_main_module, function);
     jl_value_t* argument = jl_box_float64(arg);
     jl_value_t* ret = jl_call1(func, argument);
@@ -230,7 +235,7 @@ double jl_call_dbl_function_dbl(char* function, double arg){
     return jl_unbox_float64(ret);
 }
 
-double jl_call_dbl_function_dbl_dbl(char* function, double arg1, double arg2){
+double jl_call_dbl_function_dbl_dbl(const char* function, double arg1, double arg2){
     jl_function_t *func = jl_get_function(jl_main_module, function);
     jl_value_t* argument1 = jl_box_float64(arg1);
     jl_value_t* argument2 = jl_box_float64(arg2);
@@ -246,7 +251,7 @@ double jl_call_dbl_function_dbl_dbl(char* function, double arg1, double arg2){
     return jl_unbox_float64(ret);
 }
 
-double jl_call_dbl_function_dbl_dbl_dbl(char* function, double arg1, double arg2, double arg3){
+double jl_call_dbl_function_dbl_dbl_dbl(const char* function, double arg1, double arg2, double arg3){
     jl_function_t *func = jl_get_function(jl_main_module, function);
     jl_value_t* argument1 = jl_box_float64(arg1);
     jl_value_t* argument2 = jl_box_float64(arg2);
@@ -263,7 +268,7 @@ double jl_call_dbl_function_dbl_dbl_dbl(char* function, double arg1, double arg2
     return jl_unbox_float64(ret);
 }
 
-double jl_call_dbl_function_dbl_int(char* function, double arg1, int64_t arg2){
+double jl_call_dbl_function_dbl_int(const char* function, double arg1, int64_t arg2){
     jl_function_t *func = jl_get_function(jl_main_module, function);
     jl_value_t* argument1 = jl_box_float64(arg1);
     jl_value_t* argument2 = jl_box_int64(arg2);
@@ -279,7 +284,7 @@ double jl_call_dbl_function_dbl_int(char* function, double arg1, int64_t arg2){
     return jl_unbox_float64(ret);
 }
 
-double jl_call_dbl_function_int_dbl(char* function, int64_t arg1, double arg2){
+double jl_call_dbl_function_int_dbl(const char* function, int64_t arg1, double arg2){
     jl_function_t *func = jl_get_function(jl_main_module, function);
     jl_value_t* argument1 = jl_box_int64(arg1);
     jl_value_t* argument2 = jl_box_float64(arg2);
@@ -295,7 +300,7 @@ double jl_call_dbl_function_int_dbl(char* function, int64_t arg1, double arg2){
     return jl_unbox_float64(ret);
 }
 
-int8_t jl_call_bool_function_dbl_dbl(const char* function, double arg1, double arg2){
+int8_t jl_call_bool_function_dbl_dbl(const const char* function, double arg1, double arg2){
     jl_function_t *func = jl_get_function(jl_main_module, function);
     jl_value_t* argument1 = jl_box_float64(arg1);
     jl_value_t* argument2 = jl_box_float64(arg2);
@@ -977,6 +982,7 @@ void jl_init_env(void){
     getind = jl_get_function(jl_base_module, "getindex");
     del = jl_get_function(jl_base_module, "delete!");
     str = jl_get_function(jl_base_module, "string");
+
     // Dirty hack
     // Use matrix mul! by default and not the one from Nemo
     jl_eval_str("using LinearAlgebra");
