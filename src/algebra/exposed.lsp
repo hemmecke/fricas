@@ -168,6 +168,7 @@
   (|JuliaInt64Vector| . JI64VEC) 
   (|JuliaFloat64SpecialFunctions| . JF64SF)
   (|JuliaF64SquareMatrix| . JF64SMAT)
+  (|JuliaGaloisField| . JGF) 
   (|JuliaPlotFunctions| . JPLOT)
   (|JuliaRealLinearAlgebra| . JRLA) 
   (|JuliaString| . JSTR)

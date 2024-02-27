@@ -40,8 +40,7 @@ JuliaInteger() : Exports == Implementation where
       tmp : String := concat(["string(", getind(a), op, getind(b),")"])
       jlref(concat(["ZZ(", jl_string_eval_string(tmp)$Lisp,")"]), "ZZ")
     ibinbfunc(op,a,b) ==>
-      tmp : String := concat(["string(", getind(a), op, getind(b),")"])
-      jl_bool_eval_string(tmp)$Lisp
+      jl_bool_eval_string(concat([getind(a), op, getind(b)]))$Lisp
     iunfunc(op, a) ==>
       tmp : String := concat(["string(", op, getind(a),")"])
       jlref(concat(["ZZ(",jl_string_eval_string(tmp)$Lisp, ")"]),"ZZ")
@@ -127,8 +126,7 @@ JuliaFractionInteger() : Exports == Implementation where
       jlref(concat(["QQ(", jl_string_eval_string(tmp)$Lisp,")"]), "QQ")
 
     fibinbfunc(op,a,b) ==>
-      tmp : String := concat(["string(", getind(a), op, getind(b),")"])
-      jl_bool_eval_string(tmp)$Lisp
+      jl_bool_eval_string(concat([getind(a), op, getind(b)]))$Lisp
 
     fiunfunc(op, a) ==>
       tmp : String := concat(["string(", op, getind(a),")"])
@@ -178,6 +176,90 @@ JuliaFractionInteger() : Exports == Implementation where
     coerce(i : %) : OutputForm == jlrefVal(i)
     jfint(i : Integer) == coerce(i)
     jfint(fi : Fraction Integer) == coerce(fi)
+
+)abbrev domain JGF JuliaGaloisField
+++ Experimental domain for Julia Fraction Integers
+++ Author: G. Vanuxem
+++ Date Created: Feb. 2024
+++ Description:
+++  This domain allows the manipulation of Julia Fraction Integers
+++  using the Nemo package (FLINT based, among others).
+++ Purpose: Experimentation.
+JuliaGaloisField(p : PositiveInteger) : Exports == Implementation where
+  jlrefVal  ==> JLREFVAL$Lisp
+  jlrefType ==> JLREFTYPE$Lisp
+  jlrefId   ==> JLREFID$Lisp
+  jlref    ==> make_jlref$Lisp
+  Exports ==> Join(FiniteFieldCategory, FiniteAlgebraicExtensionField(%),
+            ConvertibleTo(Integer)) with
+    jlType   : % -> SExpression
+    jlRef    : % -> SExpression
+    jlValue  : % -> SExpression
+    jlId     : % -> SExpression
+    coerce  : Integer -> %
+    coerce  : JuliaInteger -> %
+    jgf   : Integer -> %
+    jgf   : JuliaInteger -> %
+  Implementation ==> add
+    import from JuliaUtilityFunctions
+    import from String
+    
+    jlInitialize(true)
+    jl_eval_string("@suppress_err using Nemo")$Lisp
+
+    Rep := SExpression
+
+    -- initialize
+    jl_eval_string(concat(["GField=GF(", string(p),")"]))$Lisp
+
+    GF ==> concat(["GF(",string(p),")"])
+    getind(a) ==> concat(["getindex(", "refs,_"", jlrefId a, "_")"])
+
+    jgfbinfunc(op,a,b) ==>
+      tmp : String := concat(["string(", getind(a), op, getind(b),")"])
+      jlref(concat(["GField(", jl_string_eval_string(tmp)$Lisp,")"]), GF)
+
+    jgfbinbfunc(op,a,b) ==>
+      jl_bool_eval_string(concat([getind(a), op, getind(b)]))$Lisp
+
+    jgfunfunc(op, a) ==>
+      tmp : String := concat(["string(", op, getind(a),")"])
+      jlref(concat(["GField(",jl_string_eval_string(tmp)$Lisp, ")"]), GF)
+
+    0 == jlref("GField(0)", GF)
+    1 == jlref("GField(1)", GF)
+
+    x = y == jgfbinbfunc("==",x,y)
+    x ~= y == jgfbinbfunc("!=",x,y)
+
+    x + y == jgfbinfunc("+", x, y)
+    x - y == jgfbinfunc("-", x, y)
+    - x   == jgfunfunc("-", x)
+    x : % * y : % == jgfbinfunc("*", x, y)
+    x : % / y : % == jgfbinfunc("/", x, y)
+
+    x ^ y : NonNegativeInteger == jgfbinfunc("^", x, coerce(y pretend Integer))
+    x ^ y : PositiveInteger == jgfbinfunc("^", x, coerce(y pretend Integer))
+
+    x quo y == jgfbinfunc("÷", x, y)
+    -- x quo y == ibinfunc("div", x, y)
+    x rem y == jgfbinfunc("%", x, y)
+    
+    jlType(x)  == jlrefType(x)
+    jlValue(x) == jlrefVal(x)
+    jlId(x)  == jlrefId(x)
+    jlRef(x)   == x pretend SExpression
+
+    coerce(x : JuliaInteger) : % ==
+      tmp : String := concat(["string(", getind(x), ")"])
+      jlref(concat(["GField(", jl_string_eval_string(tmp)$Lisp, ")"]),GF)
+
+    coerce(i : Integer) ==
+      jlref(concat(["GField(", string(i), ")"]), GF)
+
+    coerce(i : %) : OutputForm == jlrefVal(i)
+    jgf(i : Integer) == coerce(i)
+    jgf(ji : JuliaInteger) == coerce(ji)
 
 
 )abbrev domain JUP JuliaUnivariatePolynomial
