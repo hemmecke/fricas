@@ -184,12 +184,12 @@
 
 #+:openmcl
 (progn
-(defmethod initialize-instance :after ((obj jlref) &rest initargs)
+(defmethod initialize-instance :after ((obj jlref) &rest initargs &key)
     (declare (ignore initargs))
-        (ccl:terminate-when-unreachable obj))
+    (ccl:terminate-when-unreachable obj))
 
-(defmethod terminate ((obj jlref))
-    (when (jlrefId obj)
+(defmethod ccl:terminate ((obj jlref))
+    (progn
         (format t "freeing... ~x~%" (jlrefId obj))
         (boot::|jl_delete_wrapped_hash| 0 (jlrefId obj))))
 )

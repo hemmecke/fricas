@@ -12,9 +12,11 @@ JuliaInteger() : Exports == Implementation where
   jlrefType ==> JLREFTYPE$Lisp
   jlrefId   ==> JLREFID$Lisp
   jlref     ==> make_jlref$Lisp
-  -- PARSE-INTEGER$Lisp
   parsei    ==> parse_integer$ScanningUtilities
   Exports ==> Join(JuliaType, OrderedSet, EuclideanDomain) with
+    sqrt    : % -> %
+    ++ sqrt(x) computes the square root of x.
+    ++ Throws a Julia error if it does not exists and returns 0.
     jlType  : % -> SExpression
     jlRef   : % -> SExpression
     jlValue : % -> SExpression
@@ -42,7 +44,7 @@ JuliaInteger() : Exports == Implementation where
     ibinbfunc(op,a,b) ==>
       jl_bool_eval_string(concat([getind(a), op, getind(b)]))$Lisp
     iunfunc(op, a) ==>
-      tmp : String := concat(["string(", op, getind(a),")"])
+      tmp : String := concat(["string(", op, "(", getind(a),"))"])
       jlref(concat(["ZZ(",jl_string_eval_string(tmp)$Lisp, ")"]),"ZZ")
   
     0 == jlref("ZZ(0)", "ZZ")
@@ -61,13 +63,15 @@ JuliaInteger() : Exports == Implementation where
     x : % * y : % == ibinfunc("*", x, y)
 
     x ^ y : NonNegativeInteger ==
-      ibinfunc("^", x, jlref(concat(["ZZ(",string(coerce(y)),")"]), "ZZ"))
+      ibinfunc("^", x, coerce(y pretend Integer))
     x ^ y : PositiveInteger ==
-      ibinfunc("^", x, jlref(concat(["ZZ(",string(coerce(y)),")"]), "ZZ"))
+      ibinfunc("^", x, coerce(y pretend Integer))
 
     -- x quo y == ibinfunc("div", x, y)
     x quo y == ibinfunc("÷", x, y)
     x rem y == ibinfunc("%", x, y)
+
+    sqrt(x) == iunfunc("sqrt", x)
     
     jlType(x)  == jlrefType(x)
     jlValue(x) == jlrefVal(x)
@@ -100,12 +104,16 @@ JuliaFractionInteger() : Exports == Implementation where
   jlrefVal  ==> JLREFVAL$Lisp
   jlrefType ==> JLREFTYPE$Lisp
   jlrefId   ==> JLREFID$Lisp
-  jlref    ==> make_jlref$Lisp
+  jlref     ==> make_jlref$Lisp
+  JINT      ==> JuliaInteger
   Exports ==> Join(JuliaType, QuotientFieldCategory(JuliaInteger)) with
     jlType   : % -> SExpression
     jlRef    : % -> SExpression
     jlValue  : % -> SExpression
     jlId     : % -> SExpression
+    sqrt    : % -> %
+    ++ sqrt(x) computes the square root of x.
+    ++ Throws a Julia error if it does not exists and returns 0.
     coerce  : Fraction(Integer) -> %
     coerce  : JuliaInteger -> %
     jfint   : Integer -> %
@@ -129,16 +137,16 @@ JuliaFractionInteger() : Exports == Implementation where
       jl_bool_eval_string(concat([getind(a), op, getind(b)]))$Lisp
 
     fiunfunc(op, a) ==>
-      tmp : String := concat(["string(", op, getind(a),")"])
+      tmp : String := concat(["string(", op, "(", getind(a),"))"])
       jlref(concat(["QQ(",jl_string_eval_string(tmp)$Lisp, ")"]),"QQ")
 
     0 == jlref("QQ(0)", "QQ")
     1 == jlref("QQ(1)", "QQ")
 
-    x = y == fibinbfunc("==",x,y)
+    x = y  == fibinbfunc("==",x,y)
     x ~= y == fibinbfunc("!=",x,y)
-    x < y == fibinbfunc("<",x,y)
-    x > y == fibinbfunc(">",x,y)
+    x < y  == fibinbfunc("<",x,y)
+    x > y  == fibinbfunc(">",x,y)
     x >= y == fibinbfunc(">=",x,y)
     x <= y == fibinbfunc("<=",x,y)
 
@@ -150,12 +158,14 @@ JuliaFractionInteger() : Exports == Implementation where
     x : % * y : JuliaInteger == fibinfunc("*", x, coerce(y))
     x : JuliaInteger * y : % == fibinfunc("*", coerce(x), y)
 
-    x ^ y : NonNegativeInteger == fibinfunc("^", x, coerce(y pretend Integer))
-    x ^ y : PositiveInteger == fibinfunc("^", x, coerce(y pretend Integer))
+    x ^ y : NonNegativeInteger == fibinfunc("^", x, coerce(y pretend Integer)@JINT)
+    x ^ y : PositiveInteger == fibinfunc("^", x, coerce(y pretend Integer)@JINT)
 
     x quo y == fibinfunc("÷", x, y)
     -- x quo y == ibinfunc("div", x, y)
     x rem y == fibinfunc("%", x, y)
+
+    sqrt(x) == fiunfunc("sqrt", x)
     
     jlType(x)  == jlrefType(x)
     jlValue(x) == jlrefVal(x)
@@ -189,13 +199,20 @@ JuliaGaloisField(p : PositiveInteger) : Exports == Implementation where
   jlrefVal  ==> JLREFVAL$Lisp
   jlrefType ==> JLREFTYPE$Lisp
   jlrefId   ==> JLREFID$Lisp
-  jlref    ==> make_jlref$Lisp
-  Exports ==> Join(FiniteFieldCategory, FiniteAlgebraicExtensionField(%),
-            ConvertibleTo(Integer)) with
+  jlref     ==> make_jlref$Lisp
+  PI        ==> PositiveInteger
+  NNI       ==> NonNegativeInteger
+  SUP       ==> SparseUnivariatePolynomial
+  parsei    ==> parse_integer$ScanningUtilities
+  Exports ==> Join(JuliaType, FiniteFieldCategory,
+          FiniteAlgebraicExtensionField(%), ConvertibleTo(Integer)) with
     jlType   : % -> SExpression
     jlRef    : % -> SExpression
     jlValue  : % -> SExpression
     jlId     : % -> SExpression
+    sqrt     : % -> %
+    ++ sqrt(x) returns a square root of x.
+    ++ Throw a Julia error if there is no square root and returns 0.
     coerce  : Integer -> %
     coerce  : JuliaInteger -> %
     jgf   : Integer -> %
@@ -210,24 +227,26 @@ JuliaGaloisField(p : PositiveInteger) : Exports == Implementation where
     Rep := SExpression
 
     -- initialize
-    jl_eval_string(concat(["GField=GF(", string(p),")"]))$Lisp
+    jl_eval_string(concat(["GF",string(p),"=GF(", string(p),")"]))$Lisp
 
+    -- jlref type
     GF ==> concat(["GF(",string(p),")"])
+
     getind(a) ==> concat(["getindex(", "refs,_"", jlrefId a, "_")"])
 
     jgfbinfunc(op,a,b) ==>
       tmp : String := concat(["string(", getind(a), op, getind(b),")"])
-      jlref(concat(["GField(", jl_string_eval_string(tmp)$Lisp,")"]), GF)
+      jlref(concat(["GF",string(p),"(", jl_string_eval_string(tmp)$Lisp,")"]), GF)
 
     jgfbinbfunc(op,a,b) ==>
       jl_bool_eval_string(concat([getind(a), op, getind(b)]))$Lisp
 
     jgfunfunc(op, a) ==>
-      tmp : String := concat(["string(", op, getind(a),")"])
-      jlref(concat(["GField(",jl_string_eval_string(tmp)$Lisp, ")"]), GF)
+      tmp : String := concat(["string(", op,"(" ,getind(a),"))"])
+      jlref(concat(["GF",string(p),"(", jl_string_eval_string(tmp)$Lisp, ")"]), GF)
 
-    0 == jlref("GField(0)", GF)
-    1 == jlref("GField(1)", GF)
+    0 == jlref(concat(["GF",string(p),"(0)"]), GF)
+    1 == jlref(concat(["GF",string(p),"(1)"]), GF)
 
     x = y == jgfbinbfunc("==",x,y)
     x ~= y == jgfbinbfunc("!=",x,y)
@@ -238,24 +257,68 @@ JuliaGaloisField(p : PositiveInteger) : Exports == Implementation where
     x : % * y : % == jgfbinfunc("*", x, y)
     x : % / y : % == jgfbinfunc("/", x, y)
 
-    x ^ y : NonNegativeInteger == jgfbinfunc("^", x, coerce(y pretend Integer))
-    x ^ y : PositiveInteger == jgfbinfunc("^", x, coerce(y pretend Integer))
+    x ^ y : NonNegativeInteger ==
+      jgfbinfunc("^", x, coerce(y pretend Integer)@JuliaInteger)
+    x ^ y : PositiveInteger ==
+      jgfbinfunc("^", x, coerce(y pretend Integer)@JuliaInteger)
 
     x quo y == jgfbinfunc("÷", x, y)
     -- x quo y == ibinfunc("div", x, y)
     x rem y == jgfbinfunc("%", x, y)
+
+    if p <= convert(max()$SingleInteger)@Integer then
+      q := p::SingleInteger
+      recip x ==
+        zero?(y := convert(x)@Integer :: SingleInteger) => "failed"
+        invmod(y, q)::Integer::%
+    else
+      recip x ==
+        zero?(y := convert(x)@Integer) => "failed"
+        invmod(y, p)::%
+    
+    -- Internal error: Cannot determine branch of Union.
+    -- recip(x) == jgfunfunc("inv", x)
+
+    generator() == 1
+    normalElement() == 1
+    createNormalElement() == 1
+    characteristic() == p pretend NNI
+    representationType() == "prime"
+    degree(x) : PI == 1$PositiveInteger
+    extensionDegree() : PI == 1$PositiveInteger
+    charthRoot(x : %) : % == x
+    inGroundField?(x)  == true
+    coordinates(x : %) : Vector(%) == new(1, x)$(Vector %)
+    represents(v)  == v(1)
+    retract(x) == x
+    retractIfCan(x) == x
+
+    basis() == new(1, 1::%)$(Vector %)
+    basis(n : PI) ==
+      n = 1 => basis()
+      error("basis: argument must divide extension degree")
+
+    definingPolynomial() ==
+      monomial(1, 1)$(SUP %) - monomial(1, 0)$(SUP %)
+
+    minimalPolynomial(x) ==
+      monomial(1, 1)$(SUP %) - monomial(x, 0)$(SUP %)
+
+    sqrt(x) == jgfunfunc("sqrt", x)
+
+    convert(x : %) : Integer == parsei string jlrefVal(x)
     
     jlType(x)  == jlrefType(x)
     jlValue(x) == jlrefVal(x)
-    jlId(x)  == jlrefId(x)
+    jlId(x)    == jlrefId(x)
     jlRef(x)   == x pretend SExpression
 
     coerce(x : JuliaInteger) : % ==
       tmp : String := concat(["string(", getind(x), ")"])
-      jlref(concat(["GField(", jl_string_eval_string(tmp)$Lisp, ")"]),GF)
+      jlref(concat(["GF",string(p),"(", jl_string_eval_string(tmp)$Lisp, ")"]),GF)
 
     coerce(i : Integer) ==
-      jlref(concat(["GField(", string(i), ")"]), GF)
+      jlref(concat(["GF",string(p),"(", string(i), ")"]), GF)
 
     coerce(i : %) : OutputForm == jlrefVal(i)
     jgf(i : Integer) == coerce(i)
