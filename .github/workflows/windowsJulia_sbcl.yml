@@ -23,9 +23,11 @@ jobs:
         msiexec -i sbcl-${SBCL_VER}-x86-64-windows-binary.msi -passive
     - name: download and install Julia
       run: |
-        wget https://julialang-s3.julialang.org/bin/winnt/x64/1.10/julia-1.10.0-win64.zip
-        unzip julia-1.10.0-win64.zip
-        cp -rf julia-1.10.0/* /usr/local/
+        wget https://julialang-s3.julialang.org/bin/winnt/x64/1.10/julia-1.10.1-win64.zip
+        unzip julia-1.10.1-win64.zip
+        cp -rf julia-1.10.1/* /usr/local/
+    - name: install Julia libraries
+      run: julia -e "import Pkg;Pkg.add(\"Nemo\");Pkg.add(\"Suppressor\");Pkg.add(\"SpecialFunctions\")"
     - uses: actions/checkout@v4
     - name: configure and make
       run: |
