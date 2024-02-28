@@ -2,7 +2,7 @@
 
 [![Build and Test](https://github.com/gvanuxem/fricas/actions/workflows/linuxJulia_sbcl.yml/badge.svg)](https://github.com/gvanuxem/fricas/actions/workflows/linuxJulia_sbcl.yml)\
 [![Build and Test](https://github.com/gvanuxem/fricas/actions/workflows/linuxJulia_ccl.yml/badge.svg)](https://github.com/gvanuxem/fricas/actions/workflows/linuxJulia_ccl.yml)\
-[![Build and Test](https://github.com/gvanuxem/fricas/actions/workflows/macOSJulia_sbcl.yml/badge.svg)](https://github.com/gvanuxem/fricas/actions/workflows/macOSJulia_sbcl.yml)
+[![Build and Test](https://github.com/gvanuxem/fricas/actions/workflows/macOSJulia_sbcl.yml/badge.svg)](https://github.com/gvanuxem/fricas/actions/workflows/macOSJulia_sbcl.yml)\
 [![Build and Test](https://github.com/gvanuxem/fricas/actions/workflows/windowsJulia_sbcl.yml/badge.svg)](https://github.com/gvanuxem/fricas/actions/workflows/windowsJulia_sbcl.yml)
 
 [FriCAS](https://fricas.github.io) is a general purpose computer algebra
