@@ -275,6 +275,7 @@ fakepile(s) ==
         cons([[ress, :ss]], t)
 
 intloopProcessStrings(s, n) ==
+     JGC()
      setCurrentLine s
      intloopProcess(n, true,
          next(function ncloopParse,

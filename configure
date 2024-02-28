@@ -660,6 +660,7 @@ JULIA_LIB
 JULIA_LDFLAGS
 JULIA_CPPFLAGS
 JULIA_WRAP_SO_TARGET
+JULIA_SBCL_REQUIREMENTS
 JULIA
 GMP_EXT
 GMP_LIB
@@ -4771,6 +4772,7 @@ JULIA_LDFLAGS=""
 JULIA_LIB=""
 JULIA_LIBDIR=""
 JULIA_EXT=""
+JULIA_SBCL_REQUIREMENTS=""
 
 # Check whether --enable-julia was given.
 if test "${enable_julia+set}" = set; then :
@@ -4823,6 +4825,7 @@ fi
 
    test -n "$JULIA" || as_fn_error $? "'julia' not found in $PATH" "$LINENO" 5
     if test "$fricas_lisp_flavor" = SBCL ; then
+        JULIA_SBCL_REQUIREMENTS="(require :asdf)(require :sb-concurrency)"
         true
     elif test "$fricas_lisp_flavor" = 'Clozure Common Lisp' ; then
         case $(uname -m) in
@@ -4861,6 +4864,7 @@ if test "${with_julia_config+set}" = set; then :
             esac
 
 fi
+
 
 
 

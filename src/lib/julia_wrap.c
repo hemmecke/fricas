@@ -112,13 +112,13 @@ void jl_delete_wrapped_hash(int immut, const char *hash)
 {
     jl_value_t *res;
 
-    printf("Freeing... %s\n", hash);
+    //printf("Freeing... %s\n", hash);
     if (immut){
         res = jl_call2(del, irefs, jl_cstr_to_string(hash));
     }else{
         res = jl_call2(del, refs, jl_cstr_to_string(hash));
     }
-    printf("Freed %\n", hash);
+    //printf("Freed %s\n", hash);
 
     if (jl_exception_occurred()) {
         jl_call2(jl_get_function(jl_base_module, "showerror"),

@@ -85,12 +85,12 @@
 
 (defparameter *julia-initialized* nil)
 
-; For immutables
-;(to encapsulate it in a mutable structure)
+; Immutables
+;(encapsulated in a mutable structure)
 (defclass jliref ()
-    ((id  :accessor jlrefId   :initarg :id)
-    (val  :accessor jlrefVal  :initarg :val)
-    (type :reader   jlrefType :initarg :type))
+    ((id  :reader jlrefId   :initarg :id)
+    (val  :reader jlrefVal  :initarg :val)
+    (type :reader jlrefType :initarg :type))
     (:default-initargs :id nil :type nil :val nil))
 
 (defmethod print-object((obj jliref) stream)
@@ -107,25 +107,12 @@
         #+:lispworks (flag-special-free-action hash)
         #+:cmu (ext:finalize ret (lambda () (free_jliref hash)))
         #+:sbcl (sb-ext:finalize ret (lambda ()
-                    (sb-alien:alien-funcall
-                           (sb-alien::extern-alien "jl_delete_wrapped_hash"
-                             (sb-alien::function sb-alien::void
-                                (sb-alien::integer)
-                                c-string)) 1 hash)))
-        #+:allegro (excl:schedule-finalization ret (lambda () (free_jlref 1 hash)))
+                    (sb-concurrency:enqueue hash *jiqueue*)))
+        #+:allegro (excl:schedule-finalization ret (lambda () (free_jliref hash)))
         ret))
 
 (defun free_jliref (hash)
-    (progn
-        (format t "freeing... ~x~%" hash)
-;        #+:sbcl (sb-ext:finalize ret (lambda ()
- ;                   (sb-alien:alien-funcall
-  ;                      (sb-alien::extern-alien "jl_delete_wrapped_hash"
-   ;                         (sb-alien::function sb-alien::void
-    ;                            (sb-alien::integer)
-     ;                           (sb-alien::c-string))) 1 hash)))
-        (|jl_delete_wrapped_hash| 1 hash)))
-        ;(jl_eval_string((concatenate 'string "delete!(refs,\"" hash "\")"))))
+    (|jl_delete_wrapped_hash| 1 hash))
 
 #+:openmcl
 (progn
@@ -133,16 +120,17 @@
     (declare (ignore initargs))
         (ccl:terminate-when-unreachable obj))
 
-(defmethod terminate ((obj jliref))
+(defmethod ccl:terminate ((obj jliref))
     (when (jlrefId obj)
         (format t "freeing... ~x~%" (jlrefId obj))
-        (boot::|jl_delete_wrapped_hash| 0 (jlrefId obj))))
+        (boot::|jl_delete_wrapped_hash| 1 (jlrefId obj))))
 )
 
+; Mutables
 (defclass jlref ()
-    ((id  :accessor jlrefId   :initarg :id)
-    (val  :accessor jlrefVal  :initarg :val)
-    (type :reader   jlrefType :initarg :type))
+    ((id  :reader jlrefId   :initarg :id)
+    (val  :reader jlrefVal  :initarg :val)
+    (type :reader jlrefType :initarg :type))
     (:default-initargs :id nil :type nil :val nil))
 
 (defmethod print-object((obj jlref) stream)
@@ -151,9 +139,6 @@
         (princ (concatenate 'string " " (jlrefType obj)) stream)
         (princ (concatenate 'string " " (jlrefId obj)) stream)))
 
-; TODO: add Clozure CL 'terminate unreacheable'
-; https://ccl.clozure.com/manual/chapter13.11.html
-; https://github.com/trivial-garbage/trivial-garbage
 (defun |make_jlref| (str type)
     (let* ((hash (write-to-string (random most-positive-fixnum)))
             (id (|jl_setindex_wrap_eval_string| 0 hash str))
@@ -162,25 +147,13 @@
         #+:lispworks (flag-special-free-action hash)
         #+:cmu (ext:finalize ret (lambda () (free_jlref hash)))
         #+:sbcl (sb-ext:finalize ret (lambda ()
-                    (sb-alien:alien-funcall
-                           (sb-alien::extern-alien "jl_delete_wrapped_hash"
-                             (sb-alien::function sb-alien::void
-                                (sb-alien::integer)
-                                c-string)) 0 hash)))
-        #+:allegro (excl:schedule-finalization ret (lambda () (free_jlref 0 hash)))
+                    (sb-concurrency:enqueue hash *jmqueue*)))
+        #+:allegro (excl:schedule-finalization ret (lambda () (free_jlref hash)))
         ret))
 
 (defun free_jlref (hash)
-    (progn
-        (format t "freeing... ~x~%" hash)
-;        #+:sbcl (sb-ext:finalize ret (lambda ()
- ;                   (sb-alien:alien-funcall
-  ;                      (sb-alien::extern-alien "jl_delete_wrapped_hash"
-   ;                         (sb-alien::function sb-alien::void
-    ;                            (sb-alien::integer)
-     ;                           (sb-alien::c-string))) 0 hash)))
-        (|jl_delete_wrapped_hash| 0 hash)))
-        ;(jl_eval_string((concatenate 'string "delete!(refs,\"" hash "\")"))))
+    (|jl_delete_wrapped_hash| 0 hash))
+
 
 #+:openmcl
 (progn
@@ -189,7 +162,7 @@
     (ccl:terminate-when-unreachable obj))
 
 (defmethod ccl:terminate ((obj jlref))
-    (progn
+    (when (jlrefId obj)
         (format t "freeing... ~x~%" (jlrefId obj))
         (boot::|jl_delete_wrapped_hash| 0 (jlrefId obj))))
 )

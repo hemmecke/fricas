@@ -1058,6 +1058,17 @@ with this hack and will try to convince the GCL crowd to fix this.
 
 (in-package "BOOT")
 
+#+(and :sbcl :fricas_has_julia)
+(progn
+(defparameter *jmqueue* (sb-concurrency:make-queue :name "MJulia"))
+(defparameter *jiqueue* (sb-concurrency:make-queue :name "IJulia"))
+(defun jgc ()
+    (loop while (not (sb-concurrency:queue-empty-p *jmqueue*))
+     do (|jl_delete_wrapped_hash| 0 (sb-concurrency:dequeue *jmqueue*))))
+)
+#-(and :sbcl :fricas_has_julia)
+(defun jgc ())
+
 ;;; Macros used in Boot code
 
 (defmacro IFCAR (x)

@@ -429,6 +429,7 @@ JULIA_LDFLAGS=""
 JULIA_LIB=""
 JULIA_LIBDIR=""
 JULIA_EXT=""
+JULIA_SBCL_REQUIREMENTS=""
 
 AC_ARG_ENABLE([julia],
             [AS_HELP_STRING([--enable-julia],
@@ -443,6 +444,7 @@ AC_ARG_ENABLE([julia],
 if test -n "$JULIA_WRAP_SO_TARGET" ; then
     FRICAS_CHECK_PROG([JULIA], [julia], ['julia' not found in $PATH])
     if test "$fricas_lisp_flavor" = SBCL ; then
+        JULIA_SBCL_REQUIREMENTS="(require :asdf)(require :sb-concurrency)"
         true
     elif test "$fricas_lisp_flavor" = 'Clozure Common Lisp' ; then
         case $(uname -m) in
@@ -481,6 +483,7 @@ AC_ARG_WITH([julia-config],
             esac
              ])
 
+AC_SUBST(JULIA_SBCL_REQUIREMENTS)
 AC_SUBST(JULIA_WRAP_SO_TARGET)
 AC_SUBST(JULIA_CPPFLAGS)
 AC_SUBST(JULIA_LDFLAGS)

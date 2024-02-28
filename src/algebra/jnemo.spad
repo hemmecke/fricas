@@ -14,9 +14,6 @@ JuliaInteger() : Exports == Implementation where
   jlref     ==> make_jlref$Lisp
   parsei    ==> parse_integer$ScanningUtilities
   Exports ==> Join(JuliaType, OrderedSet, EuclideanDomain) with
-    sqrt    : % -> %
-    ++ sqrt(x) computes the square root of x.
-    ++ Throws a Julia error if it does not exists and returns 0.
     jlType  : % -> SExpression
     jlRef   : % -> SExpression
     jlValue : % -> SExpression
@@ -71,8 +68,6 @@ JuliaInteger() : Exports == Implementation where
     x quo y == ibinfunc("÷", x, y)
     x rem y == ibinfunc("%", x, y)
 
-    sqrt(x) == iunfunc("sqrt", x)
-    
     jlType(x)  == jlrefType(x)
     jlValue(x) == jlrefVal(x)
     jlId(x)    == jlrefId(x)
@@ -111,9 +106,6 @@ JuliaFractionInteger() : Exports == Implementation where
     jlRef    : % -> SExpression
     jlValue  : % -> SExpression
     jlId     : % -> SExpression
-    sqrt    : % -> %
-    ++ sqrt(x) computes the square root of x.
-    ++ Throws a Julia error if it does not exists and returns 0.
     coerce  : Fraction(Integer) -> %
     coerce  : JuliaInteger -> %
     jfint   : Integer -> %
@@ -164,8 +156,6 @@ JuliaFractionInteger() : Exports == Implementation where
     x quo y == fibinfunc("÷", x, y)
     -- x quo y == ibinfunc("div", x, y)
     x rem y == fibinfunc("%", x, y)
-
-    sqrt(x) == fiunfunc("sqrt", x)
     
     jlType(x)  == jlrefType(x)
     jlValue(x) == jlrefVal(x)
