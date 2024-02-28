@@ -376,8 +376,6 @@ JuliaFloat64() : Exports == Implementation where
       asech(x : %) == jl_dbl_function_dbl("asech", x)$Lisp
       acsch(x : %) == jl_dbl_function_dbl("acsch", x)$Lisp
 
-      --digamma(x : %) == jl_dbl_function_dbl("digamma", x)$Lisp
-
       base()           == FLOAT_-RADIX(0$%)$Lisp
       mantissa x       == manexp(x).MANTISSA
       exponent x       == manexp(x).EXPONENT

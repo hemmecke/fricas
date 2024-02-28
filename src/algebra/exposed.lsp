@@ -166,6 +166,7 @@
   (|JuliaF64MatrixTranscendentalFunctions| . JF64MTF)
   (|JuliaFloat64Vector| . JF64VEC) 
   (|JuliaInt64Vector| . JI64VEC) 
+  (|JuliaIntegerMod| . JZMOD) 
   (|JuliaFloat64SpecialFunctions| . JF64SF)
   (|JuliaF64SquareMatrix| . JF64SMAT)
   (|JuliaGaloisField| . JGF) 

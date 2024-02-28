@@ -18,6 +18,7 @@ JuliaInteger() : Exports == Implementation where
     jlRef   : % -> SExpression
     jlValue : % -> SExpression
     jlId    : % -> SExpression
+    "*"     : (%, Integer) -> %
     coerce  : JI64 -> %
     coerce  : % -> JI64
     coerce  : % -> Integer
@@ -53,11 +54,23 @@ JuliaInteger() : Exports == Implementation where
     x > y  == ibinbfunc(">",x,y)
     x >= y == ibinbfunc(">=",x,y)
     x <= y == ibinbfunc("<=",x,y)
+    -- TODO: add boolean unary operator macro?
+    zero? x ==
+      jl_bool_eval_string(concat(["iszero(", getind(x),")"]))$Lisp
+    one? x ==
+      jl_bool_eval_string(concat(["isone(", getind(x),")"]))$Lisp
 
     x + y == ibinfunc("+", x, y)
     x - y == ibinfunc("-", x, y)
     - x   == iunfunc("-", x)
     x : % * y : % == ibinfunc("*", x, y)
+    x : Integer * y : % == coerce(x) * y
+    x  * y : Integer == x * coerce(y)
+
+    x : Integer * y : % ==
+      i : % := coerce(x)
+      tmp : String := concat(["string(", getind(i), "*", getind(y),")"])
+      jlref(concat(["ZZ(", jl_string_eval_string(tmp)$Lisp,")"]), "ZZ")
 
     x ^ y : NonNegativeInteger ==
       ibinfunc("^", x, coerce(y pretend Integer))
@@ -106,6 +119,7 @@ JuliaFractionInteger() : Exports == Implementation where
     jlRef    : % -> SExpression
     jlValue  : % -> SExpression
     jlId     : % -> SExpression
+    "*"     : (%, Integer) -> %
     coerce  : Fraction(Integer) -> %
     coerce  : JuliaInteger -> %
     jfint   : Integer -> %
@@ -141,14 +155,21 @@ JuliaFractionInteger() : Exports == Implementation where
     x > y  == fibinbfunc(">",x,y)
     x >= y == fibinbfunc(">=",x,y)
     x <= y == fibinbfunc("<=",x,y)
+    -- TODO: add boolean unary operator macro?
+    zero? x ==
+      jl_bool_eval_string(concat(["iszero(", getind(x),")"]))$Lisp
+    one? x ==
+      jl_bool_eval_string(concat(["isone(", getind(x),")"]))$Lisp
 
     x + y == fibinfunc("+", x, y)
     x - y == fibinfunc("-", x, y)
     - x   == fiunfunc("-", x)
     x : % * y : % == fibinfunc("*", x, y)
     x : % / y : % == fibinfunc("/", x, y)
-    x : % * y : JuliaInteger == fibinfunc("*", x, coerce(y))
-    x : JuliaInteger * y : % == fibinfunc("*", coerce(x), y)
+    x : % * y : JuliaInteger == fibinfunc("*", x, y)
+    x : JuliaInteger * y : % == fibinfunc("*", x, y)
+    x : % * y : Integer == fibinfunc("*", x, coerce(y))
+    x : Integer * y : % == fibinfunc("*", coerce(x), y)
 
     x ^ y : NonNegativeInteger == fibinfunc("^", x, coerce(y pretend Integer)@JINT)
     x ^ y : PositiveInteger == fibinfunc("^", x, coerce(y pretend Integer)@JINT)
@@ -177,13 +198,143 @@ JuliaFractionInteger() : Exports == Implementation where
     jfint(i : Integer) == coerce(i)
     jfint(fi : Fraction Integer) == coerce(fi)
 
-)abbrev domain JGF JuliaGaloisField
-++ Experimental domain for Julia Fraction Integers
+
+)abbrev domain JZMOD JuliaIntegerMod
+++ Experimental domain for Galois Fields
 ++ Author: G. Vanuxem
 ++ Date Created: Feb. 2024
 ++ Description:
-++  This domain allows the manipulation of Julia Fraction Integers
-++  using the Nemo package (FLINT based, among others).
+++  This domain allows the manipulation of Julia Galois field
+++  elements using the Nemo package (FLINT based, among others).
+++ Purpose: Experimentation.
+JuliaIntegerMod(p : PositiveInteger) : Exports == Implementation where
+  jlrefVal  ==> JLREFVAL$Lisp
+  jlrefType ==> JLREFTYPE$Lisp
+  jlrefId   ==> JLREFID$Lisp
+  jlref     ==> make_jlref$Lisp
+  PI        ==> PositiveInteger
+  NNI       ==> NonNegativeInteger
+  parsei    ==> parse_integer$ScanningUtilities
+  Exports ==> Join(JuliaType, CommutativeRing, Finite,
+        ConvertibleTo Integer, StepThrough) with
+    jlType   : % -> SExpression
+    jlRef    : % -> SExpression
+    jlValue  : % -> SExpression
+    jlId     : % -> SExpression
+    "*"      : (%, Integer) -> %
+    "*"      : (Integer, %) -> %
+    "*"      : (%, JuliaInteger) -> %
+    "*"      : (JuliaInteger, %) -> %
+    sqrt     : % -> %
+    ++ sqrt(x) returns a square root of x.
+    ++ Throw a Julia error if there is no square root and returns 0.
+    "*"     : (%, Integer) -> %
+    coerce  : Integer -> %
+    coerce  : JuliaInteger -> %
+    jzmod   : Integer -> %
+    jzmod   : JuliaInteger -> %
+  Implementation ==> add
+    import from JuliaUtilityFunctions
+    import from String
+    import from JuliaInteger
+    
+    jlInitialize(true)
+    jl_eval_string("@suppress_err using Nemo")$Lisp
+
+    Rep := SExpression
+
+    -- initialize
+    jl_eval_string(concat(["JZMOD",string(p),",=residue_ring(ZZ,", string(p),")"]))$Lisp
+
+    -- jlref type
+    JZMOD ==> concat(["JZMOD(ZZ,",string(p),")"])
+
+    getind(a) ==> concat(["getindex(", "refs,_"", jlrefId a, "_")"])
+
+    jzmodbinfunc(op,a,b) ==>
+      tmp : String := concat(["string(", getind(a), op, getind(b),")"])
+      jlref(concat(["JZMOD",string(p),"(", jl_string_eval_string(tmp)$Lisp,")"]), JZMOD)
+
+    jzmodbinbfunc(op,a,b) ==>
+      jl_bool_eval_string(concat([getind(a), op, getind(b)]))$Lisp
+
+    jzmodunfunc(op, a) ==>
+      tmp : String := concat(["string(", op,"(" ,getind(a),"))"])
+      jlref(concat(["JZMOD",string(p),"(", jl_string_eval_string(tmp)$Lisp, ")"]), JZMOD)
+
+    0 == jlref(concat(["JZMOD",string(p),"(0)"]), JZMOD)
+    1 == jlref(concat(["JZMOD",string(p),"(1)"]), JZMOD)
+    init == 0
+    nextItem(n) ==
+        m := n+1$%
+        m = 0 => "failed"
+        m
+    x = y == jzmodbinbfunc("==",x,y)
+    x ~= y == jzmodbinbfunc("!=",x,y)
+    -- TODO: add boolean unary operator macro?
+    zero? x ==
+      jl_bool_eval_string(concat(["iszero(", getind(x),")"]))$Lisp
+    one? x ==
+      jl_bool_eval_string(concat(["isone(", getind(x),")"]))$Lisp
+
+    x + y == jzmodbinfunc("+", x, y)
+    x - y == jzmodbinfunc("-", x, y)
+    - x   == jzmodunfunc("-", x)
+    x : % * y : % == jzmodbinfunc("*", x, y)
+    x : % * y : JuliaInteger == jzmodbinfunc("*", x, y)
+    x : JuliaInteger * y : % == jzmodbinfunc("*", x, y)
+    x : % * y : Integer == jzmodbinfunc("*", x, coerce(y)@JuliaInteger)
+    x : Integer * y : % == jzmodbinfunc("*", coerce(x)@JuliaInteger, y)
+
+    x ^ y : NonNegativeInteger ==
+      jzmodbinfunc("^", x, coerce(y pretend Integer)@JuliaInteger)
+    x ^ y : PositiveInteger ==
+      jzmodbinfunc("^", x, coerce(y pretend Integer)@JuliaInteger)
+   
+    if p <= convert(max()$SingleInteger)@Integer then
+      q := p::SingleInteger
+      recip x ==
+        zero?(y := convert(x)@Integer :: SingleInteger) => "failed"
+        invmod(y, q)::Integer::%
+    else
+      recip x ==
+        zero?(y := convert(x)@Integer) => "failed"
+        invmod(y, p)::%
+    
+    -- Internal error: Cannot determine branch of Union.
+    -- recip(x) == jzmodunfunc("inv", x)
+
+    size()           == p
+    characteristic() == p
+    lookup x == (zero? x => p; (convert(x)@Integer) :: PositiveInteger)
+    convert(x : %) : Integer == parsei string jlrefVal(x)
+    lookup x == (zero? x => p; (convert(x)@Integer) :: PositiveInteger)
+    random() == coerce(random(p)$Integer)
+    
+    jlType(x)  == jlrefType(x)
+    jlValue(x) == jlrefVal(x)
+    jlId(x)    == jlrefId(x)
+    jlRef(x)   == x pretend SExpression
+
+    coerce(x : JuliaInteger) : % ==
+      tmp : String := concat(["string(", getind(x), ")"])
+      jlref(concat(["JZMOD",string(p),"(", jl_string_eval_string(tmp)$Lisp, ")"]),JZMOD)
+
+    coerce(i : Integer) ==
+      jlref(concat(["JZMOD",string(p),"(", string(i), ")"]), JZMOD)
+
+    coerce(i : %) : OutputForm == jlrefVal(i)
+    jzmod(i : Integer) == coerce(i)
+    jzmod(ji : JuliaInteger) == coerce(ji)
+
+
+)abbrev domain JGF JuliaGaloisField
+++ Experimental domain for Galois Fields
+++ Author: G. Vanuxem
+++ Date Created: Feb. 2024
+++ Description:
+++  This domain allows the manipulation of Julia Galois field
+++  elements using the Nemo package (FLINT based, among others).
 ++ Purpose: Experimentation.
 JuliaGaloisField(p : PositiveInteger) : Exports == Implementation where
   jlrefVal  ==> JLREFVAL$Lisp
@@ -200,6 +351,10 @@ JuliaGaloisField(p : PositiveInteger) : Exports == Implementation where
     jlRef    : % -> SExpression
     jlValue  : % -> SExpression
     jlId     : % -> SExpression
+    "*"      : (%, JuliaInteger) -> %
+    "*"      : (JuliaInteger, %) -> %
+    "*"      : (Integer, %) -> %
+    "*"      : (%, Integer) -> %
     sqrt     : % -> %
     ++ sqrt(x) returns a square root of x.
     ++ Throw a Julia error if there is no square root and returns 0.
@@ -240,12 +395,22 @@ JuliaGaloisField(p : PositiveInteger) : Exports == Implementation where
 
     x = y == jgfbinbfunc("==",x,y)
     x ~= y == jgfbinbfunc("!=",x,y)
+    -- TODO: add boolean unary operator macro?
+    zero? x ==
+      jl_bool_eval_string(concat(["iszero(", getind(x),")"]))$Lisp
+    one? x ==
+      jl_bool_eval_string(concat(["isone(", getind(x),")"]))$Lisp
 
     x + y == jgfbinfunc("+", x, y)
     x - y == jgfbinfunc("-", x, y)
     - x   == jgfunfunc("-", x)
     x : % * y : % == jgfbinfunc("*", x, y)
+    x : % * y : JuliaInteger == jgfbinfunc("*", x, y)
+    x : JuliaInteger * y : % == jgfbinfunc("*", x, y)
+    x : % * y : Integer == jgfbinfunc("*", x, coerce(y)@JuliaInteger)
+    x : Integer * y : % == jgfbinfunc("*", coerce(x)@JuliaInteger, y)
     x : % / y : % == jgfbinfunc("/", x, y)
+
 
     x ^ y : NonNegativeInteger ==
       jgfbinfunc("^", x, coerce(y pretend Integer)@JuliaInteger)

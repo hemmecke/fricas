@@ -1,3 +1,4 @@
+#!/bin/sh
 
 PATH=$FRICAS/bin:${PATH}:/usr/bin/X11
 export PATH
@@ -14,12 +15,12 @@ showuse() {
   echo "  -eval code         evaluate specified code at start"
   echo "  -go   | -nogo      whether to start system"
   echo "  -gr   | -nogr      use Graphics (default: -gr)"
-  echo "  -ht   | -noht      use HyperDoc (default: -ht)"
+  echo "  -ht   | -noht      start HyperDoc (default: -noht)"
   echo "  -ihere| -noihere   start an interpreter buffer in the original window"
   echo "  -iw   | -noiw      start in interpreter window"
   echo "  -list              list workspaces only"
   echo "  -nox               don't use X Windows"
-  echo "  -rl                use GNU Readline via rlwrap if available"
+  echo "  -rl                use GNU Readline via rlwrap if available (default)"
   echo "  -ws wsname         use named workspace"
   #echo "  -grprog fname      use named program for Graphics"
   #echo "  -htprog fname      use named program for HyperDoc"
@@ -103,6 +104,22 @@ if [ "$*" = "-emacs" ] ; then
     eval "exec $FRICAS/bin/sman -noclef 2>/dev/null"
 fi
 
+# Call FRICASsys directly.
+if [ "$1" = "-nosman" ] ; then
+    shift
+
+    # If -rl option is given, it must come right after -nosman
+    if [ "$1" = "-rl" ] ; then
+        shift
+        if ! have_rlwrap ; then RLWRAP=""; fi
+    else
+        RLWRAP=""
+    fi
+
+    exec $RLWRAP "$FRICAS/bin/FRICASsys" "$@"
+
+    exit 1
+fi
 
 # Defaults for command-line arguments.
 list=no
@@ -194,7 +211,7 @@ if [ $had_nogr != true -a ! -f $FRICAS/lib/viewman ] ; then
 fi
 
 if [ $had_noht != true -a ! -f $FRICAS/bin/hypertex ]; then
-    echo "hypertex  not present, disabling"
+    echo "hypertex not present, disabling HyperDoc"
     otheropts="$otheropts -noht"
 fi
 
@@ -234,7 +251,4 @@ if [ $go = no ] ; then
     exit 0
 fi
 
-# Call FRICASsys directly.
-
-if ! have_rlwrap ; then RLWRAP=""; fi
-exec $RLWRAP "$FRICAS/bin/FRICASsys" "$@"
+eval "exec $FRICAS/bin/sman  -clefprog ${FRICAS}/bin/fricas-readline -noht $otheropts -ws $serverws"
