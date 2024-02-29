@@ -97,7 +97,6 @@ JuliaInteger() : Exports == Implementation where
       coerce(parsei(jlrefVal x))$Expression(Integer)
     coerce(x : %) : AlgebraicNumber  ==
       coerce(parsei(jlrefVal x))$AlgebraicNumber
-    convert(x : %) : Integer  == parsei(jlrefVal(x))
     jint(i : Integer) : % == jlref(concat(["ZZ(", string(i),")"]), "ZZ")
 
 )abbrev domain JFINT JuliaFractionInteger

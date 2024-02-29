@@ -467,13 +467,6 @@ with this hack and will try to convince the GCL crowd to fix this.
 #+:sbcl
 (eval-when (:compile-toplevel :load-toplevel :execute)
 
-;(setf *c-type-to-ffi* '(
-;    (int SB-ALIEN::int)
-;    (c-string SB-ALIEN::c-string)
-;    (double SB-ALIEN::double)
-;    (char-* (sb-alien:* sb-alien:char))
-;))
-
 (setf *c-type-to-ffi* '(
     (void    sb-alien::void)
     (bool    (sb-alien::boolean 8))
@@ -501,13 +494,6 @@ with this hack and will try to convince the GCL crowd to fix this.
 
 #+:openmcl
 (eval-when (:compile-toplevel :load-toplevel :execute)
-
-;(setf *c-type-to-ffi* '(
-;    (int :int)
-;    (c-string :address)
-;    (double :double-float)
-;    (char-* :address)
-;))
 
 (setf *c-type-to-ffi* '(
     (void :void)

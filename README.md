@@ -10,8 +10,8 @@ system (CAS).
 
 This work-in-progress repository includes some related [Julia](https://julialang.org)
 categories/domains/packages to use Julia for specific operations.
-It is only supported with SBCL or Clozure CL and Julia prior to 1.10.0 and Julia 1.10.1 are
-not supported with a SBCL based FriCAS.
+It is only supported with SBCL or Clozure CL and a a SBCL based FriCAS is
+only supported with Julia 1.10.0 as of now, see [Caveats](#caveats).
 
 ## Building and Installing
 
@@ -125,3 +125,5 @@ Current development goals:
 ## Caveats
 
 With SBCL, you will need to increase the original dynamic space size (thanks to Qian Yun who noticed that with the introduction of the RootSimplification package), so, if your SBCL uses the original dynamic space size, increase it at configure time with <code>./configure --with-lisp='sbcl --dynamic-space-size=2048'</code> or whatever you want as dynamic space size. For more information, see the [SBCL documentation](https://www.sbcl.org/manual/index.html) or the INSTALL file.
+
+Julia support with SBCL seems to be erratic, depending of the Julia version used. The 1.10.0 version seems to have solved problems related to memory management interactions with SBCL, but since Julia 1.10.1, problems occur again. So use Clozure CL or, imperatively, use Julia-1.10.0 with SBCL. I need to check why and how, for example, Julia-1.10.1 behaves very differently, in term of memory management, than Julia-1.10.0.
