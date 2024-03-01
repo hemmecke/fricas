@@ -36,7 +36,7 @@
 (fricas-foreign-call boot::|jl_dbl_function_int_dbl| "jl_call_dbl_function_int_dbl" double
         (func c-string) (arg1 int) (arg2 double))
 (fricas-foreign-call boot::|jl_delete_wrapped_hash| "jl_delete_wrapped_hash"
-        void (immut int) (idx c-string))
+        void (idx c-string))
 
 #+:sbcl
 (progn
@@ -47,9 +47,9 @@
 (fricas-foreign-call boot::|jl_string_eval_string| "jl_string_eval_string" c-string
         (command c-string))
 (fricas-foreign-call boot::|jl_getindex_wrapped_hash| "jl_getindex_wrapped_hash"
-    c-string (immut int) (hash c-string))
+    c-string (hash c-string))
 (fricas-foreign-call boot::|jl_setindex_wrap_eval_string| "jl_setindex_wrap_eval_string"
-    c-string (immut int) (hash c-string) (command c-string))
+    c-string (hash c-string) (command c-string))
 )
 
 #+:openmcl
@@ -61,9 +61,9 @@
 (fricas-foreign-call jl_string_eval_string "jl_string_eval_string" c-string
         (command c-string))
 (fricas-foreign-call jl_getindex_wrapped_hash "jl_getindex_wrapped_hash"
-    c-string (immut int) (hash c-string))
+    c-string (hash c-string))
 (fricas-foreign-call jl_setindex_wrap_eval_string "jl_setindex_wrap_eval_string"
-    c-string (immut int) (hash c-string) (command c-string))
+    c-string (hash c-string) (command c-string))
 )
 )
 
@@ -75,63 +75,22 @@
     `(if (eq (jl_bool_function_dbl_dbl ,func ,arg1 ,arg2)  0) nil t))
 (defmacro boot::|jl_string_eval_string| (str)
     `(ccl::%get-cstring (jl_string_eval_string ,str)))
-(defmacro boot::|jl_getindex_wrapped_hash| (immut hash)
-    `(ccl::%get-cstring (jl_getindex_wrapped_hash ,immut ,hash)))
-(defmacro boot::|jl_setindex_wrap_eval_string| (immut hash str)
-    `(ccl::%get-cstring (jl_setindex_wrap_eval_string ,immut ,hash ,str)))
+(defmacro boot::|jl_getindex_wrapped_hash| (hash)
+    `(ccl::%get-cstring (jl_getindex_wrapped_hash ,hash)))
+(defmacro boot::|jl_setindex_wrap_eval_string| (hash str)
+    `(ccl::%get-cstring (jl_setindex_wrap_eval_string ,hash ,str)))
 )
 
 (in-package "BOOT")
 
 (defparameter *julia-initialized* nil)
 
-; Immutables
-;(encapsulated in a mutable structure)
-(defclass jliref ()
-    ((id  :reader jlrefId   :initarg :id)
-    (val  :reader jlrefVal  :initarg :val)
-    (type :reader jlrefType :initarg :type))
-    (:default-initargs :id nil :type nil :val nil))
 
-(defmethod print-object((obj jliref) stream)
-    (print-unreadable-object (obj stream :type t :identity t)
-        (princ (jlrefVal obj) stream)
-        (princ (concatenate 'string " " (jlrefType obj)) stream)
-        (princ (concatenate 'string " " (jlrefId obj)) stream)))
-
-(defun |make_jliref| (str type)
-    (let* ((hash (write-to-string (random most-positive-fixnum)))
-            (id (|jl_setindex_wrap_eval_string| 1 hash str))
-            (val (|jl_getindex_wrapped_hash| 1 id))
-            (ret (make-instance 'jliref :type type :id id :val val)))
-        #+:lispworks (flag-special-free-action hash)
-        #+:cmu (ext:finalize ret (lambda () (free_jliref hash)))
-        #+:sbcl (sb-ext:finalize ret (lambda ()
-                    (sb-concurrency:enqueue hash *jiqueue*)))
-        #+:allegro (excl:schedule-finalization ret (lambda () (free_jliref hash)))
-        ret))
-
-(defun free_jliref (hash)
-    (|jl_delete_wrapped_hash| 1 hash))
-
-#+:openmcl
-(progn
-(defmethod initialize-instance :after ((obj jliref) &rest initargs)
-    (declare (ignore initargs))
-        (ccl:terminate-when-unreachable obj))
-
-(defmethod ccl:terminate ((obj jliref))
-    (when (jlrefId obj)
-        (format t "freeing... ~x~%" (jlrefId obj))
-        (boot::|jl_delete_wrapped_hash| 1 (jlrefId obj))))
-)
-
-; Mutables
 (defclass jlref ()
     ((id  :reader jlrefId   :initarg :id)
     (val  :reader jlrefVal  :initarg :val)
-    (type :reader jlrefType :initarg :type))
-    (:default-initargs :id nil :type nil :val nil))
+    (type :accessor jlrefType :initarg :type))
+    (:default-initargs :id nil :val nil :type "Julia"))
 
 (defmethod print-object((obj jlref) stream)
     (print-unreadable-object (obj stream :type t :identity t)
@@ -139,20 +98,20 @@
         (princ (concatenate 'string " " (jlrefType obj)) stream)
         (princ (concatenate 'string " " (jlrefId obj)) stream)))
 
-(defun |make_jlref| (str type)
+(defun |make_jlref| (str)
     (let* ((hash (write-to-string (random most-positive-fixnum)))
-            (id (|jl_setindex_wrap_eval_string| 0 hash str))
-            (val (|jl_getindex_wrapped_hash| 0 id))
-            (ret (make-instance 'jlref :type type :id id :val val)))
+            (id (|jl_setindex_wrap_eval_string| hash str))
+            (val (|jl_getindex_wrapped_hash| id))
+            (ret (make-instance 'jlref :id id :val val)))
         #+:lispworks (flag-special-free-action hash)
         #+:cmu (ext:finalize ret (lambda () (free_jlref hash)))
         #+:sbcl (sb-ext:finalize ret (lambda ()
-                    (sb-concurrency:enqueue hash *jmqueue*)))
+                    (sb-concurrency:enqueue hash *jqueue*)))
         #+:allegro (excl:schedule-finalization ret (lambda () (free_jlref hash)))
         ret))
 
 (defun free_jlref (hash)
-    (|jl_delete_wrapped_hash| 0 hash))
+    (|jl_delete_wrapped_hash| hash))
 
 
 #+:openmcl
@@ -164,7 +123,7 @@
 (defmethod ccl:terminate ((obj jlref))
     (when (jlrefId obj)
         (format t "freeing... ~x~%" (jlrefId obj))
-        (boot::|jl_delete_wrapped_hash| 0 (jlrefId obj))))
+        (boot::|jl_delete_wrapped_hash| (jlrefId obj))))
 )
 
 

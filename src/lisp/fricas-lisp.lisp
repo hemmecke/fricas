@@ -1046,11 +1046,10 @@ with this hack and will try to convince the GCL crowd to fix this.
 
 #+(and :sbcl :fricas_has_julia)
 (progn
-(defparameter *jmqueue* (sb-concurrency:make-queue :name "MJulia"))
-(defparameter *jiqueue* (sb-concurrency:make-queue :name "IJulia"))
+(defparameter *jqueue* (sb-concurrency:make-queue :name "JuliaQueue"))
 (defun jgc ()
-    (loop while (not (sb-concurrency:queue-empty-p *jmqueue*))
-     do (|jl_delete_wrapped_hash| 0 (sb-concurrency:dequeue *jmqueue*))))
+    (loop while (not (sb-concurrency:queue-empty-p *jqueue*))
+     do (|jl_delete_wrapped_hash| (sb-concurrency:dequeue *jqueue*))))
 )
 #-(and :sbcl :fricas_has_julia)
 (defun jgc ())

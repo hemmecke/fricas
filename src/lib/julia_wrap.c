@@ -83,7 +83,7 @@ char* jl_string_eval_string(char* code)
     return(jl_string_data(result));
 }
 
-char* jl_setindex_wrap_eval_string(int immut, const char* hash, const char* code)
+char* jl_setindex_wrap_eval_string(const char* hash, const char* code)
 {
     char* nstr = "";
     jl_value_t *res, *var, *ret;
@@ -98,27 +98,18 @@ char* jl_setindex_wrap_eval_string(int immut, const char* hash, const char* code
     }
     JL_GC_PUSH1(&var);
     ret = jl_cstr_to_string(hash);
-    if (immut){
-        res = jl_new_struct(reft, var);
-        jl_call3(setind, irefs, res, ret);
-    }
-    else
-        jl_call3(setind, refs, var, ret);
+    jl_call3(setind, refs, var, ret);
     JL_GC_POP();
     return(jl_string_data(ret));    
 }
 
-void jl_delete_wrapped_hash(int immut, const char *hash)
+void jl_delete_wrapped_hash(const char *hash)
 {
     jl_value_t *res;
 
     //printf("Freeing... %s\n", hash);
-    if (immut){
-        res = jl_call2(del, irefs, jl_cstr_to_string(hash));
-    }else{
-        res = jl_call2(del, refs, jl_cstr_to_string(hash));
-    }
-    //printf("Freed %s\n", hash);
+    res = jl_call2(del, refs, jl_cstr_to_string(hash));
+    //printf("%s freed\n", hash);
 
     if (jl_exception_occurred()) {
         jl_call2(jl_get_function(jl_base_module, "showerror"),
@@ -131,15 +122,11 @@ void jl_delete_wrapped_hash(int immut, const char *hash)
     return;
 }
 
-char* jl_getindex_wrapped_hash(int immut, const char *hash)
+char* jl_getindex_wrapped_hash(const char *hash)
 {
     char* nstr = "";
     jl_value_t *result;
-    if (immut)
-        result = jl_call1(getind,
-            jl_call2(getind, irefs, jl_cstr_to_string(hash)));
-    else
-        result = jl_call2(getind, refs, jl_cstr_to_string(hash));
+    result = jl_call2(getind, refs, jl_cstr_to_string(hash));
     if (jl_exception_occurred()) {
         jl_call2(jl_get_function(jl_base_module, "showerror"),
                 jl_stderr_obj(),

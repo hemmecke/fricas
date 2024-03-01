@@ -212,8 +212,8 @@ JuliaInt64() : Exports == Implementation where
 ++ Domain for Julia Float64
 ++ Author: G. Vanuxem
 ++ Date Created:
-++ Description:
-++  This domain allows the manipulation of Julia Float64.
+++ Description: \spadtype{JuliaFloat64} implements 64 bits floating
+++ point arithmetic using Julia Float64.
 JuliaFloat64() : Exports == Implementation where
     JSF ==> JuliaSpecialFunctions
     PI  ==> PositiveInteger
@@ -415,19 +415,20 @@ JuliaFloat64() : Exports == Implementation where
 ++ Domain for the Complex Julia JF64
 ++ Author: G. Vanuxem
 ++ Date Created:
-++ Description:
-++  This domain allows the manipulation of Complex Julia JF64.
+++ Description: \spadtype{JuliaComplexF64} implements complex 64 bits
+++ floating point arithmetic using Julia Float64.
 JuliaComplexF64() : Join(JuliaType,
     ComplexCategory(JuliaFloat64)) == Complex(JuliaFloat64)
 
 )abbrev domain JFLOAT JuliaFloat
 ++ Experimental domain for Julia Integers
 ++ Author: G. Vanuxem
-++ Date Created: Jan. 2023
+++ Date Created: Feb. 2024
+++ Keywords: float, floating point, number
 ++ Description:
-++  This domain allows the manipulation of Julia BigFloat
-++  (MPFR based).
-++ Purpose: Experimentation.
+++ \spadtype{JuliaFloat} implements arbitrary precision floating
+++ point arithmetic using Julia BigFloats (MPFR based).
+++ Purpose: Experimentation
 -- We use String to coerce to BigFloat to avoid precision lost.
 JuliaFloat() : Exports == Implementation where
   JI64      ==> JuliaInt64
@@ -450,7 +451,27 @@ JuliaFloat() : Exports == Implementation where
     ++ precision(x) returns the precision of x.
     precision: (%, PI) -> %
     ++ precision(x, p) returns a copy of x with precision p.
+    expm1   :  % -> %
+    ++ expm1(x) computes accurately e^x-1. It avoids the loss of precision
+    ++ involved in the direct evaluation of exp(x)-1 for small values of x.
+    exp2  : % -> %
+    ++ exp2(x) computes the base 2 exponential of x.
+    exp10 : % -> %
+    ++ exp10(x) computes the base 10 exponential of x. 
+    log2  : % -> %
+    ++ log2(x) computes the base 2 logarithm of x.
+    log10 : % -> %
+    ++ log10(x) computes the base 10 logarithm of x.  
+    exp1    : () -> %
+    ++ exp1() returns the JuliaFloat ℯ (%e)-((())) .
+    pi      : () -> %
+    ++ pi() returns the JuliaFloat π (%pi).
+    atan : % -> %
+    ++ atan(x) computes the inverse tangent of x.
+    atan : (%, %) -> %
+    ++ atan(x, y) computes the inverse tangent of x/y.
     "*"      : (%, Integer) -> %
+    "/"      : (Integer, %) -> %
     sqrt     : % -> %
     coerce   : JI64 -> %
     coerce   : JF64 -> %
@@ -474,14 +495,12 @@ JuliaFloat() : Exports == Implementation where
 
     getind(a) ==> concat(["getindex(", "refs,_"", jlrefId a, "_")"])
 
-    ibinfunc(op,a,b) ==>
-      tmp : String := concat(["string(", getind(a), op, getind(b),")"])
-      jlref(concat(["BigFloat(_"", jl_string_eval_string(tmp)$Lisp,"_")"]), "JFloat")
-    ibinbfunc(op,a,b) ==>
+    jfbinop(op,a,b) ==> jlref(concat([getind(a), op, getind(b)]))
+    jfbinfunc(func,a,b) ==>
+      jlref(concat([func, "(", getind(a), ",", getind(b),")"]))
+    jfbinbop(op,a,b) ==>
       jl_bool_eval_string(concat([getind(a), op, getind(b)]))$Lisp
-    iunfunc(op, a) ==>
-      tmp : String := concat(["string(", op, "(", getind(a),"))"])
-      jlref(concat(["BigFloat(_"",jl_string_eval_string(tmp)$Lisp, "_")"]),"JFloat")
+    jfunfunc(op, a) ==> jlref(concat([op, "(", getind(a),")"]))
 
     precision() ==
       jl_int64_eval_string("precision(BigFloat)")$Lisp pretend PI
@@ -490,84 +509,89 @@ JuliaFloat() : Exports == Implementation where
     precision(x : %) ==
       jl_int64_eval_string(concat(["precision(", getind(x),")"]))$Lisp pretend PI
     precision(x : %, p : PI) ==
-      tmp : String := concat(["string(setprecision(", getind(x),",", string(p),"))"])
-      jlref(concat(["BigFloat(_"", jl_string_eval_string(tmp)$Lisp,"_")"]), "JFloat")
+      tmp : String := concat(["setprecision(", getind(x),",", string(p),")"])
+      jlref(tmp)
 
   
-    0 == jlref("BigFloat(_"0_")", "JFloat")
-    1 == jlref("BigFloat(_"1_")", "JFloat")
+    0    == jlref("zero(BigFloat)")
+    1    == jlref("one(BigFloat)")
+    pi() == jlref("BigFloat(π)")
+    exp1() == jlref("BigFloat(ℯ)")
 
-    x = y  == ibinbfunc("==",x,y)
-    x ~= y == ibinbfunc("!=",x,y)
-    x < y  == ibinbfunc("<",x,y)
-    x > y  == ibinbfunc(">",x,y)
-    x >= y == ibinbfunc(">=",x,y)
-    x <= y == ibinbfunc("<=",x,y)
+    x = y  == jfbinbop("==",x,y)
+    x ~= y == jfbinbop("!=",x,y)
+    x < y  == jfbinbop("<",x,y)
+    x > y  == jfbinbop(">",x,y)
+    x >= y == jfbinbop(">=",x,y)
+    x <= y == jfbinbop("<=",x,y)
     -- TODO: add boolean unary operator macro?
     zero? x ==
       jl_bool_eval_string(concat(["iszero(", getind(x),")"]))$Lisp
     one? x ==
       jl_bool_eval_string(concat(["isone(", getind(x),")"]))$Lisp
 
-    x + y == ibinfunc("+", x, y)
-    x - y == ibinfunc("-", x, y)
-    - x   == iunfunc("-", x)
-    x : % * y : % == ibinfunc("*", x, y)
+    x + y == jfbinop("+", x, y)
+    x - y == jfbinop("-", x, y)
+    - x   == jfunfunc("-", x)
+    x : % * y : % == jfbinop("*", x, y)
+    x : % / y : % == jfbinop("/", x, y)
 
-    x : Integer * y : % ==
-      i := coerce(x)@JuliaInteger
-      tmp : String := concat(["string(", getind(i), "*", getind(y),")"])
-      jlref(concat(["BigFloat(", jl_string_eval_string(tmp)$Lisp,")"]), "JFloat")
-    x : % * y : Integer ==
-      i := coerce(y)@JuliaInteger
-      tmp : String := concat(["string(", getind(x), "*", getind(i),")"])
-      jlref(concat(["BigFloat(", jl_string_eval_string(tmp)$Lisp,")"]), "JFloat")
+    x : Integer * y : % == jlref(concat([getind(coerce(x)), "*", getind(y)]))
+    x : % * y : Integer == jlref(concat([getind(x), "*", getind(coerce(y))]))
+    x : Integer / y : % == jlref(concat([getind(coerce(x)), "/", getind(y)]))
+    x : % / y : Integer == jlref(concat([getind(x), "/", getind(coerce(y))]))
     
     x ^ y : NonNegativeInteger ==
-      ibinfunc("^", x, coerce(y pretend Integer))
+      jfbinop("^", x, coerce(y pretend Integer))
     x ^ y : PositiveInteger ==
-      ibinfunc("^", x, coerce(y pretend Integer))
+      jfbinop("^", x, coerce(y pretend Integer))
 
-    -- x quo y == ibinfunc("div", x, y)
-    x quo y == ibinfunc("÷", x, y)
-    x rem y == ibinfunc("%", x, y)
+    -- x quo y == jfbinop("div", x, y)
+    x quo y == jfbinop("÷", x, y)
+    x rem y == jfbinop("%", x, y)
 
     jlType(x)  == jlrefType(x)
     jlValue(x) == jlrefVal(x)
     jlId(x)    == jlrefId(x)
     jlRef(x)   == x pretend SExpression
 
-    sqrt(x) == iunfunc("sqrt",x)
-    exp(x)  == iunfunc("exp",x)
-    log(x)  == iunfunc("log",x)
+    sqrt(x)  == jfunfunc("√",x)
+    exp(x)   == jfunfunc("exp",x)
+    log(x)   == jfunfunc("log",x)
+    expm1(x) == jfunfunc("expm1",x)
+    exp2(x)  == jfunfunc("exp2",x)
+    exp10(x) == jfunfunc("exp10",x)
+    log2(x)  == jfunfunc("log2",x)
+    log10(x) == jfunfunc("log10",x)
 
-    sin(x)  == iunfunc("sin",x)
-    cos(x)  == iunfunc("cos",x)
-    tan(x)  == iunfunc("tan",x)
-    sec(x)  == iunfunc("sec",x)
-    cot(x)  == iunfunc("cot",x)
-    csc(x)  == iunfunc("csc",x)
+    sin(x)  == jfunfunc("sin",x)
+    cos(x)  == jfunfunc("cos",x)
+    tan(x)  == jfunfunc("tan",x)
+    sec(x)  == jfunfunc("sec",x)
+    cot(x)  == jfunfunc("cot",x)
+    csc(x)  == jfunfunc("csc",x)
 
-    asin(x)  == iunfunc("asin",x)
-    acos(x)  == iunfunc("acos",x)
-    atan(x)  == iunfunc("atan",x)
-    asec(x)  == iunfunc("asec",x)
-    acot(x)  == iunfunc("acot",x)
-    acsc(x)  == iunfunc("acsc",x)
+    asin(x)  == jfunfunc("asin",x)
+    acos(x)  == jfunfunc("acos",x)
+    atan(x)  == jfunfunc("atan",x)
+    atan(x,y) == jfbinfunc("atan",x,y)
+    asec(x)  == jfunfunc("asec",x)
+    acot(x)  == jfunfunc("acot",x)
+    acsc(x)  == jfunfunc("acsc",x)
 
-    sinh(x)  == iunfunc("sinh",x)
-    cosh(x)  == iunfunc("cosh",x)
-    tanh(x)  == iunfunc("tanh",x)
-    sech(x)  == iunfunc("sech",x)
-    coth(x)  == iunfunc("coth",x)
-    csch(x)  == iunfunc("csch",x)
+    sinh(x)  == jfunfunc("sinh",x)
+    cosh(x)  == jfunfunc("cosh",x)
+    tanh(x)  == jfunfunc("tanh",x)
+    sech(x)  == jfunfunc("sech",x)
+    coth(x)  == jfunfunc("coth",x)
+    csch(x)  == jfunfunc("csch",x)
 
-    asinh(x)  == iunfunc("asinh",x)
-    acosh(x)  == iunfunc("acosh",x)
-    atanh(x)  == iunfunc("atanh",x)
-    asech(x)  == iunfunc("asech",x)
-    acoth(x)  == iunfunc("acoth",x)
-    acsch(x)  == iunfunc("acsch",x)
+    asinh(x)  == jfunfunc("asinh",x)
+    acosh(x)  == jfunfunc("acosh",x)
+    atanh(x)  == jfunfunc("atanh",x)
+    asech(x)  == jfunfunc("asech",x)
+    acoth(x)  == jfunfunc("acoth",x)
+    acsch(x)  == jfunfunc("acsch",x)
 
     convert(x) : InputForm ==
       jl_string_eval_string(concat(["string(", getind(x),")"]))$Lisp
@@ -581,10 +605,10 @@ JuliaFloat() : Exports == Implementation where
     
 
     coerce(jf : JF64) : % == jfloat(convert(jf)@String)
-    coerce(i : Integer) == jlref(concat(["BigFloat(", string(i),")"]), "JFloat")
+    coerce(i : Integer) == jlref(concat(["BigFloat(", string(i),")"]))
     coerce(i : %) : OutputForm == jlrefVal(i)
-    jfloat(s : String) : % == jlref(concat(["BigFloat(_"", s,"_")"]), "JFloat")
-    jfloat(i : Integer) : % == jlref(concat(["BigFloat(_"", string(i),"_")"]), "JFloat")
+    jfloat(s : String) : % == jlref(concat(["BigFloat(_"", s,"_")"]))
+    jfloat(i : Integer) : % == jlref(concat(["BigFloat(_"", string(i),"_")"]))
 
 )abbrev package JUF JuliaUtilityFunctions
 ++ Utility package for Julia related data.
