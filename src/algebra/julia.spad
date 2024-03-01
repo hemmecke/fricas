@@ -425,37 +425,47 @@ JuliaComplexF64() : Join(JuliaType,
 ++ Author: G. Vanuxem
 ++ Date Created: Jan. 2023
 ++ Description:
-++  This domain allows the manipulation of Julia Integers
-++  using the Nemo package (FLINT based, among others).
+++  This domain allows the manipulation of Julia BigFloat
+++  (MPFR based).
 ++ Purpose: Experimentation.
+-- We use String to coerce to BigFloat to avoid precision lost.
 JuliaFloat() : Exports == Implementation where
   JI64      ==> JuliaInt64
+  PI        ==> PositiveInteger
   JF64      ==> JuliaFloat64
   jlrefVal  ==> JLREFVAL$Lisp
   jlrefType ==> JLREFTYPE$Lisp
   jlrefId   ==> JLREFID$Lisp
   jlref     ==> make_jlref$Lisp
-  Exports ==> Join(JuliaType, ConvertibleTo(InputForm), FloatingPointSystem,
-            ElementaryFunctionCategory, TranscendentalFunctionCategory,
-            DifferentialRing, CommutativeRing) with
+  Exports ==> Join(JuliaType, ConvertibleTo(InputForm), CommutativeRing,
+            FloatingPointSystem, arbitraryPrecision, ElementaryFunctionCategory,
+            TranscendentalFunctionCategory, DifferentialRing,
+            ConvertibleTo(String)) with
             -- SpecialFunctionCategory) with
-    jlType  : % -> SExpression
-    jlRef   : % -> SExpression
-    jlValue : % -> SExpression
-    jlId    : % -> SExpression
-    "*"     : (%, Integer) -> %
-    coerce  : JI64 -> %
-    coerce  : JF64 -> %
+    jlType   : % -> SExpression
+    jlRef    : % -> SExpression
+    jlValue  : % -> SExpression
+    jlId     : % -> SExpression
+    precision: % -> PositiveInteger
+    ++ precision(x) returns the precision of x.
+    precision: (%, PI) -> %
+    ++ precision(x, p) returns a copy of x with precision p.
+    "*"      : (%, Integer) -> %
+    sqrt     : % -> %
+    coerce   : JI64 -> %
+    coerce   : JF64 -> %
     retractIfCan  : % -> JF64
-    jfloat    : String -> %
-    jfloat    : JuliaString -> %
-    jfloat    : Integer -> %
-    jfloat    : JuliaFloat64 -> %
+    string   : % -> String
+    jfloat   : String -> %
+    jfloat   : JuliaString -> %
+    jfloat   : Integer -> %
+    jfloat   : JuliaFloat64 -> %
   Implementation ==> add
     import from JuliaUtilityFunctions
     import from String
     import from JuliaFloat64
     import from JuliaInteger
+    import from JuliaFractionInteger
     
     jlInitialize(true)
     jl_eval_string("@suppress_err using Nemo")$Lisp
@@ -466,15 +476,26 @@ JuliaFloat() : Exports == Implementation where
 
     ibinfunc(op,a,b) ==>
       tmp : String := concat(["string(", getind(a), op, getind(b),")"])
-      jlref(concat(["BigFloat(", jl_string_eval_string(tmp)$Lisp,")"]), "JFloat")
+      jlref(concat(["BigFloat(_"", jl_string_eval_string(tmp)$Lisp,"_")"]), "JFloat")
     ibinbfunc(op,a,b) ==>
       jl_bool_eval_string(concat([getind(a), op, getind(b)]))$Lisp
     iunfunc(op, a) ==>
       tmp : String := concat(["string(", op, "(", getind(a),"))"])
-      jlref(concat(["BigFloat(",jl_string_eval_string(tmp)$Lisp, ")"]),"JFloat")
+      jlref(concat(["BigFloat(_"",jl_string_eval_string(tmp)$Lisp, "_")"]),"JFloat")
+
+    precision() ==
+      jl_int64_eval_string("precision(BigFloat)")$Lisp pretend PI
+    precision(p : PI) ==
+      jl_int64_eval_string(concat(["setprecision(BigFloat,",string(p),")"]))$Lisp
+    precision(x : %) ==
+      jl_int64_eval_string(concat(["precision(", getind(x),")"]))$Lisp pretend PI
+    precision(x : %, p : PI) ==
+      tmp : String := concat(["string(setprecision(", getind(x),",", string(p),"))"])
+      jlref(concat(["BigFloat(_"", jl_string_eval_string(tmp)$Lisp,"_")"]), "JFloat")
+
   
-    0 == jlref("BigFloat(0)", "JFloat")
-    1 == jlref("BigFloat(1)", "JFloat")
+    0 == jlref("BigFloat(_"0_")", "JFloat")
+    1 == jlref("BigFloat(_"1_")", "JFloat")
 
     x = y  == ibinbfunc("==",x,y)
     x ~= y == ibinbfunc("!=",x,y)
@@ -501,7 +522,7 @@ JuliaFloat() : Exports == Implementation where
       i := coerce(y)@JuliaInteger
       tmp : String := concat(["string(", getind(x), "*", getind(i),")"])
       jlref(concat(["BigFloat(", jl_string_eval_string(tmp)$Lisp,")"]), "JFloat")
-
+    
     x ^ y : NonNegativeInteger ==
       ibinfunc("^", x, coerce(y pretend Integer))
     x ^ y : PositiveInteger ==
@@ -517,13 +538,53 @@ JuliaFloat() : Exports == Implementation where
     jlRef(x)   == x pretend SExpression
 
     sqrt(x) == iunfunc("sqrt",x)
+    exp(x)  == iunfunc("exp",x)
+    log(x)  == iunfunc("log",x)
 
-  
+    sin(x)  == iunfunc("sin",x)
+    cos(x)  == iunfunc("cos",x)
+    tan(x)  == iunfunc("tan",x)
+    sec(x)  == iunfunc("sec",x)
+    cot(x)  == iunfunc("cot",x)
+    csc(x)  == iunfunc("csc",x)
+
+    asin(x)  == iunfunc("asin",x)
+    acos(x)  == iunfunc("acos",x)
+    atan(x)  == iunfunc("atan",x)
+    asec(x)  == iunfunc("asec",x)
+    acot(x)  == iunfunc("acot",x)
+    acsc(x)  == iunfunc("acsc",x)
+
+    sinh(x)  == iunfunc("sinh",x)
+    cosh(x)  == iunfunc("cosh",x)
+    tanh(x)  == iunfunc("tanh",x)
+    sech(x)  == iunfunc("sech",x)
+    coth(x)  == iunfunc("coth",x)
+    csch(x)  == iunfunc("csch",x)
+
+    asinh(x)  == iunfunc("asinh",x)
+    acosh(x)  == iunfunc("acosh",x)
+    atanh(x)  == iunfunc("atanh",x)
+    asech(x)  == iunfunc("asech",x)
+    acoth(x)  == iunfunc("acoth",x)
+    acsch(x)  == iunfunc("acsch",x)
+
+    convert(x) : InputForm ==
+      jl_string_eval_string(concat(["string(", getind(x),")"]))$Lisp
+
+    convert(x) : String ==
+      jl_string_eval_string(concat(["string(", getind(x),")"]))$Lisp
+
+    string(x) : String ==
+      jl_string_eval_string(concat(["string(", getind(x),")"]))$Lisp
+    
+    
+
     coerce(jf : JF64) : % == jfloat(convert(jf)@String)
     coerce(i : Integer) == jlref(concat(["BigFloat(", string(i),")"]), "JFloat")
     coerce(i : %) : OutputForm == jlrefVal(i)
     jfloat(s : String) : % == jlref(concat(["BigFloat(_"", s,"_")"]), "JFloat")
-    jfloat(i : Integer) : % == jlref(concat(["BigFloat(", string(i),")"]), "JFloat")
+    jfloat(i : Integer) : % == jlref(concat(["BigFloat(_"", string(i),"_")"]), "JFloat")
 
 )abbrev package JUF JuliaUtilityFunctions
 ++ Utility package for Julia related data.
