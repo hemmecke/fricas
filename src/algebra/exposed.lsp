@@ -173,6 +173,7 @@
   (|JuliaGaloisField| . JGF) 
   (|JuliaPlotFunctions| . JPLOT)
   (|JuliaRealLinearAlgebra| . JRLA) 
+  (|JuliaRealField| . JRF) 
   (|JuliaString| . JSTR)
   (|JuliaUnivariatePolynomial| . JUP)
   (|JuliaUtilityFunctions| . JUF)

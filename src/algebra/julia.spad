@@ -421,7 +421,7 @@ JuliaComplexF64() : Join(JuliaType,
     ComplexCategory(JuliaFloat64)) == Complex(JuliaFloat64)
 
 )abbrev domain JFLOAT JuliaFloat
-++ Experimental domain for Julia Integers
+++ Experimental domain for Julia (Big) Floats
 ++ Author: G. Vanuxem
 ++ Date Created: Feb. 2024
 ++ Keywords: float, floating point, number
@@ -429,7 +429,7 @@ JuliaComplexF64() : Join(JuliaType,
 ++ \spadtype{JuliaFloat} implements arbitrary precision floating
 ++ point arithmetic using Julia BigFloats (MPFR based).
 ++ Purpose: Experimentation
--- We use String to coerce to BigFloat to avoid precision lost.
+-- We use String to coerce to BigFloat to avoid precision losses.
 JuliaFloat() : Exports == Implementation where
   JI64      ==> JuliaInt64
   PI        ==> PositiveInteger
@@ -452,12 +452,14 @@ JuliaFloat() : Exports == Implementation where
     precision: (%, PI) -> %
     ++ precision(x, p) returns a copy of x with precision p.
     expm1   :  % -> %
-    ++ expm1(x) computes accurately e^x-1. It avoids the loss of precision
+    ++ expm1(x) computes accurately ℯ^x-1. It avoids the loss of precision
     ++ involved in the direct evaluation of exp(x)-1 for small values of x.
     exp2  : % -> %
     ++ exp2(x) computes the base 2 exponential of x.
     exp10 : % -> %
     ++ exp10(x) computes the base 10 exponential of x. 
+    log1p : % -> %
+    ++log1p(x) computes accurately log(1+x)
     log2  : % -> %
     ++ log2(x) computes the base 2 logarithm of x.
     log10 : % -> %
@@ -500,12 +502,14 @@ JuliaFloat() : Exports == Implementation where
       jlref(concat([func, "(", getind(a), ",", getind(b),")"]))
     jfbinbop(op,a,b) ==>
       jl_bool_eval_string(concat([getind(a), op, getind(b)]))$Lisp
-    jfunfunc(op, a) ==> jlref(concat([op, "(", getind(a),")"]))
+    jfunfunc(opfunc, a) ==> jlref(concat([opfunc, "(", getind(a),")"]))
 
     precision() ==
       jl_int64_eval_string("precision(BigFloat)")$Lisp pretend PI
     precision(p : PI) ==
-      jl_int64_eval_string(concat(["setprecision(BigFloat,",string(p),")"]))$Lisp
+      oldp := precision()
+      jl_eval_string(concat(["setprecision(BigFloat,",string(p),")"]))$Lisp
+      oldp
     precision(x : %) ==
       jl_int64_eval_string(concat(["precision(", getind(x),")"]))$Lisp pretend PI
     precision(x : %, p : PI) ==
@@ -561,6 +565,7 @@ JuliaFloat() : Exports == Implementation where
     expm1(x) == jfunfunc("expm1",x)
     exp2(x)  == jfunfunc("exp2",x)
     exp10(x) == jfunfunc("exp10",x)
+    log1p(x) == jfunfunc("log1p",x)
     log2(x)  == jfunfunc("log2",x)
     log10(x) == jfunfunc("log10",x)
 
