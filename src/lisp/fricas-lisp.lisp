@@ -685,9 +685,10 @@ with this hack and will try to convince the GCL crowd to fix this.
 ;; actual string buffer. We use 'sock_get_string_buf_wrapper' to
 ;; resolve the problem
 (SI::clines "int sock_get_string_buf_wrapper(int i, object x, int j)"
-    "{ if (type_of(x)!=t_string) FEwrong_type_argument(sLstring,x);"
+    "{ if (type_of(x)!=t_string)"
+    "     FEerror(\"Wrong type arguments in sock_get_string_buf_wrapper: not a string\",0,0);"
     "  if (x->st.st_fillp<j)"
-    "    FEerror(\"string too small in sock_get_string_buf_wrapper\",0);"
+    "    FEerror(\"string too small in sock_get_string_buf_wrapper\",0,0);"
     "  return sock_get_string_buf(i, x->st.st_self, j); }")
 
 (SI::defentry sock_get_string_buf (SI::int SI::object SI::int)
