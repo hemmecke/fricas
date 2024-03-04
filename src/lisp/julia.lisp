@@ -83,9 +83,6 @@
 
 (in-package "BOOT")
 
-(defparameter *julia-initialized* nil)
-
-
 (defclass jlref ()
     ((id  :reader jlrefId   :initarg :id)
     (val  :reader jlrefVal  :initarg :val)

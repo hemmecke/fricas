@@ -1044,6 +1044,7 @@ with this hack and will try to convince the GCL crowd to fix this.
        (APPLY fun (cons stream args))))
 
 (in-package "BOOT")
+(defparameter *julia-initialized* nil)
 
 #+(and :sbcl :fricas_has_julia)
 (progn
