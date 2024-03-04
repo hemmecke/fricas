@@ -136,7 +136,6 @@ char* jl_getindex_wrapped_hash(const char *hash)
         return(nstr);
     }
     // stringify
-    jl_function_t *func = jl_get_function(jl_main_module, "string");
     return(jl_string_data(jl_call1(str, result)));
 }
 

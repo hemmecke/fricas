@@ -90,7 +90,7 @@
     ((id  :reader jlrefId   :initarg :id)
     (val  :reader jlrefVal  :initarg :val)
     (type :accessor jlrefType :initarg :type))
-    (:default-initargs :id nil :val nil :type "Julia"))
+    (:default-initargs :id nil :val nil :type nil))
 
 (defmethod print-object((obj jlref) stream)
     (print-unreadable-object (obj stream :type t :identity t)
@@ -102,7 +102,9 @@
     (let* ((hash (write-to-string (random most-positive-fixnum)))
             (id (|jl_setindex_wrap_eval_string| hash str))
             (val (|jl_getindex_wrapped_hash| id))
-            (ret (make-instance 'jlref :id id :val val)))
+            (type (|jl_string_eval_string|
+                (concatenate 'string "string(typeof(getindex(refs,\"" id "\")))")))
+            (ret (make-instance 'jlref :id id :val val :type type )))
         #+:lispworks (flag-special-free-action hash)
         #+:cmu (ext:finalize ret (lambda () (free_jlref hash)))
         #+:sbcl (sb-ext:finalize ret (lambda ()
@@ -113,7 +115,6 @@
 (defun free_jlref (hash)
     (|jl_delete_wrapped_hash| hash))
 
-
 #+:openmcl
 (progn
 (defmethod initialize-instance :after ((obj jlref) &rest initargs &key)
@@ -121,9 +122,11 @@
     (ccl:terminate-when-unreachable obj))
 
 (defmethod ccl:terminate ((obj jlref))
-    (when (jlrefId obj)
+    (progn
         (format t "freeing... ~x~%" (jlrefId obj))
-        (boot::|jl_delete_wrapped_hash| (jlrefId obj))))
+        (when (jlrefId obj)
+            (format t "freeing... ~x~%" (jlrefId obj))
+            (boot::|jl_delete_wrapped_hash| (jlrefId obj)))))
 )
 
 

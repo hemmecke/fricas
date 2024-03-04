@@ -1,9 +1,9 @@
 )abbrev category JTYPE JuliaType
-++ Category for Julia values
-++ Author: G.Vanuxem (Dec. 2022)
+++ Category for Julia types
+++ Author: G.Vanuxem
 ++ Date Created: December 2022
 ++ Description:
-++  This category allows the manipulation of Julia values.
+++  Parent category of Julia elements.
 JuliaType() : Category == SetCategory
 
 )abbrev domain JSTR JuliaString
