@@ -603,8 +603,6 @@ JuliaFloat() : Exports == Implementation where
 
     string(x) : String ==
       jl_string_eval_string(concat(["string(", getind(x),")"]))$Lisp
-    
-    
 
     coerce(jf : JF64) : % == jfloat(convert(jf)@String)
     coerce(i : Integer) == jlref(concat(["BigFloat(", string(i),")"]))

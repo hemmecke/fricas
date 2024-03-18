@@ -508,7 +508,7 @@ JuliaFPRealBall(p: PositiveInteger) : Exports == Implementation where
   jlrefId   ==> JLREFID$Lisp
   jlref     ==> make_jlref$Lisp
   Exports ==> Join(JuliaRing, ConvertibleTo(InputForm), CommutativeRing,
-            FloatingPointSystem, ElementaryFunctionCategory,
+            FloatingPointSystem, Approximate, ElementaryFunctionCategory,
             TranscendentalFunctionCategory, DifferentialRing,
             ConvertibleTo(String)) with
             -- SpecialFunctionCategory) with
@@ -557,7 +557,7 @@ JuliaFPRealBall(p: PositiveInteger) : Exports == Implementation where
     Rep := SExpression
 
     -- initialize
-    jl_eval_string(concat(["JRB", string(p),"=ArbField(", convert(p)@String,")"]))$Lisp
+    jl_eval_string(concat(["JFPRB", string(p),"=ArbField(", convert(p)@String,")"]))$Lisp
 
     getind(a) ==> concat(["getindex(", "refs,_"", jlrefId a, "_")"])
 
@@ -570,10 +570,10 @@ JuliaFPRealBall(p: PositiveInteger) : Exports == Implementation where
 
     precision() == p
   
-    0 == jlref(concat(["zero(","JRB",string(p),")"]))
-    1 == jlref(concat(["one(","JRB",string(p),")"]))
-    pi() == jlref(concat(["JRB", string(p),"(π)"]))
-    exp1() == jlref(concat(["exp(","JRB",string(p),"(1))"]))
+    0 == jlref(concat(["zero(","JFPRB",string(p),")"]))
+    1 == jlref(concat(["one(","JFPRB",string(p),")"]))
+    pi() == jlref(concat(["JFPRB", string(p),"(π)"]))
+    exp1() == jlref(concat(["exp(","JFPRB",string(p),"(1))"]))
 
     x = y  == jfbinbop("==",x,y)
     x ~= y == jfbinbop("!=",x,y)
@@ -656,19 +656,177 @@ JuliaFPRealBall(p: PositiveInteger) : Exports == Implementation where
 
     string(x) : String ==
       jl_string_eval_string(concat(["string(", getind(x),")"]))$Lisp
-    
-    
 
-    coerce(jf : JF64) : % == jlref(concat(["JRB",string(p),
+    coerce(jf : JF64) : % == jlref(concat(["JFPRB",string(p),
       "(_"", convert(jf),"_")"]))
-    coerce(i : Integer) == jlref(concat(["JRB",string(p),
+    coerce(i : Integer) == jlref(concat(["JFPRB",string(p),
       "(_"", string(i),"_")"]))
-    coerce(s : String) == jlref(concat(["JRB", string(p),"(_"", s,"_")"]))
+    coerce(s : String) == jlref(concat(["JFPRB", string(p),"(_"", s,"_")"]))
     coerce(i : %) : OutputForm == jlrefVal(i)
-    jrb(s : String) : % == jlref(concat(["JRB", string(p),"(_"", s,"_")"]))
-    jrb(i : Integer) : % == jlref(concat(["JRB",string(p),
+    jrb(s : String) : % == jlref(concat(["JFPRB", string(p),"(_"", s,"_")"]))
+    jrb(i : Integer) : % == jlref(concat(["JFPRB",string(p),
       "(_"",string(i),"_")"]))
 
+)abbrev domain JFPCB JuliaFPComplexBall
+++ Domain for Julia fixed precision complex balls arithmetic.
+++ Author: G. Vanuxem
+++ Date Created: March. 2024
+++ Keywords: float, floating point, number, complex
+++ Description:
+++ \spadtype{JuliaFPComplexBall} implements fixed precision
+++ complex ball arithmetic using the Nemo package - Arb based.
+++ Reference: https://arblib.org
+JuliaFPComplexBall(p: PositiveInteger) : Exports == Implementation where
+  JI64      ==> JuliaInt64
+  PI        ==> PositiveInteger
+  JF64      ==> JuliaFloat64
+  jlrefVal  ==> JLREFVAL$Lisp
+  jlrefType ==> JLREFTYPE$Lisp
+  jlrefId   ==> JLREFID$Lisp
+  jlref     ==> make_jlref$Lisp
+  Exports ==> Join(JuliaRing, ConvertibleTo(InputForm), CommutativeRing,
+                ComplexCategory(JuliaRealField), arbitraryPrecision,
+                ElementaryFunctionCategory, TrigonometricFunctionCategory,
+                HyperbolicFunctionCategory, DifferentialRing,
+                ConvertibleTo(String)) with
+                -- SpecialFunctionCategory) with
+    jlType   : % -> SExpression
+    jlRef    : % -> SExpression
+    jlValue  : % -> SExpression
+    jlId     : % -> SExpression
+    expm1   :  % -> %
+    ++ expm1(x) computes accurately e^x-1. It avoids the loss of precision
+    ++ involved in the direct evaluation of exp(x)-1 for small values of x.
+    log1p   : % -> %
+    ++ log1p(x) logarithm of 1+x computed accurately.
+    exp1    : () -> %
+    ++ exp1() returns the JuliaFloat ℯ (%e).
+    pi      : () -> %
+    ++ pi() returns the JuliaFloat π (%pi).
+    atan : % -> %
+    ++ atan(x) computes the inverse tangent of x.
+    atan : (%, %) -> %
+    ++ atan(x, y) computes the inverse tangent of x/y.
+    "*"      : (%, Integer) -> %
+    "/"      : (Integer, %) -> %
+    sqrt     : % -> %
+
+    --midpoint : % -> %
+    -- midpoint(x) returns the midpoint of x. 
+    --radius   : % -> JuliaRFPArbBall
+    coerce   : JI64 -> %
+    coerce   : Integer -> %
+    coerce   : JF64 -> %
+    coerce   : String -> %
+    retractIfCan  : % -> JF64
+    string   : % -> String
+    jcb   : String -> %
+    jcb   : Integer -> %
+  Implementation ==> add
+    import from JuliaUtilityFunctions
+    import from String
+    import from JuliaFloat64
+    import from JuliaInteger
+    import from JuliaFractionInteger
+    
+    jlInitialize(true)
+    jl_eval_string("@suppress_err using Nemo")$Lisp
+ 
+    Rep := SExpression
+
+    -- initialize
+    jl_eval_string(concat(["JFPCB", string(p),"=AcbField(", convert(p)@String,")"]))$Lisp
+
+    getind(a) ==> concat(["getindex(", "refs,_"", jlrefId a, "_")"])
+
+    jfbinop(op,a,b) ==> jlref(concat([getind(a), op, getind(b)]))
+    jfbinfunc(func,a,b) ==>
+      jlref(concat([func, "(", getind(a), ",", getind(b),")"]))
+    jfbinbop(op,a,b) ==>
+      jl_bool_eval_string(concat([getind(a), op, getind(b)]))$Lisp
+    jfunfunc(opfunc, a) ==> jlref(concat([opfunc, "(", getind(a),")"]))
+
+    --precision() == p
+  
+    0 == jlref(concat(["zero(","JFPCB",string(p),")"]))
+    1 == jlref(concat(["one(","JFPCB",string(p),")"]))
+    pi() == jlref(concat(["JFPCB", string(p),"(π)"]))
+    exp1() == jlref(concat(["exp(","JFPCB",string(p),"(1))"]))
+
+    x = y  == jfbinbop("==",x,y)
+    x ~= y == jfbinbop("!=",x,y)
+
+    -- TODO: add boolean unary operator macro?
+    zero? x ==
+      jl_bool_eval_string(concat(["iszero(", getind(x),")"]))$Lisp
+    one? x ==
+      jl_bool_eval_string(concat(["isone(", getind(x),")"]))$Lisp
+
+    x + y == jfbinop("+", x, y)
+    x - y == jfbinop("-", x, y)
+    - x   == jfunfunc("-", x)
+    x : % * y : % == jfbinop("*", x, y)
+    x : % / y : % == jfbinop("/", x, y)
+
+    x : Integer * y : % == jlref(concat([getind(coerce(x)@%), "*", getind(y)]))
+    x : % * y : Integer == jlref(concat([getind(x), "*", getind(coerce(y)@%)]))
+    x : Integer / y : % == jlref(concat([getind(coerce(x)@%), "/", getind(y)]))
+    --x : % / y : Integer == jlref(concat([getind(x), "/", getind(coerce(y)@%)]))
+    
+    x ^ y : Integer ==
+      jfbinop("^", x, coerce(y)@%)
+    x ^ y : Fraction(Integer) ==
+      jfbinop("^", x, jfint(y))
+
+    -- x quo y == jfbinop("div", x, y)
+    x quo y == jfbinop("÷", x, y)
+    x rem y == jfbinop("%", x, y)
+
+    jlType(x)  == jlrefType(x)
+    jlValue(x) == jlrefVal(x)
+    jlId(x)    == jlrefId(x)
+    jlRef(x)   == x pretend SExpression
+
+    sqrt(x)  == jfunfunc("√",x)
+    exp(x)   == jfunfunc("exp",x)
+    log(x)   == jfunfunc("log",x)
+    expm1(x) == jfunfunc("expm1",x)
+    log1p(x) == jfunfunc("log1p",x)
+
+
+    sin(x)  == jfunfunc("sin",x)
+    cos(x)  == jfunfunc("cos",x)
+    tan(x)  == jfunfunc("tan",x)
+    sec(x)  == jfunfunc("sec",x)
+    cot(x)  == jfunfunc("cot",x)
+    csc(x)  == jfunfunc("csc",x)
+
+    sinh(x)  == jfunfunc("sinh",x)
+    cosh(x)  == jfunfunc("cosh",x)
+    tanh(x)  == jfunfunc("tanh",x)
+    sech(x)  == jfunfunc("sech",x)
+    coth(x)  == jfunfunc("coth",x)
+    csch(x)  == jfunfunc("csch",x)
+
+    convert(x) : InputForm ==
+      jl_string_eval_string(concat(["string(", getind(x),")"]))$Lisp
+
+    convert(x) : String ==
+      jl_string_eval_string(concat(["string(", getind(x),")"]))$Lisp
+
+    string(x) : String ==
+      jl_string_eval_string(concat(["string(", getind(x),")"]))$Lisp
+
+
+    coerce(jf : JF64) : % == jlref(concat(["JFPCB",string(p),
+      "(_"", convert(jf),"_")"]))
+    coerce(i : Integer) == jlref(concat(["JFPCB",string(p),
+      "(_"", string(i),"_")"]))
+    coerce(s : String) == jlref(concat(["JFPCB", string(p),"(_"", s,"_")"]))
+    coerce(i : %) : OutputForm == jlrefVal(i)
+    jcb(s : String) : % == jlref(concat(["JFPCB", string(p),"(_"", s,"_")"]))
+    jcb(i : Integer) : % == jlref(concat(["JFPCB",string(p),
+      "(_"",string(i),"_")"]))
 
 )abbrev domain JRF JuliaRealField
 ++ Domain for Julia Real Field based on the Arb
@@ -855,7 +1013,7 @@ JuliaRealField() : Exports == Implementation where
 
 )abbrev domain JCF JuliaComplexField
 ++ Domain for Julia Complex Field based on the Arb
-++ library (arbitrary precision ball aithmetic).
+++ library (arbitrary precision ball arithmetic).
 ++ Author: G. Vanuxem
 ++ Date Created: March. 2024
 ++ Keywords: float, floating point, number, complex
@@ -875,8 +1033,9 @@ JuliaComplexField() : Exports == Implementation where
   jlref     ==> make_jlref$Lisp
   Exports ==> Join(JuliaRing, ConvertibleTo(InputForm), CommutativeRing,
             ComplexCategory(JuliaRealField), arbitraryPrecision,
-            ElementaryFunctionCategory, TranscendentalFunctionCategory,
-            DifferentialRing, ConvertibleTo(String)) with
+            ElementaryFunctionCategory, TrigonometricFunctionCategory,
+            HyperbolicFunctionCategory, DifferentialRing,
+            ConvertibleTo(String)) with
             -- SpecialFunctionCategory) with
     jlType   : % -> SExpression
     jlRef    : % -> SExpression
@@ -988,7 +1147,6 @@ JuliaComplexField() : Exports == Implementation where
     expm1(x) == jfunfunc("expm1",x)
     log1p(x) == jfunfunc("log1p",x)
 
-
     sin(x)  == jfunfunc("sin",x)
     cos(x)  == jfunfunc("cos",x)
     tan(x)  == jfunfunc("tan",x)
@@ -1024,7 +1182,6 @@ JuliaComplexField() : Exports == Implementation where
     jcf(i : Integer) : % == jlref(concat(["JCF(_"", string(i),"_")"]))
     jcf(r : Integer, i : Integer) : % ==
       jlref(concat(["JCF(_"", string(r), "_",_"" , string(i),"_")"]))
-
 
 
 )abbrev domain JUP JuliaUnivariatePolynomial
@@ -1099,23 +1256,6 @@ JuliaUnivariatePolynomial(x : Symbol, R : JuliaRing):
           coerce(p : %) : OutputForm ==
             jlRegexReplace(spjs(jlrefVal(p)),
               jlRegex(jstring "//"),jlSubstitute(jstring "/")) pretend OutputForm
-        -- Awful workaround (differentiate JZMOD from JGF)
-        else if R has FiniteFieldCategory and R has ConvertibleTo(String) then
-          jl_eval_string(concat(["R,", string(x), "=polynomial_ring(",
-            concat(["JGF",string(size()$R pretend INT)])$String,
-              ",_"", string(x), "_")"])$String)$Lisp
-          monomial(coef,exp) ==
-            jlref(concat([convert(coef),"*", string(x), "^",
-              string(exp pretend Integer)]))
-          coerce(p : %) : OutputForm == jlrefVal(p)
-        else if R has Finite and R has ConvertibleTo(String) then
-          jl_eval_string(concat(["R,", string(x), "=polynomial_ring(",
-            concat(["JZMOD",string(size()$R pretend INT)])$String,
-              ",_"", string(x), "_")"])$String)$Lisp
-          monomial(coef,exp) ==
-            jlref(concat([convert(coef),"*", string(x), "^",
-              string(exp pretend Integer)]))
-          coerce(p : %) : OutputForm == jlrefVal(p)  
         else if R is JuliaRealField then
           jl_eval_string(concat(["R,", string(x), "=polynomial_ring(JRF,_"",
               string(x), "_")"])$String)$Lisp
@@ -1130,6 +1270,31 @@ JuliaUnivariatePolynomial(x : Symbol, R : JuliaRing):
             jlref(concat([string(coef)$JCF,"*", string(x), "^",
                   string(exp pretend Integer)]))
           coerce(p : %) : OutputForm == jlrefVal(p)
+        -- For now awful workarounds (differentiate the next domains)
+        else if R has FiniteFieldCategory and R has ConvertibleTo(String) then
+          jl_eval_string(concat(["R,", string(x), "=polynomial_ring(",
+            concat(["JGF",string(size()$R pretend INT)])$String,
+              ",_"", string(x), "_")"])$String)$Lisp
+          monomial(coef,exp) ==
+            jlref(concat([convert(coef)$R,"*", string(x), "^",
+              string(exp pretend Integer)]))
+          coerce(p : %) : OutputForm == jlrefVal(p)
+        else if R has Finite and R has ConvertibleTo(String) then
+          jl_eval_string(concat(["R,", string(x), "=polynomial_ring(",
+            concat(["JZMOD",string(size()$R pretend INT)])$String,
+              ",_"", string(x), "_")"])$String)$Lisp
+          monomial(coef,exp) ==
+            jlref(concat([convert(coef)$R,"*", string(x), "^",
+              string(exp pretend Integer)]))
+          coerce(p : %) : OutputForm == jlrefVal(p)  
+        else if R has Approximate and R has FloatingPointSystem then
+          jl_eval_string(concat(["R,", string(x), "=polynomial_ring(",
+            concat(["JFPRB", string(precision()$R pretend INT)])$String,
+              ",_"", string(x), "_")"])$String)$Lisp
+          monomial(coef,exp) ==
+            jlref(concat([convert(coef),"*", string(x), "^",
+              string(exp pretend Integer)]))
+          coerce(p : %) : OutputForm == jlrefVal(p) 
         else error "Unimplemented ring."
 
         0 == jlref("zero(R)")
