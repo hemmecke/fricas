@@ -421,15 +421,14 @@ JuliaComplexF64() : Join(JuliaType,
     ComplexCategory(JuliaFloat64)) == Complex(JuliaFloat64)
 
 )abbrev domain JFLOAT JuliaFloat
-++ Experimental domain for Julia (Big) Floats
+++ Domain for Julia (Big) Floats
 ++ Author: G. Vanuxem
 ++ Date Created: Feb. 2024
 ++ Keywords: float, floating point, number
 ++ Description:
-++ \spadtype{JuliaFloat} implements arbitrary precision floating
-++ point arithmetic using Julia BigFloats (MPFR based).
-++ Purpose: Experimentation
--- We use String to coerce to BigFloat to avoid precision losses.
+++  \spadtype{JuliaFloat} implements arbitrary precision floating
+++  point arithmetic using Julia BigFloats (MPFR based).
+++ https://www.mpfr.org/
 JuliaFloat() : Exports == Implementation where
   JI64      ==> JuliaInt64
   PI        ==> PositiveInteger

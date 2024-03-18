@@ -1,5 +1,11 @@
+-- Flint : polynomials and matrices over Z, Q, Z/nZ, Qp, Fq
+-- Arb : polynomials, matrices and special functions over balls over R and C
+-- Antic : algebraic number field element arithmetic
+-- Calcium : exact real and complex numbers, including algebraic numbers
+
+
 )abbrev category JRING JuliaRing
-++ Category for Julia values
+++ Category for Julia elements
 ++ Author: G.Vanuxem
 ++ Date Created: March 2024
 ++ Description:
@@ -7,12 +13,13 @@
 JuliaRing() : Category == Join(JuliaType, Ring)
 
 )abbrev domain JINT JuliaInteger
-++ Experimental domain for Julia Integers
+++ Domain for Julia Integers
 ++ Author: G. Vanuxem
 ++ Date Created: Jan. 2023
 ++ Description:
 ++  This domain allows the manipulation of Julia Integers
-++  using the Nemo package (FLINT based, among others).
+++  using the Nemo package for Julia (FLINT based).
+++ https://flintlib.org/
 JuliaInteger() : Exports == Implementation where
   JI64      ==> JuliaInt64
   jlrefVal  ==> JLREFVAL$Lisp
@@ -108,12 +115,13 @@ JuliaInteger() : Exports == Implementation where
     jint(i : Integer) : % == jlref(concat(["ZZ(", string(i),")"]))
 
 )abbrev domain JFINT JuliaFractionInteger
-++ Experimental domain for Julia Fraction Integers
+++ Domain for Julia Fraction Integers
 ++ Author: G. Vanuxem
 ++ Date Created: Feb. 2024
 ++ Description:
 ++  This domain allows the manipulation of Julia Fraction Integers
-++  using the Nemo package (FLINT based, among others).
+++  using the Nemo package for Julia (FLINT based).
+++ https://flintlib.org/
 JuliaFractionInteger() : Exports == Implementation where
   jlrefVal  ==> JLREFVAL$Lisp
   jlrefType ==> JLREFTYPE$Lisp
@@ -149,8 +157,6 @@ JuliaFractionInteger() : Exports == Implementation where
       jlref(concat([func, "(", getind(a), ",", getind(b),")"]))
     fibinbop(op,a,b) ==>
       jl_bool_eval_string(concat([getind(a), op, getind(b)]))$Lisp
-
-
 
     0 == jlref("zero(QQ)")
     1 == jlref("one(QQ)")
@@ -213,8 +219,9 @@ JuliaFractionInteger() : Exports == Implementation where
 ++ Date Created: Feb. 2024
 ++ Description:
 ++  This domain allows the manipulation of Julia Galois field
-++  elements using the Nemo package (FLINT based, among others).
+++  elements using the Nemo package for Julia (FLINT based).
 ++ Purpose: Experimentation.
+++ https://flintlib.org/
 JuliaIntegerMod(p : PositiveInteger) : Exports == Implementation where
   jlrefVal  ==> JLREFVAL$Lisp
   jlrefType ==> JLREFTYPE$Lisp
@@ -253,7 +260,7 @@ JuliaIntegerMod(p : PositiveInteger) : Exports == Implementation where
     Rep := SExpression
 
     -- initialize
-    jl_eval_string(concat(["JZMOD",string(p),",=residue_ring(ZZ,", string(p),")"]))$Lisp
+    jl_eval_string(concat(["JZMOD",string(p),"=residue_ring(ZZ,", string(p),")"]))$Lisp
 
     getind(a) ==> concat(["getindex(", "refs,_"", jlrefId a, "_")"])
     zmodbinop(op,a,b) ==> jlref(concat([getind(a), op, getind(b)]))
@@ -262,8 +269,6 @@ JuliaIntegerMod(p : PositiveInteger) : Exports == Implementation where
       jlref(concat([func, "(", getind(a), ",", getind(b),")"]))
     zmodbinbfunc(op,a,b) ==>
       jl_bool_eval_string(concat([getind(a), op, getind(b)]))$Lisp
-
-
 
     0 == jlref(concat(["zero(JZMOD",string(p),")"]))
     1 == jlref(concat(["one(JZMOD",string(p),")"]))
@@ -341,8 +346,8 @@ JuliaIntegerMod(p : PositiveInteger) : Exports == Implementation where
 ++ Date Created: Feb. 2024
 ++ Description:
 ++  This domain allows the manipulation of Julia Galois field
-++  elements using the Nemo package (FLINT based, among others).
-++ Purpose: Experimentation.
+++  elements using the Nemo package (FLINT based).
+++ https://flintlib.org/
 JuliaGaloisField(p : PositiveInteger) : Exports == Implementation where
   jlrefVal  ==> JLREFVAL$Lisp
   jlrefType ==> JLREFTYPE$Lisp
@@ -485,15 +490,198 @@ JuliaGaloisField(p : PositiveInteger) : Exports == Implementation where
     jgf(i : Integer) == coerce(i)
     jgf(ji : JuliaInteger) == coerce(ji)
 
-)abbrev domain JRF JuliaRealField
-++ Experimental domain for Julia Real Field based on the Arb
-++ library.
+)abbrev domain JFPRB JuliaFPRealBall
+++ Domain for Julia fixed precision real balls arithmetic.
 ++ Author: G. Vanuxem
 ++ Date Created: March. 2024
 ++ Keywords: float, floating point, number, real
 ++ Description:
-++ \spadtype{JuliaRealField} implements arbitrary precision floating
-++ point arithmetic using Julia Real Field (Arb based).
+++ \spadtype{JuliaFPRealBall} implements fixed precision ball
+++ arithmetic using the Nemo package
+++ (Julia Real Field - Arb based).
+++ Reference: https://arblib.org
+JuliaFPRealBall(p: PositiveInteger) : Exports == Implementation where
+  JI64      ==> JuliaInt64
+  PI        ==> PositiveInteger
+  JF64      ==> JuliaFloat64
+  jlrefVal  ==> JLREFVAL$Lisp
+  jlrefType ==> JLREFTYPE$Lisp
+  jlrefId   ==> JLREFID$Lisp
+  jlref     ==> make_jlref$Lisp
+  Exports ==> Join(JuliaRing, ConvertibleTo(InputForm), CommutativeRing,
+            FloatingPointSystem, ElementaryFunctionCategory,
+            TranscendentalFunctionCategory, DifferentialRing,
+            ConvertibleTo(String)) with
+            -- SpecialFunctionCategory) with
+    jlType   : % -> SExpression
+    jlRef    : % -> SExpression
+    jlValue  : % -> SExpression
+    jlId     : % -> SExpression
+    expm1   :  % -> %
+    ++ expm1(x) computes accurately e^x-1. It avoids the loss of precision
+    ++ involved in the direct evaluation of exp(x)-1 for small values of x.
+    log1p   : % -> %
+    ++ log1p(x) logarithm of 1+x computed accurately.
+    exp1    : () -> %
+    ++ exp1() returns the JuliaFloat ℯ (%e).
+    pi      : () -> %
+    ++ pi() returns the JuliaFloat π (%pi).
+    atan : % -> %
+    ++ atan(x) computes the inverse tangent of x.
+    atan : (%, %) -> %
+    ++ atan(x, y) computes the inverse tangent of x/y.
+    "*"      : (%, Integer) -> %
+    "/"      : (Integer, %) -> %
+    sqrt     : % -> %
+
+    --midpoint : % -> %
+    -- midpoint(x) returns the midpoint of x. 
+    --radius   : % -> JuliaRFPArbBall
+    coerce   : JI64 -> %
+    coerce   : Integer -> %
+    coerce   : JF64 -> %
+    coerce   : String -> %
+    retractIfCan  : % -> JF64
+    string   : % -> String
+    jrb   : String -> %
+    jrb   : Integer -> %
+  Implementation ==> add
+    import from JuliaUtilityFunctions
+    import from String
+    import from JuliaFloat64
+    import from JuliaInteger
+    import from JuliaFractionInteger
+    
+    jlInitialize(true)
+    jl_eval_string("@suppress_err using Nemo")$Lisp
+ 
+    Rep := SExpression
+
+    -- initialize
+    jl_eval_string(concat(["JRB", string(p),"=ArbField(", convert(p)@String,")"]))$Lisp
+
+    getind(a) ==> concat(["getindex(", "refs,_"", jlrefId a, "_")"])
+
+    jfbinop(op,a,b) ==> jlref(concat([getind(a), op, getind(b)]))
+    jfbinfunc(func,a,b) ==>
+      jlref(concat([func, "(", getind(a), ",", getind(b),")"]))
+    jfbinbop(op,a,b) ==>
+      jl_bool_eval_string(concat([getind(a), op, getind(b)]))$Lisp
+    jfunfunc(opfunc, a) ==> jlref(concat([opfunc, "(", getind(a),")"]))
+
+    precision() == p
+  
+    0 == jlref(concat(["zero(","JRB",string(p),")"]))
+    1 == jlref(concat(["one(","JRB",string(p),")"]))
+    pi() == jlref(concat(["JRB", string(p),"(π)"]))
+    exp1() == jlref(concat(["exp(","JRB",string(p),"(1))"]))
+
+    x = y  == jfbinbop("==",x,y)
+    x ~= y == jfbinbop("!=",x,y)
+    x < y  == jfbinbop("<",x,y)
+    x > y  == jfbinbop(">",x,y)
+    x >= y == jfbinbop(">=",x,y)
+    x <= y == jfbinbop("<=",x,y)
+    -- TODO: add boolean unary operator macro?
+    zero? x ==
+      jl_bool_eval_string(concat(["iszero(", getind(x),")"]))$Lisp
+    one? x ==
+      jl_bool_eval_string(concat(["isone(", getind(x),")"]))$Lisp
+
+    x + y == jfbinop("+", x, y)
+    x - y == jfbinop("-", x, y)
+    - x   == jfunfunc("-", x)
+    x : % * y : % == jfbinop("*", x, y)
+    x : % / y : % == jfbinop("/", x, y)
+
+    x : Integer * y : % == jlref(concat([getind(coerce(x)@%), "*", getind(y)]))
+    x : % * y : Integer == jlref(concat([getind(x), "*", getind(coerce(y)@%)]))
+    x : Integer / y : % == jlref(concat([getind(coerce(x)@%), "/", getind(y)]))
+    x : % / y : Integer == jlref(concat([getind(x), "/", getind(coerce(y)@%)]))
+    
+    x ^ y : Integer ==
+      jfbinop("^", x, coerce(y)@%)
+    x ^ y : Fraction(Integer) ==
+      jfbinop("^", x, jfint(y))
+
+    -- x quo y == jfbinop("div", x, y)
+    x quo y == jfbinop("÷", x, y)
+    x rem y == jfbinop("%", x, y)
+
+    jlType(x)  == jlrefType(x)
+    jlValue(x) == jlrefVal(x)
+    jlId(x)    == jlrefId(x)
+    jlRef(x)   == x pretend SExpression
+
+    sqrt(x)  == jfunfunc("√",x)
+    exp(x)   == jfunfunc("exp",x)
+    log(x)   == jfunfunc("log",x)
+    expm1(x) == jfunfunc("expm1",x)
+    log1p(x) == jfunfunc("log1p",x)
+
+
+    sin(x)  == jfunfunc("sin",x)
+    cos(x)  == jfunfunc("cos",x)
+    tan(x)  == jfunfunc("tan",x)
+    sec(x)  == jfunfunc("sec",x)
+    cot(x)  == jfunfunc("cot",x)
+    csc(x)  == jfunfunc("csc",x)
+
+    asin(x)  == jfunfunc("asin",x)
+    acos(x)  == jfunfunc("acos",x)
+    atan(x)  == jfunfunc("atan",x)
+    atan(x,y) == jfbinfunc("atan",x,y)
+    asec(x)  == jfunfunc("asec",x)
+    acot(x)  == jfunfunc("acot",x)
+    acsc(x)  == jfunfunc("acsc",x)
+
+    sinh(x)  == jfunfunc("sinh",x)
+    cosh(x)  == jfunfunc("cosh",x)
+    tanh(x)  == jfunfunc("tanh",x)
+    sech(x)  == jfunfunc("sech",x)
+    coth(x)  == jfunfunc("coth",x)
+    csch(x)  == jfunfunc("csch",x)
+
+    asinh(x)  == jfunfunc("asinh",x)
+    acosh(x)  == jfunfunc("acosh",x)
+    atanh(x)  == jfunfunc("atanh",x)
+    asech(x)  == jfunfunc("asech",x)
+    acoth(x)  == jfunfunc("acoth",x)
+    acsch(x)  == jfunfunc("acsch",x)
+
+    convert(x) : InputForm ==
+      jl_string_eval_string(concat(["string(", getind(x),")"]))$Lisp
+
+    convert(x) : String ==
+      jl_string_eval_string(concat(["string(", getind(x),")"]))$Lisp
+
+    string(x) : String ==
+      jl_string_eval_string(concat(["string(", getind(x),")"]))$Lisp
+    
+    
+
+    coerce(jf : JF64) : % == jlref(concat(["JRB",string(p),
+      "(_"", convert(jf),"_")"]))
+    coerce(i : Integer) == jlref(concat(["JRB",string(p),
+      "(_"", string(i),"_")"]))
+    coerce(s : String) == jlref(concat(["JRB", string(p),"(_"", s,"_")"]))
+    coerce(i : %) : OutputForm == jlrefVal(i)
+    jrb(s : String) : % == jlref(concat(["JRB", string(p),"(_"", s,"_")"]))
+    jrb(i : Integer) : % == jlref(concat(["JRB",string(p),
+      "(_"",string(i),"_")"]))
+
+
+)abbrev domain JRF JuliaRealField
+++ Domain for Julia Real Field based on the Arb
+++ library (arbitrary precision ball aithmetic).
+++ Author: G. Vanuxem
+++ Date Created: March. 2024
+++ Keywords: float, floating point, number, real
+++ Description:
+++ \spadtype{JuliaRealField} implements arbitrary precision ball
+++ arithmetic using the Nemo package
+++ (Julia Real Field - Arb based).
+++ Reference: https://arblib.org
 JuliaRealField() : Exports == Implementation where
   JI64      ==> JuliaInt64
   PI        ==> PositiveInteger
@@ -527,6 +715,11 @@ JuliaRealField() : Exports == Implementation where
     "*"      : (%, Integer) -> %
     "/"      : (Integer, %) -> %
     sqrt     : % -> %
+
+    --midpoint : % -> %
+    --++ midpoint(x) returns the midpoint of x. 
+    --radius   : % -> JuliaArbBall
+    --++
     -- coerce   : JI64 -> %
     coerce   : JF64 -> %
     coerce   : String -> %
@@ -568,7 +761,7 @@ JuliaRealField() : Exports == Implementation where
     0    == jlref("zero(JRF)")
     1    == jlref("one(JRF)")
     pi() == jlref("JRF(π)")
-    exp1() == jlref("JRF(ℯ)")
+    exp1() == jlref("exp(JRF(1))")
 
     x = y  == jfbinbop("==",x,y)
     x ~= y == jfbinbop("!=",x,y)
@@ -593,10 +786,10 @@ JuliaRealField() : Exports == Implementation where
     x : Integer / y : % == jlref(concat([getind(coerce(x)), "/", getind(y)]))
     x : % / y : Integer == jlref(concat([getind(x), "/", getind(coerce(y))]))
     
-    x ^ y : NonNegativeInteger ==
-      jfbinop("^", x, coerce(y pretend Integer))
-    x ^ y : PositiveInteger ==
-      jfbinop("^", x, coerce(y pretend Integer))
+    x ^ y : Integer ==
+      jfbinop("^", x, coerce(y))
+    x ^ y : Fraction(Integer) ==
+      jfbinop("^", x, jfint(y))
 
     -- x quo y == jfbinop("div", x, y)
     x quo y == jfbinop("÷", x, y)
@@ -662,14 +855,16 @@ JuliaRealField() : Exports == Implementation where
     jrf(i : Integer) : % == jlref(concat(["JRF(_"", string(i),"_")"]))
 
 )abbrev domain JCF JuliaComplexField
-++ Domain for Julia complex field based on the Arb
-++ library.
+++ Domain for Julia Complex Field based on the Arb
+++ library (arbitrary precision ball aithmetic).
 ++ Author: G. Vanuxem
 ++ Date Created: March. 2024
-++ Keywords: float, floating point, number, real
+++ Keywords: float, floating point, number, complex
 ++ Description:
-++ \spadtype{JuliaRealField} implements arbitrary precision floating
-++ point arithmetic using Julia Real Field (Arb based).
+++ \spadtype{JuliaComplexField} implements arbitrary precision ball
+++ arithmetic using the Nemo package
+++ (Julia Complex Field - Arb based).
+++ Reference: https://arblib.org
 JuliaComplexField() : Exports == Implementation where
   JI64      ==> JuliaInt64
   PI        ==> PositiveInteger
@@ -752,7 +947,7 @@ JuliaComplexField() : Exports == Implementation where
     real(x) == jlref(concat(["real(", getind(x),")"]))
     imag(x) == jlref(concat(["imag(", getind(x),")"]))
     pi() == jlref("JCF(π)")
-    exp1() == jlref("JCF(ℯ)")
+    exp1() == jlref("exp(JCF(1))")
 
     x = y  == jfbinbop("==",x,y)
     x ~= y == jfbinbop("!=",x,y)
@@ -774,10 +969,10 @@ JuliaComplexField() : Exports == Implementation where
     x : Integer / y : % == jlref(concat([getind(coerce(x)), "/", getind(y)]))
     x : % / y : Integer == jlref(concat([getind(x), "/", getind(coerce(y))]))
     
-    x ^ y : NonNegativeInteger ==
-      jfbinop("^", x, coerce(y pretend Integer))
-    x ^ y : PositiveInteger ==
-      jfbinop("^", x, coerce(y pretend Integer))
+    x ^ y : Integer ==
+      jfbinop("^", x, coerce(y))
+    x ^ y : Fraction(Integer) ==
+      jfbinop("^", x, jfint(y))
 
     -- x quo y == jfbinop("div", x, y)
     x quo y == jfbinop("÷", x, y)
@@ -834,7 +1029,7 @@ JuliaComplexField() : Exports == Implementation where
 
 
 )abbrev domain JUP JuliaUnivariatePolynomial
-++ Univariate polynomial domain using the Nemo package from Julia
+++ Univariate polynomial domain using the Nemo packages from Julia
 ++ Author: G. vanuxem
 ++ Purpose: Experimentation.
 JuliaUnivariatePolynomial(x : Symbol, R : JuliaRing):
@@ -905,7 +1100,7 @@ JuliaUnivariatePolynomial(x : Symbol, R : JuliaRing):
           coerce(p : %) : OutputForm ==
             jlRegexReplace(spjs(jlrefVal(p)),
               jlRegex(jstring "//"),jlSubstitute(jstring "/")) pretend OutputForm
-        -- Awful workaround (differentiate JZMOD vs. JGF)
+        -- Awful workaround (differentiate JZMOD from JGF)
         else if R has FiniteFieldCategory and R has ConvertibleTo(String) then
           jl_eval_string(concat(["R,", string(x), "=polynomial_ring(",
             concat(["JGF",string(size()$R pretend INT)])$String,

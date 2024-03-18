@@ -976,5 +976,6 @@ void jl_init_env(void){
 }
 
 void jl_clear_env(void){
+    // TODO: delete refs
     jl_atexit_hook(0);
 }
