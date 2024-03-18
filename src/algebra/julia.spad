@@ -31,16 +31,14 @@ JuliaString() : Exports == Implementation where
       ++ concat(l) returns the concatenated l.
       jlRegex  : % -> %
       ++ jlRegex(str) returns the JuliaString corresponding to a Julia
-      ++ regular expression, that is, "r"str"". It is only a convenient
-      ++ function.
+      ++ regular expression, that is, "r"str"". Convenient function.
       jlSubstitute  : % -> %
       ++ jlSubstitute(str) returns the JuliaString corresponding to a Julia
-      ++ subtitute expression, that is, "s"str""". It is only a convenient
-      ++ function.
+      ++ subtitute expression, that is, "s"str""". Convenient function.
       jlLatex  : % -> %
       ++ jlLatex(str) returns the JuliaString corresponding to a Julia
       ++ LaTeX expression, that is, "L"str"" if your Julia support it
-      ++ (LaTeXStrings package). It is only a convenient function.
+      ++ (LaTeXStrings package). Convenient function.
       jlRegexMatch?   : (%, %) -> Boolean
       ++ jlRegexMatch(regex,s) checks if the regular expression matches in s.
       jlRegexMatch    : (%, %) -> %

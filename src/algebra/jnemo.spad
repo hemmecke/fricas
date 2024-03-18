@@ -260,7 +260,7 @@ JuliaIntegerMod(p : PositiveInteger) : Exports == Implementation where
     Rep := SExpression
 
     -- initialize
-    jl_eval_string(concat(["JZMOD",string(p),"=residue_ring(ZZ,", string(p),")"]))$Lisp
+    jl_eval_string(concat(["JZMOD",string(p),",=residue_ring(ZZ,", string(p),")"]))$Lisp
 
     getind(a) ==> concat(["getindex(", "refs,_"", jlrefId a, "_")"])
     zmodbinop(op,a,b) ==> jlref(concat([getind(a), op, getind(b)]))
@@ -497,8 +497,7 @@ JuliaGaloisField(p : PositiveInteger) : Exports == Implementation where
 ++ Keywords: float, floating point, number, real
 ++ Description:
 ++ \spadtype{JuliaFPRealBall} implements fixed precision ball
-++ arithmetic using the Nemo package
-++ (Julia Real Field - Arb based).
+++ arithmetic using the Nemo package - Arb based.
 ++ Reference: https://arblib.org
 JuliaFPRealBall(p: PositiveInteger) : Exports == Implementation where
   JI64      ==> JuliaInt64
