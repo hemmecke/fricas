@@ -11,7 +11,7 @@ static jl_value_t *array_int64, *array_dbl, *array_cdbl, *array2_dbl, *array2_cd
 static jl_function_t *setind, *getind, *del, *str;
 static jl_datatype_t *reft;
 
-// Use '_str' instead of '_string' (that would conflict with Julia)
+// Use '_str' instead of '_string' to avoid conflict with Julia
 void jl_eval_str(char* code)
 {
     jl_eval_string(code);
@@ -536,9 +536,15 @@ void jl_call_svd(int64_t cplx, const char* func,
     jl_array_t *jl_S = (jl_array_t*) (jl_fieldref(ret, 1));
     jl_array_t *jl_Vt = (jl_array_t*) (jl_fieldref(ret, 2));
 
+#if JULIA_VERSION_MINOR > 10
+    uref = (double*) jl_array_data(jl_U, double);
+    svref = (double*) jl_array_data(jl_S, double);
+    vtref = (double*) jl_array_data(jl_Vt, double);
+#else
     uref = (double*) jl_array_data(jl_U);
     svref = (double*) jl_array_data(jl_S);
     vtref = (double*) jl_array_data(jl_Vt);
+#endif
 
     if(cplx){
         memcpy(u, uref, jl_array_len(jl_U) * 2 * sizeof(double));
@@ -580,8 +586,15 @@ void jl_call_eigen(int64_t cplx, const char* func, double *val, double *vec,
     jl_array_t *jl_values = (jl_array_t*) (jl_fieldref(ret, 0));
     jl_array_t *jl_vectors = (jl_array_t*) (jl_fieldref(ret, 1));
 
+#if JULIA_VERSION_MINOR > 10
+    valref = (double*) jl_array_data(jl_values, double);
+    vecref = (double*) jl_array_data(jl_vectors, double);
+#else
     valref = (double*) jl_array_data(jl_values);
     vecref = (double*) jl_array_data(jl_vectors);
+#endif
+
+
     if (cplx || !strncmp(jl_typename_str(jl_array_eltype((jl_value_t *) jl_values)),
                         "Complex", 7)){
         memcpy(val, valref, jl_array_len(jl_values) * 2 * sizeof(double));
@@ -629,9 +642,16 @@ void jl_call_eigen_system(int64_t cplx, char* func, double *val,
         jl_array_t *W = (jl_array_t*) (jl_fieldref(ret, 0));
         jl_array_t *VL = (jl_array_t*) (jl_fieldref(ret, 1));
         jl_array_t *VR = (jl_array_t*) (jl_fieldref(ret, 2));
+
+#if JULIA_VERSION_MINOR > 10
+        valref = (double*) jl_array_data(W, double);
+        lvecref = (double*) jl_array_data(VL, double);
+        rvecref = (double*) jl_array_data(VR, double);
+#else
         valref = (double*) jl_array_data(W);
         lvecref = (double*) jl_array_data(VL);
         rvecref = (double*) jl_array_data(VR);
+#endif
         memcpy(val, valref, jl_array_len(W) * 2 * sizeof(double));
         memcpy(lvec, lvecref, jl_array_len(VL) * 2 * sizeof(double));
         memcpy(rvec, rvecref, jl_array_len(VL) * 2 * sizeof(double));
@@ -642,10 +662,18 @@ void jl_call_eigen_system(int64_t cplx, char* func, double *val,
         jl_array_t *IW = (jl_array_t*) (jl_fieldref(ret, 1));
         jl_array_t *VL = (jl_array_t*) (jl_fieldref(ret, 2));
         jl_array_t *VR = (jl_array_t*) (jl_fieldref(ret, 3));
+
+#if JULIA_VERSION_MINOR > 10
+        rvalref = (double*) jl_array_data(RW, double);
+        ivalref = (double*) jl_array_data(IW, double);
+        lvecref = (double*) jl_array_data(VL, double);
+        rvecref = (double*) jl_array_data(VR, double);
+#else
         rvalref = (double*) jl_array_data(RW);
         ivalref = (double*) jl_array_data(IW);
         lvecref = (double*) jl_array_data(VL);
         rvecref = (double*) jl_array_data(VR);
+#endif
 
         for(size_t i=0; i < jl_array_len(RW); i++){
             val[2*i] = rvalref[i];
@@ -765,7 +793,13 @@ void jl_call_iarray_2dfunction(int64_t cplx, const char* func, int64_t *ip,
     }
     JL_GC_PUSH1(&ret);
     jl_array_t *ipiv = (jl_array_t*) (jl_fieldref(ret, 1));
+
+#if JULIA_VERSION_MINOR > 10
+    iptmp = (int64_t *) jl_array_data(ipiv, int64_t);
+#else
     iptmp = (int64_t *) jl_array_data(ipiv);
+#endif
+
     memcpy(ip, iptmp, jl_array_len(ipiv) * sizeof(int64_t));
     JL_GC_POP();
     return;
@@ -924,7 +958,13 @@ void jl_call_array_2dfunction(int64_t acplx, int64_t cplx,
         return;
     }
     JL_GC_PUSH1(&ret);
+
+#if JULIA_VERSION_MINOR > 10
+    svref = (double*) jl_array_data(ret, double);
+#else
     svref = (double*) jl_array_data(ret);
+#endif
+
     if (acplx && !strncmp(jl_typename_str(jl_array_eltype((jl_value_t *) ret)),
             "Complex", 7)){
         memcpy(arr, svref, jl_array_len(ret) * 2 * sizeof(double));
@@ -949,6 +989,7 @@ void jl_add_module(char *module){
 */
 
 void jl_init_env(void){
+    int bak, new;
     jl_options.handle_signals = JL_OPTIONS_HANDLE_SIGNALS_OFF;
     jl_init();
     jl_complex64_type = (jl_value_t *) jl_eval_string("ComplexF64");
@@ -973,6 +1014,8 @@ void jl_init_env(void){
     // Use matrix mul! by default and not the one from Nemo
     jl_eval_str("using LinearAlgebra");
     jl_eval_str("a=[1.0 2;3 3];b=similar(a);mul!(b,a,a);");
+    //jl_eval_str("@suppress_err using Nemo");
+    jl_eval_str("using Nemo");
 }
 
 void jl_clear_env(void){

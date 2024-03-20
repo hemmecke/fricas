@@ -137,7 +137,6 @@ JuliaRealLinearAlgebra() : Exports == Implementation where
         ++ your needs. 
     Implementation ==> add
         import from JuliaUtilityFunctions
-        jlUsing(coerce("LinearAlgebra"))
         jlImport(coerce("LinearAlgebra.peakflops"))
         jlImport(coerce("LinearAlgebra.LAPACK.gesv!"))
         jlImport(coerce("LinearAlgebra.LAPACK.geev!"))
@@ -495,7 +494,6 @@ JuliaComplexLinearAlgebra() : Exports == Implementation where
         ++ Otherwise, returns a non pricipal matrix logarithm of m if possible.
     Implementation ==> add
         import from JuliaUtilityFunctions
-        jlUsing(coerce("LinearAlgebra"))
         jlImport(coerce("LinearAlgebra.LAPACK.gesv!"))
         jlImport(coerce("LinearAlgebra.LAPACK.geev!"))
 
@@ -756,7 +754,6 @@ JuliaF64MatrixTranscendentalFunctions() : Exports == Implementation where
         ++ acoth(m) computes the inverse matrix hyperbolic cotangent of m.
     Implementation ==> add
         import from JuliaUtilityFunctions
-        jlUsing(coerce("LinearAlgebra"))
 
         sin(m : JF64MAT) ==
             nr := nrows(m)
@@ -1098,7 +1095,6 @@ JuliaComplexF64MatrixTranscendentalFunctions() : Exports == Implementation where
         ++ acoth(m) computes the inverse matrix hyperbolic cotangent of m.
     Implementation ==> add
         import from JuliaUtilityFunctions
-        jlUsing(coerce("LinearAlgebra"))
 
         sin(m : JCF64MAT) ==
             nr := nrows(m)

@@ -113,7 +113,6 @@ JuliaFloat64Vector() : Exports == Implementation where
         ++ By default it is the Julia version.
     Implementation ==> add
         import from JuliaUtilityFunctions
-        jlUsing(coerce("LinearAlgebra"))
         defined?(func) ==>
             not jlDefined?(func) =>
                 error concat(string(func), " is not defined in Julia")
@@ -519,7 +518,6 @@ JuliaComplexF64Vector() :  Exports == Implementation where
     Implementation ==> add
         import from JuliaUtilityFunctions
         import from JuliaComplexLinearAlgebra
-        jlUsing(coerce("LinearAlgebra"))
         defined?(func) ==>
             not jlDefined?(func) =>
                 error concat(string(func), " is not defined in Julia")

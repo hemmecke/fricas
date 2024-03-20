@@ -46,7 +46,7 @@ JuliaInteger() : Exports == Implementation where
     import from String
     
     jlInitialize(true)
-    jl_eval_string("@suppress_err using Nemo")$Lisp
+    
  
     Rep := SExpression
 
@@ -145,7 +145,7 @@ JuliaFractionInteger() : Exports == Implementation where
     import from String
     
     jlInitialize(true)
-    jl_eval_string("@suppress_err using Nemo")$Lisp
+    
 
     Rep := SExpression
 
@@ -255,7 +255,7 @@ JuliaIntegerMod(p : PositiveInteger) : Exports == Implementation where
     import from JuliaInteger
     
     jlInitialize(true)
-    jl_eval_string("@suppress_err using Nemo")$Lisp
+    
 
     Rep := SExpression
 
@@ -381,7 +381,7 @@ JuliaGaloisField(p : PositiveInteger) : Exports == Implementation where
     import from String
     
     jlInitialize(true)
-    jl_eval_string("@suppress_err using Nemo")$Lisp
+    
 
     Rep := SExpression
 
@@ -498,7 +498,7 @@ JuliaGaloisField(p : PositiveInteger) : Exports == Implementation where
 ++ Description:
 ++ \spadtype{JuliaFPRealBall} implements fixed precision ball
 ++ arithmetic using the Nemo package - Arb based.
-++ Reference: https://arblib.org
+++ Reference: (previously https://arblib.org)
 JuliaFPRealBall(p: PositiveInteger) : Exports == Implementation where
   JI64      ==> JuliaInt64
   PI        ==> PositiveInteger
@@ -533,9 +533,11 @@ JuliaFPRealBall(p: PositiveInteger) : Exports == Implementation where
     "/"      : (Integer, %) -> %
     sqrt     : % -> %
 
-    --midpoint : % -> %
-    -- midpoint(x) returns the midpoint of x. 
-    --radius   : % -> JuliaRFPArbBall
+    midpoint : % -> %
+    ++ midpoint(x) returns the midpoint of x. 
+    radius   : % -> %
+    ++ radius(x) returns  the radius of x.
+
     coerce   : JI64 -> %
     coerce   : Integer -> %
     coerce   : JF64 -> %
@@ -552,12 +554,12 @@ JuliaFPRealBall(p: PositiveInteger) : Exports == Implementation where
     import from JuliaFractionInteger
     
     jlInitialize(true)
-    jl_eval_string("@suppress_err using Nemo")$Lisp
+    
  
     Rep := SExpression
 
     -- initialize
-    jl_eval_string(concat(["JFPRB", string(p),"=ArbField(", convert(p)@String,")"]))$Lisp
+    jl_eval_string(concat(["JFPRB", string(p),"=ArbField(", string(p),")"]))$Lisp
 
     getind(a) ==> concat(["getindex(", "refs,_"", jlrefId a, "_")"])
 
@@ -574,6 +576,9 @@ JuliaFPRealBall(p: PositiveInteger) : Exports == Implementation where
     1 == jlref(concat(["one(","JFPRB",string(p),")"]))
     pi() == jlref(concat(["JFPRB", string(p),"(π)"]))
     exp1() == jlref(concat(["exp(","JFPRB",string(p),"(1))"]))
+
+    midpoint(x) == jfunfunc("midpoint", x)
+    radius(x) == jfunfunc("radius", x)
 
     x = y  == jfbinbop("==",x,y)
     x ~= y == jfbinbop("!=",x,y)
@@ -664,8 +669,7 @@ JuliaFPRealBall(p: PositiveInteger) : Exports == Implementation where
     coerce(s : String) == jlref(concat(["JFPRB", string(p),"(_"", s,"_")"]))
     coerce(i : %) : OutputForm == jlrefVal(i)
     jrb(s : String) : % == jlref(concat(["JFPRB", string(p),"(_"", s,"_")"]))
-    jrb(i : Integer) : % == jlref(concat(["JFPRB",string(p),
-      "(_"",string(i),"_")"]))
+    jrb(i : Integer) : % == jlref(concat(["JFPRB",string(p),"(_"",string(i),"_")"]))
 
 )abbrev domain JFPCB JuliaFPComplexBall
 ++ Domain for Julia fixed precision complex balls arithmetic.
@@ -730,12 +734,12 @@ JuliaFPComplexBall(p: PositiveInteger) : Exports == Implementation where
     import from JuliaFractionInteger
     
     jlInitialize(true)
-    jl_eval_string("@suppress_err using Nemo")$Lisp
+    
  
     Rep := SExpression
 
     -- initialize
-    jl_eval_string(concat(["JFPCB", string(p),"=AcbField(", convert(p)@String,")"]))$Lisp
+    jl_eval_string(concat(["JFPCB", string(p),"=AcbField(", string(p),")"]))$Lisp
 
     getind(a) ==> concat(["getindex(", "refs,_"", jlrefId a, "_")"])
 
@@ -871,13 +875,10 @@ JuliaRealField() : Exports == Implementation where
     ++ atan(x, y) computes the inverse tangent of x/y.
     "*"      : (%, Integer) -> %
     "/"      : (Integer, %) -> %
-    sqrt     : % -> %
-
-    --midpoint : % -> %
-    --++ midpoint(x) returns the midpoint of x. 
-    --radius   : % -> JuliaArbBall
-    --++
-    -- coerce   : JI64 -> %
+    midpoint : % -> %
+    ++ midpoint(x) returns the midpoint of x. 
+    radius   : % -> %
+    ++ radius(x) returns  the radius of x.
     coerce   : JF64 -> %
     coerce   : String -> %
     retractIfCan  : % -> JF64
@@ -892,7 +893,7 @@ JuliaRealField() : Exports == Implementation where
     import from JuliaFractionInteger
     
     jlInitialize(true)
-    jl_eval_string("@suppress_err using Nemo")$Lisp
+    
  
     Rep := SExpression
 
@@ -919,6 +920,9 @@ JuliaRealField() : Exports == Implementation where
     1    == jlref("one(JRF)")
     pi() == jlref("JRF(π)")
     exp1() == jlref("exp(JRF(1))")
+
+    midpoint(x) == jfunfunc("midpoint", x)
+    radius(x) == jfunfunc("radius", x)
 
     x = y  == jfbinbop("==",x,y)
     x ~= y == jfbinbop("!=",x,y)
@@ -1077,7 +1081,7 @@ JuliaComplexField() : Exports == Implementation where
     import from JuliaFractionInteger
     
     jlInitialize(true)
-    jl_eval_string("@suppress_err using Nemo")$Lisp
+    
  
     Rep := SExpression
 
@@ -1221,7 +1225,7 @@ JuliaUnivariatePolynomial(x : Symbol, R : JuliaRing):
         import from String
     
         jlInitialize(true)
-        jl_eval_string("@suppress_err using Nemo")$Lisp
+        
         Rep := SExpression
 
         jlId(p)    == jlrefId p

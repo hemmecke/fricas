@@ -488,7 +488,7 @@ JuliaFloat() : Exports == Implementation where
     import from JuliaFractionInteger
     
     jlInitialize(true)
-    jl_eval_string("@suppress_err using Nemo")$Lisp
+    
  
     Rep := SExpression
 
@@ -730,7 +730,6 @@ JuliaUtilityFunctions() : Exports == Implementation where
     import from JuliaString
     init_julia_env()$Lisp
     jl_using_package("Random")$Lisp
-    jl_using_package("Suppressor")$Lisp
 
     defined?(func) ==>
       not jlDefined?(func)$JuliaUtilityFunctions =>
