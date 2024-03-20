@@ -8,10 +8,9 @@
 [FriCAS](https://fricas.github.io) is a general purpose computer algebra
 system (CAS).
 
-This work-in-progress repository includes some related [Julia](https://julialang.org)
-categories/domains/packages to use Julia for specific operations.
-It is only supported with SBCL or Clozure CL and a a SBCL based FriCAS is
-only supported with Julia 1.10.0 as of now, see [Caveats](#caveats).
+In this work-in-progress repository, wrappers to some [Julia](https://julialang.org)
+specific operations are added to FriCAS. It supports SBCL or Clozure CL build but, as of now, only Julia 1.10.0 is
+supported for a SBCL based FriCAS, see [Caveats](#caveats). It should not be considered production-ready.
 
 ## Building and Installing
 
@@ -20,7 +19,7 @@ consult <https://fricas.github.io>.
 
 To build FriCAS with Julia support, a simple
 <code>./configure --enable-julia</code> should do the trick.
-Notice that with SBCL (default) you will have to increase its dynamic space size, see [Caveats](#caveats).
+Note that with SBCL (default) you will have to increase its dynamic space size use, see [Caveats](#caveats).
 The <code>julia</code> executable needs to be available in your PATH.
 If you want to add Jupyter support with a SBCL based FriCAS, make sure [Hunchentoot](https://edicl.github.io/hunchentoot/) is installed.
 On a Debian like system add it with <code>sudo apt install cl-hunchentoot</code>
@@ -30,7 +29,7 @@ To know which categories/domains/packages are added to FriCAS issue in the
 FriCAS interpreter <code>)what things julia</code> or use HyperDoc:
 
 ```
-(1) -> )what things Julia
+(1) -> )what things julia
 
 Operations whose names satisfy the above pattern(s):
 
@@ -44,19 +43,24 @@ juliaVPrint
 Categories with names matching patterns:
      julia
 
- JMATCAT  JuliaMatrixCategory          JTYPE    JuliaType
- JVECCAT  JuliaVectorCategory
+ JMATCAT  JuliaMatrixCategory          JRING    JuliaRing
+ JTYPE    JuliaType                    JVECCAT  JuliaVectorCategory
 --------------------------------- Domains ---------------------------------
 
 Domains with names matching patterns:
      julia
 
- JCF64    JuliaComplexF64              JCF64MAT JuliaComplexF64Matrix
- JCF64SMA JuliaComplexF64SquareMatrix  JCF64VEC JuliaComplexF64Vector
- JF64     JuliaFloat64                 JF64MAT  JuliaFloat64Matrix
- JF64SMAT JuliaF64SquareMatrix         JF64VEC  JuliaFloat64Vector
+ JCF      JuliaComplexField            JCF64    JuliaComplexF64
+ JCF64MAT JuliaComplexF64Matrix        JCF64SMA JuliaComplexF64SquareMatrix
+ JCF64VEC JuliaComplexF64Vector        JF64     JuliaFloat64
+ JF64MAT  JuliaFloat64Matrix           JF64SMAT JuliaF64SquareMatrix
+ JF64VEC  JuliaFloat64Vector           JFINT    JuliaFractionInteger
+ JFLOAT   JuliaFloat                   JFPCB    JuliaFPComplexBall
+ JFPRB    JuliaFPRealBall              JGF      JuliaGaloisField
  JI64     JuliaInt64                   JI64VEC  JuliaInt64Vector
+ JINT     JuliaInteger                 JRF      JuliaRealField
  JSTR     JuliaString                  JSYM     JuliaSymbol
+ JUP      JuliaUnivariatePolynomial    JZMOD    JuliaIntegerMod
 -------------------------------- Packages ---------------------------------
 
 Packages with names matching patterns:
@@ -69,7 +73,6 @@ Packages with names matching patterns:
  JF64SF2  JuliaFloat64SpecialFunctions2
  JPLOT    JuliaPlotFunctions           JRLA     JuliaRealLinearAlgebra
  JUF      JuliaUtilityFunctions
- JUPF     JuliaUnivariatePolynomialFunctions
 --------------- System Commands for User Level: development ---------------
 
 System commands at this level matching patterns:
@@ -79,10 +82,12 @@ julia     juliad
 
 ------------------------- System Command Synonyms -------------------------
 
-   No user-defined synonyms satisfying patterns:
-       julia
+user-defined synonyms satisfying patterns:
+     ju
 
-(1) ->
+ )ju ............................ )julia
+ )jud ........................... )juliad
+
 ```
 
 If you want to build and install locally the HTML documentation,
@@ -124,6 +129,6 @@ Current development goals:
 
 ## Caveats
 
-With SBCL, you will need to increase the original dynamic space size (thanks to Qian Yun who noticed that with the introduction of the RootSimplification package), so, if your SBCL uses the original dynamic space size, increase it at configure time with <code>./configure --with-lisp='sbcl --dynamic-space-size=2048'</code> or whatever you want as dynamic space size. For more information, see the [SBCL documentation](https://www.sbcl.org/manual/index.html) or the INSTALL file.
+With SBCL, you will need to increase the original dynamic space size, so, if your SBCL uses the original dynamic space size, increase it at configure time with <code>./configure --with-lisp='sbcl --dynamic-space-size=2048'</code> or whatever you want as dynamic space size. For more information, see the [SBCL documentation](https://www.sbcl.org/manual/index.html) or the INSTALL file.
 
-Julia support with SBCL seems to be erratic, depending of the Julia version used. The 1.10.0 version seems to have solved problems related to memory management interactions with SBCL, but since Julia 1.10.1, problems occur again. So use Clozure CL or, imperatively, use Julia-1.10.0 with SBCL. I need to further investigate differences between those versions.
+Julia support with SBCL is erratic, depending on the Julia version used. The 1.10.0 version seems to have solved problems related to memory management interactions with SBCL, but with Julia 1.10.1 and 1.10.2 problems occur again. Note that with Julia 1.11.0-alpha2, FriCAS seems to work fine. More work needs to be done in this regards. So use Clozure CL or, imperatively, use a version of Julia that is known to be compatible.

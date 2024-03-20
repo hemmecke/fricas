@@ -734,7 +734,6 @@ JuliaFPComplexBall(p: PositiveInteger) : Exports == Implementation where
     import from JuliaFractionInteger
     
     jlInitialize(true)
-    
  
     Rep := SExpression
 
@@ -834,7 +833,7 @@ JuliaFPComplexBall(p: PositiveInteger) : Exports == Implementation where
 
 )abbrev domain JRF JuliaRealField
 ++ Domain for Julia Real Field based on the Arb
-++ library (arbitrary precision ball aithmetic).
+++ library (arbitrary precision ball arithmetic).
 ++ Author: G. Vanuxem
 ++ Date Created: March. 2024
 ++ Keywords: float, floating point, number, real
@@ -893,10 +892,8 @@ JuliaRealField() : Exports == Implementation where
     import from JuliaFractionInteger
     
     jlInitialize(true)
-    
- 
-    Rep := SExpression
 
+    Rep := SExpression
     -- initialize
     jl_eval_string(concat(["JRF","=RealField()"]))$Lisp
 
