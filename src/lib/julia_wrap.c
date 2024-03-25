@@ -83,7 +83,7 @@ char* jl_string_eval_string(char* code)
     return(jl_string_data(result));
 }
 
-char* jl_setindex_wrap_eval_string(const char* hash, const char* code)
+char* jl_setindex_wrap_eval_string(const char* index, const char* code)
 {
     char* nstr = "";
     jl_value_t *res, *var, *ret;
@@ -97,19 +97,19 @@ char* jl_setindex_wrap_eval_string(const char* hash, const char* code)
         return(nstr);
     }
     JL_GC_PUSH1(&var);
-    ret = jl_cstr_to_string(hash);
+    ret = jl_cstr_to_string(index);
     jl_call3(setind, refs, var, ret);
     JL_GC_POP();
     return(jl_string_data(ret));    
 }
 
-void jl_delete_wrapped_hash(const char *hash)
+void jl_delete_wrapped_index(const char *index)
 {
     jl_value_t *res;
 
-    //printf("Freeing... %s\n", hash);
-    res = jl_call2(del, refs, jl_cstr_to_string(hash));
-    //printf("%s freed\n", hash);
+    //printf("Freeing... %s\n", index);
+    res = jl_call2(del, refs, jl_cstr_to_string(index));
+    //printf("%s freed\n", index);
 
     if (jl_exception_occurred()) {
         jl_call2(jl_get_function(jl_base_module, "showerror"),
@@ -122,11 +122,16 @@ void jl_delete_wrapped_hash(const char *hash)
     return;
 }
 
-char* jl_getindex_wrapped_hash(const char *hash)
+char* jl_getindex_wrapped_index(const char *index)
 {
     char* nstr = "";
     jl_value_t *result;
-    result = jl_call2(getind, refs, jl_cstr_to_string(hash));
+
+    if (!strcmp(nstr, index)){
+        jl_printf(jl_stderr_stream(), "ERROR: getindex: empty index\n");
+        return(nstr);
+    }
+    result = jl_call2(getind, refs, jl_cstr_to_string(index));
     if (jl_exception_occurred()) {
         jl_call2(jl_get_function(jl_base_module, "showerror"),
                 jl_stderr_obj(),

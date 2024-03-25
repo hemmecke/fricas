@@ -28,6 +28,7 @@ INTERPSYS=FRICAS=${FRICAS} FRICAS_INITFILE='' $(fricas_build_bindir)/interpsys
 
 JULIALIST =
 JULIACATLIST =
+JULIACATDOMS =
 
 SPAD_SRCS= \
      acplot aggcat2 aggcat algcat algext algfact \
@@ -391,8 +392,9 @@ GUESSLIST= SMPEXPR FAMR2 NEWTON UFPS GOPT GUESSF1 GUESSP1\
 ifdef JULIA_WRAP_SO_TARGET
 JULIALIST = JTYPE JRING JVECCAT JMATCAT JUF JSTR JSYM JF64 JCF64 JF64VEC JF64MAT JCF64VEC \
 	    JCF64MAT JF64SMAT JCF64SMA JF64MTF JCF64MTF JF64SF JF64SF2 JDRAW JRLA JCLA \
-	    JPLOT JI64 JI64VEC JINT JFINT JFLOAT JZMOD JGF JFPRB JFPCB JRF JCF JUP 
+	    JPLOT JI64 JI64VEC JINT JFINT JFLOAT JMP JZMOD JGF JFPRB JFPCB JRF JCF JUP 
 JULIACATLIST = JTYPE JRING JVECCAT JMATCAT
+JULIACATDOMS = JRING
 endif
 
 TESTLIST= TESTCNT TESTAUX TESTUNIT
@@ -412,7 +414,7 @@ all-ax all-algebra: abbrev.list
 
 ifeq ($(BUILD_WAY),use_lisp)
 SPADLIST99=${EXTRASPADS} ${GUESSLIST} ${TESTLIST} ${JULIALIST} \
-               $(patsubst %, %-, ${CATDOMS})
+               $(patsubst %, %-, ${CATDOMS}) $(patsubst %, %-, ${JULIACATDOMS})
 
 FULL_FASL_LIST=${SPADLIST} ${SPADLIST99}
 LISTS=1 2 3 4 5 6 7 8 99
@@ -474,7 +476,7 @@ stamp-oboo3: stamp-db
            for A in ${CATLIST} ${JULIACATLIST} ${DOMLIST}; do \
               cp $$A.NRLIB/$$A.$(FASLEXT) ${OUT}/$$A.$(FASLEXT) || exit 1 ; \
            done; \
-           for A in ${CATDOMS} ; do \
+           for A in ${CATDOMS} ${JULIACATDOMS} ; do \
               cp $${A}-.NRLIB/$${A}-.$(FASLEXT) ${OUT}/$${A}-.$(FASLEXT)  || exit 1 ; \
            done; \
            rm -rf *.NRLIB ; \
@@ -541,7 +543,7 @@ spad.mak : Makefile
 	@for A in ${NSPADLIST} ; do \
 	    $(ECHO_B) "${OUT}"/$${A}."$(FASLEXT) " >> spad.mak ; \
 	done
-	@for A in $(patsubst %, ${OUT}/%-.$(FASLEXT), ${CATDOMS}) ; do \
+	@for A in $(patsubst %, ${OUT}/%-.$(FASLEXT), ${CATDOMS} ${JULIACATDOMS}) ; do \
 	    $(ECHO_B) $${A}" " >> spad.mak ; \
 	done
 	@for A in ${NSPADLIST} ; do \

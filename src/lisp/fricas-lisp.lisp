@@ -1051,7 +1051,7 @@ with this hack and will try to convince the GCL crowd to fix this.
 (defparameter *jqueue* (sb-concurrency:make-queue :name "JuliaQueue"))
 (defun jgc ()
     (loop while (not (sb-concurrency:queue-empty-p *jqueue*))
-     do (|jl_delete_wrapped_hash| (sb-concurrency:dequeue *jqueue*))))
+     do (|jl_delete_wrapped_index| (sb-concurrency:dequeue *jqueue*))))
 )
 #-(and :sbcl :fricas_has_julia)
 (defun jgc ())

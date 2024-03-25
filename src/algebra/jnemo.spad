@@ -2,15 +2,26 @@
 -- Arb : polynomials, matrices and special functions over balls over R and C
 -- Antic : algebraic number field element arithmetic
 -- Calcium : exact real and complex numbers, including algebraic numbers
-
-
 )abbrev category JRING JuliaRing
 ++ Category for Julia elements
 ++ Author: G.Vanuxem
 ++ Date Created: March 2024
 ++ Description:
 ++  Parent category of Julia Ring elements.
-JuliaRing() : Category == Join(JuliaType, Ring)
+JuliaRing() : Category == Join(JuliaType, Ring,
+        ConvertibleTo(String)) with
+    jlref   : String -> %
+    jlType  : % -> String
+    jlValue : % -> String
+    jlId    : % -> String
+    jlRef   : % -> SExpression
+    string  : % -> String
+  add
+    jlref(s)   == make_jlref(s)$Lisp
+    jlId(p)    == JLREFID(p)$Lisp pretend String
+    jlValue(p) == JLREFVAL(p)$Lisp pretend String
+    jlType(p)  == JLREFTYPE(p)$Lisp pretend String
+    jlRef(p)   == p pretend SExpression
 
 )abbrev domain JINT JuliaInteger
 ++ Domain for Julia Integers
@@ -22,19 +33,9 @@ JuliaRing() : Category == Join(JuliaType, Ring)
 ++ https://flintlib.org/
 JuliaInteger() : Exports == Implementation where
   JI64      ==> JuliaInt64
-  jlrefVal  ==> JLREFVAL$Lisp
-  jlrefType ==> JLREFTYPE$Lisp
-  jlrefId   ==> JLREFID$Lisp
-  jlref     ==> make_jlref$Lisp
   parsei    ==> parse_integer$ScanningUtilities
-  Exports ==> Join(JuliaRing, OrderedSet,
-          EuclideanDomain, ConvertibleTo(String)) with
-    jlType  : % -> SExpression
-    jlRef   : % -> SExpression
-    jlValue : % -> SExpression
-    jlId    : % -> SExpression
+  Exports ==> Join(JuliaRing, OrderedSet, EuclideanDomain) with
     "*"     : (%, Integer) -> %
-    string  : % -> String
     coerce  : JI64 -> %
     coerce  : % -> JI64
     coerce  : % -> Integer
@@ -46,11 +47,10 @@ JuliaInteger() : Exports == Implementation where
     import from String
     
     jlInitialize(true)
-    
  
     Rep := SExpression
 
-    getind(a) ==> concat(["getindex(", "refs,_"", jlrefId a, "_")"])
+    getind(a) ==> concat(["getindex(", "refs,_"", jlId a, "_")"])
     ibinop(op,a,b) ==> jlref(concat([getind(a), op, getind(b)]))
     iunfunc(func,a) ==> jlref(concat([func, "(", getind(a),")"]))
     ibinfunc(func,a,b) ==>
@@ -94,24 +94,20 @@ JuliaInteger() : Exports == Implementation where
     gcd(a,b) == ibinfunc("gcd",a,b)
     lcm(a,b) == ibinfunc("lcm",a,b)
 
-    jlType(x)  == jlrefType(x)
-    jlValue(x) == jlrefVal(x)
-    jlId(x)    == jlrefId(x)
-    jlRef(x)   == x pretend SExpression
-    string(x) : String == jlrefVal(x) pretend String
+    string(x) : String == jlValue(x)
 
-    convert(x) : String == jlrefVal(x) pretend String
+    convert(x) : String == jlValue(x)
     coerce(jsi : %): JI64 == 
-        x := parsei(jlrefVal(jsi))
+        x := parsei(jlValue(jsi))
         coerce(x)
     coerce(i : Integer) ==
       jlref(concat(["ZZ(",string(i),")"]))
-    coerce(i : %) : OutputForm == jlrefVal(i)
-    coerce(x : %) : Integer  == parsei(jlrefVal x)
+    coerce(i : %) : OutputForm == jlValue(i) pretend OutputForm
+    coerce(x : %) : Integer  == parsei(jlValue x)
     coerce(x : %) : Expression(Integer)  ==
-      coerce(parsei(jlrefVal x))$Expression(Integer)
+      coerce(parsei(jlValue x))$Expression(Integer)
     coerce(x : %) : AlgebraicNumber  ==
-      coerce(parsei(jlrefVal x))$AlgebraicNumber
+      coerce(parsei(jlValue x))$AlgebraicNumber
     jint(i : Integer) : % == jlref(concat(["ZZ(", string(i),")"]))
 
 )abbrev domain JFINT JuliaFractionInteger
@@ -123,19 +119,10 @@ JuliaInteger() : Exports == Implementation where
 ++  using the Nemo package for Julia (FLINT based).
 ++ https://flintlib.org/
 JuliaFractionInteger() : Exports == Implementation where
-  jlrefVal  ==> JLREFVAL$Lisp
-  jlrefType ==> JLREFTYPE$Lisp
-  jlrefId   ==> JLREFID$Lisp
-  jlref     ==> make_jlref$Lisp
   JINT      ==> JuliaInteger
   Exports ==> Join(JuliaRing, QuotientFieldCategory(JuliaInteger),
             ConvertibleTo(String)) with
-    jlType  : % -> SExpression
-    jlRef   : % -> SExpression
-    jlValue : % -> SExpression
-    jlId    : % -> SExpression
     "*"     : (%, Integer) -> %
-    string  : % -> String
     coerce  : Fraction(Integer) -> %
     coerce  : JuliaInteger -> %
     jfint   : Integer -> %
@@ -145,12 +132,11 @@ JuliaFractionInteger() : Exports == Implementation where
     import from String
     
     jlInitialize(true)
-    
 
     Rep := SExpression
 
     spjs(str) ==> str pretend JuliaString
-    getind(a) ==> concat(["getindex(", "refs,_"", jlrefId a, "_")"])
+    getind(a) ==> concat(["getindex(", "refs,_"", jlId a, "_")"])
     fibinop(op,a,b) ==> jlref(concat([getind(a), op, getind(b)]))
     fiunfunc(func, a) ==> jlref(concat([func, "(", getind(a),")"]))
     fibinfunc(func,a,b) ==>
@@ -191,14 +177,10 @@ JuliaFractionInteger() : Exports == Implementation where
     x quo y == fibinop("÷", x, y)
     -- x quo y == fibinop("div", x, y)
     x rem y == fibinop("%", x, y)
-    
-    jlType(x)  == jlrefType(x)
-    jlValue(x) == jlrefVal(x)
-    jlId(x)    == jlrefId(x)
-    jlRef(x)   == x pretend SExpression
-    string(x)  == jlrefVal(x) pretend String
 
-    convert(x) : String == jlrefVal(x) pretend String
+    string(x)  == jlValue(x)
+
+    convert(x) : String == jlValue(x)
     coerce(x : JuliaInteger) : % ==
       jlref(concat(["QQ(", getind(x), ")"]))
     coerce(i : Integer) ==
@@ -207,10 +189,197 @@ JuliaFractionInteger() : Exports == Implementation where
       jlref(concat(["QQ(", string(numer x),
         "//", string(denom x),")"]))
     coerce(fi : %) : OutputForm ==
-      jlRegexReplace(spjs(jlrefVal(fi)),
+      jlRegexReplace(spjs(jlValue(fi)),
         jlRegex(jstring "//"),jlSubstitute(jstring "/")) pretend OutputForm
     jfint(i : Integer) == coerce(i)
     jfint(fi : Fraction Integer) == coerce(fi)
+
+)abbrev domain JFLOAT JuliaFloat
+++ Domain for Julia (Big) Floats
+++ Author: G. Vanuxem
+++ Date Created: Feb. 2024
+++ Keywords: float, floating point, number
+++ Description:
+++  \spadtype{JuliaFloat} implements arbitrary precision floating
+++  point arithmetic using Julia BigFloats (MPFR based).
+++ https://www.mpfr.org/
+JuliaFloat() : Exports == Implementation where
+  JI64      ==> JuliaInt64
+  PI        ==> PositiveInteger
+  JF64      ==> JuliaFloat64
+  jlrefVal  ==> JLREFVAL$Lisp
+  jlrefType ==> JLREFTYPE$Lisp
+  jlrefId   ==> JLREFID$Lisp
+  jlref     ==> make_jlref$Lisp
+  Exports ==> Join(JuliaRing, ConvertibleTo(InputForm), CommutativeRing,
+            FloatingPointSystem, arbitraryPrecision, ElementaryFunctionCategory,
+            TranscendentalFunctionCategory, DifferentialRing,
+            ConvertibleTo(String)) with
+            -- SpecialFunctionCategory) with
+    precision: % -> PositiveInteger
+    ++ precision(x) returns the precision of x.
+    precision: (%, PI) -> %
+    ++ precision(x, p) returns a copy of x with precision p.
+    expm1   :  % -> %
+    ++ expm1(x) computes accurately ℯ^x-1. It avoids the loss of precision
+    ++ involved in the direct evaluation of exp(x)-1 for small values of x.
+    exp2  : % -> %
+    ++ exp2(x) computes the base 2 exponential of x.
+    exp10 : % -> %
+    ++ exp10(x) computes the base 10 exponential of x. 
+    log1p : % -> %
+    ++log1p(x) computes accurately log(1+x)
+    log2  : % -> %
+    ++ log2(x) computes the base 2 logarithm of x.
+    log10 : % -> %
+    ++ log10(x) computes the base 10 logarithm of x.  
+    exp1    : () -> %
+    ++ exp1() returns the JuliaFloat ℯ (%e)-((())) .
+    pi      : () -> %
+    ++ pi() returns the JuliaFloat π (%pi).
+    atan : % -> %
+    ++ atan(x) computes the inverse tangent of x.
+    atan : (%, %) -> %
+    ++ atan(x, y) computes the inverse tangent of x/y.
+    "*"      : (%, Integer) -> %
+    "/"      : (Integer, %) -> %
+    sqrt     : % -> %
+    coerce   : JI64 -> %
+    coerce   : JF64 -> %
+    retractIfCan  : % -> JF64
+    jfloat   : String -> %
+    jfloat   : JuliaString -> %
+    jfloat   : Integer -> %
+    jfloat   : JuliaFloat64 -> %
+  Implementation ==> add
+    import from JuliaUtilityFunctions
+    import from String
+    import from JuliaFloat64
+    import from JuliaInteger
+    import from JuliaFractionInteger
+    
+    jlInitialize(true)
+    
+ 
+    Rep := SExpression
+
+    getind(a) ==> concat(["getindex(", "refs,_"", jlrefId a, "_")"])
+
+    jfbinop(op,a,b) ==> jlref(concat([getind(a), op, getind(b)]))
+    jfbinfunc(func,a,b) ==>
+      jlref(concat([func, "(", getind(a), ",", getind(b),")"]))
+    jfbinbop(op,a,b) ==>
+      jl_bool_eval_string(concat([getind(a), op, getind(b)]))$Lisp
+    jfunfunc(opfunc, a) ==> jlref(concat([opfunc, "(", getind(a),")"]))
+
+    precision() ==
+      jl_int64_eval_string("precision(BigFloat)")$Lisp pretend PI
+    precision(p : PI) ==
+      oldp := precision()
+      jl_eval_string(concat(["setprecision(BigFloat,",string(p),")"]))$Lisp
+      oldp
+    precision(x : %) ==
+      jl_int64_eval_string(concat(["precision(", getind(x),")"]))$Lisp pretend PI
+    precision(x : %, p : PI) ==
+      tmp : String := concat(["setprecision(", getind(x),",", string(p),")"])
+      jlref(tmp)
+
+  
+    0    == jlref("zero(BigFloat)")
+    1    == jlref("one(BigFloat)")
+    pi() == jlref("BigFloat(π)")
+    exp1() == jlref("BigFloat(ℯ)")
+
+    x = y  == jfbinbop("==",x,y)
+    x ~= y == jfbinbop("!=",x,y)
+    x < y  == jfbinbop("<",x,y)
+    x > y  == jfbinbop(">",x,y)
+    x >= y == jfbinbop(">=",x,y)
+    x <= y == jfbinbop("<=",x,y)
+    -- TODO: add boolean unary operator macro?
+    zero? x ==
+      jl_bool_eval_string(concat(["iszero(", getind(x),")"]))$Lisp
+    one? x ==
+      jl_bool_eval_string(concat(["isone(", getind(x),")"]))$Lisp
+
+    x + y == jfbinop("+", x, y)
+    x - y == jfbinop("-", x, y)
+    - x   == jfunfunc("-", x)
+    x : % * y : % == jfbinop("*", x, y)
+    x : % / y : % == jfbinop("/", x, y)
+
+    x : Integer * y : % == jlref(concat([getind(coerce(x)), "*", getind(y)]))
+    x : % * y : Integer == jlref(concat([getind(x), "*", getind(coerce(y))]))
+    x : Integer / y : % == jlref(concat([getind(coerce(x)), "/", getind(y)]))
+    x : % / y : Integer == jlref(concat([getind(x), "/", getind(coerce(y))]))
+    
+    x ^ y : NonNegativeInteger ==
+      jfbinop("^", x, coerce(y pretend Integer))
+    x ^ y : PositiveInteger ==
+      jfbinop("^", x, coerce(y pretend Integer))
+
+    -- x quo y == jfbinop("div", x, y)
+    x quo y == jfbinop("÷", x, y)
+    x rem y == jfbinop("%", x, y)
+
+    jlType(x)  == jlrefType(x)
+    jlValue(x) == jlrefVal(x)
+    jlId(x)    == jlrefId(x)
+    jlRef(x)   == x pretend SExpression
+
+    sqrt(x)  == jfunfunc("√",x)
+    exp(x)   == jfunfunc("exp",x)
+    log(x)   == jfunfunc("log",x)
+    expm1(x) == jfunfunc("expm1",x)
+    exp2(x)  == jfunfunc("exp2",x)
+    exp10(x) == jfunfunc("exp10",x)
+    log1p(x) == jfunfunc("log1p",x)
+    log2(x)  == jfunfunc("log2",x)
+    log10(x) == jfunfunc("log10",x)
+
+    sin(x)  == jfunfunc("sin",x)
+    cos(x)  == jfunfunc("cos",x)
+    tan(x)  == jfunfunc("tan",x)
+    sec(x)  == jfunfunc("sec",x)
+    cot(x)  == jfunfunc("cot",x)
+    csc(x)  == jfunfunc("csc",x)
+
+    asin(x)  == jfunfunc("asin",x)
+    acos(x)  == jfunfunc("acos",x)
+    atan(x)  == jfunfunc("atan",x)
+    atan(x,y) == jfbinfunc("atan",x,y)
+    asec(x)  == jfunfunc("asec",x)
+    acot(x)  == jfunfunc("acot",x)
+    acsc(x)  == jfunfunc("acsc",x)
+
+    sinh(x)  == jfunfunc("sinh",x)
+    cosh(x)  == jfunfunc("cosh",x)
+    tanh(x)  == jfunfunc("tanh",x)
+    sech(x)  == jfunfunc("sech",x)
+    coth(x)  == jfunfunc("coth",x)
+    csch(x)  == jfunfunc("csch",x)
+
+    asinh(x)  == jfunfunc("asinh",x)
+    acosh(x)  == jfunfunc("acosh",x)
+    atanh(x)  == jfunfunc("atanh",x)
+    asech(x)  == jfunfunc("asech",x)
+    acoth(x)  == jfunfunc("acoth",x)
+    acsch(x)  == jfunfunc("acsch",x)
+
+    convert(x) : InputForm ==
+      jl_string_eval_string(concat(["string(", getind(x),")"]))$Lisp
+
+    convert(x) : String ==
+      jl_string_eval_string(concat(["string(", getind(x),")"]))$Lisp
+
+    string(x) : String ==
+      jl_string_eval_string(concat(["string(", getind(x),")"]))$Lisp
+
+    coerce(jf : JF64) : % == jfloat(convert(jf)@String)
+    coerce(i : Integer) == jlref(concat(["BigFloat(", string(i),")"]))
+    coerce(i : %) : OutputForm == jlrefVal(i)
+    jfloat(s : String) : % == jlref(concat(["BigFloat(_"", s,"_")"]))
+    jfloat(i : Integer) : % == jlref(concat(["BigFloat(_"", string(i),"_")"]))
 
 
 )abbrev domain JZMOD JuliaIntegerMod
@@ -223,19 +392,11 @@ JuliaFractionInteger() : Exports == Implementation where
 ++ Purpose: Experimentation.
 ++ https://flintlib.org/
 JuliaIntegerMod(p : PositiveInteger) : Exports == Implementation where
-  jlrefVal  ==> JLREFVAL$Lisp
-  jlrefType ==> JLREFTYPE$Lisp
-  jlrefId   ==> JLREFID$Lisp
-  jlref     ==> make_jlref$Lisp
   PI        ==> PositiveInteger
   NNI       ==> NonNegativeInteger
   parsei    ==> parse_integer$ScanningUtilities
   Exports ==> Join(JuliaRing, CommutativeRing, Finite,
         ConvertibleTo(Integer), ConvertibleTo(String), StepThrough) with
-    jlType   : % -> SExpression
-    jlRef    : % -> SExpression
-    jlValue  : % -> SExpression
-    jlId     : % -> SExpression
     "*"      : (%, Integer) -> %
     "*"      : (Integer, %) -> %
     "*"      : (%, JuliaInteger) -> %
@@ -244,7 +405,6 @@ JuliaIntegerMod(p : PositiveInteger) : Exports == Implementation where
     ++ sqrt(x) returns a square root of x.
     ++ Throw a Julia error if there is no square root and returns 0.
     "*"     : (%, Integer) -> %
-    string  : % -> String
     coerce  : Integer -> %
     coerce  : JuliaInteger -> %
     jzmod   : Integer -> %
@@ -256,13 +416,12 @@ JuliaIntegerMod(p : PositiveInteger) : Exports == Implementation where
     
     jlInitialize(true)
     
-
     Rep := SExpression
 
     -- initialize
     jl_eval_string(concat(["JZMOD",string(p),",=residue_ring(ZZ,", string(p),")"]))$Lisp
 
-    getind(a) ==> concat(["getindex(", "refs,_"", jlrefId a, "_")"])
+    getind(a) ==> concat(["getindex(", "refs,_"", jlId a, "_")"])
     zmodbinop(op,a,b) ==> jlref(concat([getind(a), op, getind(b)]))
     zmodunfunc(op, a) ==> jlref(concat([op,"(" ,getind(a),")"]))
     zmodbinfunc(func,a,b) ==>
@@ -320,14 +479,10 @@ JuliaIntegerMod(p : PositiveInteger) : Exports == Implementation where
     lookup x == (zero? x => p; (convert(x)@Integer) :: PositiveInteger)
     random() == coerce(random(p)$Integer)
     
-    jlType(x)  == jlrefType(x)
-    jlValue(x) == jlrefVal(x)
-    jlId(x)    == jlrefId(x)
-    jlRef(x)   == x pretend SExpression
-    string(x) : String == jlrefVal(x) pretend String
+    string(x) : String == jlValue(x)
 
-    convert(x) : String == jlrefVal(x) pretend String
-    convert(x : %) : Integer == parsei string jlrefVal(x)
+    convert(x) : String == jlValue(x)
+    convert(x : %) : Integer == parsei jlValue(x)
     coerce(x : JuliaInteger) : % ==
       tmp : String := concat(["string(", getind(x), ")"])
       jlref(concat(["JZMOD",string(p),"(", jl_string_eval_string(tmp)$Lisp, ")"]))
@@ -335,7 +490,7 @@ JuliaIntegerMod(p : PositiveInteger) : Exports == Implementation where
     coerce(i : Integer) ==
       jlref(concat(["JZMOD",string(p),"(", string(i), ")"]))
 
-    coerce(i : %) : OutputForm == jlrefVal(i)
+    coerce(i : %) : OutputForm == jlValue(i) pretend OutputForm
     jzmod(i : Integer) == coerce(i)
     jzmod(ji : JuliaInteger) == coerce(ji)
 
@@ -349,10 +504,6 @@ JuliaIntegerMod(p : PositiveInteger) : Exports == Implementation where
 ++  elements using the Nemo package (FLINT based).
 ++ https://flintlib.org/
 JuliaGaloisField(p : PositiveInteger) : Exports == Implementation where
-  jlrefVal  ==> JLREFVAL$Lisp
-  jlrefType ==> JLREFTYPE$Lisp
-  jlrefId   ==> JLREFID$Lisp
-  jlref     ==> make_jlref$Lisp
   PI        ==> PositiveInteger
   NNI       ==> NonNegativeInteger
   SUP       ==> SparseUnivariatePolynomial
@@ -360,10 +511,6 @@ JuliaGaloisField(p : PositiveInteger) : Exports == Implementation where
   Exports ==> Join(JuliaRing, FiniteFieldCategory, 
                    FiniteAlgebraicExtensionField(%),
                    ConvertibleTo(Integer), ConvertibleTo(String)) with
-    jlType   : % -> SExpression
-    jlRef    : % -> SExpression
-    jlValue  : % -> SExpression
-    jlId     : % -> SExpression
     "*"      : (%, JuliaInteger) -> %
     "*"      : (JuliaInteger, %) -> %
     "*"      : (Integer, %) -> %
@@ -371,7 +518,6 @@ JuliaGaloisField(p : PositiveInteger) : Exports == Implementation where
     sqrt     : % -> %
     ++ sqrt(x) returns a square root of x.
     ++ Throw a Julia error if there is no square root and returns 0.
-    string  : % -> String
     coerce  : Integer -> %
     coerce  : JuliaInteger -> %
     jgf   : Integer -> %
@@ -381,7 +527,6 @@ JuliaGaloisField(p : PositiveInteger) : Exports == Implementation where
     import from String
     
     jlInitialize(true)
-    
 
     Rep := SExpression
 
@@ -391,7 +536,7 @@ JuliaGaloisField(p : PositiveInteger) : Exports == Implementation where
     -- jlref type
     JGF ==> concat(["JGF(",string(p),")"])
 
-    getind(a) ==> concat(["getindex(", "refs,_"", jlrefId a, "_")"])
+    getind(a) ==> concat(["getindex(", "refs,_"", jlId a, "_")"])
 
     jgfbinop(op,a,b) ==> jlref(concat([getind(a), op, getind(b)]))
     jgfunfunc(op, a) ==> jlref(concat([op,"(" ,getind(a),")"]))
@@ -474,19 +619,14 @@ JuliaGaloisField(p : PositiveInteger) : Exports == Implementation where
 
     sqrt(x) == jgfunfunc("sqrt", x)
 
-    jlType(x)  == jlrefType(x)
-    jlValue(x) == jlrefVal(x)
-    jlId(x)    == jlrefId(x)
-    jlRef(x)   == x pretend SExpression
-    string(x) : String == jlrefVal(x) pretend String
-
-    convert(x) : String == jlrefVal(x) pretend String
-    convert(x : %) : Integer == parsei string jlrefVal(x)
+    string(x) : String == jlValue(x)
+    convert(x) : String == jlValue(x)
+    convert(x : %) : Integer == parsei jlValue(x)
     coerce(x : JuliaInteger) : % ==
       jlref(concat(["JGF",string(p),"(", getind(x) , ")"]))
     coerce(i : Integer) ==
       jlref(concat(["JGF",string(p),"(", string(i), ")"]))
-    coerce(i : %) : OutputForm == jlrefVal(i)
+    coerce(i : %) : OutputForm == jlValue(i) pretend OutputForm
     jgf(i : Integer) == coerce(i)
     jgf(ji : JuliaInteger) == coerce(ji)
 
@@ -503,19 +643,11 @@ JuliaFPRealBall(p: PositiveInteger) : Exports == Implementation where
   JI64      ==> JuliaInt64
   PI        ==> PositiveInteger
   JF64      ==> JuliaFloat64
-  jlrefVal  ==> JLREFVAL$Lisp
-  jlrefType ==> JLREFTYPE$Lisp
-  jlrefId   ==> JLREFID$Lisp
-  jlref     ==> make_jlref$Lisp
   Exports ==> Join(JuliaRing, ConvertibleTo(InputForm), CommutativeRing,
             FloatingPointSystem, Approximate, ElementaryFunctionCategory,
             TranscendentalFunctionCategory, DifferentialRing,
             ConvertibleTo(String)) with
             -- SpecialFunctionCategory) with
-    jlType   : % -> SExpression
-    jlRef    : % -> SExpression
-    jlValue  : % -> SExpression
-    jlId     : % -> SExpression
     expm1   :  % -> %
     ++ expm1(x) computes accurately e^x-1. It avoids the loss of precision
     ++ involved in the direct evaluation of exp(x)-1 for small values of x.
@@ -543,7 +675,6 @@ JuliaFPRealBall(p: PositiveInteger) : Exports == Implementation where
     coerce   : JF64 -> %
     coerce   : String -> %
     retractIfCan  : % -> JF64
-    string   : % -> String
     jrb   : String -> %
     jrb   : Integer -> %
   Implementation ==> add
@@ -555,13 +686,12 @@ JuliaFPRealBall(p: PositiveInteger) : Exports == Implementation where
     
     jlInitialize(true)
     
- 
     Rep := SExpression
 
     -- initialize
     jl_eval_string(concat(["JFPRB", string(p),"=ArbField(", string(p),")"]))$Lisp
 
-    getind(a) ==> concat(["getindex(", "refs,_"", jlrefId a, "_")"])
+    getind(a) ==> concat(["getindex(", "refs,_"", jlId a, "_")"])
 
     jfbinop(op,a,b) ==> jlref(concat([getind(a), op, getind(b)]))
     jfbinfunc(func,a,b) ==>
@@ -611,11 +741,6 @@ JuliaFPRealBall(p: PositiveInteger) : Exports == Implementation where
     -- x quo y == jfbinop("div", x, y)
     x quo y == jfbinop("÷", x, y)
     x rem y == jfbinop("%", x, y)
-
-    jlType(x)  == jlrefType(x)
-    jlValue(x) == jlrefVal(x)
-    jlId(x)    == jlrefId(x)
-    jlRef(x)   == x pretend SExpression
 
     sqrt(x)  == jfunfunc("√",x)
     exp(x)   == jfunfunc("exp",x)
@@ -667,7 +792,7 @@ JuliaFPRealBall(p: PositiveInteger) : Exports == Implementation where
     coerce(i : Integer) == jlref(concat(["JFPRB",string(p),
       "(_"", string(i),"_")"]))
     coerce(s : String) == jlref(concat(["JFPRB", string(p),"(_"", s,"_")"]))
-    coerce(i : %) : OutputForm == jlrefVal(i)
+    coerce(i : %) : OutputForm == jlValue(i) pretend OutputForm
     jrb(s : String) : % == jlref(concat(["JFPRB", string(p),"(_"", s,"_")"]))
     jrb(i : Integer) : % == jlref(concat(["JFPRB",string(p),"(_"",string(i),"_")"]))
 
@@ -684,20 +809,12 @@ JuliaFPComplexBall(p: PositiveInteger) : Exports == Implementation where
   JI64      ==> JuliaInt64
   PI        ==> PositiveInteger
   JF64      ==> JuliaFloat64
-  jlrefVal  ==> JLREFVAL$Lisp
-  jlrefType ==> JLREFTYPE$Lisp
-  jlrefId   ==> JLREFID$Lisp
-  jlref     ==> make_jlref$Lisp
   Exports ==> Join(JuliaRing, ConvertibleTo(InputForm), CommutativeRing,
                 ComplexCategory(JuliaRealField), arbitraryPrecision,
                 ElementaryFunctionCategory, TrigonometricFunctionCategory,
                 HyperbolicFunctionCategory, DifferentialRing,
                 ConvertibleTo(String)) with
                 -- SpecialFunctionCategory) with
-    jlType   : % -> SExpression
-    jlRef    : % -> SExpression
-    jlValue  : % -> SExpression
-    jlId     : % -> SExpression
     expm1   :  % -> %
     ++ expm1(x) computes accurately e^x-1. It avoids the loss of precision
     ++ involved in the direct evaluation of exp(x)-1 for small values of x.
@@ -723,7 +840,6 @@ JuliaFPComplexBall(p: PositiveInteger) : Exports == Implementation where
     coerce   : JF64 -> %
     coerce   : String -> %
     retractIfCan  : % -> JF64
-    string   : % -> String
     jcb   : String -> %
     jcb   : Integer -> %
   Implementation ==> add
@@ -740,7 +856,7 @@ JuliaFPComplexBall(p: PositiveInteger) : Exports == Implementation where
     -- initialize
     jl_eval_string(concat(["JFPCB", string(p),"=AcbField(", string(p),")"]))$Lisp
 
-    getind(a) ==> concat(["getindex(", "refs,_"", jlrefId a, "_")"])
+    getind(a) ==> concat(["getindex(", "refs,_"", jlId a, "_")"])
 
     jfbinop(op,a,b) ==> jlref(concat([getind(a), op, getind(b)]))
     jfbinfunc(func,a,b) ==>
@@ -785,11 +901,6 @@ JuliaFPComplexBall(p: PositiveInteger) : Exports == Implementation where
     x quo y == jfbinop("÷", x, y)
     x rem y == jfbinop("%", x, y)
 
-    jlType(x)  == jlrefType(x)
-    jlValue(x) == jlrefVal(x)
-    jlId(x)    == jlrefId(x)
-    jlRef(x)   == x pretend SExpression
-
     sqrt(x)  == jfunfunc("√",x)
     exp(x)   == jfunfunc("exp",x)
     log(x)   == jfunfunc("log",x)
@@ -826,7 +937,7 @@ JuliaFPComplexBall(p: PositiveInteger) : Exports == Implementation where
     coerce(i : Integer) == jlref(concat(["JFPCB",string(p),
       "(_"", string(i),"_")"]))
     coerce(s : String) == jlref(concat(["JFPCB", string(p),"(_"", s,"_")"]))
-    coerce(i : %) : OutputForm == jlrefVal(i)
+    coerce(i : %) : OutputForm == jlValue(i) pretend OutputForm
     jcb(s : String) : % == jlref(concat(["JFPCB", string(p),"(_"", s,"_")"]))
     jcb(i : Integer) : % == jlref(concat(["JFPCB",string(p),
       "(_"",string(i),"_")"]))
@@ -846,19 +957,11 @@ JuliaRealField() : Exports == Implementation where
   JI64      ==> JuliaInt64
   PI        ==> PositiveInteger
   JF64      ==> JuliaFloat64
-  jlrefVal  ==> JLREFVAL$Lisp
-  jlrefType ==> JLREFTYPE$Lisp
-  jlrefId   ==> JLREFID$Lisp
-  jlref     ==> make_jlref$Lisp
   Exports ==> Join(JuliaRing, ConvertibleTo(InputForm), CommutativeRing,
             FloatingPointSystem, arbitraryPrecision, ElementaryFunctionCategory,
             TranscendentalFunctionCategory, DifferentialRing,
             ConvertibleTo(String)) with
             -- SpecialFunctionCategory) with
-    jlType   : % -> SExpression
-    jlRef    : % -> SExpression
-    jlValue  : % -> SExpression
-    jlId     : % -> SExpression
     expm1   :  % -> %
     ++ expm1(x) computes accurately e^x-1. It avoids the loss of precision
     ++ involved in the direct evaluation of exp(x)-1 for small values of x.
@@ -881,7 +984,6 @@ JuliaRealField() : Exports == Implementation where
     coerce   : JF64 -> %
     coerce   : String -> %
     retractIfCan  : % -> JF64
-    string   : % -> String
     jrf   : String -> %
     jrf   : Integer -> %
   Implementation ==> add
@@ -897,7 +999,7 @@ JuliaRealField() : Exports == Implementation where
     -- initialize
     jl_eval_string(concat(["JRF","=RealField()"]))$Lisp
 
-    getind(a) ==> concat(["getindex(", "refs,_"", jlrefId a, "_")"])
+    getind(a) ==> concat(["getindex(", "refs,_"", jlId a, "_")"])
 
     jfbinop(op,a,b) ==> jlref(concat([getind(a), op, getind(b)]))
     jfbinfunc(func,a,b) ==>
@@ -953,11 +1055,6 @@ JuliaRealField() : Exports == Implementation where
     x quo y == jfbinop("÷", x, y)
     x rem y == jfbinop("%", x, y)
 
-    jlType(x)  == jlrefType(x)
-    jlValue(x) == jlrefVal(x)
-    jlId(x)    == jlrefId(x)
-    jlRef(x)   == x pretend SExpression
-
     sqrt(x)  == jfunfunc("√",x)
     exp(x)   == jfunfunc("exp",x)
     log(x)   == jfunfunc("log",x)
@@ -1003,12 +1100,10 @@ JuliaRealField() : Exports == Implementation where
     string(x) : String ==
       jl_string_eval_string(concat(["string(", getind(x),")"]))$Lisp
     
-    
-
     coerce(jf : JF64) : % == jlref(concat(["JRF(_"", convert(jf),"_")"]))
     coerce(i : Integer) == jlref(concat(["JRF(_"", string(i),"_")"]))
     coerce(s : String) == jlref(concat(["JRF(_"", s,"_")"]))
-    coerce(i : %) : OutputForm == jlrefVal(i)
+    coerce(i : %) : OutputForm == jlValue(i) pretend OutputForm
     jrf(s : String) : % == jlref(concat(["JRF(_"", s,"_")"]))
     jrf(i : Integer) : % == jlref(concat(["JRF(_"", string(i),"_")"]))
 
@@ -1028,10 +1123,6 @@ JuliaComplexField() : Exports == Implementation where
   PI        ==> PositiveInteger
   JF64      ==> JuliaFloat64
   JRF       ==> JuliaRealField
-  jlrefVal  ==> JLREFVAL$Lisp
-  jlrefType ==> JLREFTYPE$Lisp
-  jlrefId   ==> JLREFID$Lisp
-  jlref     ==> make_jlref$Lisp
   Exports ==> Join(JuliaRing, ConvertibleTo(InputForm), CommutativeRing,
             ComplexCategory(JuliaRealField), arbitraryPrecision,
             ElementaryFunctionCategory, TrigonometricFunctionCategory,
@@ -1065,7 +1156,6 @@ JuliaComplexField() : Exports == Implementation where
     coerce   : JF64 -> %
     coerce   : String -> %
     retractIfCan  : % -> JF64
-    string   : % -> String
     jcf   : String -> %
     jcf   : (String, String) -> %
     jcf   : Integer -> %
@@ -1078,14 +1168,13 @@ JuliaComplexField() : Exports == Implementation where
     import from JuliaFractionInteger
     
     jlInitialize(true)
-    
- 
+
     Rep := SExpression
 
     -- initialize
     jl_eval_string(concat(["JCF","= ComplexField()"]))$Lisp
 
-    getind(a) ==> concat(["getindex(", "refs,_"", jlrefId a, "_")"])
+    getind(a) ==> concat(["getindex(", "refs,_"", jlId a, "_")"])
 
     jfbinop(op,a,b) ==> jlref(concat([getind(a), op, getind(b)]))
     jfbinfunc(func,a,b) ==>
@@ -1137,11 +1226,6 @@ JuliaComplexField() : Exports == Implementation where
     x quo y == jfbinop("÷", x, y)
     x rem y == jfbinop("%", x, y)
 
-    jlType(x)  == jlrefType(x)
-    jlValue(x) == jlrefVal(x)
-    jlId(x)    == jlrefId(x)
-    jlRef(x)   == x pretend SExpression
-
     sqrt(x)  == jfunfunc("√",x)
     exp(x)   == jfunfunc("exp",x)
     log(x)   == jfunfunc("log",x)
@@ -1176,7 +1260,7 @@ JuliaComplexField() : Exports == Implementation where
     coerce(jf : JF64) : % == jlref(concat(["JCF(_"", convert(jf),"_")"]))
     coerce(i : Integer) == jlref(concat(["JCF(_"", string(i),"_")"]))
     coerce(s : String) == jlref(concat(["JCF(_"", s,"_")"]))
-    coerce(i : %) : OutputForm == jlrefVal(i)
+    coerce(i : %) : OutputForm == jlValue(i) pretend OutputForm
     jcf(s : String) : % == jlref(concat(["JCF(_"", s,"_")"]))
     jcf(r : String, i : String) : % ==
       jlref(concat(["JCF(_"", r, "_",_"", i, "_")"]))
@@ -1186,15 +1270,11 @@ JuliaComplexField() : Exports == Implementation where
 
 
 )abbrev domain JUP JuliaUnivariatePolynomial
-++ Univariate polynomial domain using the Nemo packages from Julia
-++ Author: G. vanuxem
+++ Univariate polynomial domain using the Julia Nemo package.
+++ Author: G. Vanuxem
 ++ Purpose: Experimentation.
-JuliaUnivariatePolynomial(x : Symbol, R : JuliaRing):
+JuliaUnivariatePolynomial(R : JuliaRing, x : Symbol):
   Exports == Implementation where
-    jlrefType ==> JLREFTYPE$Lisp
-    jlrefId   ==> JLREFID$Lisp
-    jlrefVal  ==> JLREFVAL$Lisp
-    jlref     ==> make_jlref$Lisp 
     JINT      ==> JuliaInteger
     JFINT     ==> JuliaFractionInteger
     JRF       ==> JuliaRealField
@@ -1205,18 +1285,11 @@ JuliaUnivariatePolynomial(x : Symbol, R : JuliaRing):
     NNI       ==> NonNegativeInteger
     Exports ==> Join(JuliaRing, UnivariatePolynomialCategory(R),
                     ConvertibleTo(String)) with
-        jlType   : % -> SExpression
-        jlValue  : % -> SExpression
-        jlId     : % -> SExpression
-        jlRef   : % -> SExpression
         jup     : UnivariatePolynomial(x,R) -> %
         ++ jup(p) converts the univariate polynomial p to
         ++ a Julia univariate polynomial.
         coerce   : Variable(x) -> %
         ++ coerce(x) converts the variable x to a Julia univariate polynomial.
-        "*"      : (%, PositiveInteger) -> %
-        "*"      : (%, NonNegativeInteger) -> %
-        string   : % -> String
     Implementation ==> add
         import from JuliaUtilityFunctions
         import from String
@@ -1225,15 +1298,9 @@ JuliaUnivariatePolynomial(x : Symbol, R : JuliaRing):
         
         Rep := SExpression
 
-        jlId(p)    == jlrefId p
-        jlValue(p) == jlrefVal p
-        jlType(p)  == jlrefType p
-        jlRef(p)   == p pretend SExpression
-
         spjs(str) ==> str pretend JuliaString
 
-        getind(a) ==> concat(["getindex(", "refs,_"", jlrefId(a), "_")"])
-
+        getind(a) ==> concat(["getindex(", "refs,_"", jlId(a), "_")"])
         upbinop(op,a,b) ==> jlref(concat([getind(a), op, getind(b)]))
         upunfunc(op, a) ==> jlref(concat([op, "(", getind(a),")"]))
         upbinfunc(func,a,b) ==> 
@@ -1247,7 +1314,7 @@ JuliaUnivariatePolynomial(x : Symbol, R : JuliaRing):
           monomial(coef,exp) ==
             jlref(concat([string(coef)$JINT,"*", string(x), "^",
               string(exp pretend Integer)]))
-          coerce(p : %) : OutputForm == jlrefVal(p)
+          coerce(p : %) : OutputForm == jlValue(p) pretend OutputForm
         else if R is JuliaFractionInteger then
           jl_eval_string(concat(["R,", string(x), "=polynomial_ring(QQ,_"",
             string(x), "_")"])$String)$Lisp
@@ -1255,7 +1322,7 @@ JuliaUnivariatePolynomial(x : Symbol, R : JuliaRing):
             jlref(concat([string(coef)$JFINT,"*", string(x), "^",
               string(exp pretend Integer)]))
           coerce(p : %) : OutputForm ==
-            jlRegexReplace(spjs(jlrefVal(p)),
+            jlRegexReplace(spjs(jlValue(p)),
               jlRegex(jstring "//"),jlSubstitute(jstring "/")) pretend OutputForm
         else if R is JuliaRealField then
           jl_eval_string(concat(["R,", string(x), "=polynomial_ring(JRF,_"",
@@ -1263,39 +1330,39 @@ JuliaUnivariatePolynomial(x : Symbol, R : JuliaRing):
           monomial(coef,exp) ==
             jlref(concat([string(coef)$JRF,"*", string(x), "^",
                   string(exp pretend Integer)]))
-          coerce(p : %) : OutputForm == jlrefVal(p)
+          coerce(p : %) : OutputForm == jlValue(p) pretend OutputForm
         else if R is JuliaComplexField then
           jl_eval_string(concat(["R,", string(x), "=polynomial_ring(JCF,_"",
               string(x), "_")"])$String)$Lisp
           monomial(coef,exp) ==
             jlref(concat([string(coef)$JCF,"*", string(x), "^",
                   string(exp pretend Integer)]))
-          coerce(p : %) : OutputForm == jlrefVal(p)
+          coerce(p : %) : OutputForm == jlValue(p) pretend OutputForm
         -- For now awful workarounds (differentiate the next domains)
-        else if R has FiniteFieldCategory and R has ConvertibleTo(String) then
+        else if R has FiniteFieldCategory then
           jl_eval_string(concat(["R,", string(x), "=polynomial_ring(",
-            concat(["JGF",string(size()$R pretend INT)])$String,
+            "JGF", string(size()$R pretend INT),
               ",_"", string(x), "_")"])$String)$Lisp
           monomial(coef,exp) ==
             jlref(concat([convert(coef)$R,"*", string(x), "^",
               string(exp pretend Integer)]))
-          coerce(p : %) : OutputForm == jlrefVal(p)
-        else if R has Finite and R has ConvertibleTo(String) then
+          coerce(p : %) : OutputForm == jlValue(p) pretend OutputForm
+        else if R has Finite then
           jl_eval_string(concat(["R,", string(x), "=polynomial_ring(",
-            concat(["JZMOD",string(size()$R pretend INT)])$String,
+            "JZMOD",string(size()$R pretend INT),
               ",_"", string(x), "_")"])$String)$Lisp
           monomial(coef,exp) ==
             jlref(concat([convert(coef)$R,"*", string(x), "^",
               string(exp pretend Integer)]))
-          coerce(p : %) : OutputForm == jlrefVal(p)  
+          coerce(p : %) : OutputForm == jlValue(p) pretend OutputForm
         else if R has Approximate and R has FloatingPointSystem then
           jl_eval_string(concat(["R,", string(x), "=polynomial_ring(",
-            concat(["JFPRB", string(precision()$R pretend INT)])$String,
+            "JFPRB", string(precision()$R pretend INT),
               ",_"", string(x), "_")"])$String)$Lisp
           monomial(coef,exp) ==
             jlref(concat([convert(coef),"*", string(x), "^",
               string(exp pretend Integer)]))
-          coerce(p : %) : OutputForm == jlrefVal(p) 
+          coerce(p : %) : OutputForm == jlValue(p) pretend OutputForm
         else error "Unimplemented ring."
 
         0 == jlref("zero(R)")
@@ -1307,11 +1374,10 @@ JuliaUnivariatePolynomial(x : Symbol, R : JuliaRing):
         a : % - b : % == upbinop("-",a,b)
         a : % * b : % == upbinop("*",a,b)
         a : R * b : % == upbinop("*",a,b)
+        a : % * b : R == upbinop("*",a,b)
         i : Integer  * b : % == upbinop("*", coerce(i)@JINT, b)
-        fi : Fraction(INT) * b : % == upbinop("*", coerce(fi)@JFINT, b)
         a : % * i : INT  == upbinop("*", a, coerce(i))
-        a : % * i : PI  == upbinop("*", a, coerce(i pretend Integer)@JINT)
-        a : % * i : NNI  == upbinop("*", a, coerce(i pretend Integer)@JINT)
+        fi : Fraction(INT) * b : % == upbinop("*", coerce(fi)@JFINT, b)
         a : % ^ i : PI  == upbinop("^", a, coerce(i pretend Integer)@JINT)
         a : % ^ i : NNI  == upbinop("^", a, coerce(i pretend Integer)@JINT)
 
@@ -1324,8 +1390,152 @@ JuliaUnivariatePolynomial(x : Symbol, R : JuliaRing):
         jup(up) : % ==
             p:= first(lines formatExpression(up::OutputForm)$Format1D)
             jlref(p)
-        string(p)  == jlrefVal(p) pretend String
+        string(p)  == jlValue(p)
 
-        convert(p) : String == jlrefVal(p) pretend String
+        convert(p) : String == jlValue(p)
         coerce(v : Variable(x)) == jlref(string(v::Symbol))
         coerce(i : Integer) == jlref(concat(["R(",string(i),")"]))
+
+)abbrev domain JMP JuliaMultivariatePolynomial
+++ 
+++ Author: G. Vanuxem
+++ Basic Functions: Ring, degree, eval, coefficient, monomial, differentiate,
+++ resultant, gcd
+++ Related Constructors: Polynomial, JuliaUnivariatePolynomial
+++ Also See:
+++ AMS Classifications:
+++ Keywords: polynomial, multivariate
+++ References:
+++ Description:
+++   This type is the basic representation of sparse recursive multivariate
+++ polynomials. It is parameterized by the coefficient ring.
+++ The coefficient ring may be non-commutative, but the variables are
+++ assumed to commute.
+JuliaMultivariatePolynomial(R : JuliaRing, VarSet : List Symbol) : 
+    Exports == Implementation where
+      JINT      ==> JuliaInteger
+      JFINT     ==> JuliaFractionInteger
+      JRF       ==> JuliaRealField
+      JCF       ==> JuliaComplexField
+      JI64      ==> JuliaInt64
+      INT       ==> Integer
+      PI        ==> PositiveInteger
+      NNI       ==> NonNegativeInteger
+      Exports ==> Join(JuliaRing,
+                    PolynomialCategory(R, IndexedExponents(OrderedVariableList(VarSet)),
+                      OrderedVariableList(VarSet)),
+                        ConvertibleTo(String)) with
+        jmp     : MultivariatePolynomial(VarSet,R) -> %
+        ++ jmp(p) converts the multivariate polynomial p to
+        ++ a Julia multivariate polynomial.
+        --coerce   :  -> %
+        --++ coerce(x) converts the variable x to a Julia univariate polynomial.
+        "*"      : (%, PositiveInteger) -> %
+        "*"      : (%, NonNegativeInteger) -> %
+      Implementation ==> add
+        import from JuliaUtilityFunctions
+        import from String
+
+        jlInitialize(true)
+
+        Rep := SExpression
+
+        spjs(str) ==> str pretend JuliaString
+        -- awful hack
+        jVarSet := removeDuplicates(VarSet)
+        vars := first lines formatExpression(jVarSet::OutputForm)$Format1D
+        setelt!(vars, 1, char "("); setelt!(vars, #vars, char ")")
+        lvars := map(v +-> string(v), jVarSet)$ListFunctions2(Symbol, String)
+        jvars := 
+          first lines formatExpression(lvars::OutputForm)$Format1D    
+
+        getind(a) ==> concat(["getindex(", "refs,_"", jlId(a), "_")"])
+        upbinop(op,a,b) ==> jlref(concat([getind(a), op, getind(b)]))
+        upunfunc(op, a) ==> jlref(concat([op, "(", getind(a),")"]))
+        upbinfunc(func,a,b) ==> 
+          jlref(concat([func, "(", getind(a), ",", getind(b), ")"]))
+        upbinbop(op,a,b) ==>
+          jl_bool_eval_string(concat([getind(a), op, getind(b)]))$Lisp
+
+        if R is JuliaInteger then
+          jl_eval_string(concat(["R,", vars, "=polynomial_ring(ZZ,",
+            jvars, ")"])$String)$Lisp
+          coerce(p : %) : OutputForm == jlValue(p) pretend OutputForm
+        else if R is JuliaFractionInteger then
+          jl_eval_string(concat(["R,", vars, "=polynomial_ring(QQ,",
+            jvars, ")"])$String)$Lisp
+          coerce(p : %) : OutputForm ==
+            jlRegexReplace(spjs(jlValue(p)),
+              jlRegex(jstring "//"),jlSubstitute(jstring "/")) pretend OutputForm
+        else if R is JuliaRealField then
+          jl_eval_string(concat(["R,", vars, "=polynomial_ring(JRF,",
+            jvars, ")"])$String)$Lisp
+          coerce(p : %) : OutputForm == jlValue(p) pretend OutputForm
+        else if R is JuliaComplexField then
+          jl_eval_string(concat(["R,", vars, "=polynomial_ring(JCF,",
+            jvars, ")"])$String)$Lisp
+          coerce(p : %) : OutputForm == jlValue(p) pretend OutputForm
+        -- For now awful workarounds (differentiate the next domains)
+        else if R has FiniteFieldCategory then
+          jl_eval_string(concat(["R,", vars, "=polynomial_ring(",
+            "JGF", string(size()$R pretend INT), ",",
+              jvars, ")"])$String)$Lisp
+          coerce(p : %) : OutputForm == jlValue(p) pretend OutputForm
+        else if R has Finite then
+          jl_eval_string(concat(["R,", vars, "=polynomial_ring(",
+            "JZMOD", string(size()$R pretend INT),
+              ",", jvars, ")"])$String)$Lisp
+          coerce(p : %) : OutputForm == jlValue(p) pretend OutputForm
+        else if R has Approximate and R has FloatingPointSystem then
+          jl_eval_string(concat(["R,", vars, "=polynomial_ring(",
+            "JFPRB", string(precision()$R pretend INT),
+              ",", jvars, ")"])$String)$Lisp
+          coerce(p : %) : OutputForm == jlValue(p) pretend OutputForm
+         error "Unimplemented ring."
+
+        0 == jlref("zero(R)")
+        1 == jlref("one(R)")
+        - a == upunfunc("-",a)
+        a : % = b : % == upbinbop("==",a,b)
+        a : % ~= b : % == upbinbop("!=",a,b)
+        a : % + b : % == upbinop("+",a,b)
+        a : % - b : % == upbinop("-",a,b)
+        a : % * b : % == upbinop("*",a,b)
+        a : R * b : % == upbinop("*",a,b)
+        a : % * b : R == upbinop("*",a,b)
+        i : Integer  * b : % == upbinop("*", coerce(i)@JINT, b)
+        fi : Fraction(INT) * b : % == upbinop("*", coerce(fi)@JFINT, b)
+        a : % * i : INT  == upbinop("*", a, coerce(i))
+        a : % * i : PI  == upbinop("*", a, coerce(i pretend Integer)@JINT)
+        a : % * i : NNI  == upbinop("*", a, coerce(i pretend Integer)@JINT)
+        a : % ^ i : PI  == upbinop("^", a, coerce(i pretend Integer)@JINT)
+        a : % ^ i : NNI  == upbinop("^", a, coerce(i pretend Integer)@JINT)
+
+        retractIfCan(p : %) : Union(R,"failed") ==
+          jl_bool_eval_string(concat(["is_constant(", getind(p),")"]))$Lisp
+            => jlref(jlValue(p))$R
+          "failed"
+
+        reductum(p) == upunfunc("tail",p)
+        gcd(p1,p2)  == upbinfunc("gcd",p1,p2)
+
+        degree(p) == jl_int64_eval_string(concat(["degree(", getind(p),")"]))$Lisp   
+        leadingCoefficient(p : %) ==
+            jlref(concat(["leading_coefficient(", getind(p),")"]))
+        --jup(up) : % ==
+        --    p:= first(lines formatExpression(up::OutputForm)$Format1D)
+        --    jlref(p)
+        string(p)  == jlValue(p)
+        convert(p) : String == jlValue(p)
+
+        --monomial(c : R, ies : IndexedExponents(OrderedVariableList(VarSet))) ==
+         -- zero? ies => (c::%)
+          --p1 : % := monomial(c, reductum ies)
+          --m1 := monomial(p1, leadingCoefficient ies)$D
+          --[leadingSupport ies, m1]$VPoly
+        -- coerce c
+
+        coerce(v: OrderedVariableList(VarSet)) == jlref(string(convert(v)@Symbol))
+        coerce(i : Integer) == jlref(concat(["R(", string(i), ")"]))
+        coerce(c : R) == jlref(concat(["R(", string(c),")"]))
+
