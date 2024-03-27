@@ -259,8 +259,7 @@ JuliaFloat() : Exports == Implementation where
     import from JuliaFractionInteger
     
     jlInitialize(true)
-    
- 
+
     Rep := SExpression
 
     getind(a) ==> concat(["getindex(", "refs,_"", jlrefId a, "_")"])
@@ -381,6 +380,89 @@ JuliaFloat() : Exports == Implementation where
     jfloat(s : String) : % == jlref(concat(["BigFloat(_"", s,"_")"]))
     jfloat(i : Integer) : % == jlref(concat(["BigFloat(_"", string(i),"_")"]))
 
+)abbrev domain JAN JuliaAlgebraicNumber
+++ Domain for Julia algebraic number
+++ Author: G. Vanuxem
+++ Date Created: March. 2023
+++ Description:
+++  This domain allows the manipulation of Julia algebraic numbers
+++  using the Nemo package for Julia (Calcium based).
+++ https://fredrikj.net/calcium/
+JuliaAlgebraicNumber() : Exports == Implementation where
+  JI64      ==> JuliaInt64
+  parsei    ==> parse_integer$ScanningUtilities
+  Exports ==> Join(JuliaRing, OrderedSet, EuclideanDomain) with
+    "*"     : (%, Integer) -> %
+    coerce  : JI64 -> %
+    coerce  : % -> JI64
+    coerce  : % -> Integer
+    coerce  : % -> Expression Integer
+    coerce  : % -> AlgebraicNumber
+    jint    : Integer -> %
+  Implementation ==> add
+    import from JuliaUtilityFunctions
+    import from String
+    
+    jlInitialize(true)
+ 
+    Rep := SExpression
+
+    getind(a) ==> concat(["getindex(", "refs,_"", jlId a, "_")"])
+    ibinop(op,a,b) ==> jlref(concat([getind(a), op, getind(b)]))
+    iunfunc(func,a) ==> jlref(concat([func, "(", getind(a),")"]))
+    ibinfunc(func,a,b) ==>
+      jlref(concat([func, "(", getind(a), ",", getind(b),")"]))
+    ibinbop(op,a,b) ==>
+      jl_bool_eval_string(concat([getind(a), op, getind(b)]))$Lisp
+
+  
+    0 == jlref("zero(QQBar)")
+    1 == jlref("one(QQBar)")
+
+    x = y  == ibinbop("==",x,y)
+    x ~= y == ibinbop("!=",x,y)
+    x < y  == ibinbop("<",x,y)
+    x > y  == ibinbop(">",x,y)
+    x >= y == ibinbop(">=",x,y)
+    x <= y == ibinbop("<=",x,y)
+
+    -- TODO: add boolean unary operator macro?
+    zero? x ==
+      jl_bool_eval_string(concat(["iszero(", getind(x),")"]))$Lisp
+    one? x ==
+      jl_bool_eval_string(concat(["isone(", getind(x),")"]))$Lisp
+
+    x + y == ibinop("+", x, y)
+    x - y == ibinop("-", x, y)
+    - x   == iunfunc("-", x)
+    x : % * y : % == ibinop("*", x, y)
+    x : Integer * y : % == coerce(x) * y
+    x  * y : Integer == jlref(concat([getind(x), "*", getind(coerce(y))]))
+    x : Integer * y : % == jlref(concat([getind(coerce(x)), "*", getind(y)]))
+
+    x ^ y : NonNegativeInteger ==
+      ibinop("^", x, coerce(y pretend Integer))
+    x ^ y : PositiveInteger ==
+      ibinop("^", x, coerce(y pretend Integer))
+
+    -- x quo y == ibinop("div", x, y)
+    x quo y == ibinop("÷", x, y)
+    x rem y == ibinop("%", x, y)
+    gcd(a,b) == ibinfunc("gcd",a,b)
+    lcm(a,b) == ibinfunc("lcm",a,b)
+
+    string(x) : String == jlValue(x)
+
+    convert(x) : String == jlValue(x)
+    --coerce(jsi : %): JI64 == 
+    --    coerce(coerce(x)@Integer)
+    coerce(i : Integer) ==
+      jlref(concat(["QQBar(",string(i),")"]))
+    coerce(i : %) : OutputForm == jlValue(i) pretend OutputForm
+    coerce(x : %) : Integer  == parsei(jlValue x)
+    coerce(x : %) : Expression(Integer)  ==
+      coerce(parsei(jlValue x))$Expression(Integer)
+    jan(i : Integer) : % == jlref(concat(["QQBar(", string(i),")"]))
 
 )abbrev domain JZMOD JuliaIntegerMod
 ++ Experimental domain for Galois Fields

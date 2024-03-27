@@ -1027,6 +1027,7 @@
   (|InnerEvalable&| . IEVALAB-)
   (|IntegerNumberSystem&| . INS-)
   (|IntegralDomain&| . INTDOM-)
+  (|JuliaAlgebraicNumber| . JAN)
   (|JuliaMultivariatePolynomial&| . JMP-)
   (|KeyedDictionary&| . KDAGG-)
   (|LazyStreamAggregate&| . LZSTAGG-)
