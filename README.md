@@ -18,7 +18,7 @@ For general installation instructions see INSTALL. For general documentation
 consult <https://fricas.github.io>.
 
 To build FriCAS with Julia support, a simple
-<code>./configure --enable-julia</code> should do the trick.
+<code>./configure --enable-julia</code> should do the trick. The required Julia packages are Nemo, Plots and SpecialFunctions.
 Note that with SBCL (default) you will have to increase its dynamic space size use, see [Caveats](#caveats).
 The <code>julia</code> executable needs to be available in your PATH.
 If you want to add Jupyter support with a SBCL based FriCAS, make sure [Hunchentoot](https://edicl.github.io/hunchentoot/) is installed.
