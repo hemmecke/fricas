@@ -1427,9 +1427,9 @@ JuliaMultivariatePolynomial(R : JuliaRing, VarSet : List Symbol,
     Exports == Implementation where
       JINT      ==> JuliaInteger
       JFINT     ==> JuliaFractionInteger
+      JI64      ==> JuliaInt64
       JRF       ==> JuliaRealField
       JCF       ==> JuliaComplexField
-      JI64      ==> JuliaInt64
       INT       ==> Integer
       PI        ==> PositiveInteger
       NNI       ==> NonNegativeInteger
@@ -1462,11 +1462,11 @@ JuliaMultivariatePolynomial(R : JuliaRing, VarSet : List Symbol,
           first lines formatExpression(lvars::OutputForm)$Format1D    
 
         getind(a) ==> concat(["getindex(", "refs,_"", jlId(a), "_")"])
-        upbinop(op,a,b) ==> jlref(concat([getind(a), op, getind(b)]))
-        upunfunc(op, a) ==> jlref(concat([op, "(", getind(a),")"]))
-        upbinfunc(func,a,b) ==> 
+        mpbinop(op,a,b) ==> jlref(concat([getind(a), op, getind(b)]))
+        mpunfunc(op, a) ==> jlref(concat([op, "(", getind(a),")"]))
+        mpbinfunc(func,a,b) ==> 
           jlref(concat([func, "(", getind(a), ",", getind(b), ")"]))
-        upbinbop(op,a,b) ==>
+        mpbinbop(op,a,b) ==>
           jl_bool_eval_string(concat([getind(a), op, getind(b)]))$Lisp
 
         if R is JuliaInteger then
@@ -1475,68 +1475,68 @@ JuliaMultivariatePolynomial(R : JuliaRing, VarSet : List Symbol,
           coerce(p : %) : OutputForm == jlValue(p) pretend OutputForm
         else if R is JuliaFractionInteger then
           jl_eval_string(concat(["R,", vars, "=polynomial_ring(QQ,",
-            jvars, ")"])$String)$Lisp
+            jvars, ";internal_ordering=", string(ordering),")"])$String)$Lisp
           coerce(p : %) : OutputForm ==
             jlRegexReplace(spjs(jlValue(p)),
               jlRegex(jstring "//"),jlSubstitute(jstring "/")) pretend OutputForm
         else if R is JuliaRealField then
           jl_eval_string(concat(["R,", vars, "=polynomial_ring(JRF,",
-            jvars, ")"])$String)$Lisp
+            jvars, ";internal_ordering=", string(ordering),")"])$String)$Lisp
           coerce(p : %) : OutputForm == jlValue(p) pretend OutputForm
         else if R is JuliaComplexField then
           jl_eval_string(concat(["R,", vars, "=polynomial_ring(JCF,",
-            jvars, ")"])$String)$Lisp
+            jvars, ";internal_ordering=", string(ordering),")"])$String)$Lisp
           coerce(p : %) : OutputForm == jlValue(p) pretend OutputForm
         -- For now awful workarounds (differentiate the next domains)
         else if R has FiniteFieldCategory then
           jl_eval_string(concat(["R,", vars, "=polynomial_ring(",
             "JGF", string(size()$R pretend INT), ",",
-              jvars, ")"])$String)$Lisp
+              jvars, ";internal_ordering=", string(ordering),")"])$String)$Lisp
           coerce(p : %) : OutputForm == jlValue(p) pretend OutputForm
         else if R has Finite then
           jl_eval_string(concat(["R,", vars, "=polynomial_ring(",
             "JZMOD", string(size()$R pretend INT),
-              ",", jvars, ")"])$String)$Lisp
+              ",", jvars, ";internal_ordering=", string(ordering),")"])$String)$Lisp
           coerce(p : %) : OutputForm == jlValue(p) pretend OutputForm
         else if R has Approximate and R has FloatingPointSystem then
           jl_eval_string(concat(["R,", vars, "=polynomial_ring(",
             "JFPRB", string(precision()$R pretend INT),
-              ",", jvars, ")"])$String)$Lisp
+              ",", jvars, ";internal_ordering=", string(ordering),")"])$String)$Lisp
           coerce(p : %) : OutputForm == jlValue(p) pretend OutputForm
          error "Unimplemented ring."
 
         0 == jlref("zero(R)")
         1 == jlref("one(R)")
-        - a == upunfunc("-",a)
-        a : % = b : % == upbinbop("==",a,b)
-        a : % ~= b : % == upbinbop("!=",a,b)
-        a : % + b : % == upbinop("+",a,b)
-        a : % - b : % == upbinop("-",a,b)
-        a : % * b : % == upbinop("*",a,b)
-        a : R * b : % == upbinop("*",a,b)
-        a : % * b : R == upbinop("*",a,b)
-        i : Integer  * b : % == upbinop("*", coerce(i)@JINT, b)
-        fi : Fraction(INT) * b : % == upbinop("*", coerce(fi)@JFINT, b)
-        a : % * i : INT  == upbinop("*", a, coerce(i))
-        a : % * i : PI  == upbinop("*", a, coerce(i pretend Integer)@JINT)
-        a : % * i : NNI  == upbinop("*", a, coerce(i pretend Integer)@JINT)
-        a : % ^ i : PI  == upbinop("^", a, coerce(i pretend Integer)@JINT)
-        a : % ^ i : NNI  == upbinop("^", a, coerce(i pretend Integer)@JINT)
+        - a == mpunfunc("-",a)
+        a : % = b : % == mpbinbop("==",a,b)
+        a : % ~= b : % == mpbinbop("!=",a,b)
+        a : % + b : % == mpbinop("+",a,b)
+        a : % - b : % == mpbinop("-",a,b)
+        a : % * b : % == mpbinop("*",a,b)
+        a : R * b : % == mpbinop("*",a,b)
+        a : % * b : R == mpbinop("*",a,b)
+        i : Integer  * b : % == mpbinop("*", coerce(i)@JINT, b)
+        fi : Fraction(INT) * b : % == mpbinop("*", coerce(fi)@JFINT, b)
+        a : % * i : INT  == mpbinop("*", a, coerce(i))
+        a : % * i : PI  == mpbinop("*", a, coerce(i pretend Integer)@JINT)
+        a : % * i : NNI  == mpbinop("*", a, coerce(i pretend Integer)@JINT)
+        a : % ^ i : PI  == mpbinop("^", a, coerce(i pretend Integer)@JINT)
+        a : % ^ i : NNI  == mpbinop("^", a, coerce(i pretend Integer)@JINT)
 
         retractIfCan(p : %) : Union(R,"failed") ==
           jl_bool_eval_string(concat(["is_constant(", getind(p),")"]))$Lisp
             => jlref(jlValue(p))$R
           "failed"
 
-        reductum(p) == upunfunc("tail",p)
-        gcd(p1,p2)  == upbinfunc("gcd",p1,p2)
+        reductum(p) == mpunfunc("tail",p)
+        gcd(p1,p2)  == mpbinfunc("gcd",p1,p2)
 
         degree(p) == jl_int64_eval_string(concat(["degree(", getind(p),")"]))$Lisp   
         leadingCoefficient(p : %) ==
             jlref(concat(["leading_coefficient(", getind(p),")"]))
-        --jup(up) : % ==
-        --    p:= first(lines formatExpression(up::OutputForm)$Format1D)
-        --    jlref(p)
+        jmp(mp) : % ==
+            p:= first(lines formatExpression(mp::OutputForm)$Format1D)
+            jlref(p)
         string(p)  == jlValue(p)
         convert(p) : String == jlValue(p)
 
