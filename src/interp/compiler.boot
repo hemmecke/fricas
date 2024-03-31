@@ -481,10 +481,16 @@ try_constant_DF(mant, exp, m, e) ==
 
 compForm1(form is [op,:argl],m,e) ==
   op="error" =>
+      constr :=
+          NULL($functorForm) => nil
+          first($functorForm)
+      fun :=
+          $op = constr => nil
+          $op
       #argl = 1 =>
           arg := first(argl)
           u := comp(arg, $String, e) =>
-              [[op, u.expr], m, e]
+              [["error3", MKQ(constr), MKQ(fun), u.expr], m, e]
           SAY ['"compiling call to error ", argl]
           u := outputComp(arg, e) =>
               [[op, ['LIST, ['QUOTE, 'mathprint], u.expr]], m, e]
