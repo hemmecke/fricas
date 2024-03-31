@@ -171,6 +171,9 @@ userError x == errorSupervisor($UserError,x)
 
 error(x) == errorSupervisor($AlgebraError,x)
 
+error3(con, fun, mess) ==
+    errorSupervisor($AlgebraError, [STRCONC(fun, '" $ ", con, '": "), mess])
+
 nice_failure_msg(val, branch, umode) ==
     uname := devaluate(umode)
     of1 := coerceUn2E(val, uname);
