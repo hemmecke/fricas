@@ -964,6 +964,7 @@ canReturn(expr,level,exitCount,ValueFlag) ==  --SPAD: exit and friends
   level=exitCount and not ValueFlag => nil
   op="SEQ" => or/[canReturn(u,level+1,exitCount,false) for u in rest expr]
   op = "error" => nil
+  op = "error3" => nil
   op="TAGGEDreturn" => nil
   op="CATCH" =>
     [.,gs,data]:= expr
@@ -1442,4 +1443,3 @@ compilerDoit(constructor, fun) ==
       for ii in $byConstructors repeat
         null member(ii,$constructorsSeen) =>
           sayBrightly ['">>> Warning ",'%b,ii,'%d,'" was not found"]
-
