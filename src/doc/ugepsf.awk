@@ -8,8 +8,7 @@
 # psXtc -- include a ps file instead of the output of the command
 # xtc -- normal command plus output
 # noOutputXtc -- ignore any output of the command(s)
-# nullXtc -- the command is not executed
-(/:\\psXtc/ || /:\\xtc/ || /:\\noOutputXtc/ || /:\\nullXtc/) {n++}
+(/:\\psXtc/ || /:\\xtc/ || /:\\noOutputXtc/) {n++}
 
 /:\\spadgraph/ {spadgraph=1}
 

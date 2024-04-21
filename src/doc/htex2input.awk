@@ -104,9 +104,7 @@ xtc==2 && /^\\begin{spadsrc}/ {
         print "-- \\begin{xtcnooutput}"
     }
     if (xtcname=="xtc" || xtcname=="noOutputXtc") {
-        if (xtcname!="nullXtc") {
-            for (i = 1; i < n; i++) {print arr[i]}
-        }
+        for (i = 1; i < n; i++) {print arr[i]}
     }
     if (xtcname=="psXtc" || xtcname=="noOutputXtc") {
         print "-- \\end{xtcnooutput}"
@@ -114,7 +112,7 @@ xtc==2 && /^\\begin{spadsrc}/ {
     next
 }
 
-/^\\xtc{/ || /^\\noOutputXtc{/ || /^\\nullXtc{/ || /^\\psXtc{/ {
+/^\\xtc{/ || /^\\noOutputXtc{/ || /^\\psXtc{/ {
     xtc=1
     sub(/\\/,"")
     sub(/{.*/,"")

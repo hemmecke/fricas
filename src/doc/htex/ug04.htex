@@ -223,7 +223,7 @@ Issue this to redirect FORTRAN output to, for example, the file
 }{
 \spadcommand{)set output fortran linalg}
 }
-\nullXtc{
+\noOutputXtc{
 You must {\it also} turn on the creation of FORTRAN output.
 The above just says where it goes if it is created.
 }{
@@ -236,19 +236,19 @@ that you specified with \spadsys{)cd}.
 \syscmdindex{cd}
 You should use \spadsys{)cd} before you send the output to the file.
 
-\nullXtc{
+\noOutputXtc{
 You can always direct output back to the screen by issuing this.
 \index{output formats!sending to screen}
 }{
 \spadcommand{)set output fortran console}
 }
-\nullXtc{
+\noOutputXtc{
 Let's make sure FORTRAN formatting is off so that nothing we
 do from now on produces FORTRAN output.
 }{
 \spadcommand{)set output fortran off}
 }
-\nullXtc{
+\noOutputXtc{
 We also delete the demonstrated output file we created.
 }{
 \spadcommand{)system rm linalg.sfort}
@@ -279,12 +279,12 @@ It is usually on when you start the system.
 \index{output formats!monospace 2D}
 \index{monospace 2D output format}
 
-\nullXtc{
+\noOutputXtc{
 If it is not, issue this.
 }{
 \spadcommand{)set output algebra on \bound{algon}}
 }
-\nullXtc{
+\noOutputXtc{
 Since the printed version of this book
 (as opposed to the \HyperName{} version)
 shows output produced by the
@@ -294,7 +294,7 @@ let us temporarily turn off
 }{
 \spadcommand{)set output tex off \bound{texoff}}
 }
-\nullXtc{
+\noOutputXtc{
 Here is an example of what it looks like.
 }{
 \spadcommand{matrix [[i*x^i + j*\%i*y^j for i in 1..2] for j in 3..4] \free{algon texoff}}
@@ -307,12 +307,12 @@ Here is an example of what it looks like.
 +4%i y  + x  4%i y  + 2x +
 \end{verbatim}
 
-\nullXtc{
+\noOutputXtc{
 Issue this to turn off this kind of formatting.
 }{
 \spadcommand{)set output algebra off}
 }
-\nullXtc{
+\noOutputXtc{
 Turn \TeX{} output on again.
 }{
 \spadcommand{)set output tex on}

@@ -382,7 +382,7 @@ local directory for the package.
 To test the package, you must load the package before trying an
 operation.
 
-\nullXtc{
+\noOutputXtc{
 Compile the package.
 }{
 \spadcommand{)compile drawpak}

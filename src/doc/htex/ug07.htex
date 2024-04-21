@@ -1314,7 +1314,7 @@ Display the new \spadtype{TwoDimensionalViewport} containing both graphs.
 %
 }
 % XXX: Without close we have trouble during documentation build
-\nullXtc{
+\noOutputXtc{
 The viewports \spad{v1}, \spad{v2} and \spad{v3} are no longer needed so
 we close them.
 }{

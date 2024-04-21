@@ -647,7 +647,7 @@ tmp/ug09.tex: tmp/examples.list
 	${UGEXAMPLES} $< > $@
 
 pics.mk:
-	grep '\(\\head{\|\\psXtc\|\xtc\|\\noOutputXtc\|\\nullXtc\|epsffile\|\\spadgraph\)' ${srcdir}/htex/ug*.htex \
+	grep '\(\\head{\|\\psXtc\|\xtc\|\\noOutputXtc\|epsffile\|\\spadgraph\)' ${srcdir}/htex/ug*.htex \
 	| ${UGEPSF} > $@
 
 ###################################################################

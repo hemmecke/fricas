@@ -327,7 +327,6 @@ The page you requested was not found in the \HyperName{} database.
 \newcommand{\noOutputXtc}[2]{\xtc{#1}{#2}}  % comment and then \spadcommand or spadsrc
 \newcommand{\not=}{\inputbitmap{\htbmdir{}/not=.bitmap}}
 \newcommand{\notequal}{\inputbitmap{\htbmdir{}/notequal.bitmap}}
-\newcommand{\nullXtc}[2]{\xtc{#1}{#2}}      % comment and then \spadcommand or spadsrc
 \newcommand{\pp}{\newline}              % Use this instead of \par for now.
 \newcommand{\psXtc}[3]{\xtc{#1}{#2}}        % comment and then \spadcommand or spadsrc
 \newcommand{\ref}[1]{(see the graph)}
