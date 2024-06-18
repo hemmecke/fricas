@@ -11,9 +11,11 @@ BEGIN {
     print ")set streams calculate 7"
     print "outputSpacing(0)"
     print "-- \\end{inputonly}"
+    spadgraph=0
 }
 
 END {
+    maybeCloseViewport()
     print ")set quit unprotected"
     print ")quit"
 }
@@ -62,14 +64,12 @@ END {
 
 /^} *$/ && xtc>1 {
     xtc=0
-    spadgraph=0
     print "-- \\end{" xtcname "}"
     next
 }
 
 xtc==2 && (/^\\spadcommand{/ || /^\\spadgraph{/) {
-    if (match($0, /^\\spadgraph{/)) spadgraph=1
-    print "-- \\begin{spadsrc}"
+    posspadgraph=match($0, /^\\spadgraph{/)
     gsub(/^\\spadcommand{/, "")
     gsub(/^\\spadgraph{/, "")
     gsub(/}$/, "")
@@ -79,17 +79,31 @@ xtc==2 && (/^\\spadcommand{/ || /^\\spadgraph{/) {
     gsub(/\\_/, "_")
     gsub(/\\free{.*/, "")
     gsub(/\\bound{.*/, "")
+    gsub(/  *$/, "")
+
+    # ")clear all" commands need special treatment
+    if ($0 == ")clear all") {maybeCloseViewport()}
+    print "-- \\begin{spadsrc}"
     print "-- " $0
     print "-- \\end{spadsrc}"
+
     if (xtcname=="psXtc") {
-        print "-- \\begin{psxtcnooutput}"
-        print $0
-        print "-- \\end{psxtcnooutput}"
+        if (posspadgraph>0) {maybeCloseViewport()}
+        print "-- \\begin{inputonly}"
+        if (posspadgraph>0) {
+            spadgraph=1
+            print ")if CreateGraphics"
+            print "spadgraphViewport:=" $0
+            print ")endif"
+        } else {
+            print $0
+        }
+        print "-- \\end{inputonly}"
     }
     if (xtcname=="noOutputXtc") {
-        print "-- \\begin{xtcnooutput}"
+        print "-- \\begin{inputonly}"
         print $0
-        print "-- \\end{xtcnooutput}"
+        print "-- \\end{inputonly}"
     }
     if (xtcname=="xtc") {
         print $0
@@ -108,22 +122,16 @@ xtc==2 && /^\\begin{spadsrc}/ {
         getline
     }
     print "-- " $0
-    if (xtcname=="psXtc") {
-        print "-- \\begin{psxtcnooutput}"
-    }
-    if (xtcname=="noOutputXtc") {
-        print "-- \\begin{xtcnooutput}"
+    if (xtcname=="psXtc" || xtcname=="noOutputXtc") {
+        print "-- \\begin{inputonly}"
     }
     if (xtcname=="xtc" || xtcname=="noOutputXtc") {
         if (xtcname!="nullXtc") {
             for (i = 1; i < n; i++) {print arr[i]}
         }
     }
-    if (xtcname=="psXtc") {
-        print "-- \\end{psxtcnooutput}"
-    }
-    if (xtcname=="noOutputXtc") {
-        print "-- \\end{xtcnooutput}"
+    if (xtcname=="psXtc" || xtcname=="noOutputXtc") {
+        print "-- \\end{inputonly}"
     }
     next
 }
@@ -149,25 +157,37 @@ xtc==2 && /^\\begin{spadsrc}/ {
     next
 }
 
-xtc==3 && /^\\epsffile/ {
-    print "-- " $0
-    if (xtcname == "psXtc" && spadgraph == 1) {
-        gsub(/^\\epsffile.*{/, "")
-        gsub(/}$/, "")
-        print "-- \\begin{psxtcnooutput}"
-        print "write(%, \"tmp/" $0 "\", \"postscript\"); close(%)"
-        print "-- \\end{psxtcnooutput}"
-    }
+xtc==3 && xtcname == "psXtc" {
+    print "-- \\begin{center}"
+    print "-- \\includegraphics[height=.25\\textheight]{" $0 "}"
+    print "-- \\end{center}"
+    print "-- \\begin{inputonly}"
+    print ")if CreateGraphics"
+    print "write(spadgraphViewport, \"tmp/" $0 "\", \"postscript\");"
+    print ")endif"
+    print "-- \\end{inputonly}"
     next
 }
 
 {
     print "-- " $0
     if (match($0,/^\\head/)) {
+        maybeCloseViewport()
         print "-- \\begin{inputonly}"
         print ")clear all"
         print "-- \\end{inputonly}"
     }
+}
+
+function maybeCloseViewport() {
+    if (spadgraph>0) {
+        print "-- \\begin{inputonly}"
+        print ")if CreateGraphics"
+        print "close(spadgraphViewport);"
+        print ")endif"
+        print "-- \\end{inputonly}"
+    }
+    spadgraph=0
 }
 
 function endMacroIndex(line,parms,    pp,x,bc,cc,len,found) {
