@@ -35,12 +35,7 @@
 \head{chapter}{Using \HyperName{}}{ugHyper}
 % *********************************************************************
 
-\begin{texonly}
-\begin{figure}[htbp]
-\includehyperdoc{h-root}
-\caption{The \HyperName{} root window page.}
-\end{figure}
-\end{texonly}
+\includehyperdoc{h-root}{The \HyperName{} root window page.}
 
 \HyperName{} is the gateway to \Language{}.
 \index{HyperDoc @{\protect\HyperName{}}}

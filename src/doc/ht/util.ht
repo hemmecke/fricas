@@ -229,7 +229,6 @@ The page you requested was not found in the \HyperName{} database.
 \newcommand{\ell}{\inputbitmap{\htbmdir{}/ell.bitmap}}
 \newcommand{\emptyset}{\inputbitmap{\htbmdir{}/emptyset.bitmap}}
 \newcommand{\epsilon}{\inputbitmap{\htbmdir{}/epsilon.bitmap}}
-\newcommand{\includespadgraph}{}
 \newcommand{\eta}{\inputbitmap{\htbmdir{}/eta.bitmap}}
 \newcommand{\exists}{\inputbitmap{\htbmdir{}/exists.bitmap}}
 \newcommand{\forall}{\inputbitmap{\htbmdir{}/forall.bitmap}}
@@ -244,6 +243,7 @@ The page you requested was not found in the \HyperName{} database.
 \newcommand{\huge}{}
 \newcommand{\Im}{\inputbitmap{\htbmdir{}/Im.bitmap}}
 \newcommand{\imath}{\inputbitmap{\htbmdir{}/imath.bitmap}}
+\newcommand{\includehyperdoc}[2]{}
 \newcommand{\infty}{\inputbitmap{\htbmdir{}/infty.bitmap}}
 \newcommand{\int}{\inputbitmap{\htbmdir{}/int.bitmap}}
 \newcommand{\iota}{\inputbitmap{\htbmdir{}/iota.bitmap}}

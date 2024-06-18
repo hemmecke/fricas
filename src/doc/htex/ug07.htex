@@ -591,13 +591,7 @@ The panel is displayed on the side of the viewport closest to
 where you clicked.  Each of the buttons which toggle on and off show the
 current state of the graph.
 
-\begin{texonly}
-\typeout{2D control-panel.}
-\begin{figure}[htbp]
-\includehyperdoc{2Dctrl}
-\caption{Two-dimensional control-panel.}
-\end{figure}
-\end{texonly}
+\includehyperdoc{2Dctrl}{Two-dimensional control-panel.}
 
 % *********************************************************************
 \subsubsection{Transformations}
@@ -2139,13 +2133,7 @@ and click with your left mouse button.
 This displays a control-panel on the side of the viewport
 that is closest to where you clicked.
 
-\begin{texonly}
-\typeout{3D control-panel.}
-\begin{figure}[htbp]
-\includehyperdoc{3Dctrl}
-\caption{Three-dimensional control-panel.}
-\end{figure}
-\end{texonly}
+\includehyperdoc{3Dctrl}{Three-dimensional control-panel.}
 
 % *********************************************************************
 \subsubsection{Transformations}
