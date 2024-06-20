@@ -673,6 +673,9 @@ ${HTEX_VIEWPORTS_STAMP}: tmp/stamp-%: tmp/vp-%.input
 	${STAMP} $@
 
 stamp-book-viewports: ${HTEX_VIEWPORTS_STAMP}
+	${STAMP} $@
+
+stamp-book-pics: stamp-book-viewports
 	cp ${pngsrcdir}/*.png tmp/
 	for f in tmp/*.VIEW/image.ps; do \
 		epstopdf $$f --outfile=`echo $$f | sed 's/VIEW.*/pdf/'`; \
@@ -708,7 +711,7 @@ tmp/info.tex:
 # Convince latex to abort on error.
 LATEX=pdflatex -halt-on-error -file-line-error -interaction=nonstopmode
 
-book-pdf: stamp-book-viewports tmp/ug09.tex tmp/info.tex ${HTEX_FILES_TEX}
+book-pdf: stamp-book-pics tmp/ug09.tex tmp/info.tex ${HTEX_FILES_TEX}
 	TEXINPUTS=$$TEXINPUTS:${srcdir}:tmp:. ${LATEX} book.tex \
 	|| (echo "==> Detected problem while running LaTeX."; \
 	    echo "==> LaTeX must be installed."; \
