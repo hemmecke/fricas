@@ -215,30 +215,31 @@ StreamTaylorSeriesOperations(A) : Exports == Implementation where
     --        in reverse order, c(k-1)~=0.
 
     -- local
-    revSum(ra: ST A, rvc: List A): A ==
-        cc: A := 0
+    revSum(ra : ST A, rvc : List A) : A ==
+        cc : A := 0
         for c in rvc while not empty? ra repeat
             cc := cc + c * frst(ra)
             ra := rst ra
         cc
 
     -- local
-    restRecip(a: ST A, u: A, n: I, k: I, ra: ST A, revc: List A): ST A == delay
+    restRecip(a : ST A, u : A, n : I, k : I, ra : ST A, revc : List A): ST A ==
+      delay
         --assert(k=#revc)
         --assert(for i in k .. n-1 while not empty? a repeat a := rst a; a=ra)
         --assert(#revc>0)
         empty? ra => empty()
-        rvc: List A := revc -- create a local variable inside 'delay'
-        cn: A := u * revSum(ra, rvc) -- u = -1/a(0)
+        rvc : List A := revc -- create a local variable inside 'delay'
+        cn : A := u * revSum(ra, rvc) -- u = -1/a(0)
         zero? cn => concat(cn, restRecip(a, u, n+1, k, rst ra, rvc))
         for i in k..n-1 repeat rvc := cons(0, rvc) -- fill rvc with zeros
         concat(cn, restRecip(a, u, n+1, n+1, a, cons(cn, rvc)))
 
-    recip(x: ST A): UN ==
+    recip(x : ST A) : UN ==
         empty? x => "failed"
-        ua: Union(A, "failed") := recip frst x
+        ua : Union(A, "failed") := recip frst x
         ua case "failed" => "failed"
-        c0: A := ua @ A
+        c0 : A := ua @ A
         concat(c0, restRecip(rst x, -c0, 1, 1, rst x, [c0])) :: UN
 
 -------------------------------------------------------------------
@@ -273,19 +274,19 @@ StreamTaylorSeriesOperations(A) : Exports == Implementation where
     --        in reverse order, c(k-1)~=0.
 
     -- local
-    restDiv(a: ST A, u: A, n: I, k: I, ra: ST A, b: ST A, revc: List A): ST A ==
-      delay
+    restDiv(a : ST A, u : A, n : I, k : I, ra : ST A, b : ST A,_
+            revc : List A) : ST A == delay
         --assert(k=#revc)
         --assert(for i in k .. n-1 while not empty? a repeat a := rst a; a=ra)
         --assert(#revc>0)
         empty? b => restRecip(a, u, n, k, ra, revc)
-        rvc: List A := revc -- create a local variable inside 'delay'
-        cn: A := (revSum(ra, rvc) - frst b) * u -- u = -1/a(0)
+        rvc : List A := revc -- create a local variable inside 'delay'
+        cn : A := (revSum(ra, rvc) - frst b) * u -- u = -1/a(0)
         zero? cn => concat(cn, restDiv(a, u, n+1, k, rst ra, rst b, rvc))
         for i in k..n-1 repeat rvc := cons(0, rvc) -- fill rvc with zeros
         concat(cn, restDiv(a, u, n+1, n+1, a, rst b, cons(cn, rvc)))
 
-    ((x: ST A) exquo (y: ST A)): UN ==
+    ((x : ST A) exquo (y : ST A)) : UN ==
         for n in 1..1000 repeat
             empty? y => return "failed"
             empty? x => return empty()
@@ -293,18 +294,18 @@ StreamTaylorSeriesOperations(A) : Exports == Implementation where
             not zero? frst x => return "failed"
             x := rst x
             y := rst y
-        ua: Union(A, "failed") := recip frst y
+        ua : Union(A, "failed") := recip frst y
         ua case "failed" => "failed"
-        u: A := ua @ A
+        u : A := ua @ A
         c0 := frst(x) * u
         concat(c0, restDiv(rst y, -u, 1, 1, rst y, rst x, [c0]))
 
-    ((x : ST A) / (y : ST A)): ST A == delay
+    ((x : ST A) / (y : ST A)) : ST A == delay
         empty? y => error "/: division by zero"
         empty? x => empty()
-        ua: Union(A, "failed") := recip frst y
+        ua : Union(A, "failed") := recip frst y
         ua case "failed" => error "/: second argument is not invertible"
-        u: A := ua @ A
+        u : A := ua @ A
         c0 := frst(x) * u
         concat(c0, restDiv(rst y, -u, 1, 1, rst y, rst x, [c0]))
 
