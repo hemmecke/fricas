@@ -12,7 +12,8 @@
 ++ References:
 ++ Description:
 ++   StreamTaylorSeriesOperations implements Taylor series arithmetic,
-++   where a Taylor series is represented by a stream of its coefficients.
+++   where a Taylor series is represented by a stream of its coefficients,
+++   see corresponding operations in the category Ring.
 StreamTaylorSeriesOperations(A) : Exports == Implementation where
   A :        Ring
   RN     ==> Fraction Integer
