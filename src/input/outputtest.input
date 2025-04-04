@@ -37,6 +37,7 @@ F2D ==> Formatter Format2D
 F1D ==> Formatter Format1D
 FLT ==> Formatter FormatLaTeX
 FMJ ==> Formatter FormatMathJax
+FMM ==> Formatter FormatMathematica
 begin(s: String, env: String): OutputBox == _
   vconcat([box s, box "\hrulefill", box env]$List(OutputBox), 1, -1)$OutputBox
 setDefault!(_
@@ -55,6 +56,10 @@ setDefault!(_
   (label: String): OutputBox +-> begin("Format2D", "\begin{verbcode}"),_
   (label: String): OutputBox +-> box "\end{verbcode}"_
   )$F2D
+setDefault!(_
+  (label: String): OutputBox +-> begin("FormatMathematica", "\begin{verbcode}"),_
+  (label: String): OutputBox +-> box "\end{verbcode}"_
+  )$FMM
 
 E ==> Expression Integer
 OF ==> OutputForm
@@ -78,6 +83,7 @@ macro e x == (_
     display(o::FMJ);_
     display(o::F1D);_
     display(o::F2D);_
+    display(o::FMM);_
     print(message("Algebra i-output.boot\hrulefill")$OF);_
     print(message("\begin{verbcode}")$OF);_
     print(o);_
