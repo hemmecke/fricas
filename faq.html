@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="_static/classic.css?v=2bf1fcf8" />
     <link rel="stylesheet" href="_static/style.css" type="text/css" />
     
-    <script src="_static/documentation_options.js?v=f8f8a157"></script>
+    <script src="_static/documentation_options.js?v=249bdec9"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -73,7 +73,7 @@
 <li><p><a class="reference internal" href="#why-do-fricas-input-defined-functions-fail-in-fricas" id="id20">Why do .fricas.input defined functions fail in fricas?</a></p></li>
 <li><p><a class="reference internal" href="#how-can-i-debug-algebra-code" id="id21">How can I debug algebra code?</a></p></li>
 <li><p><a class="reference internal" href="#how-can-i-access-lisp-code-from-the-fricas-command-line" id="id22">How can I access lisp code from the FriCAS command line?</a></p></li>
-<li><p><a class="reference internal" href="#is-there-exeption-handling-in-fricas" id="id23">Is there exeption handling in FriCAS?</a></p></li>
+<li><p><a class="reference internal" href="#is-there-exception-handling-in-fricas" id="id23">Is there exception handling in FriCAS?</a></p></li>
 <li><p><a class="reference internal" href="#can-i-run-a-function-under-a-time-constraint" id="id24">Can I run a function under a time constraint?</a></p></li>
 <li><p><a class="reference internal" href="#how-can-i-compile-fspace-spad" id="id25">How can I compile fspace.spad?</a></p></li>
 <li><p><a class="reference internal" href="#are-there-things-in-fricas-that-do-not-work-properly" id="id26">Are there things in FriCAS that do not work properly?</a></p></li>
@@ -584,9 +584,9 @@ the BOOT package. To restart FriCAS type</p>
 </div>
 <p>Note: for ECL you need to type <code class="docutils literal notranslate"><span class="pre">(in-package</span> <span class="pre">&quot;BOOT&quot;)</span></code> before <code class="docutils literal notranslate"><span class="pre">(|runspad|)</span></code>.</p>
 </section>
-<section id="is-there-exeption-handling-in-fricas">
-<h3>Is there exeption handling in FriCAS?<a class="headerlink" href="#is-there-exeption-handling-in-fricas" title="Link to this heading">¶</a></h3>
-<p>You can use a constructions like</p>
+<section id="is-there-exception-handling-in-fricas">
+<h3>Is there exception handling in FriCAS?<a class="headerlink" href="#is-there-exception-handling-in-fricas" title="Link to this heading">¶</a></h3>
+<p>You can use a construction like</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>foo() ==
     l := bits()$Float;
     try
