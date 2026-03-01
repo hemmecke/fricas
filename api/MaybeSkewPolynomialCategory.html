@@ -1,29 +1,25 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>MaybeSkewPolynomialCategory(R, E, VarSet) &#8212; FriCAS</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
     
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/documentation_options.js?v=f8f8a157"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="MeetSemilattice" href="MeetSemilattice.html" />
-    <link rel="prev" title="MatrixCategory(R, Row, Col)" href="MatrixCategory.html" /> 
+    <link rel="prev" title="MatrixOperationsCategory(R, Row, Col)" href="MatrixOperationsCategory.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -33,7 +29,7 @@
           <a href="MeetSemilattice.html" title="MeetSemilattice"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="MatrixCategory.html" title="MatrixCategory(R, Row, Col)"
+          <a href="MatrixOperationsCategory.html" title="MatrixOperationsCategory(R, Row, Col)"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">FriCAS</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" >FriCAS API</a> &#187;</li>
@@ -48,14 +44,14 @@
           <div class="body" role="main">
             
   <section id="maybeskewpolynomialcategory-r-e-varset">
-<span id="l4d61796265536b6577506f6c796e6f6d69616c43617465676f7279"></span><span id="index-0"></span><h1>MaybeSkewPolynomialCategory(R, E, VarSet)<a class="headerlink" href="#maybeskewpolynomialcategory-r-e-varset" title="Permalink to this heading">¶</a></h1>
-<p><a class="reference external" href="https://github.com/hemmecke/fricas/blob/master/src/algebra/polycat.spad#L165">polycat.spad line 165</a> <a class="reference external" href="https://github.com/hemmecke/fricas/edit/master/src/algebra/polycat.spad#L165">[edit on github]</a></p>
+<span id="l4d61796265536b6577506f6c796e6f6d69616c43617465676f7279"></span><span id="index-0"></span><h1>MaybeSkewPolynomialCategory(R, E, VarSet)<a class="headerlink" href="#maybeskewpolynomialcategory-r-e-varset" title="Link to this heading">¶</a></h1>
+<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/docfix/src/algebra/polycat.spad#L165">polycat.spad line 165</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/docfix/src/algebra/polycat.spad#L165">[edit on github]</a></p>
 <ul class="simple">
 <li><p>R: Join(<a class="reference internal" href="SemiRng.html#l53656d69526e67"><span class="std std-ref">SemiRng</span></a>, <a class="reference internal" href="AbelianMonoid.html#l4162656c69616e4d6f6e6f6964"><span class="std std-ref">AbelianMonoid</span></a>)</p></li>
 <li><p>E: <a class="reference internal" href="OrderedAbelianMonoidSup.html#l4f7264657265644162656c69616e4d6f6e6f6964537570"><span class="std std-ref">OrderedAbelianMonoidSup</span></a></p></li>
 <li><p>VarSet: <a class="reference internal" href="OrderedSet.html#l4f726465726564536574"><span class="std std-ref">OrderedSet</span></a></p></li>
 </ul>
-<p>The category for general multi-variate possibly skew polynomials over a ring <code class="docutils literal notranslate"><span class="pre">R</span></code>, in variables from VarSet, with exponents from the <a class="reference internal" href="OrderedAbelianMonoidSup.html#l4f7264657265644162656c69616e4d6f6e6f6964537570"><span class="std std-ref">OrderedAbelianMonoidSup</span></a>.</p>
+<p>The category for general multi-variate possibly skew polynomials over a ring <code class="code docutils literal notranslate"><span class="pre">R</span></code>, in variables from VarSet, with exponents from the <a class="reference internal" href="OrderedAbelianMonoidSup.html#l4f7264657265644162656c69616e4d6f6e6f6964537570"><span class="std std-ref">OrderedAbelianMonoidSup</span></a>.</p>
 <dl class="simple" id="l4d61796265536b6577506f6c796e6f6d69616c43617465676f7279-30">
 <dt><a class="reference internal" href="AbelianMonoid.html#l4162656c69616e4d6f6e6f6964-30"><span class="std std-ref">0</span></a>: %</dt><dd><p>from <a class="reference internal" href="AbelianMonoid.html#l4162656c69616e4d6f6e6f6964"><span class="std std-ref">AbelianMonoid</span></a></p>
 </dd>
@@ -65,7 +61,7 @@
 </dd>
 </dl>
 <dl class="simple" id="l4d61796265536b6577506f6c796e6f6d69616c43617465676f7279-2a">
-<dt><a class="reference internal" href="LeftModule.html#l4c6566744d6f64756c65-2a"><span class="std std-ref">*</span></a>: (%, %) -&gt; %</dt><dd><p>from <a class="reference internal" href="LeftModule.html#l4c6566744d6f64756c65"><span class="std std-ref">LeftModule</span></a> %</p>
+<dt><a class="reference internal" href="Magma.html#l4d61676d61-2a"><span class="std std-ref">*</span></a>: (%, %) -&gt; %</dt><dd><p>from <a class="reference internal" href="Magma.html#l4d61676d61"><span class="std std-ref">Magma</span></a></p>
 </dd>
 <dt><a class="reference internal" href="RightModule.html#l52696768744d6f64756c65-2a"><span class="std std-ref">*</span></a>: (%, <a class="reference internal" href="Fraction.html#l4672616374696f6e"><span class="std std-ref">Fraction</span></a> <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>) -&gt; % if R has <a class="reference internal" href="Algebra.html#l416c6765627261"><span class="std std-ref">Algebra</span></a> <a class="reference internal" href="Fraction.html#l4672616374696f6e"><span class="std std-ref">Fraction</span></a> <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a></dt><dd><p>from <a class="reference internal" href="RightModule.html#l52696768744d6f64756c65"><span class="std std-ref">RightModule</span></a> <a class="reference internal" href="Fraction.html#l4672616374696f6e"><span class="std std-ref">Fraction</span></a> <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a></p>
 </dd>
@@ -136,20 +132,16 @@
 <dt><a class="reference internal" href="NonAssociativeRing.html#l4e6f6e4173736f6369617469766552696e67-6368617261637465726973746963"><span class="std std-ref">characteristic</span></a>: () -&gt; <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a> if R has <a class="reference internal" href="Ring.html#l52696e67"><span class="std std-ref">Ring</span></a></dt><dd><p>from <a class="reference internal" href="NonAssociativeRing.html#l4e6f6e4173736f6369617469766552696e67"><span class="std std-ref">NonAssociativeRing</span></a></p>
 </dd>
 </dl>
-<dl class="simple" id="l4d61796265536b6577506f6c796e6f6d69616c43617465676f7279-636861727468526f6f74">
-<dt><a class="reference internal" href="CharacteristicNonZero.html#l43686172616374657269737469634e6f6e5a65726f-636861727468526f6f74"><span class="std std-ref">charthRoot</span></a>: % -&gt; Union(%, failed) if R has <a class="reference internal" href="CharacteristicNonZero.html#l43686172616374657269737469634e6f6e5a65726f"><span class="std std-ref">CharacteristicNonZero</span></a></dt><dd><p>from <a class="reference internal" href="CharacteristicNonZero.html#l43686172616374657269737469634e6f6e5a65726f"><span class="std std-ref">CharacteristicNonZero</span></a></p>
-</dd>
-</dl>
 <dl class="simple" id="l4d61796265536b6577506f6c796e6f6d69616c43617465676f7279-636f656666696369656e74">
 <dt><a class="reference internal" href="AbelianMonoidRing.html#l4162656c69616e4d6f6e6f696452696e67-636f656666696369656e74"><span class="std std-ref">coefficient</span></a>: (%, E) -&gt; R</dt><dd><p>from <a class="reference internal" href="AbelianMonoidRing.html#l4162656c69616e4d6f6e6f696452696e67"><span class="std std-ref">AbelianMonoidRing</span></a>(R, E)</p>
 </dd>
 </dl>
 <dl class="simple" id="index-1">
-<dt><span class="spadfun">coefficient</span>: (%, <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> VarSet, <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>) -&gt; %</dt><dd><p><code class="docutils literal notranslate"><span class="pre">coefficient(p,</span> <span class="pre">lv,</span> <span class="pre">ln)</span></code> views the polynomial <code class="docutils literal notranslate"><span class="pre">p</span></code> as a polynomial in the variables of <code class="docutils literal notranslate"><span class="pre">lv</span></code> and returns the coefficient of the term <code class="docutils literal notranslate"><span class="pre">lv^ln</span></code>, i.e. <code class="docutils literal notranslate"><span class="pre">prod(lv_i</span> <span class="pre">^</span> <span class="pre">ln_i)</span></code>.</p>
+<dt><span class="spadfun">coefficient</span>: (%, <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> VarSet, <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>) -&gt; %</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">coefficient(p,</span> <span class="pre">lv,</span> <span class="pre">ln)</span></code> views the polynomial <code class="code docutils literal notranslate"><span class="pre">p</span></code> as a polynomial in the variables of <code class="code docutils literal notranslate"><span class="pre">lv</span></code> and returns the coefficient of the term <code class="code docutils literal notranslate"><span class="pre">lv^ln</span></code>, i.e. <code class="code docutils literal notranslate"><span class="pre">prod(lv_i</span> <span class="pre">^</span> <span class="pre">ln_i)</span></code>.</p>
 </dd>
 </dl>
 <dl class="simple" id="index-2">
-<dt><span class="spadfun">coefficient</span>: (%, VarSet, <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>) -&gt; %</dt><dd><p><code class="docutils literal notranslate"><span class="pre">coefficient(p,</span> <span class="pre">v,</span> <span class="pre">n)</span></code> views the polynomial <code class="docutils literal notranslate"><span class="pre">p</span></code> as a univariate polynomial in <code class="docutils literal notranslate"><span class="pre">v</span></code> and returns the coefficient of the <code class="docutils literal notranslate"><span class="pre">v^n</span></code> term.</p>
+<dt><span class="spadfun">coefficient</span>: (%, VarSet, <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>) -&gt; %</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">coefficient(p,</span> <span class="pre">v,</span> <span class="pre">n)</span></code> views the polynomial <code class="code docutils literal notranslate"><span class="pre">p</span></code> as a univariate polynomial in <code class="code docutils literal notranslate"><span class="pre">v</span></code> and returns the coefficient of the <code class="code docutils literal notranslate"><span class="pre">v^n</span></code> term.</p>
 </dd>
 </dl>
 <dl class="simple" id="l4d61796265536b6577506f6c796e6f6d69616c43617465676f7279-636f656666696369656e7473">
@@ -189,11 +181,11 @@
 </dd>
 </dl>
 <dl class="simple" id="index-3">
-<dt><span class="spadfun">degree</span>: (%, <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> VarSet) -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">degree(p,</span> <span class="pre">lv)</span></code> gives the list of degrees of polynomial <code class="docutils literal notranslate"><span class="pre">p</span></code> with respect to each of the variables in the list <code class="docutils literal notranslate"><span class="pre">lv</span></code>.</p>
+<dt><span class="spadfun">degree</span>: (%, <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> VarSet) -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">degree(p,</span> <span class="pre">lv)</span></code> gives the list of degrees of polynomial <code class="code docutils literal notranslate"><span class="pre">p</span></code> with respect to each of the variables in the list <code class="code docutils literal notranslate"><span class="pre">lv</span></code>.</p>
 </dd>
 </dl>
 <dl class="simple" id="index-4">
-<dt><span class="spadfun">degree</span>: (%, VarSet) -&gt; <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">degree(p,</span> <span class="pre">v)</span></code> gives the degree of polynomial <code class="docutils literal notranslate"><span class="pre">p</span></code> with respect to the variable <code class="docutils literal notranslate"><span class="pre">v</span></code>.</p>
+<dt><span class="spadfun">degree</span>: (%, VarSet) -&gt; <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">degree(p,</span> <span class="pre">v)</span></code> gives the degree of polynomial <code class="code docutils literal notranslate"><span class="pre">p</span></code> with respect to the variable <code class="code docutils literal notranslate"><span class="pre">v</span></code>.</p>
 </dd>
 </dl>
 <dl class="simple" id="l4d61796265536b6577506f6c796e6f6d69616c43617465676f7279-657871756f">
@@ -252,8 +244,8 @@
 <dt><a class="reference internal" href="IndexedDirectProductCategory.html#l496e646578656444697265637450726f6475637443617465676f7279-6c6973744f665465726d73"><span class="std std-ref">listOfTerms</span></a>: % -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> Record(k: E, c: R)</dt><dd><p>from <a class="reference internal" href="IndexedDirectProductCategory.html#l496e646578656444697265637450726f6475637443617465676f7279"><span class="std std-ref">IndexedDirectProductCategory</span></a>(R, E)</p>
 </dd>
 </dl>
-<span class="target" id="l4d61796265536b6577506f6c796e6f6d69616c43617465676f7279-6d61696e5661726961626c65"></span><dl class="simple" id="index-5">
-<dt><span class="spadfun">mainVariable</span>: % -&gt; Union(VarSet, failed)</dt><dd><p><code class="docutils literal notranslate"><span class="pre">mainVariable(p)</span></code> returns the biggest variable which actually occurs in the polynomial <code class="docutils literal notranslate"><span class="pre">p</span></code>, or “failed” if no variables are present. fails precisely if polynomial satisfies ground?</p>
+<span id="l4d61796265536b6577506f6c796e6f6d69616c43617465676f7279-6d61696e5661726961626c65"></span><dl class="simple" id="index-5">
+<dt><span class="spadfun">mainVariable</span>: % -&gt; Union(VarSet, failed)</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">mainVariable(p)</span></code> returns the biggest variable which actually occurs in the polynomial <code class="code docutils literal notranslate"><span class="pre">p</span></code>, or “failed” if no variables are present. fails precisely if polynomial satisfies ground?</p>
 </dd>
 </dl>
 <dl class="simple" id="l4d61796265536b6577506f6c796e6f6d69616c43617465676f7279-6d6170">
@@ -272,18 +264,18 @@
 <dt><a class="reference internal" href="IndexedProductCategory.html#l496e646578656450726f6475637443617465676f7279-6d6f6e6f6d69616c3f"><span class="std std-ref">monomial?</span></a>: % -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a></dt><dd><p>from <a class="reference internal" href="IndexedProductCategory.html#l496e646578656450726f6475637443617465676f7279"><span class="std std-ref">IndexedProductCategory</span></a>(R, E)</p>
 </dd>
 </dl>
-<span class="target" id="l4d61796265536b6577506f6c796e6f6d69616c43617465676f7279-6d6f6e6f6d69616c"></span><dl class="simple" id="index-6">
-<dt><span class="spadfun">monomial</span>: (%, <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> VarSet, <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>) -&gt; %</dt><dd><p><code class="docutils literal notranslate"><span class="pre">monomial(a,</span> <span class="pre">[v1..vn],</span> <span class="pre">[e1..en])</span></code> returns <code class="docutils literal notranslate"><span class="pre">a*prod(vi^ei)</span></code>.</p>
+<span id="l4d61796265536b6577506f6c796e6f6d69616c43617465676f7279-6d6f6e6f6d69616c"></span><dl class="simple" id="index-6">
+<dt><span class="spadfun">monomial</span>: (%, <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> VarSet, <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>) -&gt; %</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">monomial(a,</span> <span class="pre">[v1..vn],</span> <span class="pre">[e1..en])</span></code> returns <code class="code docutils literal notranslate"><span class="pre">a*prod(vi^ei)</span></code>.</p>
 </dd>
 </dl>
 <dl class="simple" id="index-7">
-<dt><span class="spadfun">monomial</span>: (%, VarSet, <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>) -&gt; %</dt><dd><p><code class="docutils literal notranslate"><span class="pre">monomial(a,</span> <span class="pre">x,</span> <span class="pre">n)</span></code> creates the monomial <code class="docutils literal notranslate"><span class="pre">a*x^n</span></code> where <code class="docutils literal notranslate"><span class="pre">a</span></code> is a polynomial, <code class="docutils literal notranslate"><span class="pre">x</span></code> is a variable and <code class="docutils literal notranslate"><span class="pre">n</span></code> is a nonnegative integer.</p>
+<dt><span class="spadfun">monomial</span>: (%, VarSet, <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>) -&gt; %</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">monomial(a,</span> <span class="pre">x,</span> <span class="pre">n)</span></code> creates the monomial <code class="code docutils literal notranslate"><span class="pre">a*x^n</span></code> where <code class="code docutils literal notranslate"><span class="pre">a</span></code> is a polynomial, <code class="code docutils literal notranslate"><span class="pre">x</span></code> is a variable and <code class="code docutils literal notranslate"><span class="pre">n</span></code> is a nonnegative integer.</p>
 </dd>
 <dt><a class="reference internal" href="IndexedProductCategory.html#l496e646578656450726f6475637443617465676f7279-6d6f6e6f6d69616c"><span class="std std-ref">monomial</span></a>: (R, E) -&gt; %</dt><dd><p>from <a class="reference internal" href="IndexedProductCategory.html#l496e646578656450726f6475637443617465676f7279"><span class="std std-ref">IndexedProductCategory</span></a>(R, E)</p>
 </dd>
 </dl>
-<span class="target" id="l4d61796265536b6577506f6c796e6f6d69616c43617465676f7279-6d6f6e6f6d69616c73"></span><dl class="simple" id="index-8">
-<dt><span class="spadfun">monomials</span>: % -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> %</dt><dd><p><code class="docutils literal notranslate"><span class="pre">monomials(p)</span></code> returns the list of non-zero monomials of polynomial <code class="docutils literal notranslate"><span class="pre">p</span></code>, i.e. <code class="docutils literal notranslate"><span class="pre">monomials(sum(a_(i)</span> <span class="pre">X^(i)))</span> <span class="pre">=</span> <span class="pre">[a_(1)</span> <span class="pre">X^(1),</span> <span class="pre">...,</span> <span class="pre">a_(n)</span> <span class="pre">X^(n)]</span></code>.</p>
+<span id="l4d61796265536b6577506f6c796e6f6d69616c43617465676f7279-6d6f6e6f6d69616c73"></span><dl class="simple" id="index-8">
+<dt><span class="spadfun">monomials</span>: % -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> %</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">monomials(p)</span></code> returns the list of non-zero monomials of polynomial <code class="code docutils literal notranslate"><span class="pre">p</span></code>, i.e. <code class="code docutils literal notranslate"><span class="pre">monomials(sum(a_(i)</span> <span class="pre">X^(i)))</span> <span class="pre">=</span> <span class="pre">[a_(1)</span> <span class="pre">X^(1),</span> <span class="pre">...,</span> <span class="pre">a_(n)</span> <span class="pre">X^(n)]</span></code>.</p>
 </dd>
 </dl>
 <dl class="simple" id="l4d61796265536b6577506f6c796e6f6d69616c43617465676f7279-6e756d6265724f664d6f6e6f6d69616c73">
@@ -306,8 +298,8 @@
 <dt><a class="reference internal" href="FiniteAbelianMonoidRing.html#l46696e6974654162656c69616e4d6f6e6f696452696e67-706f6d6f706f21"><span class="std std-ref">pomopo!</span></a>: (%, R, E, %) -&gt; %</dt><dd><p>from <a class="reference internal" href="FiniteAbelianMonoidRing.html#l46696e6974654162656c69616e4d6f6e6f696452696e67"><span class="std std-ref">FiniteAbelianMonoidRing</span></a>(R, E)</p>
 </dd>
 </dl>
-<span class="target" id="l4d61796265536b6577506f6c796e6f6d69616c43617465676f7279-7072696d69746976654d6f6e6f6d69616c73"></span><dl class="simple" id="index-9">
-<dt><span class="spadfun">primitiveMonomials</span>: % -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> % if R has <a class="reference internal" href="SemiRing.html#l53656d6952696e67"><span class="std std-ref">SemiRing</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">primitiveMonomials(p)</span></code> gives the list of monomials of the polynomial <code class="docutils literal notranslate"><span class="pre">p</span></code> with their coefficients removed. Note: <code class="docutils literal notranslate"><span class="pre">primitiveMonomials(sum(a_(i)</span> <span class="pre">X^(i)))</span> <span class="pre">=</span> <span class="pre">[X^(1),</span> <span class="pre">...,</span> <span class="pre">X^(n)]</span></code>.</p>
+<span id="l4d61796265536b6577506f6c796e6f6d69616c43617465676f7279-7072696d69746976654d6f6e6f6d69616c73"></span><dl class="simple" id="index-9">
+<dt><span class="spadfun">primitiveMonomials</span>: % -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> % if R has <a class="reference internal" href="SemiRing.html#l53656d6952696e67"><span class="std std-ref">SemiRing</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">primitiveMonomials(p)</span></code> gives the list of monomials of the polynomial <code class="code docutils literal notranslate"><span class="pre">p</span></code> with their coefficients removed. Note: <code class="code docutils literal notranslate"><span class="pre">primitiveMonomials(sum(a_(i)</span> <span class="pre">X^(i)))</span> <span class="pre">=</span> <span class="pre">[X^(1),</span> <span class="pre">...,</span> <span class="pre">X^(n)]</span></code>.</p>
 </dd>
 </dl>
 <dl class="simple" id="l4d61796265536b6577506f6c796e6f6d69616c43617465676f7279-7072696d697469766550617274">
@@ -374,16 +366,16 @@
 <dt><a class="reference internal" href="FreeModuleCategory.html#l467265654d6f64756c6543617465676f7279-737570706f7274"><span class="std std-ref">support</span></a>: % -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> E</dt><dd><p>from <a class="reference internal" href="FreeModuleCategory.html#l467265654d6f64756c6543617465676f7279"><span class="std std-ref">FreeModuleCategory</span></a>(R, E)</p>
 </dd>
 </dl>
-<span class="target" id="l4d61796265536b6577506f6c796e6f6d69616c43617465676f7279-746f74616c446567726565"></span><dl class="simple" id="index-10">
-<dt><span class="spadfun">totalDegree</span>: % -&gt; <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">totalDegree(p)</span></code> returns the largest sum over all monomials of all exponents of a monomial.</p>
+<span id="l4d61796265536b6577506f6c796e6f6d69616c43617465676f7279-746f74616c446567726565"></span><dl class="simple" id="index-10">
+<dt><span class="spadfun">totalDegree</span>: % -&gt; <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">totalDegree(p)</span></code> returns the largest sum over all monomials of all exponents of a monomial.</p>
 </dd>
 </dl>
 <dl class="simple" id="index-11">
-<dt><span class="spadfun">totalDegree</span>: (%, <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> VarSet) -&gt; <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">totalDegree(p,</span> <span class="pre">lv)</span></code> returns the maximum sum (over all monomials of polynomial <code class="docutils literal notranslate"><span class="pre">p</span></code>) of the variables in the list <code class="docutils literal notranslate"><span class="pre">lv</span></code>.</p>
+<dt><span class="spadfun">totalDegree</span>: (%, <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> VarSet) -&gt; <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">totalDegree(p,</span> <span class="pre">lv)</span></code> returns the maximum sum (over all monomials of polynomial <code class="code docutils literal notranslate"><span class="pre">p</span></code>) of the variables in the list <code class="code docutils literal notranslate"><span class="pre">lv</span></code>.</p>
 </dd>
 </dl>
-<span class="target" id="l4d61796265536b6577506f6c796e6f6d69616c43617465676f7279-746f74616c446567726565536f72746564"></span><dl class="simple" id="index-12">
-<dt><span class="spadfun">totalDegreeSorted</span>: (%, <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> VarSet) -&gt; <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">totalDegreeSorted(p,</span> <span class="pre">lv)</span></code> returns the maximum sum (over all monomials of polynomial <code class="docutils literal notranslate"><span class="pre">p</span></code>) of the degree in variables in the list <code class="docutils literal notranslate"><span class="pre">lv</span></code>. <code class="docutils literal notranslate"><span class="pre">lv</span></code> is assumed to be sorted in decreasing order.</p>
+<span id="l4d61796265536b6577506f6c796e6f6d69616c43617465676f7279-746f74616c446567726565536f72746564"></span><dl class="simple" id="index-12">
+<dt><span class="spadfun">totalDegreeSorted</span>: (%, <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> VarSet) -&gt; <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">totalDegreeSorted(p,</span> <span class="pre">lv)</span></code> returns the maximum sum (over all monomials of polynomial <code class="code docutils literal notranslate"><span class="pre">p</span></code>) of the degree in variables in the list <code class="code docutils literal notranslate"><span class="pre">lv</span></code>. <code class="code docutils literal notranslate"><span class="pre">lv</span></code> is assumed to be sorted in decreasing order.</p>
 </dd>
 </dl>
 <dl class="simple" id="l4d61796265536b6577506f6c796e6f6d69616c43617465676f7279-756e69743f">
@@ -398,8 +390,8 @@
 <dt><a class="reference internal" href="EntireRing.html#l456e7469726552696e67-756e69744e6f726d616c"><span class="std std-ref">unitNormal</span></a>: % -&gt; Record(unit: %, canonical: %, associate: %) if R has <a class="reference internal" href="EntireRing.html#l456e7469726552696e67"><span class="std std-ref">EntireRing</span></a></dt><dd><p>from <a class="reference internal" href="EntireRing.html#l456e7469726552696e67"><span class="std std-ref">EntireRing</span></a></p>
 </dd>
 </dl>
-<span class="target" id="l4d61796265536b6577506f6c796e6f6d69616c43617465676f7279-7661726961626c6573"></span><dl class="simple" id="index-13">
-<dt><span class="spadfun">variables</span>: % -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> VarSet</dt><dd><p><code class="docutils literal notranslate"><span class="pre">variables(p)</span></code> returns the list of those variables actually appearing in the polynomial <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p>
+<span id="l4d61796265536b6577506f6c796e6f6d69616c43617465676f7279-7661726961626c6573"></span><dl class="simple" id="index-13">
+<dt><span class="spadfun">variables</span>: % -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> VarSet</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">variables(p)</span></code> returns the list of those variables actually appearing in the polynomial <code class="code docutils literal notranslate"><span class="pre">p</span></code>.</p>
 </dd>
 </dl>
 <dl class="simple" id="l4d61796265536b6577506f6c796e6f6d69616c43617465676f7279-7a65726f3f">
@@ -478,13 +470,14 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
 <h3><a href="../index.html">Table of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">FriCAS API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../features.html">Features</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../help.html">Help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
@@ -492,7 +485,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../history.html">History</a></li>
 </ul>
 
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -500,13 +493,13 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -516,7 +509,7 @@
           <a href="MeetSemilattice.html" title="MeetSemilattice"
              >next</a> |</li>
         <li class="right" >
-          <a href="MatrixCategory.html" title="MatrixCategory(R, Row, Col)"
+          <a href="MatrixOperationsCategory.html" title="MatrixOperationsCategory(R, Row, Col)"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">FriCAS</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" >FriCAS API</a> &#187;</li>
@@ -525,7 +518,7 @@
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2007-2023, FriCAS Team.
+    &#169; Copyright 2007-2026, FriCAS Team.
     </div>
   </body>
 </html>

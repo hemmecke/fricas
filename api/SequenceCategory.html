@@ -1,29 +1,25 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>SequenceCategory R &#8212; FriCAS</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
     
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/documentation_options.js?v=f8f8a157"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="SetAggregate S" href="SetAggregate.html" />
     <link rel="prev" title="SemiRng" href="SemiRng.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -48,8 +44,8 @@
           <div class="body" role="main">
             
   <section id="sequencecategory-r">
-<span id="l53657175656e636543617465676f7279"></span><span id="index-0"></span><h1>SequenceCategory R<a class="headerlink" href="#sequencecategory-r" title="Permalink to this heading">¶</a></h1>
-<p><a class="reference external" href="https://github.com/hemmecke/fricas/blob/master/src/algebra/distro.spad#L2">distro.spad line 2</a> <a class="reference external" href="https://github.com/hemmecke/fricas/edit/master/src/algebra/distro.spad#L2">[edit on github]</a></p>
+<span id="l53657175656e636543617465676f7279"></span><span id="index-0"></span><h1>SequenceCategory R<a class="headerlink" href="#sequencecategory-r" title="Link to this heading">¶</a></h1>
+<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/docfix/src/algebra/distro.spad#L2">distro.spad line 2</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/docfix/src/algebra/distro.spad#L2">[edit on github]</a></p>
 <ul class="simple">
 <li><p>R: <a class="reference internal" href="CommutativeRing.html#l436f6d6d7574617469766552696e67"><span class="std std-ref">CommutativeRing</span></a></p></li>
 </ul>
@@ -112,8 +108,8 @@
 <dt><a class="reference internal" href="HomogeneousAggregate.html#l486f6d6f67656e656f7573416767726567617465-616e793f"><span class="std std-ref">any?</span></a>: (R -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a>, %) -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a> if % has <a class="reference internal" href="finiteAggregate.html#l66696e697465416767726567617465"><span class="std std-ref">finiteAggregate</span></a></dt><dd><p>from <a class="reference internal" href="HomogeneousAggregate.html#l486f6d6f67656e656f7573416767726567617465"><span class="std std-ref">HomogeneousAggregate</span></a> R</p>
 </dd>
 </dl>
-<span class="target" id="l53657175656e636543617465676f7279-6170706c79"></span><dl class="simple" id="index-1">
-<dt><span class="spadfun">apply</span>: (%, <a class="reference internal" href="Partition.html#l506172746974696f6e"><span class="std std-ref">Partition</span></a>) -&gt; R</dt><dd><p><code class="docutils literal notranslate"><span class="pre">elt(mm,</span> <span class="pre">pi)</span></code> returns the product of the entries indexed by the integer partition <code class="docutils literal notranslate"><span class="pre">pi</span></code> (as in partitionend moments)</p>
+<span id="l53657175656e636543617465676f7279-6170706c79"></span><dl class="simple" id="index-1">
+<dt><span class="spadfun">apply</span>: (%, <a class="reference internal" href="Partition.html#l506172746974696f6e"><span class="std std-ref">Partition</span></a>) -&gt; R</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">elt(mm,</span> <span class="pre">pi)</span></code> returns the product of the entries indexed by the integer partition <code class="code docutils literal notranslate"><span class="pre">pi</span></code> (as in partitionend moments)</p>
 </dd>
 </dl>
 <dl class="simple" id="l53657175656e636543617465676f7279-6368696c643f">
@@ -129,7 +125,7 @@
 </dd>
 </dl>
 <dl class="simple" id="index-2">
-<dt><span class="spadfun">coerce</span>: <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> R -&gt; %</dt><dd><p><code class="docutils literal notranslate"><span class="pre">coerce(x)</span></code> creation of elements</p>
+<dt><span class="spadfun">coerce</span>: <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> R -&gt; %</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">coerce(x)</span></code> creation of elements</p>
 </dd>
 </dl>
 <dl class="simple" id="l53657175656e636543617465676f7279-636f6d706c657465">
@@ -145,17 +141,17 @@
 </dd>
 </dl>
 <dl class="simple" id="l53657175656e636543617465676f7279-636f6e636174">
-<dt><a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465-636f6e636174"><span class="std std-ref">concat</span></a>: (%, %) -&gt; %</dt><dd><p>from <a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465"><span class="std std-ref">LinearAggregate</span></a> R</p>
+<dt><a class="reference internal" href="UnaryRecursiveAggregate.html#l556e617279526563757273697665416767726567617465-636f6e636174"><span class="std std-ref">concat</span></a>: (%, %) -&gt; %</dt><dd><p>from <a class="reference internal" href="UnaryRecursiveAggregate.html#l556e617279526563757273697665416767726567617465"><span class="std std-ref">UnaryRecursiveAggregate</span></a> R</p>
 </dd>
 <dt><a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465-636f6e636174"><span class="std std-ref">concat</span></a>: (%, R) -&gt; %</dt><dd><p>from <a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465"><span class="std std-ref">LinearAggregate</span></a> R</p>
 </dd>
-<dt><a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465-636f6e636174"><span class="std std-ref">concat</span></a>: (R, %) -&gt; %</dt><dd><p>from <a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465"><span class="std std-ref">LinearAggregate</span></a> R</p>
+<dt><a class="reference internal" href="UnaryRecursiveAggregate.html#l556e617279526563757273697665416767726567617465-636f6e636174"><span class="std std-ref">concat</span></a>: (R, %) -&gt; %</dt><dd><p>from <a class="reference internal" href="UnaryRecursiveAggregate.html#l556e617279526563757273697665416767726567617465"><span class="std std-ref">UnaryRecursiveAggregate</span></a> R</p>
 </dd>
 <dt><a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465-636f6e636174"><span class="std std-ref">concat</span></a>: <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> % -&gt; %</dt><dd><p>from <a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465"><span class="std std-ref">LinearAggregate</span></a> R</p>
 </dd>
 </dl>
-<span class="target" id="l53657175656e636543617465676f7279-636f6e73"></span><dl class="simple" id="index-3">
-<dt><span class="spadfun">cons</span>: (R, %) -&gt; %</dt><dd><p><code class="docutils literal notranslate"><span class="pre">cons(r,</span> <span class="pre">s)</span></code> prepends <code class="docutils literal notranslate"><span class="pre">r</span></code> to the stream <code class="docutils literal notranslate"><span class="pre">s</span></code></p>
+<span id="l53657175656e636543617465676f7279-636f6e73"></span><dl class="simple" id="index-3">
+<dt><span class="spadfun">cons</span>: (R, %) -&gt; %</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">cons(r,</span> <span class="pre">s)</span></code> prepends <code class="code docutils literal notranslate"><span class="pre">r</span></code> to the stream <code class="code docutils literal notranslate"><span class="pre">s</span></code></p>
 </dd>
 </dl>
 <dl class="simple" id="l53657175656e636543617465676f7279-636f6e737472756374">
@@ -171,7 +167,7 @@
 </dd>
 </dl>
 <dl class="simple" id="l53657175656e636543617465676f7279-636f7079496e746f21">
-<dt><a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465-636f7079496e746f21"><span class="std std-ref">copyInto!</span></a>: (%, %, <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>) -&gt; % if % has <a class="reference internal" href="shallowlyMutable.html#l7368616c6c6f776c794d757461626c65"><span class="std std-ref">shallowlyMutable</span></a> and % has <a class="reference internal" href="finiteAggregate.html#l66696e697465416767726567617465"><span class="std std-ref">finiteAggregate</span></a></dt><dd><p>from <a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465"><span class="std std-ref">LinearAggregate</span></a> R</p>
+<dt><a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465-636f7079496e746f21"><span class="std std-ref">copyInto!</span></a>: (%, %, <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>) -&gt; % if % has <a class="reference internal" href="finiteAggregate.html#l66696e697465416767726567617465"><span class="std std-ref">finiteAggregate</span></a> and % has <a class="reference internal" href="shallowlyMutable.html#l7368616c6c6f776c794d757461626c65"><span class="std std-ref">shallowlyMutable</span></a></dt><dd><p>from <a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465"><span class="std std-ref">LinearAggregate</span></a> R</p>
 </dd>
 </dl>
 <dl class="simple" id="l53657175656e636543617465676f7279-636f756e74">
@@ -206,8 +202,8 @@
 <dt><a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465-64656c657465"><span class="std std-ref">delete</span></a>: (%, <a class="reference internal" href="UniversalSegment.html#l556e6976657273616c5365676d656e74"><span class="std std-ref">UniversalSegment</span></a> <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>) -&gt; %</dt><dd><p>from <a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465"><span class="std std-ref">LinearAggregate</span></a> R</p>
 </dd>
 </dl>
-<span class="target" id="l53657175656e636543617465676f7279-64696c617465"></span><dl class="simple" id="index-4">
-<dt><span class="spadfun">dilate</span>: (R, %) -&gt; %</dt><dd><p><code class="docutils literal notranslate"><span class="pre">dilate(a,</span> <span class="pre">x)</span></code> returns the sequence $a^n <code class="docutils literal notranslate"><span class="pre">x_n</span></code>$ (starting at $<code class="docutils literal notranslate"><span class="pre">n=1</span></code>$)</p>
+<span id="l53657175656e636543617465676f7279-64696c617465"></span><dl class="simple" id="index-4">
+<dt><span class="spadfun">dilate</span>: (R, %) -&gt; %</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">dilate(a,</span> <span class="pre">x)</span></code> returns the sequence $a^n <code class="code docutils literal notranslate"><span class="pre">x_n</span></code>$ (starting at $<code class="code docutils literal notranslate"><span class="pre">n=1</span></code>$)</p>
 </dd>
 </dl>
 <dl class="simple" id="l53657175656e636543617465676f7279-64697374616e6365">
@@ -219,7 +215,7 @@
 </dd>
 </dl>
 <dl class="simple" id="index-5">
-<dt><span class="spadfun">elt</span>: (%, <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>) -&gt; R</dt><dd><p><code class="docutils literal notranslate"><span class="pre">elt(mm,</span> <span class="pre">n)</span></code> returns the <code class="docutils literal notranslate"><span class="pre">n</span></code>th element of a sequence.</p>
+<dt><span class="spadfun">elt</span>: (%, <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>) -&gt; R</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">elt(mm,</span> <span class="pre">n)</span></code> returns the <code class="code docutils literal notranslate"><span class="pre">n</span></code>th element of a sequence.</p>
 </dd>
 <dt><a class="reference internal" href="EltableAggregate.html#l456c7461626c65416767726567617465-656c74"><span class="std std-ref">elt</span></a>: (%, <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>, R) -&gt; R</dt><dd><p>from <a class="reference internal" href="EltableAggregate.html#l456c7461626c65416767726567617465"><span class="std std-ref">EltableAggregate</span></a>(<a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>, R)</p>
 </dd>
@@ -291,15 +287,15 @@
 </dd>
 </dl>
 <dl class="simple" id="l53657175656e636543617465676f7279-6669727374">
-<dt><a class="reference internal" href="IndexedAggregate.html#l496e6465786564416767726567617465-6669727374"><span class="std std-ref">first</span></a>: % -&gt; R</dt><dd><p>from <a class="reference internal" href="IndexedAggregate.html#l496e6465786564416767726567617465"><span class="std std-ref">IndexedAggregate</span></a>(<a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>, R)</p>
+<dt><a class="reference internal" href="UnaryRecursiveAggregate.html#l556e617279526563757273697665416767726567617465-6669727374"><span class="std std-ref">first</span></a>: % -&gt; R</dt><dd><p>from <a class="reference internal" href="UnaryRecursiveAggregate.html#l556e617279526563757273697665416767726567617465"><span class="std std-ref">UnaryRecursiveAggregate</span></a> R</p>
 </dd>
 </dl>
 <dl class="simple" id="index-6">
-<dt><span class="spadfun">first</span>: (%, <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>) -&gt; %</dt><dd><p><code class="docutils literal notranslate"><span class="pre">first(x,</span> <span class="pre">n)</span></code> returns the sequence of the first <code class="docutils literal notranslate"><span class="pre">n</span></code> entries</p>
+<dt><span class="spadfun">first</span>: (%, <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>) -&gt; %</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">first(x,</span> <span class="pre">n)</span></code> returns the sequence of the first <code class="code docutils literal notranslate"><span class="pre">n</span></code> entries</p>
 </dd>
 </dl>
-<span class="target" id="l53657175656e636543617465676f7279-66697273746e"></span><dl class="simple" id="index-7">
-<dt><span class="spadfun">firstn</span>: (%, <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>) -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> R</dt><dd><p><code class="docutils literal notranslate"><span class="pre">firstn(x,</span> <span class="pre">n)</span></code> returns a list of the first <code class="docutils literal notranslate"><span class="pre">n</span></code> entries</p>
+<span id="l53657175656e636543617465676f7279-66697273746e"></span><dl class="simple" id="index-7">
+<dt><span class="spadfun">firstn</span>: (%, <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>) -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> R</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">firstn(x,</span> <span class="pre">n)</span></code> returns a list of the first <code class="code docutils literal notranslate"><span class="pre">n</span></code> entries</p>
 </dd>
 </dl>
 <dl class="simple" id="l53657175656e636543617465676f7279-66727374">
@@ -489,7 +485,7 @@
 </dd>
 </dl>
 <dl class="simple" id="l53657175656e636543617465676f7279-7265766572736521">
-<dt><a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465-7265766572736521"><span class="std std-ref">reverse!</span></a>: % -&gt; % if % has <a class="reference internal" href="shallowlyMutable.html#l7368616c6c6f776c794d757461626c65"><span class="std std-ref">shallowlyMutable</span></a> and % has <a class="reference internal" href="finiteAggregate.html#l66696e697465416767726567617465"><span class="std std-ref">finiteAggregate</span></a></dt><dd><p>from <a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465"><span class="std std-ref">LinearAggregate</span></a> R</p>
+<dt><a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465-7265766572736521"><span class="std std-ref">reverse!</span></a>: % -&gt; % if % has <a class="reference internal" href="finiteAggregate.html#l66696e697465416767726567617465"><span class="std std-ref">finiteAggregate</span></a> and % has <a class="reference internal" href="shallowlyMutable.html#l7368616c6c6f776c794d757461626c65"><span class="std std-ref">shallowlyMutable</span></a></dt><dd><p>from <a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465"><span class="std std-ref">LinearAggregate</span></a> R</p>
 </dd>
 </dl>
 <dl class="simple" id="l53657175656e636543617465676f7279-72657665727365">
@@ -516,12 +512,12 @@
 <dt><a class="reference internal" href="LazyStreamAggregate.html#l4c617a7953747265616d416767726567617465-73656c656374"><span class="std std-ref">select</span></a>: (R -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a>, %) -&gt; %</dt><dd><p>from <a class="reference internal" href="LazyStreamAggregate.html#l4c617a7953747265616d416767726567617465"><span class="std std-ref">LazyStreamAggregate</span></a> R</p>
 </dd>
 </dl>
-<span class="target" id="l53657175656e636543617465676f7279-73657175656e6365"></span><dl class="simple" id="index-8">
-<dt><span class="spadfun">sequence</span>: (R -&gt; R, R) -&gt; %</dt><dd><p><code class="docutils literal notranslate"><span class="pre">sequence(f,</span> <span class="pre">s0)</span></code> generates a stream recursively by applying the function <code class="docutils literal notranslate"><span class="pre">f:</span></code> <code class="docutils literal notranslate"><span class="pre">S</span></code> <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code> <code class="docutils literal notranslate"><span class="pre">S</span></code> to the last computed value.</p>
+<span id="l53657175656e636543617465676f7279-73657175656e6365"></span><dl class="simple" id="index-8">
+<dt><span class="spadfun">sequence</span>: (R -&gt; R, R) -&gt; %</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">sequence(f,</span> <span class="pre">s0)</span></code> generates a stream recursively by applying the function <code class="code docutils literal notranslate"><span class="pre">f:</span></code> <code class="code docutils literal notranslate"><span class="pre">S</span></code> <code class="code docutils literal notranslate"><span class="pre">-&gt;</span></code> <code class="code docutils literal notranslate"><span class="pre">S</span></code> to the last computed value.</p>
 </dd>
 </dl>
 <dl class="simple" id="index-9">
-<dt><span class="spadfun">sequence</span>: <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> R -&gt; %</dt><dd><p><code class="docutils literal notranslate"><span class="pre">sequence(x)</span></code> turns the stream <code class="docutils literal notranslate"><span class="pre">x</span></code> into a sequence</p>
+<dt><span class="spadfun">sequence</span>: <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> R -&gt; %</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">sequence(x)</span></code> turns the stream <code class="code docutils literal notranslate"><span class="pre">x</span></code> into a sequence</p>
 </dd>
 </dl>
 <dl class="simple" id="l53657175656e636543617465676f7279-7365746368696c6472656e21">
@@ -563,13 +559,13 @@
 </dd>
 </dl>
 <dl class="simple" id="l53657175656e636543617465676f7279-736d616c6c65723f">
-<dt><a class="reference internal" href="Comparable.html#l436f6d70617261626c65-736d616c6c65723f"><span class="std std-ref">smaller?</span></a>: (%, %) -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a> if % has <a class="reference internal" href="finiteAggregate.html#l66696e697465416767726567617465"><span class="std std-ref">finiteAggregate</span></a> and R has <a class="reference internal" href="OrderedSet.html#l4f726465726564536574"><span class="std std-ref">OrderedSet</span></a> or R has <a class="reference internal" href="Comparable.html#l436f6d70617261626c65"><span class="std std-ref">Comparable</span></a> and % has <a class="reference internal" href="finiteAggregate.html#l66696e697465416767726567617465"><span class="std std-ref">finiteAggregate</span></a></dt><dd><p>from <a class="reference internal" href="Comparable.html#l436f6d70617261626c65"><span class="std std-ref">Comparable</span></a></p>
+<dt><a class="reference internal" href="Comparable.html#l436f6d70617261626c65-736d616c6c65723f"><span class="std std-ref">smaller?</span></a>: (%, %) -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a> if R has <a class="reference internal" href="Comparable.html#l436f6d70617261626c65"><span class="std std-ref">Comparable</span></a> and % has <a class="reference internal" href="finiteAggregate.html#l66696e697465416767726567617465"><span class="std std-ref">finiteAggregate</span></a> or % has <a class="reference internal" href="finiteAggregate.html#l66696e697465416767726567617465"><span class="std std-ref">finiteAggregate</span></a> and R has <a class="reference internal" href="OrderedSet.html#l4f726465726564536574"><span class="std std-ref">OrderedSet</span></a></dt><dd><p>from <a class="reference internal" href="Comparable.html#l436f6d70617261626c65"><span class="std std-ref">Comparable</span></a></p>
 </dd>
 </dl>
 <dl class="simple" id="l53657175656e636543617465676f7279-736f727421">
-<dt><a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465-736f727421"><span class="std std-ref">sort!</span></a>: % -&gt; % if % has <a class="reference internal" href="shallowlyMutable.html#l7368616c6c6f776c794d757461626c65"><span class="std std-ref">shallowlyMutable</span></a> and % has <a class="reference internal" href="finiteAggregate.html#l66696e697465416767726567617465"><span class="std std-ref">finiteAggregate</span></a> and R has <a class="reference internal" href="OrderedSet.html#l4f726465726564536574"><span class="std std-ref">OrderedSet</span></a></dt><dd><p>from <a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465"><span class="std std-ref">LinearAggregate</span></a> R</p>
+<dt><a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465-736f727421"><span class="std std-ref">sort!</span></a>: % -&gt; % if % has <a class="reference internal" href="finiteAggregate.html#l66696e697465416767726567617465"><span class="std std-ref">finiteAggregate</span></a> and R has <a class="reference internal" href="OrderedSet.html#l4f726465726564536574"><span class="std std-ref">OrderedSet</span></a> and % has <a class="reference internal" href="shallowlyMutable.html#l7368616c6c6f776c794d757461626c65"><span class="std std-ref">shallowlyMutable</span></a></dt><dd><p>from <a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465"><span class="std std-ref">LinearAggregate</span></a> R</p>
 </dd>
-<dt><a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465-736f727421"><span class="std std-ref">sort!</span></a>: ((R, R) -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a>, %) -&gt; % if % has <a class="reference internal" href="shallowlyMutable.html#l7368616c6c6f776c794d757461626c65"><span class="std std-ref">shallowlyMutable</span></a> and % has <a class="reference internal" href="finiteAggregate.html#l66696e697465416767726567617465"><span class="std std-ref">finiteAggregate</span></a></dt><dd><p>from <a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465"><span class="std std-ref">LinearAggregate</span></a> R</p>
+<dt><a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465-736f727421"><span class="std std-ref">sort!</span></a>: ((R, R) -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a>, %) -&gt; % if % has <a class="reference internal" href="finiteAggregate.html#l66696e697465416767726567617465"><span class="std std-ref">finiteAggregate</span></a> and % has <a class="reference internal" href="shallowlyMutable.html#l7368616c6c6f776c794d757461626c65"><span class="std std-ref">shallowlyMutable</span></a></dt><dd><p>from <a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465"><span class="std std-ref">LinearAggregate</span></a> R</p>
 </dd>
 </dl>
 <dl class="simple" id="l53657175656e636543617465676f7279-736f7274">
@@ -588,8 +584,8 @@
 <dt><a class="reference internal" href="UnaryRecursiveAggregate.html#l556e617279526563757273697665416767726567617465-73706c697421"><span class="std std-ref">split!</span></a>: (%, <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>) -&gt; % if % has <a class="reference internal" href="shallowlyMutable.html#l7368616c6c6f776c794d757461626c65"><span class="std std-ref">shallowlyMutable</span></a></dt><dd><p>from <a class="reference internal" href="UnaryRecursiveAggregate.html#l556e617279526563757273697665416767726567617465"><span class="std std-ref">UnaryRecursiveAggregate</span></a> R</p>
 </dd>
 </dl>
-<span class="target" id="l53657175656e636543617465676f7279-73747265616d"></span><dl class="simple" id="index-10">
-<dt><span class="spadfun">stream</span>: % -&gt; <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> R</dt><dd><p><code class="docutils literal notranslate"><span class="pre">stream(x)</span></code> returns stream of entries</p>
+<span id="l53657175656e636543617465676f7279-73747265616d"></span><dl class="simple" id="index-10">
+<dt><span class="spadfun">stream</span>: % -&gt; <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> R</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">stream(x)</span></code> returns stream of entries</p>
 </dd>
 </dl>
 <dl class="simple" id="l53657175656e636543617465676f7279-7375627472616374496643616e">
@@ -657,13 +653,14 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
 <h3><a href="../index.html">Table of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">FriCAS API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../features.html">Features</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../help.html">Help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
@@ -671,7 +668,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../history.html">History</a></li>
 </ul>
 
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -679,13 +676,13 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -704,7 +701,7 @@
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2007-2023, FriCAS Team.
+    &#169; Copyright 2007-2026, FriCAS Team.
     </div>
   </body>
 </html>

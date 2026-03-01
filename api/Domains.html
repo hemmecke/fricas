@@ -1,36 +1,32 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Domains &#8212; FriCAS</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
     
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/documentation_options.js?v=f8f8a157"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="AlgebraGivenByStructuralConstants(R, n, ls, gamma)" href="AlgebraGivenByStructuralConstants.html" />
+    <link rel="next" title="AInterval R" href="AInterval.html" />
     <link rel="prev" title="XPolynomialsCat(vl, R)" href="XPolynomialsCat.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="AlgebraGivenByStructuralConstants.html" title="AlgebraGivenByStructuralConstants(R, n, ls, gamma)"
+          <a href="AInterval.html" title="AInterval R"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="XPolynomialsCat.html" title="XPolynomialsCat(vl, R)"
@@ -47,10 +43,11 @@
           <div class="body" role="main">
             
   <section id="domains">
-<h1>Domains<a class="headerlink" href="#domains" title="Permalink to this heading">¶</a></h1>
+<h1>Domains<a class="headerlink" href="#domains" title="Link to this heading">¶</a></h1>
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="AInterval.html">AInterval R</a></li>
 <li class="toctree-l1"><a class="reference internal" href="AlgebraGivenByStructuralConstants.html">AlgebraGivenByStructuralConstants(R, n, ls, gamma)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="AlgebraicFunctionField.html">AlgebraicFunctionField(F, UP, UPUP, modulus)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="AlgebraicNumber.html">AlgebraicNumber</a></li>
@@ -65,6 +62,8 @@
 <li class="toctree-l1"><a class="reference internal" href="BalancedBinaryTree.html">BalancedBinaryTree S</a></li>
 <li class="toctree-l1"><a class="reference internal" href="BalancedPAdicInteger.html">BalancedPAdicInteger p</a></li>
 <li class="toctree-l1"><a class="reference internal" href="BalancedPAdicRational.html">BalancedPAdicRational p</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BasicFile.html">BasicFile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BasicKeyedAccessFile.html">BasicKeyedAccessFile</a></li>
 <li class="toctree-l1"><a class="reference internal" href="BasicOperator.html">BasicOperator</a></li>
 <li class="toctree-l1"><a class="reference internal" href="BinaryExpansion.html">BinaryExpansion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="BinarySearchTree.html">BinarySearchTree S</a></li>
@@ -112,6 +111,7 @@
 <li class="toctree-l1"><a class="reference internal" href="DrawOption.html">DrawOption</a></li>
 <li class="toctree-l1"><a class="reference internal" href="EqTable.html">EqTable(Key, Entry)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Equation.html">Equation S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ErrorIndicator.html">ErrorIndicator</a></li>
 <li class="toctree-l1"><a class="reference internal" href="EuclideanModularRing.html">EuclideanModularRing(S, R, Mod, reduction, merge, exactQuo)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Exit.html">Exit</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ExponentialExpansion.html">ExponentialExpansion(R, FE, var, cen)</a></li>
@@ -318,7 +318,7 @@
 <li class="toctree-l1"><a class="reference internal" href="PendantTree.html">PendantTree S</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Permutation.html">Permutation S</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PermutationGroup.html">PermutationGroup S</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Pi.html">Pi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PiDomain.html">PiDomain</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PlaneAlgebraicCurvePlot.html">PlaneAlgebraicCurvePlot</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Plot.html">Plot</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Plot3D.html">Plot3D</a></li>
@@ -413,6 +413,7 @@
 <li class="toctree-l1"><a class="reference internal" href="TexFormat.html">TexFormat</a></li>
 <li class="toctree-l1"><a class="reference internal" href="TexmacsFormat.html">TexmacsFormat</a></li>
 <li class="toctree-l1"><a class="reference internal" href="TextFile.html">TextFile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TeXTree.html">TeXTree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="TheSymbolTable.html">TheSymbolTable</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ThreeDimensionalMatrix.html">ThreeDimensionalMatrix R</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ThreeDimensionalViewport.html">ThreeDimensionalViewport</a></li>
@@ -468,13 +469,14 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
 <h3><a href="../index.html">Table of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">FriCAS API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../features.html">Features</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../help.html">Help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
@@ -482,7 +484,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../history.html">History</a></li>
 </ul>
 
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -490,20 +492,20 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="AlgebraGivenByStructuralConstants.html" title="AlgebraGivenByStructuralConstants(R, n, ls, gamma)"
+          <a href="AInterval.html" title="AInterval R"
              >next</a> |</li>
         <li class="right" >
           <a href="XPolynomialsCat.html" title="XPolynomialsCat(vl, R)"
@@ -514,7 +516,7 @@
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2007-2023, FriCAS Team.
+    &#169; Copyright 2007-2026, FriCAS Team.
     </div>
   </body>
 </html>

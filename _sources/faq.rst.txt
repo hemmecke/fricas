@@ -29,6 +29,9 @@ functionality. As of April 2013, in the src/algebra subdirectory,
 which hosts mathematical functionality about 25% of code was added
 after the fork.
 
+See also
+`FriCAS advantages <https://wiki.fricas.org/FriCASAdvantages>`_
+
 
 What does the FriCAS name mean?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -63,7 +66,7 @@ it |PACKAGE_BOOK|. Its content is shown by the integrated HyperDoc
 help system. You can also access the book in .pdf form at
 http://fricas.github.io/book.pdf.
 An older version is available in in .xhtml form at
-http://fricas-wiki.math.uni.wroc.pl/JenksSutorInXhtml.
+http://wiki.fricas.org/JenksSutorInXhtml.
 
 
 Where should I report bugs?
@@ -75,11 +78,11 @@ https://github.com/fricas/fricas/issues.
 The older bugtrackers at
 `SourceForge <http://sourceforge.net/tracker/?atid=972421&group_id=200168>`_
 and
-the `FriCAS wiki <`http://fricas-wiki.math.uni.wroc.pl/IssueTracker>`_
+the `FriCAS wiki <`http://wiki.fricas.org/IssueTracker>`_
 should not be used anymore.
 
 
-How one can use FriCAS in a pipe or in batch mode?
+How can one use FriCAS in a pipe or in batch mode?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Currently trying to run plain ``fricas`` command in a pipe hangs
@@ -93,11 +96,11 @@ There several ways to let FriCAS process commands from a file.
    cat tst.input | fricas -nosman > tst.output
    echo ')read tst.input' | fricas -nosman > tst.output
 
-Whereas the first two versions do not show the input in ``tst.ouput``,
+Whereas the first two versions do not show the input in ``tst.output``,
 the last command does. However, in the latter case it is hard to
 distinguish input from output.
 
-Note: Similarly to the commandline, pipe mode requires each function
+Note: Similarly to the command line, pipe mode requires each function
 to be defined in a single line.
 
 
@@ -110,6 +113,21 @@ specify all parameters. Then click on 'Operations' and finally on
 'Implementations'. If you are interested in a single operation, after
 clicking on 'Operations' click on an operation name and then click on
 'Implementations'.
+
+In a direct way you can just type the function name with a full
+specification from which domain, for example::
+
+  antiCommutator $ Polynomial(Integer)
+
+The output will be
+::
+
+   theMap(NASRNG-;antiCommutator;3S;1,10)
+
+The part between ``(`` and the first ``;`` is an abbreviation of the
+domain in which the function is implemented. In the above case
+``NASRNG-`` stands for the default package of the category
+``NonAssociativeSemiRng``.
 
 
 Clef does not work.  Is there an alternative?
@@ -272,12 +290,12 @@ will tell you the signatures that the interpreter is trying to use.
 Another method is to do
 ::
 
-   )lisp (setq |$monitorNewWorld| t)
+   )boot $monitorNewWorld := true
 
 and you can view database calls with
 ::
 
-   )lisp (setq *miss* t)
+   )boot $miss := true
 
 
 How can I record console output?
@@ -296,13 +314,13 @@ starts sending output to the file called ``filename`` and
 stops sending output to the file.
 
 
-Graphics doesn't work or sman fails to start ?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Graphics doesn't work or sman fails to start?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 First try running ``sman`` as
 ::
 
-   sman -debug -noclef -nonag -noht
+   sman -debug -noclef -noht
 
 If graphics still doesn't work or sman fails to start then look at the
 error messages.
@@ -336,7 +354,7 @@ Why do .fricas.input defined functions fail in fricas?
 You write this in your ``.fricas.input`` file:
 ::
 
-   mrd(x:Integer,v:Integer):Integer == x+y
+   mrandom(x:Integer,y:Integer,z:Integer):Integer == x+y+z
 
 You can't see this function even though it appears to be defined. That's
 because FriCAS is working in a new frame.
@@ -597,7 +615,7 @@ to disable it do
 
    --> (setq $dalymode nil)
 
-I wrote this change to the interpreter because I tend to use lisp a lot
+Tim Daly wrote this change to the interpreter because he used lisp a lot
 during maintenance. It breaks some syntax but you can work around that.
 
 If you really want to "drop" into lisp do
@@ -610,4 +628,65 @@ and now you are talking only to lisp at a lisp command prompt in
 the BOOT package. To restart FriCAS type
 ::
 
-   BOOT>(restart)
+   BOOT> (|runspad|)
+
+Note: for ECL you need to type ``(in-package "BOOT")`` before ``(|runspad|)``.
+
+
+Is there exeption handling in FriCAS?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can use a constructions like
+::
+
+   foo() ==
+       l := bits()$Float;
+       try
+            -- set new precision
+            bits(128)
+            -- do your work
+        finally
+            bits(l)
+
+to temporarily set the floating poing precision and have it reset
+after the computation even if the computation (your work) results in
+an error.
+
+
+Can I run a function under a time constraint?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checkout the
+`TimeoutPackage <http://fricas.github.io/api/TimeoutPackage.html>`_.
+
+
+How can I compile fspace.spad?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The file ``fspace.spad`` needs a special bootstrap sequence:
+::
+
+   )boot $bootStrapMode := true
+   )compile fspace.spad
+   )boot $bootStrapMode := false
+   )compile fspace.spad
+
+When developing similar changes you need to recompile all things which
+depend on the change and which you want to use, directly or
+indirectly.
+
+Full build takes care of bootstrapping and recompiles everything, so
+after that things works in expected way.
+
+
+
+Are there things in FriCAS that do not work properly?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Yes, there are certainly, a number of them. We list here a few.
+
+* Functions that have types as their parameters work in in the
+  compiler, but not in the interpreter.
+
+  See
+  https://groups.google.com/d/msgid/fricas-devel/aUgPGQyo6_coDs5q%40fricas.org.

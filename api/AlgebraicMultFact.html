@@ -1,29 +1,25 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>AlgebraicMultFact(OV, E, P) &#8212; FriCAS</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
     
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/documentation_options.js?v=f8f8a157"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="AlgebraPackage(R, A)" href="AlgebraPackage.html" />
     <link rel="prev" title="AlgebraicManipulations(R, F)" href="AlgebraicManipulations.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -48,20 +44,20 @@
           <div class="body" role="main">
             
   <section id="algebraicmultfact-ov-e-p">
-<span id="l416c676562726169634d756c7446616374"></span><span id="index-0"></span><h1>AlgebraicMultFact(OV, E, P)<a class="headerlink" href="#algebraicmultfact-ov-e-p" title="Permalink to this heading">¶</a></h1>
-<p><a class="reference external" href="https://github.com/hemmecke/fricas/blob/master/src/algebra/multfact.spad#L488">multfact.spad line 488</a> <a class="reference external" href="https://github.com/hemmecke/fricas/edit/master/src/algebra/multfact.spad#L488">[edit on github]</a></p>
+<span id="l416c676562726169634d756c7446616374"></span><span id="index-0"></span><h1>AlgebraicMultFact(OV, E, P)<a class="headerlink" href="#algebraicmultfact-ov-e-p" title="Link to this heading">¶</a></h1>
+<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/docfix/src/algebra/multfact.spad#L488">multfact.spad line 488</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/docfix/src/algebra/multfact.spad#L488">[edit on github]</a></p>
 <ul class="simple">
 <li><p>OV: <a class="reference internal" href="OrderedSet.html#l4f726465726564536574"><span class="std std-ref">OrderedSet</span></a></p></li>
 <li><p>E: <a class="reference internal" href="OrderedAbelianMonoidSup.html#l4f7264657265644162656c69616e4d6f6e6f6964537570"><span class="std std-ref">OrderedAbelianMonoidSup</span></a></p></li>
 <li><p>P: <a class="reference internal" href="PolynomialCategory.html#l506f6c796e6f6d69616c43617465676f7279"><span class="std std-ref">PolynomialCategory</span></a>(<a class="reference internal" href="AlgebraicNumber.html#l416c676562726169634e756d626572"><span class="std std-ref">AlgebraicNumber</span></a>, E, OV)</p></li>
 </ul>
 <p>This package factors multivariate polynomials over the domain of <a class="reference internal" href="AlgebraicNumber.html#l416c676562726169634e756d626572"><span class="std std-ref">AlgebraicNumber</span></a> by allowing the user to specify a list of algebraic numbers generating the particular extension to factor over.</p>
-<span class="target" id="l416c676562726169634d756c7446616374-666163746f72"></span><dl class="simple" id="index-1">
-<dt><span class="spadfun">factor</span>: (P, <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> <a class="reference internal" href="AlgebraicNumber.html#l416c676562726169634e756d626572"><span class="std std-ref">AlgebraicNumber</span></a>) -&gt; <a class="reference internal" href="Factored.html#l466163746f726564"><span class="std std-ref">Factored</span></a> P</dt><dd><p><code class="docutils literal notranslate"><span class="pre">factor(p,</span> <span class="pre">lan)</span></code> factors the polynomial <code class="docutils literal notranslate"><span class="pre">p</span></code> over the extension generated by the algebraic numbers given by the list lan.</p>
+<span id="l416c676562726169634d756c7446616374-666163746f72"></span><dl class="simple" id="index-1">
+<dt><span class="spadfun">factor</span>: (P, <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> <a class="reference internal" href="AlgebraicNumber.html#l416c676562726169634e756d626572"><span class="std std-ref">AlgebraicNumber</span></a>) -&gt; <a class="reference internal" href="Factored.html#l466163746f726564"><span class="std std-ref">Factored</span></a> P</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">factor(p,</span> <span class="pre">lan)</span></code> factors the polynomial <code class="code docutils literal notranslate"><span class="pre">p</span></code> over the extension generated by the algebraic numbers given by the list lan.</p>
 </dd>
 </dl>
 <dl class="simple" id="index-2">
-<dt><span class="spadfun">factor</span>: (<a class="reference internal" href="SparseUnivariatePolynomial.html#l537061727365556e6976617269617465506f6c796e6f6d69616c"><span class="std std-ref">SparseUnivariatePolynomial</span></a> P, <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> <a class="reference internal" href="AlgebraicNumber.html#l416c676562726169634e756d626572"><span class="std std-ref">AlgebraicNumber</span></a>) -&gt; <a class="reference internal" href="Factored.html#l466163746f726564"><span class="std std-ref">Factored</span></a> <a class="reference internal" href="SparseUnivariatePolynomial.html#l537061727365556e6976617269617465506f6c796e6f6d69616c"><span class="std std-ref">SparseUnivariatePolynomial</span></a> P</dt><dd><p><code class="docutils literal notranslate"><span class="pre">factor(p,</span> <span class="pre">lan)</span></code> factors the polynomial <code class="docutils literal notranslate"><span class="pre">p</span></code> over the extension generated by the algebraic numbers given by the list lan. <code class="docutils literal notranslate"><span class="pre">p</span></code> is presented as a univariate polynomial with multivariate coefficients.</p>
+<dt><span class="spadfun">factor</span>: (<a class="reference internal" href="SparseUnivariatePolynomial.html#l537061727365556e6976617269617465506f6c796e6f6d69616c"><span class="std std-ref">SparseUnivariatePolynomial</span></a> P, <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> <a class="reference internal" href="AlgebraicNumber.html#l416c676562726169634e756d626572"><span class="std std-ref">AlgebraicNumber</span></a>) -&gt; <a class="reference internal" href="Factored.html#l466163746f726564"><span class="std std-ref">Factored</span></a> <a class="reference internal" href="SparseUnivariatePolynomial.html#l537061727365556e6976617269617465506f6c796e6f6d69616c"><span class="std std-ref">SparseUnivariatePolynomial</span></a> P</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">factor(p,</span> <span class="pre">lan)</span></code> factors the polynomial <code class="code docutils literal notranslate"><span class="pre">p</span></code> over the extension generated by the algebraic numbers given by the list lan. <code class="code docutils literal notranslate"><span class="pre">p</span></code> is presented as a univariate polynomial with multivariate coefficients.</p>
 </dd>
 </dl>
 </section>
@@ -71,13 +67,14 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
 <h3><a href="../index.html">Table of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">FriCAS API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../features.html">Features</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../help.html">Help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
@@ -85,7 +82,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../history.html">History</a></li>
 </ul>
 
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -93,13 +90,13 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -118,7 +115,7 @@
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2007-2023, FriCAS Team.
+    &#169; Copyright 2007-2026, FriCAS Team.
     </div>
   </body>
 </html>

@@ -1,29 +1,25 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>PosetFactory S &#8212; FriCAS</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
     
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/documentation_options.js?v=f8f8a157"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="PowerSeriesLimitPackage(R, FE)" href="PowerSeriesLimitPackage.html" />
     <link rel="prev" title="PolynomialToUnivariatePolynomial(x, R)" href="PolynomialToUnivariatePolynomial.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -48,37 +44,37 @@
           <div class="body" role="main">
             
   <section id="posetfactory-s">
-<span id="l506f736574466163746f7279"></span><span id="index-0"></span><h1>PosetFactory S<a class="headerlink" href="#posetfactory-s" title="Permalink to this heading">¶</a></h1>
-<p><a class="reference external" href="https://github.com/hemmecke/fricas/blob/master/src/algebra/logic.spad#L2119">logic.spad line 2119</a> <a class="reference external" href="https://github.com/hemmecke/fricas/edit/master/src/algebra/logic.spad#L2119">[edit on github]</a></p>
+<span id="l506f736574466163746f7279"></span><span id="index-0"></span><h1>PosetFactory S<a class="headerlink" href="#posetfactory-s" title="Link to this heading">¶</a></h1>
+<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/docfix/src/algebra/logic.spad#L2041">logic.spad line 2041</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/docfix/src/algebra/logic.spad#L2041">[edit on github]</a></p>
 <ul class="simple">
 <li><p>S: <a class="reference internal" href="SetCategory.html#l53657443617465676f7279"><span class="std std-ref">SetCategory</span></a></p></li>
 </ul>
-<p>Provides functions to construct various small posets including powerset. Perhaps it should be called a ‘powerlist’ but since we do not expect duplicates or reqire specific ordering it is essentially the same.</p>
-<span class="target" id="l506f736574466163746f7279-636f6d706c6574656c794f726465726564536574"></span><dl class="simple" id="index-1">
+<p>Provides functions to construct various small posets including powerset. Perhaps it should be called a ‘powerlist’ but since we do not expect duplicates or require specific ordering it is essentially the same.</p>
+<span id="l506f736574466163746f7279-636f6d706c6574656c794f726465726564536574"></span><dl class="simple" id="index-1">
 <dt><span class="spadfun">completelyOrderedSet</span>: <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> S -&gt; <a class="reference internal" href="FiniteBiCPO.html#l46696e697465426943504f"><span class="std std-ref">FiniteBiCPO</span></a> S</dt><dd><p>generates a completely ordered set</p>
 </dd>
 </dl>
-<span class="target" id="l506f736574466163746f7279-706f7365744c37"></span><dl class="simple" id="index-2">
-<dt><span class="spadfun">posetL7</span>: <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> S -&gt; <a class="reference internal" href="FiniteBiCPO.html#l46696e697465426943504f"><span class="std std-ref">FiniteBiCPO</span></a> S</dt><dd><p>generates a poset corresponding to an <code class="docutils literal notranslate"><span class="pre">L7</span></code> lattice</p>
+<span id="l506f736574466163746f7279-706f7365744c37"></span><dl class="simple" id="index-2">
+<dt><span class="spadfun">posetL7</span>: <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> S -&gt; <a class="reference internal" href="FiniteBiCPO.html#l46696e697465426943504f"><span class="std std-ref">FiniteBiCPO</span></a> S</dt><dd><p>generates a poset corresponding to an <code class="code docutils literal notranslate"><span class="pre">L7</span></code> lattice</p>
 </dd>
 </dl>
-<span class="target" id="l506f736574466163746f7279-706f7365744d35"></span><dl class="simple" id="index-3">
-<dt><span class="spadfun">posetM5</span>: <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> S -&gt; <a class="reference internal" href="FiniteBiCPO.html#l46696e697465426943504f"><span class="std std-ref">FiniteBiCPO</span></a> S</dt><dd><p>generates a poset corresponding to an <code class="docutils literal notranslate"><span class="pre">M5</span></code> lattice</p>
+<span id="l506f736574466163746f7279-706f7365744d35"></span><dl class="simple" id="index-3">
+<dt><span class="spadfun">posetM5</span>: <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> S -&gt; <a class="reference internal" href="FiniteBiCPO.html#l46696e697465426943504f"><span class="std std-ref">FiniteBiCPO</span></a> S</dt><dd><p>generates a poset corresponding to an <code class="code docutils literal notranslate"><span class="pre">M5</span></code> lattice</p>
 </dd>
 </dl>
-<span class="target" id="l506f736574466163746f7279-706f7365744e35"></span><dl class="simple" id="index-4">
-<dt><span class="spadfun">posetN5</span>: <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> S -&gt; <a class="reference internal" href="FiniteBiCPO.html#l46696e697465426943504f"><span class="std std-ref">FiniteBiCPO</span></a> S</dt><dd><p>generates a poset corresponding to an <code class="docutils literal notranslate"><span class="pre">N5</span></code> lattice</p>
+<span id="l506f736574466163746f7279-706f7365744e35"></span><dl class="simple" id="index-4">
+<dt><span class="spadfun">posetN5</span>: <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> S -&gt; <a class="reference internal" href="FiniteBiCPO.html#l46696e697465426943504f"><span class="std std-ref">FiniteBiCPO</span></a> S</dt><dd><p>generates a poset corresponding to an <code class="code docutils literal notranslate"><span class="pre">N5</span></code> lattice</p>
 </dd>
 </dl>
-<span class="target" id="l506f736574466163746f7279-706f7365744f36"></span><dl class="simple" id="index-5">
-<dt><span class="spadfun">posetO6</span>: <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> S -&gt; <a class="reference internal" href="FiniteBiCPO.html#l46696e697465426943504f"><span class="std std-ref">FiniteBiCPO</span></a> S</dt><dd><p>generates a poset corresponding to an <code class="docutils literal notranslate"><span class="pre">O6</span></code> lattice</p>
+<span id="l506f736574466163746f7279-706f7365744f36"></span><dl class="simple" id="index-5">
+<dt><span class="spadfun">posetO6</span>: <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> S -&gt; <a class="reference internal" href="FiniteBiCPO.html#l46696e697465426943504f"><span class="std std-ref">FiniteBiCPO</span></a> S</dt><dd><p>generates a poset corresponding to an <code class="code docutils literal notranslate"><span class="pre">O6</span></code> lattice</p>
 </dd>
 </dl>
-<span class="target" id="l506f736574466163746f7279-706f7365745036"></span><dl class="simple" id="index-6">
-<dt><span class="spadfun">posetP6</span>: <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> S -&gt; <a class="reference internal" href="FiniteBiCPO.html#l46696e697465426943504f"><span class="std std-ref">FiniteBiCPO</span></a> S</dt><dd><p>generates a poset corresponding to an <code class="docutils literal notranslate"><span class="pre">P6</span></code> lattice</p>
+<span id="l506f736574466163746f7279-706f7365745036"></span><dl class="simple" id="index-6">
+<dt><span class="spadfun">posetP6</span>: <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> S -&gt; <a class="reference internal" href="FiniteBiCPO.html#l46696e697465426943504f"><span class="std std-ref">FiniteBiCPO</span></a> S</dt><dd><p>generates a poset corresponding to an <code class="code docutils literal notranslate"><span class="pre">P6</span></code> lattice</p>
 </dd>
 </dl>
-<span class="target" id="l506f736574466163746f7279-706f776572736574"></span><dl class="simple" id="index-7">
+<span id="l506f736574466163746f7279-706f776572736574"></span><dl class="simple" id="index-7">
 <dt><span class="spadfun">powerset</span>: <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> S -&gt; <a class="reference internal" href="FiniteBiCPO.html#l46696e697465426943504f"><span class="std std-ref">FiniteBiCPO</span></a> <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> S</dt><dd><p>generate a poset representing all possible subsets of a given set with their subset relationships.</p>
 </dd>
 </dl>
@@ -89,13 +85,14 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
 <h3><a href="../index.html">Table of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">FriCAS API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../features.html">Features</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../help.html">Help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
@@ -103,7 +100,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../history.html">History</a></li>
 </ul>
 
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -111,13 +108,13 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -136,7 +133,7 @@
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2007-2023, FriCAS Team.
+    &#169; Copyright 2007-2026, FriCAS Team.
     </div>
   </body>
 </html>

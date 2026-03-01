@@ -1,29 +1,25 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>PolynomialSetCategory(R, E, VarSet, P) &#8212; FriCAS</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
     
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/documentation_options.js?v=f8f8a157"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Poset S" href="Poset.html" />
     <link rel="prev" title="PolynomialFactorizationExplicit" href="PolynomialFactorizationExplicit.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -48,15 +44,15 @@
           <div class="body" role="main">
             
   <section id="polynomialsetcategory-r-e-varset-p">
-<span id="l506f6c796e6f6d69616c53657443617465676f7279"></span><span id="index-0"></span><h1>PolynomialSetCategory(R, E, VarSet, P)<a class="headerlink" href="#polynomialsetcategory-r-e-varset-p" title="Permalink to this heading">¶</a></h1>
-<p><a class="reference external" href="https://github.com/hemmecke/fricas/blob/master/src/algebra/polset.spad#L1">polset.spad line 1</a> <a class="reference external" href="https://github.com/hemmecke/fricas/edit/master/src/algebra/polset.spad#L1">[edit on github]</a></p>
+<span id="l506f6c796e6f6d69616c53657443617465676f7279"></span><span id="index-0"></span><h1>PolynomialSetCategory(R, E, VarSet, P)<a class="headerlink" href="#polynomialsetcategory-r-e-varset-p" title="Link to this heading">¶</a></h1>
+<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/docfix/src/algebra/polset.spad#L1">polset.spad line 1</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/docfix/src/algebra/polset.spad#L1">[edit on github]</a></p>
 <ul class="simple">
 <li><p>R: <a class="reference internal" href="Ring.html#l52696e67"><span class="std std-ref">Ring</span></a></p></li>
 <li><p>E: <a class="reference internal" href="OrderedAbelianMonoidSup.html#l4f7264657265644162656c69616e4d6f6e6f6964537570"><span class="std std-ref">OrderedAbelianMonoidSup</span></a></p></li>
 <li><p>VarSet: <a class="reference internal" href="OrderedSet.html#l4f726465726564536574"><span class="std std-ref">OrderedSet</span></a></p></li>
 <li><p>P: <a class="reference internal" href="RecursivePolynomialCategory.html#l526563757273697665506f6c796e6f6d69616c43617465676f7279"><span class="std std-ref">RecursivePolynomialCategory</span></a>(R, E, VarSet)</p></li>
 </ul>
-<p>A category for finite subsets of a polynomial ring. Such a set is only regarded as a set of polynomials and not identified to the ideal it generates. So two distinct sets may generate the same the ideal. Furthermore, for <code class="docutils literal notranslate"><span class="pre">R</span></code> being an integral domain, a set of polynomials may be viewed as a representation of the ideal it generates in the polynomial ring <code class="docutils literal notranslate"><span class="pre">(R)^(-1)</span> <span class="pre">P</span></code>, or the set of its zeros (described for instance by the radical of the previous ideal, or a split of the associated affine variety) and so on. So this category provides operations about those different notions.</p>
+<p>A category for finite subsets of a polynomial ring. Such a set is only regarded as a set of polynomials and not identified to the ideal it generates. So two distinct sets may generate the same the ideal. Furthermore, for <code class="code docutils literal notranslate"><span class="pre">R</span></code> being an integral domain, a set of polynomials may be viewed as a representation of the ideal it generates in the polynomial ring <code class="code docutils literal notranslate"><span class="pre">(R)^(-1)</span> <span class="pre">P</span></code>, or the set of its zeros (described for instance by the radical of the previous ideal, or a split of the associated affine variety) and so on. So this category provides operations about those different notions.</p>
 <dl class="simple" id="l506f6c796e6f6d69616c53657443617465676f7279-23">
 <dt><a class="reference internal" href="Aggregate.html#l416767726567617465-23"><span class="std std-ref">#</span></a>: % -&gt; <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a></dt><dd><p>from <a class="reference internal" href="Aggregate.html#l416767726567617465"><span class="std std-ref">Aggregate</span></a></p>
 </dd>
@@ -79,16 +75,16 @@
 <dt><a class="reference internal" href="CoercibleTo.html#l436f65726369626c65546f-636f65726365"><span class="std std-ref">coerce</span></a>: % -&gt; <a class="reference internal" href="OutputForm.html#l4f7574707574466f726d"><span class="std std-ref">OutputForm</span></a></dt><dd><p>from <a class="reference internal" href="CoercibleTo.html#l436f65726369626c65546f"><span class="std std-ref">CoercibleTo</span></a> <a class="reference internal" href="OutputForm.html#l4f7574707574466f726d"><span class="std std-ref">OutputForm</span></a></p>
 </dd>
 </dl>
-<span class="target" id="l506f6c796e6f6d69616c53657443617465676f7279-636f6c6c656374"></span><dl class="simple" id="index-1">
-<dt><span class="spadfun">collect</span>: (%, VarSet) -&gt; %</dt><dd><p><code class="docutils literal notranslate"><span class="pre">collect(ps,</span> <span class="pre">v)</span></code> returns the set consisting of the polynomials of <code class="docutils literal notranslate"><span class="pre">ps</span></code> with <code class="docutils literal notranslate"><span class="pre">v</span></code> as main variable.</p>
+<span id="l506f6c796e6f6d69616c53657443617465676f7279-636f6c6c656374"></span><dl class="simple" id="index-1">
+<dt><span class="spadfun">collect</span>: (%, VarSet) -&gt; %</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">collect(ps,</span> <span class="pre">v)</span></code> returns the set consisting of the polynomials of <code class="code docutils literal notranslate"><span class="pre">ps</span></code> with <code class="code docutils literal notranslate"><span class="pre">v</span></code> as main variable.</p>
 </dd>
 </dl>
-<span class="target" id="l506f6c796e6f6d69616c53657443617465676f7279-636f6c6c656374556e646572"></span><dl class="simple" id="index-2">
-<dt><span class="spadfun">collectUnder</span>: (%, VarSet) -&gt; %</dt><dd><p><code class="docutils literal notranslate"><span class="pre">collectUnder(ps,</span> <span class="pre">v)</span></code> returns the set consisting of the polynomials of <code class="docutils literal notranslate"><span class="pre">ps</span></code> with main variable less than <code class="docutils literal notranslate"><span class="pre">v</span></code>.</p>
+<span id="l506f6c796e6f6d69616c53657443617465676f7279-636f6c6c656374556e646572"></span><dl class="simple" id="index-2">
+<dt><span class="spadfun">collectUnder</span>: (%, VarSet) -&gt; %</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">collectUnder(ps,</span> <span class="pre">v)</span></code> returns the set consisting of the polynomials of <code class="code docutils literal notranslate"><span class="pre">ps</span></code> with main variable less than <code class="code docutils literal notranslate"><span class="pre">v</span></code>.</p>
 </dd>
 </dl>
-<span class="target" id="l506f6c796e6f6d69616c53657443617465676f7279-636f6c6c6563745570706572"></span><dl class="simple" id="index-3">
-<dt><span class="spadfun">collectUpper</span>: (%, VarSet) -&gt; %</dt><dd><p><code class="docutils literal notranslate"><span class="pre">collectUpper(ps,</span> <span class="pre">v)</span></code> returns the set consisting of the polynomials of <code class="docutils literal notranslate"><span class="pre">ps</span></code> with main variable greater than <code class="docutils literal notranslate"><span class="pre">v</span></code>.</p>
+<span id="l506f6c796e6f6d69616c53657443617465676f7279-636f6c6c6563745570706572"></span><dl class="simple" id="index-3">
+<dt><span class="spadfun">collectUpper</span>: (%, VarSet) -&gt; %</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">collectUpper(ps,</span> <span class="pre">v)</span></code> returns the set consisting of the polynomials of <code class="code docutils literal notranslate"><span class="pre">ps</span></code> with main variable greater than <code class="code docutils literal notranslate"><span class="pre">v</span></code>.</p>
 </dd>
 </dl>
 <dl class="simple" id="l506f6c796e6f6d69616c53657443617465676f7279-636f6e737472756374">
@@ -139,12 +135,12 @@
 <dt><a class="reference internal" href="Collection.html#l436f6c6c656374696f6e-66696e64"><span class="std std-ref">find</span></a>: (P -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a>, %) -&gt; Union(P, failed)</dt><dd><p>from <a class="reference internal" href="Collection.html#l436f6c6c656374696f6e"><span class="std std-ref">Collection</span></a> P</p>
 </dd>
 </dl>
-<span class="target" id="l506f6c796e6f6d69616c53657443617465676f7279-6865616452656d61696e646572"></span><dl class="simple" id="index-4">
-<dt><span class="spadfun">headRemainder</span>: (P, %) -&gt; Record(num: P, den: R) if R has <a class="reference internal" href="IntegralDomain.html#l496e74656772616c446f6d61696e"><span class="std std-ref">IntegralDomain</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">headRemainder(a,</span> <span class="pre">ps)</span></code> returns <code class="docutils literal notranslate"><span class="pre">[b,</span> <span class="pre">r]</span></code> such that the leading monomial of <code class="docutils literal notranslate"><span class="pre">b</span></code> is reduced in the sense of Groebner bases <code class="docutils literal notranslate"><span class="pre">w</span></code>.<code class="docutils literal notranslate"><span class="pre">r</span></code>.<code class="docutils literal notranslate"><span class="pre">t</span></code>. <code class="docutils literal notranslate"><span class="pre">ps</span></code> and <code class="docutils literal notranslate"><span class="pre">r*a</span> <span class="pre">-</span> <span class="pre">b</span></code> lies in the ideal generated by <code class="docutils literal notranslate"><span class="pre">ps</span></code>.</p>
+<span id="l506f6c796e6f6d69616c53657443617465676f7279-6865616452656d61696e646572"></span><dl class="simple" id="index-4">
+<dt><span class="spadfun">headRemainder</span>: (P, %) -&gt; Record(num: P, den: R) if R has <a class="reference internal" href="IntegralDomain.html#l496e74656772616c446f6d61696e"><span class="std std-ref">IntegralDomain</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">headRemainder(a,</span> <span class="pre">ps)</span></code> returns <code class="code docutils literal notranslate"><span class="pre">[b,</span> <span class="pre">r]</span></code> such that the leading monomial of <code class="code docutils literal notranslate"><span class="pre">b</span></code> is reduced in the sense of Groebner bases with respect to <code class="code docutils literal notranslate"><span class="pre">ps</span></code> and <code class="code docutils literal notranslate"><span class="pre">r*a</span> <span class="pre">-</span> <span class="pre">b</span></code> lies in the ideal generated by <code class="code docutils literal notranslate"><span class="pre">ps</span></code>.</p>
 </dd>
 </dl>
-<span class="target" id="l506f6c796e6f6d69616c53657443617465676f7279-69657861637451756f"></span><dl class="simple" id="index-5">
-<dt><span class="spadfun">iexactQuo</span>: (R, R) -&gt; R if R has <a class="reference internal" href="IntegralDomain.html#l496e74656772616c446f6d61696e"><span class="std std-ref">IntegralDomain</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">iexactQuo(x,</span> <span class="pre">y)</span></code> should be local but conditional</p>
+<span id="l506f6c796e6f6d69616c53657443617465676f7279-69657861637451756f"></span><dl class="simple" id="index-5">
+<dt><span class="spadfun">iexactQuo</span>: (R, R) -&gt; R if R has <a class="reference internal" href="IntegralDomain.html#l496e74656772616c446f6d61696e"><span class="std std-ref">IntegralDomain</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">iexactQuo(x,</span> <span class="pre">y)</span></code> should be local but conditional</p>
 </dd>
 </dl>
 <dl class="simple" id="l506f6c796e6f6d69616c53657443617465676f7279-6c61746578">
@@ -155,12 +151,12 @@
 <dt><a class="reference internal" href="Aggregate.html#l416767726567617465-6c6573733f"><span class="std std-ref">less?</span></a>: (%, <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>) -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a></dt><dd><p>from <a class="reference internal" href="Aggregate.html#l416767726567617465"><span class="std std-ref">Aggregate</span></a></p>
 </dd>
 </dl>
-<span class="target" id="l506f6c796e6f6d69616c53657443617465676f7279-6d61696e5661726961626c653f"></span><dl class="simple" id="index-6">
-<dt><span class="spadfun">mainVariable?</span>: (VarSet, %) -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">mainVariable?(v,</span> <span class="pre">ps)</span></code> returns <code class="docutils literal notranslate"><span class="pre">true</span></code> iff <code class="docutils literal notranslate"><span class="pre">v</span></code> is the main variable of some polynomial in <code class="docutils literal notranslate"><span class="pre">ps</span></code>.</p>
+<span id="l506f6c796e6f6d69616c53657443617465676f7279-6d61696e5661726961626c653f"></span><dl class="simple" id="index-6">
+<dt><span class="spadfun">mainVariable?</span>: (VarSet, %) -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">mainVariable?(v,</span> <span class="pre">ps)</span></code> returns <code class="code docutils literal notranslate"><span class="pre">true</span></code> iff <code class="code docutils literal notranslate"><span class="pre">v</span></code> is the main variable of some polynomial in <code class="code docutils literal notranslate"><span class="pre">ps</span></code>.</p>
 </dd>
 </dl>
-<span class="target" id="l506f6c796e6f6d69616c53657443617465676f7279-6d61696e5661726961626c6573"></span><dl class="simple" id="index-7">
-<dt><span class="spadfun">mainVariables</span>: % -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> VarSet</dt><dd><p><code class="docutils literal notranslate"><span class="pre">mainVariables(ps)</span></code> returns the decreasingly sorted list of the variables which are main variables of some polynomial in <code class="docutils literal notranslate"><span class="pre">ps</span></code>.</p>
+<span id="l506f6c796e6f6d69616c53657443617465676f7279-6d61696e5661726961626c6573"></span><dl class="simple" id="index-7">
+<dt><span class="spadfun">mainVariables</span>: % -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> VarSet</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">mainVariables(ps)</span></code> returns the decreasingly sorted list of the variables which are main variables of some polynomial in <code class="code docutils literal notranslate"><span class="pre">ps</span></code>.</p>
 </dd>
 </dl>
 <dl class="simple" id="l506f6c796e6f6d69616c53657443617465676f7279-6d617021">
@@ -193,8 +189,8 @@
 <dt><a class="reference internal" href="Aggregate.html#l416767726567617465-6d6f72653f"><span class="std std-ref">more?</span></a>: (%, <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>) -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a></dt><dd><p>from <a class="reference internal" href="Aggregate.html#l416767726567617465"><span class="std std-ref">Aggregate</span></a></p>
 </dd>
 </dl>
-<span class="target" id="l506f6c796e6f6d69616c53657443617465676f7279-6d766172"></span><dl class="simple" id="index-8">
-<dt><span class="spadfun">mvar</span>: % -&gt; VarSet</dt><dd><p><code class="docutils literal notranslate"><span class="pre">mvar(ps)</span></code> returns the main variable of the non constant polynomial with the greatest main variable, if any, else an error is returned.</p>
+<span id="l506f6c796e6f6d69616c53657443617465676f7279-6d766172"></span><dl class="simple" id="index-8">
+<dt><span class="spadfun">mvar</span>: % -&gt; VarSet</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">mvar(ps)</span></code> returns the main variable of the non constant polynomial with the greatest main variable, if any, else an error is returned.</p>
 </dd>
 </dl>
 <dl class="simple" id="l506f6c796e6f6d69616c53657443617465676f7279-7061727473">
@@ -209,8 +205,8 @@
 <dt><a class="reference internal" href="Collection.html#l436f6c6c656374696f6e-726564756365"><span class="std std-ref">reduce</span></a>: ((P, P) -&gt; P, %, P, P) -&gt; P</dt><dd><p>from <a class="reference internal" href="Collection.html#l436f6c6c656374696f6e"><span class="std std-ref">Collection</span></a> P</p>
 </dd>
 </dl>
-<span class="target" id="l506f6c796e6f6d69616c53657443617465676f7279-72656d61696e646572"></span><dl class="simple" id="index-9">
-<dt><span class="spadfun">remainder</span>: (P, %) -&gt; Record(rnum: R, polnum: P, den: R) if R has <a class="reference internal" href="IntegralDomain.html#l496e74656772616c446f6d61696e"><span class="std std-ref">IntegralDomain</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">remainder(a,</span> <span class="pre">ps)</span></code> returns <code class="docutils literal notranslate"><span class="pre">[c,</span> <span class="pre">b,</span> <span class="pre">r]</span></code> such that <code class="docutils literal notranslate"><span class="pre">b</span></code> is fully reduced in the sense of Groebner bases <code class="docutils literal notranslate"><span class="pre">w</span></code>.<code class="docutils literal notranslate"><span class="pre">r</span></code>.<code class="docutils literal notranslate"><span class="pre">t</span></code>. <code class="docutils literal notranslate"><span class="pre">ps</span></code>, <code class="docutils literal notranslate"><span class="pre">r*a</span> <span class="pre">-</span> <span class="pre">c*b</span></code> lies in the ideal generated by <code class="docutils literal notranslate"><span class="pre">ps</span></code>. Furthermore, if <code class="docutils literal notranslate"><span class="pre">R</span></code> is a <code class="docutils literal notranslate"><span class="pre">gcd</span></code>-domain, <code class="docutils literal notranslate"><span class="pre">b</span></code> is primitive.</p>
+<span id="l506f6c796e6f6d69616c53657443617465676f7279-72656d61696e646572"></span><dl class="simple" id="index-9">
+<dt><span class="spadfun">remainder</span>: (P, %) -&gt; Record(rnum: R, polnum: P, den: R) if R has <a class="reference internal" href="IntegralDomain.html#l496e74656772616c446f6d61696e"><span class="std std-ref">IntegralDomain</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">remainder(a,</span> <span class="pre">ps)</span></code> returns <code class="code docutils literal notranslate"><span class="pre">[c,</span> <span class="pre">b,</span> <span class="pre">r]</span></code> such that <code class="code docutils literal notranslate"><span class="pre">b</span></code> is fully reduced in the sense of Groebner bases with respect to <code class="code docutils literal notranslate"><span class="pre">ps</span></code> and <code class="code docutils literal notranslate"><span class="pre">r*a</span> <span class="pre">-</span> <span class="pre">c*b</span></code> lies in the ideal generated by <code class="code docutils literal notranslate"><span class="pre">ps</span></code>. Furthermore, if <code class="code docutils literal notranslate"><span class="pre">R</span></code> is a <code class="code docutils literal notranslate"><span class="pre">gcd</span></code>-domain, <code class="code docutils literal notranslate"><span class="pre">b</span></code> is primitive.</p>
 </dd>
 </dl>
 <dl class="simple" id="l506f6c796e6f6d69616c53657443617465676f7279-72656d6f7665">
@@ -231,28 +227,28 @@
 <dt><a class="reference internal" href="RetractableFrom.html#l5265747261637461626c6546726f6d-72657472616374496643616e"><span class="std std-ref">retractIfCan</span></a>: <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> P -&gt; Union(%, failed)</dt><dd><p>from <a class="reference internal" href="RetractableFrom.html#l5265747261637461626c6546726f6d"><span class="std std-ref">RetractableFrom</span></a> <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> P</p>
 </dd>
 </dl>
-<span class="target" id="l506f6c796e6f6d69616c53657443617465676f7279-72657772697465496465616c576974684865616452656d61696e646572"></span><dl class="simple" id="index-10">
-<dt><span class="spadfun">rewriteIdealWithHeadRemainder</span>: (<a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> P, %) -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> P if R has <a class="reference internal" href="IntegralDomain.html#l496e74656772616c446f6d61696e"><span class="std std-ref">IntegralDomain</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">rewriteIdealWithHeadRemainder(lp,</span> <span class="pre">cs)</span></code> returns <code class="docutils literal notranslate"><span class="pre">lr</span></code> such that the leading monomial of every polynomial in <code class="docutils literal notranslate"><span class="pre">lr</span></code> is reduced in the sense of Groebner bases <code class="docutils literal notranslate"><span class="pre">w</span></code>.<code class="docutils literal notranslate"><span class="pre">r</span></code>.<code class="docutils literal notranslate"><span class="pre">t</span></code>. <code class="docutils literal notranslate"><span class="pre">cs</span></code> and <code class="docutils literal notranslate"><span class="pre">(lp,</span> <span class="pre">cs)</span></code> and <code class="docutils literal notranslate"><span class="pre">(lr,</span> <span class="pre">cs)</span></code> generate the same ideal in <code class="docutils literal notranslate"><span class="pre">(R)^(-1)</span> <span class="pre">P</span></code>.</p>
+<span id="l506f6c796e6f6d69616c53657443617465676f7279-72657772697465496465616c576974684865616452656d61696e646572"></span><dl class="simple" id="index-10">
+<dt><span class="spadfun">rewriteIdealWithHeadRemainder</span>: (<a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> P, %) -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> P if R has <a class="reference internal" href="IntegralDomain.html#l496e74656772616c446f6d61696e"><span class="std std-ref">IntegralDomain</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">rewriteIdealWithHeadRemainder(lp,</span> <span class="pre">cs)</span></code> returns <code class="code docutils literal notranslate"><span class="pre">lr</span></code> such that the leading monomial of every polynomial in <code class="code docutils literal notranslate"><span class="pre">lr</span></code> is reduced in the sense of Groebner bases with respect to <code class="code docutils literal notranslate"><span class="pre">cs</span></code> and <code class="code docutils literal notranslate"><span class="pre">(lp,</span> <span class="pre">cs)</span></code> and <code class="code docutils literal notranslate"><span class="pre">(lr,</span> <span class="pre">cs)</span></code> generate the same ideal in <code class="code docutils literal notranslate"><span class="pre">(R)^(-1)</span> <span class="pre">P</span></code>.</p>
 </dd>
 </dl>
-<span class="target" id="l506f6c796e6f6d69616c53657443617465676f7279-72657772697465496465616c5769746852656d61696e646572"></span><dl class="simple" id="index-11">
-<dt><span class="spadfun">rewriteIdealWithRemainder</span>: (<a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> P, %) -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> P if R has <a class="reference internal" href="IntegralDomain.html#l496e74656772616c446f6d61696e"><span class="std std-ref">IntegralDomain</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">rewriteIdealWithRemainder(lp,</span> <span class="pre">cs)</span></code> returns <code class="docutils literal notranslate"><span class="pre">lr</span></code> such that every polynomial in <code class="docutils literal notranslate"><span class="pre">lr</span></code> is fully reduced in the sense of Groebner bases <code class="docutils literal notranslate"><span class="pre">w</span></code>.<code class="docutils literal notranslate"><span class="pre">r</span></code>.<code class="docutils literal notranslate"><span class="pre">t</span></code>. <code class="docutils literal notranslate"><span class="pre">cs</span></code> and <code class="docutils literal notranslate"><span class="pre">(lp,</span> <span class="pre">cs)</span></code> and <code class="docutils literal notranslate"><span class="pre">(lr,</span> <span class="pre">cs)</span></code> generate the same ideal in <code class="docutils literal notranslate"><span class="pre">(R)^(-1)</span> <span class="pre">P</span></code>.</p>
+<span id="l506f6c796e6f6d69616c53657443617465676f7279-72657772697465496465616c5769746852656d61696e646572"></span><dl class="simple" id="index-11">
+<dt><span class="spadfun">rewriteIdealWithRemainder</span>: (<a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> P, %) -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> P if R has <a class="reference internal" href="IntegralDomain.html#l496e74656772616c446f6d61696e"><span class="std std-ref">IntegralDomain</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">rewriteIdealWithRemainder(lp,</span> <span class="pre">cs)</span></code> returns <code class="code docutils literal notranslate"><span class="pre">lr</span></code> such that every polynomial in <code class="code docutils literal notranslate"><span class="pre">lr</span></code> is fully reduced in the sense of Groebner bases with respect to <code class="code docutils literal notranslate"><span class="pre">cs</span></code> and <code class="code docutils literal notranslate"><span class="pre">(lp,</span> <span class="pre">cs)</span></code> and <code class="code docutils literal notranslate"><span class="pre">(lr,</span> <span class="pre">cs)</span></code> generate the same ideal in <code class="code docutils literal notranslate"><span class="pre">(R)^(-1)</span> <span class="pre">P</span></code>.</p>
 </dd>
 </dl>
-<span class="target" id="l506f6c796e6f6d69616c53657443617465676f7279-726f756768426173653f"></span><dl class="simple" id="index-12">
-<dt><span class="spadfun">roughBase?</span>: % -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a> if R has <a class="reference internal" href="IntegralDomain.html#l496e74656772616c446f6d61696e"><span class="std std-ref">IntegralDomain</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">roughBase?(ps)</span></code> returns <code class="docutils literal notranslate"><span class="pre">true</span></code> iff for every pair <code class="docutils literal notranslate"><span class="pre">{p,</span> <span class="pre">q}</span></code> of polynomials in <code class="docutils literal notranslate"><span class="pre">ps</span></code> their leading monomials are relatively prime.</p>
+<span id="l506f6c796e6f6d69616c53657443617465676f7279-726f756768426173653f"></span><dl class="simple" id="index-12">
+<dt><span class="spadfun">roughBase?</span>: % -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a> if R has <a class="reference internal" href="IntegralDomain.html#l496e74656772616c446f6d61696e"><span class="std std-ref">IntegralDomain</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">roughBase?(ps)</span></code> returns <code class="code docutils literal notranslate"><span class="pre">true</span></code> iff for every pair <code class="code docutils literal notranslate"><span class="pre">{p,</span> <span class="pre">q}</span></code> of polynomials in <code class="code docutils literal notranslate"><span class="pre">ps</span></code> their leading monomials are relatively prime.</p>
 </dd>
 </dl>
-<span class="target" id="l506f6c796e6f6d69616c53657443617465676f7279-726f756768457175616c496465616c733f"></span><dl class="simple" id="index-13">
-<dt><span class="spadfun">roughEqualIdeals?</span>: (%, %) -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a> if R has <a class="reference internal" href="IntegralDomain.html#l496e74656772616c446f6d61696e"><span class="std std-ref">IntegralDomain</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">roughEqualIdeals?(ps1,</span> <span class="pre">ps2)</span></code> returns <code class="docutils literal notranslate"><span class="pre">true</span></code> iff it can proved that <code class="docutils literal notranslate"><span class="pre">ps1</span></code> and <code class="docutils literal notranslate"><span class="pre">ps2</span></code> generate the same ideal in <code class="docutils literal notranslate"><span class="pre">(R)^(-1)</span> <span class="pre">P</span></code> without computing Groebner bases.</p>
+<span id="l506f6c796e6f6d69616c53657443617465676f7279-726f756768457175616c496465616c733f"></span><dl class="simple" id="index-13">
+<dt><span class="spadfun">roughEqualIdeals?</span>: (%, %) -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a> if R has <a class="reference internal" href="IntegralDomain.html#l496e74656772616c446f6d61696e"><span class="std std-ref">IntegralDomain</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">roughEqualIdeals?(ps1,</span> <span class="pre">ps2)</span></code> returns <code class="code docutils literal notranslate"><span class="pre">true</span></code> iff it can proved that <code class="code docutils literal notranslate"><span class="pre">ps1</span></code> and <code class="code docutils literal notranslate"><span class="pre">ps2</span></code> generate the same ideal in <code class="code docutils literal notranslate"><span class="pre">(R)^(-1)</span> <span class="pre">P</span></code> without computing Groebner bases.</p>
 </dd>
 </dl>
-<span class="target" id="l506f6c796e6f6d69616c53657443617465676f7279-726f756768537562496465616c3f"></span><dl class="simple" id="index-14">
-<dt><span class="spadfun">roughSubIdeal?</span>: (%, %) -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a> if R has <a class="reference internal" href="IntegralDomain.html#l496e74656772616c446f6d61696e"><span class="std std-ref">IntegralDomain</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">roughSubIdeal?(ps1,</span> <span class="pre">ps2)</span></code> returns <code class="docutils literal notranslate"><span class="pre">true</span></code> iff it can proved that all polynomials in <code class="docutils literal notranslate"><span class="pre">ps1</span></code> lie in the ideal generated by <code class="docutils literal notranslate"><span class="pre">ps2</span></code> in <code class="docutils literal notranslate"><span class="pre">(R)^(-1)</span> <span class="pre">P</span></code> without computing Groebner bases.</p>
+<span id="l506f6c796e6f6d69616c53657443617465676f7279-726f756768537562496465616c3f"></span><dl class="simple" id="index-14">
+<dt><span class="spadfun">roughSubIdeal?</span>: (%, %) -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a> if R has <a class="reference internal" href="IntegralDomain.html#l496e74656772616c446f6d61696e"><span class="std std-ref">IntegralDomain</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">roughSubIdeal?(ps1,</span> <span class="pre">ps2)</span></code> returns <code class="code docutils literal notranslate"><span class="pre">true</span></code> iff it can proved that all polynomials in <code class="code docutils literal notranslate"><span class="pre">ps1</span></code> lie in the ideal generated by <code class="code docutils literal notranslate"><span class="pre">ps2</span></code> in <code class="code docutils literal notranslate"><span class="pre">(R)^(-1)</span> <span class="pre">P</span></code> without computing Groebner bases.</p>
 </dd>
 </dl>
-<span class="target" id="l506f6c796e6f6d69616c53657443617465676f7279-726f756768556e6974496465616c3f"></span><dl class="simple" id="index-15">
-<dt><span class="spadfun">roughUnitIdeal?</span>: % -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a> if R has <a class="reference internal" href="IntegralDomain.html#l496e74656772616c446f6d61696e"><span class="std std-ref">IntegralDomain</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">roughUnitIdeal?(ps)</span></code> returns <code class="docutils literal notranslate"><span class="pre">true</span></code> iff <code class="docutils literal notranslate"><span class="pre">ps</span></code> contains some non null element lying in the base ring <code class="docutils literal notranslate"><span class="pre">R</span></code>.</p>
+<span id="l506f6c796e6f6d69616c53657443617465676f7279-726f756768556e6974496465616c3f"></span><dl class="simple" id="index-15">
+<dt><span class="spadfun">roughUnitIdeal?</span>: % -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a> if R has <a class="reference internal" href="IntegralDomain.html#l496e74656772616c446f6d61696e"><span class="std std-ref">IntegralDomain</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">roughUnitIdeal?(ps)</span></code> returns <code class="code docutils literal notranslate"><span class="pre">true</span></code> iff <code class="code docutils literal notranslate"><span class="pre">ps</span></code> contains some non null element lying in the base ring <code class="code docutils literal notranslate"><span class="pre">R</span></code>.</p>
 </dd>
 </dl>
 <dl class="simple" id="l506f6c796e6f6d69616c53657443617465676f7279-73616d706c65">
@@ -267,20 +263,20 @@
 <dt><a class="reference internal" href="Aggregate.html#l416767726567617465-73697a653f"><span class="std std-ref">size?</span></a>: (%, <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>) -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a></dt><dd><p>from <a class="reference internal" href="Aggregate.html#l416767726567617465"><span class="std std-ref">Aggregate</span></a></p>
 </dd>
 </dl>
-<span class="target" id="l506f6c796e6f6d69616c53657443617465676f7279-736f7274"></span><dl class="simple" id="index-16">
-<dt><span class="spadfun">sort</span>: (%, VarSet) -&gt; Record(under: %, floor: %, upper: %)</dt><dd><p><code class="docutils literal notranslate"><span class="pre">sort(v,</span> <span class="pre">ps)</span></code> returns <code class="docutils literal notranslate"><span class="pre">us,</span> <span class="pre">vs,</span> <span class="pre">ws</span></code> such that <code class="docutils literal notranslate"><span class="pre">us</span></code> is <code class="docutils literal notranslate"><span class="pre">collectUnder(ps,</span> <span class="pre">v)</span></code>, <code class="docutils literal notranslate"><span class="pre">vs</span></code> is <code class="docutils literal notranslate"><span class="pre">collect(ps,</span> <span class="pre">v)</span></code> and <code class="docutils literal notranslate"><span class="pre">ws</span></code> is <code class="docutils literal notranslate"><span class="pre">collectUpper(ps,</span> <span class="pre">v)</span></code>.</p>
+<span id="l506f6c796e6f6d69616c53657443617465676f7279-736f7274"></span><dl class="simple" id="index-16">
+<dt><span class="spadfun">sort</span>: (%, VarSet) -&gt; Record(under: %, floor: %, upper: %)</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">sort(v,</span> <span class="pre">ps)</span></code> returns <code class="code docutils literal notranslate"><span class="pre">us,</span> <span class="pre">vs,</span> <span class="pre">ws</span></code> such that <code class="code docutils literal notranslate"><span class="pre">us</span></code> is <code class="code docutils literal notranslate"><span class="pre">collectUnder(ps,</span> <span class="pre">v)</span></code>, <code class="code docutils literal notranslate"><span class="pre">vs</span></code> is <code class="code docutils literal notranslate"><span class="pre">collect(ps,</span> <span class="pre">v)</span></code> and <code class="code docutils literal notranslate"><span class="pre">ws</span></code> is <code class="code docutils literal notranslate"><span class="pre">collectUpper(ps,</span> <span class="pre">v)</span></code>.</p>
 </dd>
 </dl>
-<span class="target" id="l506f6c796e6f6d69616c53657443617465676f7279-747269616e67756c61723f"></span><dl class="simple" id="index-17">
-<dt><span class="spadfun">triangular?</span>: % -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a> if R has <a class="reference internal" href="IntegralDomain.html#l496e74656772616c446f6d61696e"><span class="std std-ref">IntegralDomain</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">triangular?(ps)</span></code> returns <code class="docutils literal notranslate"><span class="pre">true</span></code> iff <code class="docutils literal notranslate"><span class="pre">ps</span></code> is a triangular set, i.e. two distinct polynomials have distinct main variables and no constant lies in <code class="docutils literal notranslate"><span class="pre">ps</span></code>.</p>
+<span id="l506f6c796e6f6d69616c53657443617465676f7279-747269616e67756c61723f"></span><dl class="simple" id="index-17">
+<dt><span class="spadfun">triangular?</span>: % -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a> if R has <a class="reference internal" href="IntegralDomain.html#l496e74656772616c446f6d61696e"><span class="std std-ref">IntegralDomain</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">triangular?(ps)</span></code> returns <code class="code docutils literal notranslate"><span class="pre">true</span></code> iff <code class="code docutils literal notranslate"><span class="pre">ps</span></code> is a triangular set, i.e. two distinct polynomials have distinct main variables and no constant lies in <code class="code docutils literal notranslate"><span class="pre">ps</span></code>.</p>
 </dd>
 </dl>
-<span class="target" id="l506f6c796e6f6d69616c53657443617465676f7279-7472697669616c496465616c3f"></span><dl class="simple" id="index-18">
-<dt><span class="spadfun">trivialIdeal?</span>: % -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">trivialIdeal?(ps)</span></code> returns <code class="docutils literal notranslate"><span class="pre">true</span></code> iff <code class="docutils literal notranslate"><span class="pre">ps</span></code> does not contain non-zero elements.</p>
+<span id="l506f6c796e6f6d69616c53657443617465676f7279-7472697669616c496465616c3f"></span><dl class="simple" id="index-18">
+<dt><span class="spadfun">trivialIdeal?</span>: % -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">trivialIdeal?(ps)</span></code> returns <code class="code docutils literal notranslate"><span class="pre">true</span></code> iff <code class="code docutils literal notranslate"><span class="pre">ps</span></code> does not contain non-zero elements.</p>
 </dd>
 </dl>
-<span class="target" id="l506f6c796e6f6d69616c53657443617465676f7279-7661726961626c6573"></span><dl class="simple" id="index-19">
-<dt><span class="spadfun">variables</span>: % -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> VarSet</dt><dd><p><code class="docutils literal notranslate"><span class="pre">variables(ps)</span></code> returns the decreasingly sorted list of the variables which are variables of some polynomial in <code class="docutils literal notranslate"><span class="pre">ps</span></code>.</p>
+<span id="l506f6c796e6f6d69616c53657443617465676f7279-7661726961626c6573"></span><dl class="simple" id="index-19">
+<dt><span class="spadfun">variables</span>: % -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> VarSet</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">variables(ps)</span></code> returns the decreasingly sorted list of the variables which are variables of some polynomial in <code class="code docutils literal notranslate"><span class="pre">ps</span></code>.</p>
 </dd>
 </dl>
 <p><a class="reference internal" href="Aggregate.html#l416767726567617465"><span class="std std-ref">Aggregate</span></a></p>
@@ -302,13 +298,14 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
 <h3><a href="../index.html">Table of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">FriCAS API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../features.html">Features</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../help.html">Help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
@@ -316,7 +313,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../history.html">History</a></li>
 </ul>
 
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -324,13 +321,13 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -349,7 +346,7 @@
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2007-2023, FriCAS Team.
+    &#169; Copyright 2007-2026, FriCAS Team.
     </div>
   </body>
 </html>

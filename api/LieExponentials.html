@@ -1,29 +1,25 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>LieExponentials(VarSet, R, Order) &#8212; FriCAS</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
     
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/documentation_options.js?v=f8f8a157"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="LiePolynomial(VarSet, R)" href="LiePolynomial.html" />
     <link rel="prev" title="Library" href="Library.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -48,14 +44,14 @@
           <div class="body" role="main">
             
   <section id="lieexponentials-varset-r-order">
-<span id="l4c69654578706f6e656e7469616c73"></span><span id="index-0"></span><h1>LieExponentials(VarSet, R, Order)<a class="headerlink" href="#lieexponentials-varset-r-order" title="Permalink to this heading">¶</a></h1>
-<p><a class="reference external" href="https://github.com/hemmecke/fricas/blob/master/src/algebra/xlpoly.spad#L982">xlpoly.spad line 982</a> <a class="reference external" href="https://github.com/hemmecke/fricas/edit/master/src/algebra/xlpoly.spad#L982">[edit on github]</a></p>
+<span id="l4c69654578706f6e656e7469616c73"></span><span id="index-0"></span><h1>LieExponentials(VarSet, R, Order)<a class="headerlink" href="#lieexponentials-varset-r-order" title="Link to this heading">¶</a></h1>
+<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/docfix/src/algebra/xlpoly.spad#L981">xlpoly.spad line 981</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/docfix/src/algebra/xlpoly.spad#L981">[edit on github]</a></p>
 <ul class="simple">
 <li><p>VarSet: <a class="reference internal" href="OrderedSet.html#l4f726465726564536574"><span class="std std-ref">OrderedSet</span></a></p></li>
 <li><p>R: Join(<a class="reference internal" href="CommutativeRing.html#l436f6d6d7574617469766552696e67"><span class="std std-ref">CommutativeRing</span></a>, <a class="reference internal" href="Module.html#l4d6f64756c65"><span class="std std-ref">Module</span></a> <a class="reference internal" href="Fraction.html#l4672616374696f6e"><span class="std std-ref">Fraction</span></a> <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>)</p></li>
 <li><p>Order: <a class="reference internal" href="PositiveInteger.html#l506f736974697665496e7465676572"><span class="std std-ref">PositiveInteger</span></a></p></li>
 </ul>
-<p>Management of the Lie Group associated with a free nilpotent Lie algebra. Every Lie bracket with length greater than <code class="docutils literal notranslate"><span class="pre">Order</span></code> are assumed to be null. The implementation inherits from the <a class="reference internal" href="XPBWPolynomial.html#l58504257506f6c796e6f6d69616c"><span class="std std-ref">XPBWPolynomial</span></a> domain constructor: Lyndon coordinates are exponential coordinates of the second kind.   Author: Michel Petitot (<a class="reference external" href="mailto:petitot&#37;&#52;&#48;lifl">petitot<span>&#64;</span>lifl</a>.<code class="docutils literal notranslate"><span class="pre">fr</span></code>).</p>
+<p>Management of the Lie Group associated with a free nilpotent Lie algebra. Every Lie bracket with length greater than <code class="code docutils literal notranslate"><span class="pre">Order</span></code> are assumed to be null. The implementation inherits from the <a class="reference internal" href="XPBWPolynomial.html#l58504257506f6c796e6f6d69616c"><span class="std std-ref">XPBWPolynomial</span></a> domain constructor: Lyndon coordinates are exponential coordinates of the second kind.</p>
 <dl class="simple" id="l4c69654578706f6e656e7469616c73-31">
 <dt><a class="reference internal" href="MagmaWithUnit.html#l4d61676d6157697468556e6974-31"><span class="std std-ref">1</span></a>: %</dt><dd><p>from <a class="reference internal" href="MagmaWithUnit.html#l4d61676d6157697468556e6974"><span class="std std-ref">MagmaWithUnit</span></a></p>
 </dd>
@@ -89,11 +85,11 @@
 </dd>
 </dl>
 <dl class="simple" id="index-1">
-<dt><span class="spadfun">coerce</span>: % -&gt; <a class="reference internal" href="XDistributedPolynomial.html#l584469737472696275746564506f6c796e6f6d69616c"><span class="std std-ref">XDistributedPolynomial</span></a>(VarSet, R)</dt><dd><p><code class="docutils literal notranslate"><span class="pre">coerce(g)</span></code> returns the internal representation of <code class="docutils literal notranslate"><span class="pre">g</span></code>.</p>
+<dt><span class="spadfun">coerce</span>: % -&gt; <a class="reference internal" href="XDistributedPolynomial.html#l584469737472696275746564506f6c796e6f6d69616c"><span class="std std-ref">XDistributedPolynomial</span></a>(VarSet, R)</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">coerce(g)</span></code> returns the internal representation of <code class="code docutils literal notranslate"><span class="pre">g</span></code>.</p>
 </dd>
 </dl>
 <dl class="simple" id="index-2">
-<dt><span class="spadfun">coerce</span>: % -&gt; <a class="reference internal" href="XPBWPolynomial.html#l58504257506f6c796e6f6d69616c"><span class="std std-ref">XPBWPolynomial</span></a>(VarSet, R)</dt><dd><p><code class="docutils literal notranslate"><span class="pre">coerce(g)</span></code> returns the internal representation of <code class="docutils literal notranslate"><span class="pre">g</span></code>.</p>
+<dt><span class="spadfun">coerce</span>: % -&gt; <a class="reference internal" href="XPBWPolynomial.html#l58504257506f6c796e6f6d69616c"><span class="std std-ref">XPBWPolynomial</span></a>(VarSet, R)</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">coerce(g)</span></code> returns the internal representation of <code class="code docutils literal notranslate"><span class="pre">g</span></code>.</p>
 </dd>
 </dl>
 <dl class="simple" id="l4c69654578706f6e656e7469616c73-636f6d6d757461746f72">
@@ -104,12 +100,12 @@
 <dt><a class="reference internal" href="Group.html#l47726f7570-636f6e6a7567617465"><span class="std std-ref">conjugate</span></a>: (%, %) -&gt; %</dt><dd><p>from <a class="reference internal" href="Group.html#l47726f7570"><span class="std std-ref">Group</span></a></p>
 </dd>
 </dl>
-<span class="target" id="l4c69654578706f6e656e7469616c73-657870"></span><dl class="simple" id="index-3">
-<dt><span class="spadfun">exp</span>: <a class="reference internal" href="LiePolynomial.html#l4c6965506f6c796e6f6d69616c"><span class="std std-ref">LiePolynomial</span></a>(VarSet, R) -&gt; %</dt><dd><p><code class="docutils literal notranslate"><span class="pre">exp(p)</span></code> returns the exponential of <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p>
+<span id="l4c69654578706f6e656e7469616c73-657870"></span><dl class="simple" id="index-3">
+<dt><span class="spadfun">exp</span>: <a class="reference internal" href="LiePolynomial.html#l4c6965506f6c796e6f6d69616c"><span class="std std-ref">LiePolynomial</span></a>(VarSet, R) -&gt; %</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">exp(p)</span></code> returns the exponential of <code class="code docutils literal notranslate"><span class="pre">p</span></code>.</p>
 </dd>
 </dl>
-<span class="target" id="l4c69654578706f6e656e7469616c73-6964656e74696669636174696f6e"></span><dl class="simple" id="index-4">
-<dt><span class="spadfun">identification</span>: (%, %) -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> <a class="reference internal" href="Equation.html#l4571756174696f6e"><span class="std std-ref">Equation</span></a> R</dt><dd><p><code class="docutils literal notranslate"><span class="pre">identification(g,</span> <span class="pre">h)</span></code> returns the list of equations <code class="docutils literal notranslate"><span class="pre">g_i</span> <span class="pre">=</span> <span class="pre">h_i</span></code>, where <code class="docutils literal notranslate"><span class="pre">g_i</span></code> (resp. <code class="docutils literal notranslate"><span class="pre">h_i</span></code>) are exponential coordinates of <code class="docutils literal notranslate"><span class="pre">g</span></code> (resp. <code class="docutils literal notranslate"><span class="pre">h</span></code>).</p>
+<span id="l4c69654578706f6e656e7469616c73-6964656e74696669636174696f6e"></span><dl class="simple" id="index-4">
+<dt><span class="spadfun">identification</span>: (%, %) -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> <a class="reference internal" href="Equation.html#l4571756174696f6e"><span class="std std-ref">Equation</span></a> R</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">identification(g,</span> <span class="pre">h)</span></code> returns the list of equations <code class="code docutils literal notranslate"><span class="pre">g_i</span> <span class="pre">=</span> <span class="pre">h_i</span></code>, where <code class="code docutils literal notranslate"><span class="pre">g_i</span></code> (resp. <code class="code docutils literal notranslate"><span class="pre">h_i</span></code>) are exponential coordinates of <code class="code docutils literal notranslate"><span class="pre">g</span></code> (resp. <code class="code docutils literal notranslate"><span class="pre">h</span></code>).</p>
 </dd>
 </dl>
 <dl class="simple" id="l4c69654578706f6e656e7469616c73-696e76">
@@ -130,24 +126,24 @@
 <dt><a class="reference internal" href="MagmaWithUnit.html#l4d61676d6157697468556e6974-6c6566745265636970"><span class="std std-ref">leftRecip</span></a>: % -&gt; Union(%, failed)</dt><dd><p>from <a class="reference internal" href="MagmaWithUnit.html#l4d61676d6157697468556e6974"><span class="std std-ref">MagmaWithUnit</span></a></p>
 </dd>
 </dl>
-<span class="target" id="l4c69654578706f6e656e7469616c73-6c6973744f665465726d73"></span><dl class="simple" id="index-5">
-<dt><span class="spadfun">listOfTerms</span>: % -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> Record(k: <a class="reference internal" href="PoincareBirkhoffWittLyndonBasis.html#l506f696e636172654269726b686f6666576974744c796e646f6e4261736973"><span class="std std-ref">PoincareBirkhoffWittLyndonBasis</span></a> VarSet, c: R)</dt><dd><p><code class="docutils literal notranslate"><span class="pre">listOfTerms(p)</span></code> returns the internal representation of <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p>
+<span id="l4c69654578706f6e656e7469616c73-6c6973744f665465726d73"></span><dl class="simple" id="index-5">
+<dt><span class="spadfun">listOfTerms</span>: % -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> Record(k: <a class="reference internal" href="PoincareBirkhoffWittLyndonBasis.html#l506f696e636172654269726b686f6666576974744c796e646f6e4261736973"><span class="std std-ref">PoincareBirkhoffWittLyndonBasis</span></a> VarSet, c: R)</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">listOfTerms(p)</span></code> returns the internal representation of <code class="code docutils literal notranslate"><span class="pre">p</span></code>.</p>
 </dd>
 </dl>
-<span class="target" id="l4c69654578706f6e656e7469616c73-6c6f67"></span><dl class="simple" id="index-6">
-<dt><span class="spadfun">log</span>: % -&gt; <a class="reference internal" href="LiePolynomial.html#l4c6965506f6c796e6f6d69616c"><span class="std std-ref">LiePolynomial</span></a>(VarSet, R)</dt><dd><p><code class="docutils literal notranslate"><span class="pre">log(p)</span></code> returns the logarithm of <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p>
+<span id="l4c69654578706f6e656e7469616c73-6c6f67"></span><dl class="simple" id="index-6">
+<dt><span class="spadfun">log</span>: % -&gt; <a class="reference internal" href="LiePolynomial.html#l4c6965506f6c796e6f6d69616c"><span class="std std-ref">LiePolynomial</span></a>(VarSet, R)</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">log(p)</span></code> returns the logarithm of <code class="code docutils literal notranslate"><span class="pre">p</span></code>.</p>
 </dd>
 </dl>
-<span class="target" id="l4c69654578706f6e656e7469616c73-4c796e646f6e4261736973"></span><dl class="simple" id="index-7">
-<dt><span class="spadfun">LyndonBasis</span>: <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> VarSet -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> <a class="reference internal" href="LiePolynomial.html#l4c6965506f6c796e6f6d69616c"><span class="std std-ref">LiePolynomial</span></a>(VarSet, R)</dt><dd><p><code class="docutils literal notranslate"><span class="pre">LyndonBasis(lv)</span></code> returns the Lyndon basis of the nilpotent free Lie algebra.</p>
+<span id="l4c69654578706f6e656e7469616c73-4c796e646f6e4261736973"></span><dl class="simple" id="index-7">
+<dt><span class="spadfun">LyndonBasis</span>: <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> VarSet -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> <a class="reference internal" href="LiePolynomial.html#l4c6965506f6c796e6f6d69616c"><span class="std std-ref">LiePolynomial</span></a>(VarSet, R)</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">LyndonBasis(lv)</span></code> returns the Lyndon basis of the nilpotent free Lie algebra.</p>
 </dd>
 </dl>
-<span class="target" id="l4c69654578706f6e656e7469616c73-4c796e646f6e436f6f7264696e61746573"></span><dl class="simple" id="index-8">
-<dt><span class="spadfun">LyndonCoordinates</span>: % -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> Record(k: <a class="reference internal" href="LyndonWord.html#l4c796e646f6e576f7264"><span class="std std-ref">LyndonWord</span></a> VarSet, c: R)</dt><dd><p><code class="docutils literal notranslate"><span class="pre">LyndonCoordinates(g)</span></code> returns the exponential coordinates of <code class="docutils literal notranslate"><span class="pre">g</span></code>.</p>
+<span id="l4c69654578706f6e656e7469616c73-4c796e646f6e436f6f7264696e61746573"></span><dl class="simple" id="index-8">
+<dt><span class="spadfun">LyndonCoordinates</span>: % -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> Record(k: <a class="reference internal" href="LyndonWord.html#l4c796e646f6e576f7264"><span class="std std-ref">LyndonWord</span></a> VarSet, c: R)</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">LyndonCoordinates(g)</span></code> returns the exponential coordinates of <code class="code docutils literal notranslate"><span class="pre">g</span></code>.</p>
 </dd>
 </dl>
-<span class="target" id="l4c69654578706f6e656e7469616c73-6d6972726f72"></span><dl class="simple" id="index-9">
-<dt><span class="spadfun">mirror</span>: % -&gt; %</dt><dd><p><code class="docutils literal notranslate"><span class="pre">mirror(g)</span></code> is the mirror of the internal representation of <code class="docutils literal notranslate"><span class="pre">g</span></code>.</p>
+<span id="l4c69654578706f6e656e7469616c73-6d6972726f72"></span><dl class="simple" id="index-9">
+<dt><span class="spadfun">mirror</span>: % -&gt; %</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">mirror(g)</span></code> is the mirror of the internal representation of <code class="code docutils literal notranslate"><span class="pre">g</span></code>.</p>
 </dd>
 </dl>
 <dl class="simple" id="l4c69654578706f6e656e7469616c73-6f6e653f">
@@ -172,8 +168,8 @@
 <dt><a class="reference internal" href="MagmaWithUnit.html#l4d61676d6157697468556e6974-73616d706c65"><span class="std std-ref">sample</span></a>: %</dt><dd><p>from <a class="reference internal" href="MagmaWithUnit.html#l4d61676d6157697468556e6974"><span class="std std-ref">MagmaWithUnit</span></a></p>
 </dd>
 </dl>
-<span class="target" id="l4c69654578706f6e656e7469616c73-7661724c697374"></span><dl class="simple" id="index-10">
-<dt><span class="spadfun">varList</span>: % -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> VarSet</dt><dd><p><code class="docutils literal notranslate"><span class="pre">varList(g)</span></code> returns the list of variables of <code class="docutils literal notranslate"><span class="pre">g</span></code>.</p>
+<span id="l4c69654578706f6e656e7469616c73-7661724c697374"></span><dl class="simple" id="index-10">
+<dt><span class="spadfun">varList</span>: % -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> VarSet</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">varList(g)</span></code> returns the list of variables of <code class="code docutils literal notranslate"><span class="pre">g</span></code>.</p>
 </dd>
 </dl>
 <p><a class="reference internal" href="BasicType.html#l426173696354797065"><span class="std std-ref">BasicType</span></a></p>
@@ -193,13 +189,14 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
 <h3><a href="../index.html">Table of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">FriCAS API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../features.html">Features</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../help.html">Help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
@@ -207,7 +204,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../history.html">History</a></li>
 </ul>
 
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -215,13 +212,13 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -240,7 +237,7 @@
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2007-2023, FriCAS Team.
+    &#169; Copyright 2007-2026, FriCAS Team.
     </div>
   </body>
 </html>

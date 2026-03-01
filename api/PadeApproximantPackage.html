@@ -1,29 +1,25 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>PadeApproximantPackage(R, x, pt) &#8212; FriCAS</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
     
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/documentation_options.js?v=f8f8a157"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="PadeApproximants(R, PS, UP)" href="PadeApproximants.html" />
     <link rel="prev" title="OutputPackage" href="OutputPackage.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -48,20 +44,20 @@
           <div class="body" role="main">
             
   <section id="padeapproximantpackage-r-x-pt">
-<span id="l50616465417070726f78696d616e745061636b616765"></span><span id="index-0"></span><h1>PadeApproximantPackage(R, x, pt)<a class="headerlink" href="#padeapproximantpackage-r-x-pt" title="Permalink to this heading">¶</a></h1>
-<p><a class="reference external" href="https://github.com/hemmecke/fricas/blob/master/src/algebra/pade.spad#L1">pade.spad line 1</a> <a class="reference external" href="https://github.com/hemmecke/fricas/edit/master/src/algebra/pade.spad#L1">[edit on github]</a></p>
+<span id="l50616465417070726f78696d616e745061636b616765"></span><span id="index-0"></span><h1>PadeApproximantPackage(R, x, pt)<a class="headerlink" href="#padeapproximantpackage-r-x-pt" title="Link to this heading">¶</a></h1>
+<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/docfix/src/algebra/pade.spad#L1">pade.spad line 1</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/docfix/src/algebra/pade.spad#L1">[edit on github]</a></p>
 <ul class="simple">
 <li><p>R: <a class="reference internal" href="Field.html#l4669656c64"><span class="std std-ref">Field</span></a></p></li>
 <li><p>x: <a class="reference internal" href="Symbol.html#l53796d626f6c"><span class="std std-ref">Symbol</span></a></p></li>
 <li><p>pt: R</p></li>
 </ul>
-<p>This package computes reliable Pad&amp;ea. approximants using a generalized Viskovatov continued fraction algorithm. Authors: Trager, Burge, Hassner &amp; Watt. Date Created: April 1987 Keywords: Pade, series Examples: References: “Pade Approximants, Part I: Basic Theory”, Baker &amp; Graves-Morris.</p>
-<span class="target" id="l50616465417070726f78696d616e745061636b616765-70616465"></span><dl class="simple" id="index-1">
-<dt><span class="spadfun">pade</span>: (<a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>, <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>, <a class="reference internal" href="UnivariateTaylorSeries.html#l556e69766172696174655461796c6f72536572696573"><span class="std std-ref">UnivariateTaylorSeries</span></a>(R, x, pt)) -&gt; Union(<a class="reference internal" href="Fraction.html#l4672616374696f6e"><span class="std std-ref">Fraction</span></a> <a class="reference internal" href="UnivariatePolynomial.html#l556e6976617269617465506f6c796e6f6d69616c"><span class="std std-ref">UnivariatePolynomial</span></a>(x, R), failed)</dt><dd><p><code class="docutils literal notranslate"><span class="pre">pade(nd,</span> <span class="pre">dd,</span> <span class="pre">s)</span></code> computes the quotient of polynomials (if it exists) with numerator degree at most <code class="docutils literal notranslate"><span class="pre">nd</span></code> and denominator degree at most <code class="docutils literal notranslate"><span class="pre">dd</span></code> which matches the series <code class="docutils literal notranslate"><span class="pre">s</span></code> to order <code class="docutils literal notranslate"><span class="pre">nd</span> <span class="pre">+</span> <span class="pre">dd</span></code>.</p>
+<p>This package computes reliable Pade approximants using a generalized Viskovatov continued fraction algorithm.</p>
+<span id="l50616465417070726f78696d616e745061636b616765-70616465"></span><dl class="simple" id="index-1">
+<dt><span class="spadfun">pade</span>: (<a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>, <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>, <a class="reference internal" href="UnivariateTaylorSeries.html#l556e69766172696174655461796c6f72536572696573"><span class="std std-ref">UnivariateTaylorSeries</span></a>(R, x, pt)) -&gt; Union(<a class="reference internal" href="Fraction.html#l4672616374696f6e"><span class="std std-ref">Fraction</span></a> <a class="reference internal" href="UnivariatePolynomial.html#l556e6976617269617465506f6c796e6f6d69616c"><span class="std std-ref">UnivariatePolynomial</span></a>(x, R), failed)</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">pade(nd,</span> <span class="pre">dd,</span> <span class="pre">s)</span></code> computes the quotient of polynomials (if it exists) with numerator degree at most <code class="code docutils literal notranslate"><span class="pre">nd</span></code> and denominator degree at most <code class="code docutils literal notranslate"><span class="pre">dd</span></code> which matches the series <code class="code docutils literal notranslate"><span class="pre">s</span></code> to order <code class="code docutils literal notranslate"><span class="pre">nd</span> <span class="pre">+</span> <span class="pre">dd</span></code>.</p>
 </dd>
 </dl>
 <dl class="simple" id="index-2">
-<dt><span class="spadfun">pade</span>: (<a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>, <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>, <a class="reference internal" href="UnivariateTaylorSeries.html#l556e69766172696174655461796c6f72536572696573"><span class="std std-ref">UnivariateTaylorSeries</span></a>(R, x, pt), <a class="reference internal" href="UnivariateTaylorSeries.html#l556e69766172696174655461796c6f72536572696573"><span class="std std-ref">UnivariateTaylorSeries</span></a>(R, x, pt)) -&gt; Union(<a class="reference internal" href="Fraction.html#l4672616374696f6e"><span class="std std-ref">Fraction</span></a> <a class="reference internal" href="UnivariatePolynomial.html#l556e6976617269617465506f6c796e6f6d69616c"><span class="std std-ref">UnivariatePolynomial</span></a>(x, R), failed)</dt><dd><p><code class="docutils literal notranslate"><span class="pre">pade(nd,</span> <span class="pre">dd,</span> <span class="pre">ns,</span> <span class="pre">ds)</span></code> computes the approximant as a quotient of polynomials (if it exists) for arguments <code class="docutils literal notranslate"><span class="pre">nd</span></code> (numerator degree of approximant), <code class="docutils literal notranslate"><span class="pre">dd</span></code> (denominator degree of approximant), <code class="docutils literal notranslate"><span class="pre">ns</span></code> (numerator series of function), and <code class="docutils literal notranslate"><span class="pre">ds</span></code> (denominator series of function).</p>
+<dt><span class="spadfun">pade</span>: (<a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>, <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>, <a class="reference internal" href="UnivariateTaylorSeries.html#l556e69766172696174655461796c6f72536572696573"><span class="std std-ref">UnivariateTaylorSeries</span></a>(R, x, pt), <a class="reference internal" href="UnivariateTaylorSeries.html#l556e69766172696174655461796c6f72536572696573"><span class="std std-ref">UnivariateTaylorSeries</span></a>(R, x, pt)) -&gt; Union(<a class="reference internal" href="Fraction.html#l4672616374696f6e"><span class="std std-ref">Fraction</span></a> <a class="reference internal" href="UnivariatePolynomial.html#l556e6976617269617465506f6c796e6f6d69616c"><span class="std std-ref">UnivariatePolynomial</span></a>(x, R), failed)</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">pade(nd,</span> <span class="pre">dd,</span> <span class="pre">ns,</span> <span class="pre">ds)</span></code> computes the approximant as a quotient of polynomials (if it exists) for arguments <code class="code docutils literal notranslate"><span class="pre">nd</span></code> (numerator degree of approximant), <code class="code docutils literal notranslate"><span class="pre">dd</span></code> (denominator degree of approximant), <code class="code docutils literal notranslate"><span class="pre">ns</span></code> (numerator series of function), and <code class="code docutils literal notranslate"><span class="pre">ds</span></code> (denominator series of function).</p>
 </dd>
 </dl>
 </section>
@@ -71,13 +67,14 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
 <h3><a href="../index.html">Table of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">FriCAS API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../features.html">Features</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../help.html">Help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
@@ -85,7 +82,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../history.html">History</a></li>
 </ul>
 
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -93,13 +90,13 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -118,7 +115,7 @@
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2007-2023, FriCAS Team.
+    &#169; Copyright 2007-2026, FriCAS Team.
     </div>
   </body>
 </html>

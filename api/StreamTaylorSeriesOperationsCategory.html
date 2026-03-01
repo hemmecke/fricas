@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>StreamTaylorSeriesOperationsCategory(R, M) &#8212; FriCAS</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
+    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    
+    <script src="../_static/documentation_options.js?v=f8f8a157"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="StringAggregate" href="StringAggregate.html" />
+    <link rel="prev" title="StreamAggregate S" href="StreamAggregate.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="StringAggregate.html" title="StringAggregate"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="StreamAggregate.html" title="StreamAggregate S"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">FriCAS</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >FriCAS API</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="Categories.html" accesskey="U">Categories</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">StreamTaylorSeriesOperationsCategory(R, M)</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="streamtaylorseriesoperationscategory-r-m">
+<span id="l53747265616d5461796c6f725365726965734f7065726174696f6e7343617465676f7279"></span><span id="index-0"></span><h1>StreamTaylorSeriesOperationsCategory(R, M)<a class="headerlink" href="#streamtaylorseriesoperationscategory-r-m" title="Link to this heading">¶</a></h1>
+<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/docfix/src/algebra/sttaylor.spad#L1">sttaylor.spad line 1</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/docfix/src/algebra/sttaylor.spad#L1">[edit on github]</a></p>
+<ul class="simple">
+<li><p>R: <a class="reference internal" href="Ring.html#l52696e67"><span class="std std-ref">Ring</span></a></p></li>
+<li><p>M: <a class="reference internal" href="LeftModule.html#l4c6566744d6f64756c65"><span class="std std-ref">LeftModule</span></a> R</p></li>
+</ul>
+<p>This is category specifying operations for Taylor series arithmetic, where a Taylor series is represented by a stream of its coefficients. Relevant operations satisfy usual axioms like Ring and LeftModule. This category was extracted and generalized from StreamTaylorSeriesOperations to factor out common interface.</p>
+<p id="index-1"><span id="l53747265616d5461796c6f725365726965734f7065726174696f6e7343617465676f7279-2a"></span><span class="spadfun">*</span>: (M, <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> R) -&gt; <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M if M has <a class="reference internal" href="RightModule.html#l52696768744d6f64756c65"><span class="std std-ref">RightModule</span></a> R</p>
+<dl class="simple" id="index-2">
+<dt><span class="spadfun">*</span>: (R, <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M) -&gt; <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">r</span> <span class="pre">*</span> <span class="pre">a</span></code> returns the power series scalar multiplication of <code class="code docutils literal notranslate"><span class="pre">r</span></code> by <code class="code docutils literal notranslate"><span class="pre">a</span></code>: <code class="code docutils literal notranslate"><span class="pre">r</span> <span class="pre">*</span> <span class="pre">[a0,</span> <span class="pre">a1,</span> <span class="pre">...]</span> <span class="pre">=</span> <span class="pre">[r</span> <span class="pre">*</span> <span class="pre">a0,</span> <span class="pre">r</span> <span class="pre">*</span> <span class="pre">a1,</span> <span class="pre">...]</span></code></p>
+</dd>
+</dl>
+<dl class="simple" id="index-3">
+<dt><span class="spadfun">*</span>: (<a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M, R) -&gt; <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M if M has <a class="reference internal" href="RightModule.html#l52696768744d6f64756c65"><span class="std std-ref">RightModule</span></a> R</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">a</span> <span class="pre">*</span> <span class="pre">r</span></code> returns the power series scalar multiplication of <code class="code docutils literal notranslate"><span class="pre">a</span></code> by <code class="code docutils literal notranslate"><span class="pre">r:</span></code> <code class="code docutils literal notranslate"><span class="pre">[a0,</span> <span class="pre">a1,</span> <span class="pre">...]</span> <span class="pre">*</span> <span class="pre">r</span> <span class="pre">=</span> <span class="pre">[a0</span> <span class="pre">*</span> <span class="pre">r,</span> <span class="pre">a1</span> <span class="pre">*</span> <span class="pre">r,</span> <span class="pre">...]</span></code></p>
+</dd>
+</dl>
+<dl class="simple" id="index-4">
+<dt><span class="spadfun">*</span>: (<a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> R, <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M) -&gt; <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">a</span> <span class="pre">*</span> <span class="pre">b</span></code> returns the power series (Cauchy) product of <code class="code docutils literal notranslate"><span class="pre">a</span></code> and <code class="code docutils literal notranslate"><span class="pre">b:</span></code> <code class="code docutils literal notranslate"><span class="pre">[a0,</span> <span class="pre">a1,</span> <span class="pre">...]</span> <span class="pre">*</span> <span class="pre">[b0,</span> <span class="pre">b1,</span> <span class="pre">...]</span> <span class="pre">=</span> <span class="pre">[c0,</span> <span class="pre">c1,</span> <span class="pre">...]</span></code> where <code class="code docutils literal notranslate"><span class="pre">ck</span> <span class="pre">=</span> <span class="pre">sum(i</span> <span class="pre">+</span> <span class="pre">j</span> <span class="pre">=</span> <span class="pre">k,</span> <span class="pre">ai</span> <span class="pre">*</span> <span class="pre">bk)</span></code>.</p>
+</dd>
+</dl>
+<span id="l53747265616d5461796c6f725365726965734f7065726174696f6e7343617465676f7279-2b"></span><dl class="simple" id="index-5">
+<dt><span class="spadfun">+</span>: (<a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M, <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M) -&gt; <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span></code> returns the power series sum of <code class="code docutils literal notranslate"><span class="pre">a</span></code> and <code class="code docutils literal notranslate"><span class="pre">b</span></code>: <code class="code docutils literal notranslate"><span class="pre">[a0,</span> <span class="pre">a1,</span> <span class="pre">..]</span> <span class="pre">+</span> <span class="pre">[b0,</span> <span class="pre">b1,</span> <span class="pre">..]</span> <span class="pre">=</span> <span class="pre">[a0</span> <span class="pre">+</span> <span class="pre">b0,</span> <span class="pre">a1</span> <span class="pre">+</span> <span class="pre">b1,</span> <span class="pre">..]</span></code></p>
+</dd>
+</dl>
+<span id="l53747265616d5461796c6f725365726965734f7065726174696f6e7343617465676f7279-2d"></span><dl class="simple" id="index-6">
+<dt><span class="spadfun">-</span>: (<a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M, <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M) -&gt; <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">a</span> <span class="pre">-</span> <span class="pre">b</span></code> returns the power series difference of <code class="code docutils literal notranslate"><span class="pre">a</span></code> and <code class="code docutils literal notranslate"><span class="pre">b</span></code>: <code class="code docutils literal notranslate"><span class="pre">[a0,</span> <span class="pre">a1,</span> <span class="pre">..]</span> <span class="pre">-</span> <span class="pre">[b0,</span> <span class="pre">b1,</span> <span class="pre">..]</span> <span class="pre">=</span> <span class="pre">[a0</span> <span class="pre">-</span> <span class="pre">b0,</span> <span class="pre">a1</span> <span class="pre">-</span> <span class="pre">b1,</span> <span class="pre">..]</span></code></p>
+</dd>
+</dl>
+<dl class="simple" id="index-7">
+<dt><span class="spadfun">-</span>: <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M -&gt; <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">-</span> <span class="pre">a</span></code> returns the power series negative of <code class="code docutils literal notranslate"><span class="pre">a</span></code>: <code class="code docutils literal notranslate"><span class="pre">-</span> <span class="pre">[a0,</span> <span class="pre">a1,</span> <span class="pre">...]</span> <span class="pre">=</span> <span class="pre">[-</span> <span class="pre">a0,</span> <span class="pre">-</span> <span class="pre">a1,</span> <span class="pre">...]</span></code></p>
+</dd>
+</dl>
+<span id="l53747265616d5461796c6f725365726965734f7065726174696f6e7343617465676f7279-616464696167"></span><dl class="simple" id="index-8">
+<dt><span class="spadfun">addiag</span>: <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M -&gt; <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">addiag(x)</span></code> performs diagonal addition of a stream of streams. if <code class="code docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">[[a&lt;0,</span> <span class="pre">0&gt;,</span> <span class="pre">a&lt;0,</span> <span class="pre">1&gt;,</span> <span class="pre">..],</span> <span class="pre">[a&lt;1,</span> <span class="pre">0&gt;,</span> <span class="pre">a&lt;1,</span> <span class="pre">1&gt;,</span> <span class="pre">..],</span> <span class="pre">[a&lt;2,</span> <span class="pre">0&gt;,</span> <span class="pre">a&lt;2,</span> <span class="pre">1&gt;,</span> <span class="pre">..],</span> <span class="pre">..]</span></code> and <code class="code docutils literal notranslate"><span class="pre">addiag(x)</span> <span class="pre">=</span> <span class="pre">[b&lt;0,</span> <span class="pre">b&lt;1&gt;,</span> <span class="pre">...]</span></code>, then <code class="code docutils literal notranslate"><span class="pre">b&lt;k&gt;</span> <span class="pre">=</span> <span class="pre">sum(i+j=k,</span> <span class="pre">a&lt;i,</span> <span class="pre">j&gt;)</span></code>.</p>
+</dd>
+</dl>
+<span id="l53747265616d5461796c6f725365726965734f7065726174696f6e7343617465676f7279-636f65726365"></span><dl class="simple" id="index-9">
+<dt><span class="spadfun">coerce</span>: M -&gt; <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">coerce(r)</span></code> converts a module element <code class="code docutils literal notranslate"><span class="pre">r</span></code> to a stream with one element.</p>
+</dd>
+</dl>
+<span id="l53747265616d5461796c6f725365726965734f7065726174696f6e7343617465676f7279-636f6d706f7365"></span><dl class="simple" id="index-10">
+<dt><span class="spadfun">compose</span>: (<a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M, <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> R) -&gt; <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M if M has <a class="reference internal" href="RightModule.html#l52696768744d6f64756c65"><span class="std std-ref">RightModule</span></a> R</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">compose(a,</span> <span class="pre">b)</span></code> composes the power series <code class="code docutils literal notranslate"><span class="pre">a</span></code> with the power series <code class="code docutils literal notranslate"><span class="pre">b</span></code>.</p>
+</dd>
+</dl>
+<span id="l53747265616d5461796c6f725365726965734f7065726174696f6e7343617465676f7279-6465726976"></span><dl class="simple" id="index-11">
+<dt><span class="spadfun">deriv</span>: <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M -&gt; <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">deriv(a)</span></code> returns the derivative of the power series with respect to the power series variable. Thus <code class="code docutils literal notranslate"><span class="pre">deriv([a0,</span> <span class="pre">a1,</span> <span class="pre">a2,</span> <span class="pre">...])</span></code> returns <code class="code docutils literal notranslate"><span class="pre">[a1,</span> <span class="pre">2</span> <span class="pre">a2,</span> <span class="pre">3</span> <span class="pre">a3,</span> <span class="pre">...]</span></code>.</p>
+</dd>
+</dl>
+<span id="l53747265616d5461796c6f725365726965734f7065726174696f6e7343617465676f7279-6576616c"></span><dl class="simple" id="index-12">
+<dt><span class="spadfun">eval</span>: (<a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M, R) -&gt; <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M if M has <a class="reference internal" href="RightModule.html#l52696768744d6f64756c65"><span class="std std-ref">RightModule</span></a> R</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">eval(a,</span> <span class="pre">r)</span></code> returns a stream of partial sums of the power series <code class="code docutils literal notranslate"><span class="pre">a</span></code> evaluated at the power series variable equal to <code class="code docutils literal notranslate"><span class="pre">r</span></code>.</p>
+</dd>
+</dl>
+<span id="l53747265616d5461796c6f725365726965734f7065726174696f6e7343617465676f7279-676465726976"></span><dl class="simple" id="index-13">
+<dt><span class="spadfun">gderiv</span>: (<a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a> -&gt; R, <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M) -&gt; <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">gderiv(f,</span> <span class="pre">[a0,</span> <span class="pre">a1,</span> <span class="pre">a2,</span> <span class="pre">..])</span></code> returns <code class="code docutils literal notranslate"><span class="pre">[f(0)*a0,</span> <span class="pre">f(1)*a1,</span> <span class="pre">f(2)*a2,</span> <span class="pre">..]</span></code>.</p>
+</dd>
+</dl>
+<span id="l53747265616d5461796c6f725365726965734f7065726174696f6e7343617465676f7279-696e74"></span><dl class="simple" id="index-14">
+<dt><span class="spadfun">int</span>: R -&gt; <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> R</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">int(r)</span></code> returns [<code class="code docutils literal notranslate"><span class="pre">r</span></code>, <code class="code docutils literal notranslate"><span class="pre">r+1</span></code>, <code class="code docutils literal notranslate"><span class="pre">r+2</span></code>, …], where <code class="code docutils literal notranslate"><span class="pre">r</span></code> is a ring element.</p>
+</dd>
+</dl>
+<span id="l53747265616d5461796c6f725365726965734f7065726174696f6e7343617465676f7279-696e746567657273"></span><dl class="simple" id="index-15">
+<dt><span class="spadfun">integers</span>: <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a> -&gt; <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">integers(n)</span></code> returns <code class="code docutils literal notranslate"><span class="pre">[n,</span> <span class="pre">n+1,</span> <span class="pre">n+2,</span> <span class="pre">...]</span></code>.</p>
+</dd>
+</dl>
+<span id="l53747265616d5461796c6f725365726965734f7065726174696f6e7343617465676f7279-696e74656772617465"></span><dl class="simple" id="index-16">
+<dt><span class="spadfun">integrate</span>: (M, <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M) -&gt; <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M if R has <a class="reference internal" href="Algebra.html#l416c6765627261"><span class="std std-ref">Algebra</span></a> <a class="reference internal" href="Fraction.html#l4672616374696f6e"><span class="std std-ref">Fraction</span></a> <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">integrate(r,</span> <span class="pre">a)</span></code> returns the integral of the power series <code class="code docutils literal notranslate"><span class="pre">a</span></code> with respect to the power series variable where <code class="code docutils literal notranslate"><span class="pre">r</span></code> denotes the constant of integration. Thus <code class="code docutils literal notranslate"><span class="pre">integrate(a,</span> <span class="pre">[a0,</span> <span class="pre">a1,</span> <span class="pre">a2,</span> <span class="pre">...])</span> <span class="pre">=</span> <span class="pre">[a,</span> <span class="pre">a0,</span> <span class="pre">a1/2,</span> <span class="pre">a2/3,</span> <span class="pre">...]</span></code>.</p>
+</dd>
+</dl>
+<span id="l53747265616d5461796c6f725365726965734f7065726174696f6e7343617465676f7279-696e766d756c746973656374"></span><dl class="simple" id="index-17">
+<dt><span class="spadfun">invmultisect</span>: (<a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>, <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>, <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M) -&gt; <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">invmultisect(a,</span> <span class="pre">b,</span> <span class="pre">st)</span></code> substitutes <code class="code docutils literal notranslate"><span class="pre">x^((a+b)*n)</span></code> for <code class="code docutils literal notranslate"><span class="pre">x^n</span></code> and multiplies by <code class="code docutils literal notranslate"><span class="pre">x^b</span></code>.</p>
+</dd>
+</dl>
+<span id="l53747265616d5461796c6f725365726965734f7065726174696f6e7343617465676f7279-6c617a79496e74656772617465"></span><dl class="simple" id="index-18">
+<dt><span class="spadfun">lazyIntegrate</span>: (M, () -&gt; <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M) -&gt; <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M if R has <a class="reference internal" href="Algebra.html#l416c6765627261"><span class="std std-ref">Algebra</span></a> <a class="reference internal" href="Fraction.html#l4672616374696f6e"><span class="std std-ref">Fraction</span></a> <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">lazyIntegrate(r,</span> <span class="pre">f)</span></code> is a version of integrate used for fixed point computations.</p>
+</dd>
+</dl>
+<span id="l53747265616d5461796c6f725365726965734f7065726174696f6e7343617465676f7279-6d61706d756c74"></span><dl class="simple" id="index-19">
+<dt><span class="spadfun">mapmult</span>: (<a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M, <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> R) -&gt; <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M if M has <a class="reference internal" href="RightModule.html#l52696768744d6f64756c65"><span class="std std-ref">RightModule</span></a> R</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">mapmult([a0,</span> <span class="pre">a1,</span> <span class="pre">..],</span> <span class="pre">[b0,</span> <span class="pre">b1,</span> <span class="pre">..])</span></code> returns <code class="code docutils literal notranslate"><span class="pre">[a0*b0,</span> <span class="pre">a1*b1,</span> <span class="pre">..]</span></code>.</p>
+</dd>
+</dl>
+<dl class="simple" id="index-20">
+<dt><span class="spadfun">mapmult</span>: (<a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> R, <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M) -&gt; <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">mapmult([a0,</span> <span class="pre">a1,</span> <span class="pre">..],</span> <span class="pre">[b0,</span> <span class="pre">b1,</span> <span class="pre">..])</span></code> returns <code class="code docutils literal notranslate"><span class="pre">[a0*b0,</span> <span class="pre">a1*b1,</span> <span class="pre">..]</span></code>.</p>
+</dd>
+</dl>
+<span id="l53747265616d5461796c6f725365726965734f7065726174696f6e7343617465676f7279-6d6f6e6f6d"></span><dl class="simple" id="index-21">
+<dt><span class="spadfun">monom</span>: (M, <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>) -&gt; <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">monom(coef,</span> <span class="pre">deg)</span></code> is a monomial of degree deg with coefficient <code class="code docutils literal notranslate"><span class="pre">coef</span></code>.</p>
+</dd>
+</dl>
+<span id="l53747265616d5461796c6f725365726965734f7065726174696f6e7343617465676f7279-6d756c746973656374"></span><dl class="simple" id="index-22">
+<dt><span class="spadfun">multisect</span>: (<a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>, <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>, <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M) -&gt; <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> M</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">multisect(a,</span> <span class="pre">b,</span> <span class="pre">st)</span></code> selects the coefficients of <code class="code docutils literal notranslate"><span class="pre">x^((a+b)*n+a)</span></code>, and changes them to <code class="code docutils literal notranslate"><span class="pre">x^n</span></code>.</p>
+</dd>
+</dl>
+<span id="l53747265616d5461796c6f725365726965734f7065726174696f6e7343617465676f7279-6f6464696e746567657273"></span><dl class="simple" id="index-23">
+<dt><span class="spadfun">oddintegers</span>: <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a> -&gt; <a class="reference internal" href="Stream.html#l53747265616d"><span class="std std-ref">Stream</span></a> <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">oddintegers(n)</span></code> returns <code class="code docutils literal notranslate"><span class="pre">[n,</span> <span class="pre">n+2,</span> <span class="pre">n+4,</span> <span class="pre">...]</span></code>.</p>
+</dd>
+</dl>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="../index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">FriCAS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../help.html">Help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../citation.html">Citation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../history.html">History</a></li>
+</ul>
+
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="StringAggregate.html" title="StringAggregate"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="StreamAggregate.html" title="StreamAggregate S"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">FriCAS</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >FriCAS API</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="Categories.html" >Categories</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">StreamTaylorSeriesOperationsCategory(R, M)</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2007-2026, FriCAS Team.
+    </div>
+  </body>
+</html>
