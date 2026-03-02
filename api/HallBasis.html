@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>HallBasis &#8212; FriCAS</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
+    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    
+    <script src="../_static/documentation_options.js?v=9dc688dd"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">FriCAS</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">HallBasis</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="hallbasis">
+<span id="l48616c6c4261736973"></span><span id="index-0"></span><h1>HallBasis<a class="headerlink" href="#hallbasis" title="Link to this heading">¶</a></h1>
+<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/docfix/src/algebra/fnla.spad#L70">fnla.spad line 70</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/docfix/src/algebra/fnla.spad#L70">[edit on github]</a></p>
+<p>Generate a basis for the free Lie algebra on <code class="code docutils literal notranslate"><span class="pre">n</span></code> generators over a ring <code class="code docutils literal notranslate"><span class="pre">R</span></code> with identity up to basic commutators of length <code class="code docutils literal notranslate"><span class="pre">c</span></code> using the algorithm of <code class="code docutils literal notranslate"><span class="pre">P</span></code>. Hall as given in Serre<code class="code docutils literal notranslate"><span class="pre">'s</span></code> book Lie Groups <code class="code docutils literal notranslate"><span class="pre">--</span></code> Lie Algebras.</p>
+<span id="l48616c6c4261736973-6261736973"></span><dl class="simple" id="index-1">
+<dt><span class="spadfun">basis</span>: (<a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>, <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>) -&gt; <a class="reference internal" href="Vector.html#l566563746f72"><span class="std std-ref">Vector</span></a> <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">basis(numberOfGens,</span> <span class="pre">maximalWeight)</span></code> generates a vector of elements of the form [left, weight, right] which represents a <code class="code docutils literal notranslate"><span class="pre">P</span></code>. Hall basis element for the free lie algebra on <code class="code docutils literal notranslate"><span class="pre">numberOfGens</span></code> generators. We only generate those basis elements of weight less than or equal to maximalWeight</p>
+</dd>
+</dl>
+<span id="l48616c6c4261736973-696e48616c6c42617369733f"></span><dl class="simple" id="index-2">
+<dt><span class="spadfun">inHallBasis?</span>: (<a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>, <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>, <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>, <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>) -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">inHallBasis?(numberOfGens,</span> <span class="pre">leftCandidate,</span> <span class="pre">rightCandidate,</span> <span class="pre">left)</span></code> tests to see if a new element should be added to the <code class="code docutils literal notranslate"><span class="pre">P</span></code>. Hall basis being constructed. The list <code class="code docutils literal notranslate"><span class="pre">[leftCandidate,</span> <span class="pre">wt,</span> <span class="pre">rightCandidate]</span></code> is included in the basis if in the unique factorization of <code class="code docutils literal notranslate"><span class="pre">rightCandidate</span></code>, we have left factor leftOfRight, and leftOfRight <code class="code docutils literal notranslate"><span class="pre">&lt;=</span></code> <code class="code docutils literal notranslate"><span class="pre">leftCandidate</span></code></p>
+</dd>
+</dl>
+<span id="l48616c6c4261736973-6c66756e63"></span><dl class="simple" id="index-3">
+<dt><span class="spadfun">lfunc</span>: (<a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>, <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>) -&gt; <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">lfunc(d,</span> <span class="pre">n)</span></code> computes the rank of the <code class="code docutils literal notranslate"><span class="pre">n</span></code>th factor in the lower central series of the free <code class="code docutils literal notranslate"><span class="pre">d</span></code>-generated free Lie algebra; This rank is <code class="code docutils literal notranslate"><span class="pre">d</span></code> if <code class="code docutils literal notranslate"><span class="pre">n</span></code> = 1 and binom(<code class="code docutils literal notranslate"><span class="pre">d</span></code>, 2) if <code class="code docutils literal notranslate"><span class="pre">n</span></code> = 2</p>
+</dd>
+</dl>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="../index.html">Table of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../help.html">Help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../citation.html">Citation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../history.html">History</a></li>
+</ul>
+
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">FriCAS</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">HallBasis</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2007-2026, FriCAS Team.
+    </div>
+  </body>
+</html>

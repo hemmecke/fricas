@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ReduceLODE(F, L, UP, A, LO) &#8212; FriCAS</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
+    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    
+    <script src="../_static/documentation_options.js?v=9dc688dd"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">FriCAS</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">ReduceLODE(F, L, UP, A, LO)</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="reducelode-f-l-up-a-lo">
+<span id="l5265647563654c4f4445"></span><span id="index-0"></span><h1>ReduceLODE(F, L, UP, A, LO)<a class="headerlink" href="#reducelode-f-l-up-a-lo" title="Link to this heading">¶</a></h1>
+<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/docfix/src/algebra/odeef.spad#L189">odeef.spad line 189</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/docfix/src/algebra/odeef.spad#L189">[edit on github]</a></p>
+<ul class="simple">
+<li><p>F: <a class="reference internal" href="Field.html#l4669656c64"><span class="std std-ref">Field</span></a></p></li>
+<li><p>L: <a class="reference internal" href="LinearOrdinaryDifferentialOperatorCategory.html#l4c696e6561724f7264696e617279446966666572656e7469616c4f70657261746f7243617465676f7279"><span class="std std-ref">LinearOrdinaryDifferentialOperatorCategory</span></a> F</p></li>
+<li><p>UP: <a class="reference internal" href="UnivariatePolynomialCategory.html#l556e6976617269617465506f6c796e6f6d69616c43617465676f7279"><span class="std std-ref">UnivariatePolynomialCategory</span></a> F</p></li>
+<li><p>A: <a class="reference internal" href="MonogenicAlgebra.html#l4d6f6e6f67656e6963416c6765627261"><span class="std std-ref">MonogenicAlgebra</span></a>(F, UP)</p></li>
+<li><p>LO: <a class="reference internal" href="LinearOrdinaryDifferentialOperatorCategory.html#l4c696e6561724f7264696e617279446966666572656e7469616c4f70657261746f7243617465676f7279"><span class="std std-ref">LinearOrdinaryDifferentialOperatorCategory</span></a> A</p></li>
+</ul>
+<p>Elimination of an algebraic from the coefficients of a linear ordinary differential equation.</p>
+<span id="l5265647563654c4f4445-7265647563654c4f4445"></span><dl class="simple" id="index-1">
+<dt><span class="spadfun">reduceLODE</span>: (LO, A) -&gt; Record(mat: <a class="reference internal" href="Matrix.html#l4d6174726978"><span class="std std-ref">Matrix</span></a> L, vec: <a class="reference internal" href="Vector.html#l566563746f72"><span class="std std-ref">Vector</span></a> F)</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">reduceLODE(op,</span> <span class="pre">g)</span></code> returns <code class="code docutils literal notranslate"><span class="pre">[m,</span> <span class="pre">v]</span></code> such that any solution in <code class="code docutils literal notranslate"><span class="pre">A</span></code> of <code class="code docutils literal notranslate"><span class="pre">op</span> <span class="pre">z</span> <span class="pre">=</span> <span class="pre">g</span></code> is of the form <code class="code docutils literal notranslate"><span class="pre">z</span> <span class="pre">=</span> <span class="pre">(z_1,</span> <span class="pre">...,</span> <span class="pre">z_m)</span> <span class="pre">.</span> <span class="pre">(b_1,</span> <span class="pre">...,</span> <span class="pre">b_m)</span></code> where the <code class="code docutils literal notranslate"><span class="pre">b_i's</span></code> are the basis of <code class="code docutils literal notranslate"><span class="pre">A</span></code> over <code class="code docutils literal notranslate"><span class="pre">F</span></code> returned by <span class="spadfun">basis</span>() from <code class="code docutils literal notranslate"><span class="pre">A</span></code>, and the <code class="code docutils literal notranslate"><span class="pre">z_i's</span></code> satisfy the differential system <code class="code docutils literal notranslate"><span class="pre">M.z</span> <span class="pre">=</span> <span class="pre">v</span></code>.</p>
+</dd>
+</dl>
+<dl class="simple" id="index-2">
+<dt><span class="spadfun">reduceLODE</span>: (LO, <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> A) -&gt; Record(mat: <a class="reference internal" href="Matrix.html#l4d6174726978"><span class="std std-ref">Matrix</span></a> L, vecs: <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> <a class="reference internal" href="Vector.html#l566563746f72"><span class="std std-ref">Vector</span></a> F)</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">reduceLODE(op,</span> <span class="pre">[g1,</span> <span class="pre">...,</span> <span class="pre">gn])</span></code> returns <code class="code docutils literal notranslate"><span class="pre">[m,</span> <span class="pre">[v1,</span> <span class="pre">...,</span> <span class="pre">vn]]</span></code> such that any solution in <code class="code docutils literal notranslate"><span class="pre">A</span></code> of <code class="code docutils literal notranslate"><span class="pre">op</span> <span class="pre">z</span> <span class="pre">=</span> <span class="pre">c1*g1</span> <span class="pre">+</span> <span class="pre">...</span> <span class="pre">+</span> <span class="pre">cn*gn</span></code> where <code class="code docutils literal notranslate"><span class="pre">ci</span></code> are constants satisfy the differential system <code class="code docutils literal notranslate"><span class="pre">M.z</span> <span class="pre">=</span> <span class="pre">c1*v1</span> <span class="pre">+</span> <span class="pre">...</span> <span class="pre">+</span> <span class="pre">cn*vn</span></code></p>
+</dd>
+</dl>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="../index.html">Table of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../help.html">Help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../citation.html">Citation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../history.html">History</a></li>
+</ul>
+
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">FriCAS</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">ReduceLODE(F, L, UP, A, LO)</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2007-2026, FriCAS Team.
+    </div>
+  </body>
+</html>

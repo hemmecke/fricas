@@ -1,0 +1,84 @@
+Download
+========
+
+.. contents:: Table of Contents
+   :local:
+
+
+Official releases
+-----------------
+
+https://github.com/fricas/fricas/releases/
+
+
+Binary distribution
+^^^^^^^^^^^^^^^^^^^
+
+- ``fricas-x.y.z.amd64.tar.bz2`` (64-bit binary for amd64 (x86_64) Linux)
+- ``fricas-x.y.z-windows-x86-64.zip`` (64-bit binary for Windows)
+
+On MacOS you should consider using Homebrew.
+
+https://formulae.brew.sh/formula/fricas/
+
+Source distribution
+^^^^^^^^^^^^^^^^^^^
+
+- ``fricas-x.y.z-full.tar.bz2`` is a "full" source tarball.
+  It is identical to the respective version in the |git repository|,
+  but additionally contains pregenerated (machine independent) files,
+  i.e., compilation from these tarballs takes less time than from the
+  git sources.
+
+- ``x.y.z.tar.gz`` and ``x.y.z.zip`` source as in git repository
+
+FriCAS x.y.z should build on Linux and many Unix like systems (for
+example Mac OSX and Cygwin).
+
+Official |git repository| (read-only access). Fork it on github if
+you like.
+::
+
+   git clone https://github.com/fricas/fricas.git
+
+Alternative distribution platform (includes older releases)
+-----------------------------------------------------------
+
+https://sourceforge.net/projects/fricas/files/fricas/
+
+Other forms of distribution
+---------------------------
+
+Here is a `list of versions of FriCAS
+<https://repology.org/project/fricas/versions>`_
+that can be installed by the package manager of your operating
+system. Note, however, that these packages are not provided by
+the FriCAS developers, but by other volunteers.
+
+* `Debian package <https://packages.debian.org/stable/math/fricas>`_
+  (build on GCL_)
+
+* `ArchLinux package <https://archlinux.org/packages/extra/x86_64/fricas/>`_
+* `Gentoo package <https://packages.gentoo.org/packages/sci-mathematics/fricas>`_
+* `FreeBSD package <https://ports.freebsd.org/cgi/ports.cgi?stype=pkg&query=math/fricas>`_
+* `NetBSD package <https://pkgsrc.se/math/fricas>`_
+* `MacPorts <https://ports.macports.org/port/fricas/>`_
+* `Homebrew <https://formulae.brew.sh/formula/fricas>`_
+
+
+Nightly builds
+--------------
+
+https://github.com/fricas/fricas-nightly-builds/releases/tag/nightly
+
+Installation Guide
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   install
+
+
+
+.. _GCL: https://www.gnu.org/software/gcl/

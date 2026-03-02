@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>PolynomialFactorizationByRecursion(R, E, VarSet, S) &#8212; FriCAS</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
+    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    
+    <script src="../_static/documentation_options.js?v=9dc688dd"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">FriCAS</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">PolynomialFactorizationByRecursion(R, E, VarSet, S)</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="polynomialfactorizationbyrecursion-r-e-varset-s">
+<span id="l506f6c796e6f6d69616c466163746f72697a6174696f6e4279526563757273696f6e"></span><span id="index-0"></span><h1>PolynomialFactorizationByRecursion(R, E, VarSet, S)<a class="headerlink" href="#polynomialfactorizationbyrecursion-r-e-varset-s" title="Link to this heading">¶</a></h1>
+<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/docfix/src/algebra/pfbr.spad#L1">pfbr.spad line 1</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/docfix/src/algebra/pfbr.spad#L1">[edit on github]</a></p>
+<ul class="simple">
+<li><p>R: <a class="reference internal" href="PolynomialFactorizationExplicit.html#l506f6c796e6f6d69616c466163746f72697a6174696f6e4578706c69636974"><span class="std std-ref">PolynomialFactorizationExplicit</span></a></p></li>
+<li><p>E: <a class="reference internal" href="OrderedAbelianMonoidSup.html#l4f7264657265644162656c69616e4d6f6e6f6964537570"><span class="std std-ref">OrderedAbelianMonoidSup</span></a></p></li>
+<li><p>VarSet: <a class="reference internal" href="OrderedSet.html#l4f726465726564536574"><span class="std std-ref">OrderedSet</span></a></p></li>
+<li><p>S: <a class="reference internal" href="PolynomialCategory.html#l506f6c796e6f6d69616c43617465676f7279"><span class="std std-ref">PolynomialCategory</span></a>(R, E, VarSet)</p></li>
+</ul>
+<p>PolynomialFactorizationByRecursion(<code class="code docutils literal notranslate"><span class="pre">R</span></code>, <code class="code docutils literal notranslate"><span class="pre">E</span></code>, <code class="code docutils literal notranslate"><span class="pre">VarSet</span></code>, <code class="code docutils literal notranslate"><span class="pre">S</span></code>) is used for factorization of sparse univariate polynomials over a domain <code class="code docutils literal notranslate"><span class="pre">S</span></code> of multivariate polynomials over <code class="code docutils literal notranslate"><span class="pre">R</span></code>.</p>
+<span id="l506f6c796e6f6d69616c466163746f72697a6174696f6e4279526563757273696f6e-626976617269617465534c50454252"></span><dl class="simple" id="index-1">
+<dt><span class="spadfun">bivariateSLPEBR</span>: (<a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> <a class="reference internal" href="SparseUnivariatePolynomial.html#l537061727365556e6976617269617465506f6c796e6f6d69616c"><span class="std std-ref">SparseUnivariatePolynomial</span></a> S, <a class="reference internal" href="SparseUnivariatePolynomial.html#l537061727365556e6976617269617465506f6c796e6f6d69616c"><span class="std std-ref">SparseUnivariatePolynomial</span></a> S, VarSet) -&gt; Union(<a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> <a class="reference internal" href="SparseUnivariatePolynomial.html#l537061727365556e6976617269617465506f6c796e6f6d69616c"><span class="std std-ref">SparseUnivariatePolynomial</span></a> S, failed)</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">bivariateSLPEBR(lp,</span> <span class="pre">p,</span> <span class="pre">v)</span></code> implements the bivariate case of <span class="spadfun">solveLinearPolynomialEquationByRecursion</span>; its implementation depends on <code class="code docutils literal notranslate"><span class="pre">R</span></code></p>
+</dd>
+</dl>
+<span id="l506f6c796e6f6d69616c466163746f72697a6174696f6e4279526563757273696f6e-666163746f724279526563757273696f6e"></span><dl class="simple" id="index-2">
+<dt><span class="spadfun">factorByRecursion</span>: <a class="reference internal" href="SparseUnivariatePolynomial.html#l537061727365556e6976617269617465506f6c796e6f6d69616c"><span class="std std-ref">SparseUnivariatePolynomial</span></a> S -&gt; <a class="reference internal" href="Factored.html#l466163746f726564"><span class="std std-ref">Factored</span></a> <a class="reference internal" href="SparseUnivariatePolynomial.html#l537061727365556e6976617269617465506f6c796e6f6d69616c"><span class="std std-ref">SparseUnivariatePolynomial</span></a> S</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">factorByRecursion(p)</span></code> factors polynomial <code class="code docutils literal notranslate"><span class="pre">p</span></code>. This function performs the recursion step for factorPolynomial, as defined in <a class="reference internal" href="PolynomialFactorizationExplicit.html#l506f6c796e6f6d69616c466163746f72697a6174696f6e4578706c69636974"><span class="std std-ref">PolynomialFactorizationExplicit</span></a> category (see <span class="spadfun">factorPolynomial</span>)</p>
+</dd>
+</dl>
+<span id="l506f6c796e6f6d69616c466163746f72697a6174696f6e4279526563757273696f6e-666163746f72537175617265467265654279526563757273696f6e"></span><dl class="simple" id="index-3">
+<dt><span class="spadfun">factorSquareFreeByRecursion</span>: <a class="reference internal" href="SparseUnivariatePolynomial.html#l537061727365556e6976617269617465506f6c796e6f6d69616c"><span class="std std-ref">SparseUnivariatePolynomial</span></a> S -&gt; <a class="reference internal" href="Factored.html#l466163746f726564"><span class="std std-ref">Factored</span></a> <a class="reference internal" href="SparseUnivariatePolynomial.html#l537061727365556e6976617269617465506f6c796e6f6d69616c"><span class="std std-ref">SparseUnivariatePolynomial</span></a> S</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">factorSquareFreeByRecursion(p)</span></code> returns the square free factorization of <code class="code docutils literal notranslate"><span class="pre">p</span></code>. This functions performs the recursion step for factorSquareFreePolynomial, as defined in <a class="reference internal" href="PolynomialFactorizationExplicit.html#l506f6c796e6f6d69616c466163746f72697a6174696f6e4578706c69636974"><span class="std std-ref">PolynomialFactorizationExplicit</span></a> category (see <span class="spadfun">factorSquareFreePolynomial</span>).</p>
+</dd>
+</dl>
+<span id="l506f6c796e6f6d69616c466163746f72697a6174696f6e4279526563757273696f6e-72616e646f6d52"></span><dl class="simple" id="index-4">
+<dt><span class="spadfun">randomR</span>: <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a> -&gt; R</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">randomR</span> <span class="pre">produces</span></code> a random element of <code class="code docutils literal notranslate"><span class="pre">R</span></code></p>
+</dd>
+</dl>
+<span id="l506f6c796e6f6d69616c466163746f72697a6174696f6e4279526563757273696f6e-736f6c76654c696e656172506f6c796e6f6d69616c4571756174696f6e4279526563757273696f6e"></span><dl class="simple" id="index-5">
+<dt><span class="spadfun">solveLinearPolynomialEquationByRecursion</span>: (<a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> <a class="reference internal" href="SparseUnivariatePolynomial.html#l537061727365556e6976617269617465506f6c796e6f6d69616c"><span class="std std-ref">SparseUnivariatePolynomial</span></a> S, <a class="reference internal" href="SparseUnivariatePolynomial.html#l537061727365556e6976617269617465506f6c796e6f6d69616c"><span class="std std-ref">SparseUnivariatePolynomial</span></a> S) -&gt; Union(<a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> <a class="reference internal" href="SparseUnivariatePolynomial.html#l537061727365556e6976617269617465506f6c796e6f6d69616c"><span class="std std-ref">SparseUnivariatePolynomial</span></a> S, failed)</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">solveLinearPolynomialEquationByRecursion([p1,</span> <span class="pre">...,</span> <span class="pre">pn],</span> <span class="pre">p)</span></code> returns the list of polynomials <code class="code docutils literal notranslate"><span class="pre">[q1,</span> <span class="pre">...,</span> <span class="pre">qn]</span></code> such that <code class="code docutils literal notranslate"><span class="pre">sum</span> <span class="pre">qi/pi</span> <span class="pre">=</span> <span class="pre">p</span> <span class="pre">/</span> <span class="pre">prod</span> <span class="pre">pi</span></code>, a recursion step for solveLinearPolynomialEquation as defined in <a class="reference internal" href="PolynomialFactorizationExplicit.html#l506f6c796e6f6d69616c466163746f72697a6174696f6e4578706c69636974"><span class="std std-ref">PolynomialFactorizationExplicit</span></a> category (see <span class="spadfun">solveLinearPolynomialEquation</span>). If no such list of <code class="code docutils literal notranslate"><span class="pre">qi</span></code> exists, then “failed” is returned.</p>
+</dd>
+</dl>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="../index.html">Table of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../help.html">Help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../citation.html">Citation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../history.html">History</a></li>
+</ul>
+
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">FriCAS</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">PolynomialFactorizationByRecursion(R, E, VarSet, S)</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2007-2026, FriCAS Team.
+    </div>
+  </body>
+</html>
