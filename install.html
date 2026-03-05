@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="_static/classic.css?v=2bf1fcf8" />
     <link rel="stylesheet" href="_static/style.css" type="text/css" />
     
-    <script src="_static/documentation_options.js?v=9dc688dd"></script>
+    <script src="_static/documentation_options.js?v=8458d014"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     
@@ -87,8 +87,7 @@
 </ul>
 </li>
 <li><p><a class="reference internal" href="#creation-of-distribution-tarballs" id="id29">Creation of distribution tarballs</a></p></li>
-<li><p><a class="reference internal" href="#installation-from-binary-distribution" id="id30">Installation from binary distribution</a></p></li>
-<li><p><a class="reference internal" href="#known-problems" id="id31">Known problems</a></p></li>
+<li><p><a class="reference internal" href="#known-problems" id="id30">Known problems</a></p></li>
 </ul>
 </nav>
 <p>Note: this text is mostly about installation from sources.
@@ -99,7 +98,7 @@ binary distribution.</p>
 <section id="quick-installation-linux">
 <h3><a class="toc-backref" href="#id3" role="doc-backlink">Quick installation (Linux)</a><a class="headerlink" href="#quick-installation-linux" title="Link to this heading">¶</a></h3>
 <p>FriCAS offers release binaries for Linux on Intel/AMD processors.
-Get the respective binary tarball (replace <cite>x.y.z</cite> by d9d27a7638f402e94a7909d98ea79b2131dbf65a).</p>
+Get the respective binary tarball (replace <cite>x.y.z</cite> by a764983b5521d68318d6fa52c53b3399ec92fb4d).</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>V=x.y.z
 wget https://github.com/fricas/fricas/releases/download/$V/fricas-$V.amd64.tar.bz2
 </pre></div>
@@ -123,7 +122,7 @@ follows.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>F=$HOME/software
 L=$F/usr/local
 mkdir -p $L
-tar xjf fricas-$V.amd64.tar.bz2 -C $L
+tar xjf fricas-$V.amd64.tar.bz2 -C $F
 sed -i &quot;s|^exec_prefix=|FRICAS_PREFIX=\&quot;$L\&quot;\nexport FRICAS_PREFIX\nexec_prefix=|&quot; $L/bin/fricas
 sed -i &quot;s|^exec_prefix=|FRICAS_PREFIX=\&quot;$L\&quot;\nexport FRICAS_PREFIX\nexec_prefix=|;s|/usr/local/|$L/|&quot; $L/bin/efricas
 </pre></div>
@@ -135,11 +134,13 @@ sed -i &quot;s|^exec_prefix=|FRICAS_PREFIX=\&quot;$L\&quot;\nexport FRICAS_PREFI
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>(HyperDoc) Cannot load font -adobe-courier-medium-r-normal--18-*-*-*-m-*-iso8859-1 ; using defaul.
 </pre></div>
 </div>
-<p>on the console, do the following.</p>
+<p>on the console, do the following:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sudo apt install xfonts-100dpi
 xset fp rehash
 </pre></div>
 </div>
+<p>Restart the X server (log out and log in again) in case the font
+in HyperDoc still does not look pretty.</p>
 </section>
 </section>
 <section id="quick-installation-macos">
@@ -254,8 +255,7 @@ by <a class="reference external" href="https://jfricas.readthedocs.io">jFriCAS</
 <h3><a class="toc-backref" href="#id12" role="doc-backlink">X libraries (optional, but needed for graphics and HyperDoc)</a><a class="headerlink" href="#x-libraries-optional-but-needed-for-graphics-and-hyperdoc" title="Link to this heading">¶</a></h3>
 <p>On Debian (or Ubuntu) install the following packages.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sudo apt install libx11-dev libxt-dev libice-dev \
-                 libsm-dev libxau-dev libxdmcp-dev libxpm-dev \
-                 xfonts-100dpi
+                 libsm-dev libxau-dev libxdmcp-dev libxpm-dev
 </pre></div>
 </div>
 </section>
@@ -290,16 +290,18 @@ except for Clozure CL on Power PC.</p>
 </div>
 <p>In order to build the <a class="reference external" href="https://hemmecke.github.io/fricas/book.pdf">FriCAS Book</a>, you also need the following
 LaTeX packages (available from <a class="reference external" href="https://www.ctan.org/">CTAN</a>) or your package manager.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>amsmath hyperref verbatim xparse (texlive-latex-base)
-breqn listings                   (texlive-latex-recommended)
-color framed makeidx mleftright  (texlive-latex-extra)
-tensor                           (texlive-science)
-tikz                             (texlive-pictures)
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>amssymb                                   (texlive-base)
+amsmath graphicx hyperref verbatim xparse (texlive-latex-base)
+breqn listings                            (texlive-latex-recommended)
+color framed makeidx                      (texlive-latex-extra)
+tensor                                    (texlive-science)
+tikz                                      (texlive-pictures)
 </pre></div>
 </div>
 <p>The respective package can be searched for on
 <a class="reference external" href="https://packages.ubuntu.com/">Ubuntu package search</a>.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sudo apt install texlive-latex-base \
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sudo apt install texlive-base \
+                 texlive-latex-base \
                  texlive-latex-recommended \
                  texlive-latex-extra \
                  texlive-science \
@@ -364,7 +366,7 @@ export PATH=$ALDORINSTALLDIR/bin:$PATH
 <h2><a class="toc-backref" href="#id19" role="doc-backlink">Detailed installation instructions</a><a class="headerlink" href="#detailed-installation-instructions" title="Link to this heading">¶</a></h2>
 <p>We assume that you have installed all necessary prerequisites.</p>
 <ol class="arabic" start="0">
-<li><p>Change to a directory with enough (1.5 GB) free space.</p></li>
+<li><p>Change to a directory with enough (0.8 GB) free space.</p></li>
 <li><p>Fetch sources.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git clone --depth 1 https://github.com/fricas/fricas
 </pre></div>
@@ -372,8 +374,8 @@ export PATH=$ALDORINSTALLDIR/bin:$PATH
 <p>Remove the <code class="docutils literal notranslate"><span class="pre">--depth</span> <span class="pre">1</span></code> option for access to the change history.</p>
 </li>
 <li><p>Create build directory and change to it</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mkdir fricas-build
-cd fricas-build
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mkdir fr-build
+cd fr-build
 </pre></div>
 </div>
 </li>
@@ -419,9 +421,9 @@ run tests</p>
 <p>The preferred way to build FriCAS is to use an already installed Lisp.
 Also, it is preferable to use a separate build directory.  Assuming
 that the source tree is in <code class="docutils literal notranslate"><span class="pre">$HOME/fricas</span></code>, you build in
-<code class="docutils literal notranslate"><span class="pre">$HOME/fricas-build</span></code> subdirectory and your Lisp is called
+<code class="docutils literal notranslate"><span class="pre">$HOME/fr-build</span></code> subdirectory and your Lisp is called
 <code class="docutils literal notranslate"><span class="pre">sbcl</span></code> the following should just work.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cd $HOME/fricas-build
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cd $HOME/fr-build
 $HOME/fricas/configure --with-lisp=sbcl &amp;&amp; make &amp;&amp; sudo make install
 </pre></div>
 </div>
@@ -437,8 +439,8 @@ and adjust as needed.</p>
 <p>If you compile FriCAS from the <a class="reference external" href="https://github.com/hemmecke/fricas">FriCAS git repository</a>, and <code class="docutils literal notranslate"><span class="pre">configure</span></code>
 does not detect the <code class="docutils literal notranslate"><span class="pre">xvfb-run</span></code> program, then graphic examples will
 not be built.  This results in broken HyperDoc pages – all graphic
-examples will be missing (and trying to access them will crash
-HyperDoc).</p>
+examples will be missing (and trying to access them will crash the
+hypertex process).</p>
 <p>To get working graphic examples login into X and replace <code class="docutils literal notranslate"><span class="pre">make</span></code>
 above by the following</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>make MAYBE_VIEWPORTS=viewports
@@ -532,20 +534,6 @@ respectively).</p>
 <p>After a build of FriCAS, (suppose your build directory is under
 <code class="docutils literal notranslate"><span class="pre">$BUILD</span></code>), you can build the documentation provided at
 the <a class="reference external" href="https://hemmecke.github.io/fricas/index.html">FriCAS home page</a> on your local installation.</p>
-<p>Currently, you need the <code class="docutils literal notranslate"><span class="pre">imagemagick</span></code> program.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sudo apt install imagemagick
-</pre></div>
-</div>
-<p>For security reasons, ImageMagick fails for some conversion.
-For compiling images you must, therefore, relax the policy.
-Modify to the line</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;policy domain=&quot;coder&quot; rights=&quot;read|write&quot; pattern=&quot;PS&quot; /&gt;
-</pre></div>
-</div>
-<p>in <code class="docutils literal notranslate"><span class="pre">/etc/ImageMagick-6/policy.xml</span></code> (maybe you have to add it).</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sudo emacs /etc/ImageMagick-6/policy.xml
-</pre></div>
-</div>
 <p>If you want only <a class="reference external" href="https://hemmecke.github.io/fricas/book.pdf">FriCAS Book</a> (also known as the FriCAS User
 Guide) do</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>make book
@@ -883,9 +871,10 @@ git clone https://github.com/pdo/frimacs.git
 build sources, taking care to build Hyperdoc pages and graphic
 examples.  Make sure that text of help pages is available in some
 directory (they are <strong>not</strong> part of source tree, some are generated,
-but the rest is copied to tarball).  Assuming that you build FriCAS
-in <code class="docutils literal notranslate"><span class="pre">fricas-build</span></code> and <code class="docutils literal notranslate"><span class="pre">$SRC</span></code> point to FriCAS source tree do</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cd fricas-build
+but the rest is copied to the tarball).  Assuming that you built
+FriCAS in <code class="docutils literal notranslate"><span class="pre">fr-build</span></code> and <code class="docutils literal notranslate"><span class="pre">$SRC</span></code> points to the FriCAS source tree,
+do</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cd fr-build
 $SRC/src/scripts/mkdist.sh --copy_lisp --copy_phts \
   --copy_help=/full/path/to/help/files
 mv dist ../fricas-x.y.z
@@ -898,8 +887,9 @@ differs from trunk, namely release branch has version number, trunk
 instead gives date of last update to <code class="docutils literal notranslate"><span class="pre">configure.ac</span></code>.  If you
 wish you can create distribution tarballs from trunk.</p>
 <p>The binary distribution can be created as follows.  First fetch and
-unpack source tarball in work directory.  Then in work directory</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mkdir fricas-build
+unpack source tarball into the work directory.  Then in the work directory</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mkdir fr-build
+cd fr-build
 ../fricas-x.y.z/configure --enable--gmp --with-lisp=/path/to/hsbcl
 make -j 7 &gt; makelog 2&gt;&amp;1
 make DESTDIR=/full/path/to/auxiliary/dir install
@@ -908,55 +898,8 @@ tar -cjf fricas-x.y.z.amd64.tar.bz2 usr
 </pre></div>
 </div>
 </section>
-<section id="installation-from-binary-distribution">
-<h2><a class="toc-backref" href="#id30" role="doc-backlink">Installation from binary distribution</a><a class="headerlink" href="#installation-from-binary-distribution" title="Link to this heading">¶</a></h2>
-<p>You can download the latest release as a <code class="docutils literal notranslate"><span class="pre">.tar.bz2</span></code> from
-<a class="reference external" href="https://github.com/fricas/fricas/releases">https://github.com/fricas/fricas/releases</a> and install as follows (of
-course, you can set <code class="docutils literal notranslate"><span class="pre">FDIR</span></code> to anything you like).</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>FDIR=$HOME/fricas
-mkdir -p $FDIR
-cd $FDIR
-tar xjf fricas-x.y.z.amd64.tar.bz2
-</pre></div>
-</div>
-<p>If before running <code class="docutils literal notranslate"><span class="pre">tar</span></code> you change to the root directory and do
-this command as <code class="docutils literal notranslate"><span class="pre">root</span></code>, then you will get a ready-to-run FriCAS in
-the <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code> subtree of the filesystem.  This puts <a class="reference external" href="https://hemmecke.github.io/fricas/index.html">FriCAS</a> files
-in the same places as running <code class="docutils literal notranslate"><span class="pre">install</span></code> after build from source
-using default settings.</p>
-<p>Alternatively, you can put FriCAS files anywhere in your file system,
-which is useful if you want to install FriCAS without administrator
-rights.</p>
-<p>For this to work you need to adapt the <code class="docutils literal notranslate"><span class="pre">fricas</span></code> and <code class="docutils literal notranslate"><span class="pre">efricas</span></code> scripts
-to point to the right paths.</p>
-<p>After installation you can start FriCAS with full path name
-like one of the following commands.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$FDIR/usr/local/bin/fricas
-$FDIR/usr/local/bin/efricas
-</pre></div>
-</div>
-<p>Of course, you must have <a class="reference external" href="https://www.gnu.org/software/emacs/">Emacs</a> installed for the <code class="docutils literal notranslate"><span class="pre">efricas</span></code>
-script to work correctly.</p>
-<p>You might have to install</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sudo apt install xfonts-75dpi xfonts-100dpi
-</pre></div>
-</div>
-<p>and restart the X server (log out and log in again) in case the font
-in HyperDoc does not look pretty.</p>
-<p>That is, however, not necessary, if you do not intend to use HyperDoc
-a lot and rather look at the <a class="reference external" href="https://hemmecke.github.io/fricas/index.html">FriCAS</a> homepage in order to find
-relevant information.</p>
-<p>Optionally, set the PATH in <code class="docutils literal notranslate"><span class="pre">$HOME/.bashrc</span></code>.
-Edit the file <code class="docutils literal notranslate"><span class="pre">$HOME/.bashrc</span></code> (or whatever your shell initialization
-resource is) and put in something like the following in order to make
-all fricas scripts available.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>FDIR=$HOME/fricas
-export PATH=$FDIR/usr/local/bin:$PATH
-</pre></div>
-</div>
-</section>
 <section id="known-problems">
-<h2><a class="toc-backref" href="#id31" role="doc-backlink">Known problems</a><a class="headerlink" href="#known-problems" title="Link to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id30" role="doc-backlink">Known problems</a><a class="headerlink" href="#known-problems" title="Link to this heading">¶</a></h2>
 <ul>
 <li><p>currently when using case insensitive filesystem (typically on
 macOS and Windows), the git version can only be built in a
