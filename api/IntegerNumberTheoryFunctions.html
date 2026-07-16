@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>IntegerNumberTheoryFunctions &#8212; FriCAS</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
     
-    <script src="../_static/documentation_options.js?v=6505e2d8"></script>
-    <script src="../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/documentation_options.js?v=3191e198"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -45,10 +45,10 @@
             
   <section id="integernumbertheoryfunctions">
 <span id="l496e74656765724e756d6265725468656f727946756e6374696f6e73"></span><span id="index-0"></span><h1>IntegerNumberTheoryFunctions<a class="headerlink" href="#integernumbertheoryfunctions" title="Link to this heading">¶</a></h1>
-<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/docfix/src/algebra/numtheor.spad#L182">numtheor.spad line 182</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/docfix/src/algebra/numtheor.spad#L182">[edit on github]</a></p>
+<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/jfricas/src/algebra/numtheor.spad#L182">numtheor.spad line 182</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/jfricas/src/algebra/numtheor.spad#L182">[edit on github]</a></p>
 <p>This package provides various number theoretic functions on the integers.</p>
 <span id="l496e74656765724e756d6265725468656f727946756e6374696f6e73-6265726e6f756c6c69"></span><dl class="simple" id="index-1">
-<dt><span class="spadfun">bernoulli</span>: <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a> -&gt; <a class="reference internal" href="Fraction.html#l4672616374696f6e"><span class="std std-ref">Fraction</span></a> <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">bernoulli(n)</span></code> returns the <code class="code docutils literal notranslate"><span class="pre">n</span></code>th Bernoulli number. this is <code class="code docutils literal notranslate"><span class="pre">B(n,</span> <span class="pre">0)</span></code>, where <code class="code docutils literal notranslate"><span class="pre">B(n,</span> <span class="pre">x)</span></code> is the <code class="code docutils literal notranslate"><span class="pre">n</span></code>th Bernoulli polynomial.</p>
+<dt><span class="spadfun">bernoulli</span>: <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a> -&gt; <a class="reference internal" href="Fraction.html#l4672616374696f6e"><span class="std std-ref">Fraction</span></a> <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">bernoulli(n)</span></code> returns the <code class="code docutils literal notranslate"><span class="pre">n</span></code>th Bernoulli number. This is <code class="code docutils literal notranslate"><span class="pre">B(n,</span> <span class="pre">0)</span></code>, where <code class="code docutils literal notranslate"><span class="pre">B(n,</span> <span class="pre">x)</span></code> is the <code class="code docutils literal notranslate"><span class="pre">n</span></code>th Bernoulli polynomial.</p>
 </dd>
 </dl>
 <span id="l496e74656765724e756d6265725468656f727946756e6374696f6e73-6361726d69636861656c4c616d626461"></span><dl class="simple" id="index-2">
@@ -100,7 +100,7 @@
 </dd>
 </dl>
 <span id="l496e74656765724e756d6265725468656f727946756e6374696f6e73-73756d4f664b7468506f77657244697669736f7273"></span><dl class="simple" id="index-14">
-<dt><span class="spadfun">sumOfKthPowerDivisors</span>: (<a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>, <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>) -&gt; <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">sumOfKthPowerDivisors(n,</span> <span class="pre">k)</span></code> returns the sum of the <code class="code docutils literal notranslate"><span class="pre">k</span></code>th powers of the integers between 1 and <code class="code docutils literal notranslate"><span class="pre">n</span></code> (inclusive) which divide <code class="code docutils literal notranslate"><span class="pre">n</span></code>. the sum of the <code class="code docutils literal notranslate"><span class="pre">k</span></code>th powers of the divisors of <code class="code docutils literal notranslate"><span class="pre">n</span></code> is often denoted by <code class="code docutils literal notranslate"><span class="pre">sigma_k(n)</span></code>.</p>
+<dt><span class="spadfun">sumOfKthPowerDivisors</span>: (<a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>, <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>) -&gt; <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">sumOfKthPowerDivisors(n,</span> <span class="pre">k)</span></code> returns the sum of the <code class="code docutils literal notranslate"><span class="pre">k</span></code>th powers of the integers between 1 and <code class="code docutils literal notranslate"><span class="pre">n</span></code> (inclusive) which divide <code class="code docutils literal notranslate"><span class="pre">n</span></code>. The sum of the <code class="code docutils literal notranslate"><span class="pre">k</span></code>th powers of the divisors of <code class="code docutils literal notranslate"><span class="pre">n</span></code> is often denoted by <code class="code docutils literal notranslate"><span class="pre">sigma_k(n)</span></code>.</p>
 </dd>
 </dl>
 </section>

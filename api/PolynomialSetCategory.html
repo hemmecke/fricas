@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>PolynomialSetCategory(R, E, VarSet, P) &#8212; FriCAS</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
     
-    <script src="../_static/documentation_options.js?v=6505e2d8"></script>
-    <script src="../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/documentation_options.js?v=3191e198"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -45,7 +45,7 @@
             
   <section id="polynomialsetcategory-r-e-varset-p">
 <span id="l506f6c796e6f6d69616c53657443617465676f7279"></span><span id="index-0"></span><h1>PolynomialSetCategory(R, E, VarSet, P)<a class="headerlink" href="#polynomialsetcategory-r-e-varset-p" title="Link to this heading">¶</a></h1>
-<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/docfix/src/algebra/polset.spad#L1">polset.spad line 1</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/docfix/src/algebra/polset.spad#L1">[edit on github]</a></p>
+<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/jfricas/src/algebra/polset.spad#L1">polset.spad line 1</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/jfricas/src/algebra/polset.spad#L1">[edit on github]</a></p>
 <ul class="simple">
 <li><p>R: <a class="reference internal" href="Ring.html#l52696e67"><span class="std std-ref">Ring</span></a></p></li>
 <li><p>E: <a class="reference internal" href="OrderedAbelianMonoidSup.html#l4f7264657265644162656c69616e4d6f6e6f6964537570"><span class="std std-ref">OrderedAbelianMonoidSup</span></a></p></li>
@@ -240,11 +240,11 @@
 </dd>
 </dl>
 <span id="l506f6c796e6f6d69616c53657443617465676f7279-726f756768457175616c496465616c733f"></span><dl class="simple" id="index-13">
-<dt><span class="spadfun">roughEqualIdeals?</span>: (%, %) -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a> if R has <a class="reference internal" href="IntegralDomain.html#l496e74656772616c446f6d61696e"><span class="std std-ref">IntegralDomain</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">roughEqualIdeals?(ps1,</span> <span class="pre">ps2)</span></code> returns <code class="code docutils literal notranslate"><span class="pre">true</span></code> iff it can proved that <code class="code docutils literal notranslate"><span class="pre">ps1</span></code> and <code class="code docutils literal notranslate"><span class="pre">ps2</span></code> generate the same ideal in <code class="code docutils literal notranslate"><span class="pre">(R)^(-1)</span> <span class="pre">P</span></code> without computing Groebner bases.</p>
+<dt><span class="spadfun">roughEqualIdeals?</span>: (%, %) -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a> if R has <a class="reference internal" href="IntegralDomain.html#l496e74656772616c446f6d61696e"><span class="std std-ref">IntegralDomain</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">roughEqualIdeals?(ps1,</span> <span class="pre">ps2)</span></code> returns <code class="code docutils literal notranslate"><span class="pre">true</span></code> iff it can be proved that <code class="code docutils literal notranslate"><span class="pre">ps1</span></code> and <code class="code docutils literal notranslate"><span class="pre">ps2</span></code> generate the same ideal in <code class="code docutils literal notranslate"><span class="pre">(R)^(-1)</span> <span class="pre">P</span></code> without computing Groebner bases.</p>
 </dd>
 </dl>
 <span id="l506f6c796e6f6d69616c53657443617465676f7279-726f756768537562496465616c3f"></span><dl class="simple" id="index-14">
-<dt><span class="spadfun">roughSubIdeal?</span>: (%, %) -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a> if R has <a class="reference internal" href="IntegralDomain.html#l496e74656772616c446f6d61696e"><span class="std std-ref">IntegralDomain</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">roughSubIdeal?(ps1,</span> <span class="pre">ps2)</span></code> returns <code class="code docutils literal notranslate"><span class="pre">true</span></code> iff it can proved that all polynomials in <code class="code docutils literal notranslate"><span class="pre">ps1</span></code> lie in the ideal generated by <code class="code docutils literal notranslate"><span class="pre">ps2</span></code> in <code class="code docutils literal notranslate"><span class="pre">(R)^(-1)</span> <span class="pre">P</span></code> without computing Groebner bases.</p>
+<dt><span class="spadfun">roughSubIdeal?</span>: (%, %) -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a> if R has <a class="reference internal" href="IntegralDomain.html#l496e74656772616c446f6d61696e"><span class="std std-ref">IntegralDomain</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">roughSubIdeal?(ps1,</span> <span class="pre">ps2)</span></code> returns <code class="code docutils literal notranslate"><span class="pre">true</span></code> iff it can be proved that all polynomials in <code class="code docutils literal notranslate"><span class="pre">ps1</span></code> lie in the ideal generated by <code class="code docutils literal notranslate"><span class="pre">ps2</span></code> in <code class="code docutils literal notranslate"><span class="pre">(R)^(-1)</span> <span class="pre">P</span></code> without computing Groebner bases.</p>
 </dd>
 </dl>
 <span id="l506f6c796e6f6d69616c53657443617465676f7279-726f756768556e6974496465616c3f"></span><dl class="simple" id="index-15">

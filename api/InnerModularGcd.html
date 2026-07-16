@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>InnerModularGcd(R, BP, pMod, nextMod) &#8212; FriCAS</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
     
-    <script src="../_static/documentation_options.js?v=6505e2d8"></script>
-    <script src="../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/documentation_options.js?v=3191e198"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -45,14 +45,14 @@
             
   <section id="innermodulargcd-r-bp-pmod-nextmod">
 <span id="l496e6e65724d6f64756c6172476364"></span><span id="index-0"></span><h1>InnerModularGcd(R, BP, pMod, nextMod)<a class="headerlink" href="#innermodulargcd-r-bp-pmod-nextmod" title="Link to this heading">¶</a></h1>
-<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/docfix/src/algebra/modgcd.spad#L1">modgcd.spad line 1</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/docfix/src/algebra/modgcd.spad#L1">[edit on github]</a></p>
+<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/jfricas/src/algebra/modgcd.spad#L1">modgcd.spad line 1</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/jfricas/src/algebra/modgcd.spad#L1">[edit on github]</a></p>
 <ul class="simple">
 <li><p>R: <a class="reference internal" href="EuclideanDomain.html#l4575636c696465616e446f6d61696e"><span class="std std-ref">EuclideanDomain</span></a></p></li>
 <li><p>BP: <a class="reference internal" href="UnivariatePolynomialCategory.html#l556e6976617269617465506f6c796e6f6d69616c43617465676f7279"><span class="std std-ref">UnivariatePolynomialCategory</span></a> R</p></li>
 <li><p>pMod: R</p></li>
 <li><p>nextMod: (R, <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>) -&gt; R</p></li>
 </ul>
-<p>This file contains the functions for modular <code class="code docutils literal notranslate"><span class="pre">gcd</span></code> algorithm for univariate polynomials with coefficients in a non-trivial euclidean domain (i.e. not a field). The package is parametrised by the coefficient domain, the polynomial domain, a prime, and a function for choosing the next prime</p>
+<p>This file contains the functions for modular <code class="code docutils literal notranslate"><span class="pre">gcd</span></code> algorithm for univariate polynomials with coefficients in a non-trivial Euclidean domain (i.e. not a field). The package is parameterized by the coefficient domain, the polynomial domain, a prime, and a function for choosing the next prime</p>
 <span id="l496e6e65724d6f64756c6172476364-6d6f64756c61724763645072696d6974697665"></span><dl class="simple" id="index-1">
 <dt><span class="spadfun">modularGcdPrimitive</span>: <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> BP -&gt; BP</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">modularGcdPrimitive(listf)</span></code> computes the <code class="code docutils literal notranslate"><span class="pre">gcd</span></code> of the list of primitive polynomials <code class="code docutils literal notranslate"><span class="pre">listf</span></code> by modular methods.</p>
 </dd>

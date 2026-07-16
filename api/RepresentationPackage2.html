@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>RepresentationPackage2 R &#8212; FriCAS</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
     
-    <script src="../_static/documentation_options.js?v=6505e2d8"></script>
-    <script src="../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/documentation_options.js?v=3191e198"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -45,7 +45,7 @@
             
   <section id="representationpackage2-r">
 <span id="l526570726573656e746174696f6e5061636b61676532"></span><span id="index-0"></span><h1>RepresentationPackage2 R<a class="headerlink" href="#representationpackage2-r" title="Link to this heading">¶</a></h1>
-<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/docfix/src/algebra/rep2.spad#L1">rep2.spad line 1</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/docfix/src/algebra/rep2.spad#L1">[edit on github]</a></p>
+<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/jfricas/src/algebra/rep2.spad#L1">rep2.spad line 1</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/jfricas/src/algebra/rep2.spad#L1">[edit on github]</a></p>
 <ul class="simple">
 <li><p>R: <a class="reference internal" href="Ring.html#l52696e67"><span class="std std-ref">Ring</span></a></p></li>
 </ul>
@@ -75,7 +75,7 @@
 </dd>
 </dl>
 <span id="l526570726573656e746174696f6e5061636b61676532-69734162736f6c7574656c794972726564756369626c653f"></span><dl class="simple" id="index-7">
-<dt><span class="spadfun">isAbsolutelyIrreducible?</span>: (<a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> <a class="reference internal" href="Matrix.html#l4d6174726978"><span class="std std-ref">Matrix</span></a> R, <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>) -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a> if R has <a class="reference internal" href="Field.html#l4669656c64"><span class="std std-ref">Field</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">isAbsolutelyIrreducible?(aG,</span> <span class="pre">numberOfTries)</span></code> uses Norton<code class="code docutils literal notranslate"><span class="pre">'s</span></code> irreducibility test to check for absolute irreduciblity, assuming if a one-dimensional kernel is found. As no field extension changes create “new” elements in a one-dimensional space, the criterium stays <code class="code docutils literal notranslate"><span class="pre">true</span></code> for every extension. The method looks for one-dimensionals only by creating random elements (no fingerprints) since a run of <em>meatAxe</em> would have proved absolute irreducibility anyway.</p>
+<dt><span class="spadfun">isAbsolutelyIrreducible?</span>: (<a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> <a class="reference internal" href="Matrix.html#l4d6174726978"><span class="std std-ref">Matrix</span></a> R, <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>) -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a> if R has <a class="reference internal" href="Field.html#l4669656c64"><span class="std std-ref">Field</span></a></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">isAbsolutelyIrreducible?(aG,</span> <span class="pre">numberOfTries)</span></code> uses Norton<code class="code docutils literal notranslate"><span class="pre">'s</span></code> irreducibility test to check for absolute irreducibility, assuming if a one-dimensional kernel is found. As no field extension changes create “new” elements in a one-dimensional space, the criterium stays <code class="code docutils literal notranslate"><span class="pre">true</span></code> for every extension. The method looks for one-dimensionals only by creating random elements (no fingerprints) since a run of <em>meatAxe</em> would have proved absolute irreducibility anyway.</p>
 </dd>
 </dl>
 <dl class="simple" id="index-8">

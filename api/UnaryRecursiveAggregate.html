@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>UnaryRecursiveAggregate S &#8212; FriCAS</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
     
-    <script src="../_static/documentation_options.js?v=6505e2d8"></script>
-    <script src="../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/documentation_options.js?v=3191e198"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -45,11 +45,11 @@
             
   <section id="unaryrecursiveaggregate-s">
 <span id="l556e617279526563757273697665416767726567617465"></span><span id="index-0"></span><h1>UnaryRecursiveAggregate S<a class="headerlink" href="#unaryrecursiveaggregate-s" title="Link to this heading">¶</a></h1>
-<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/docfix/src/algebra/aggcat.spad#L1303">aggcat.spad line 1303</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/docfix/src/algebra/aggcat.spad#L1303">[edit on github]</a></p>
+<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/jfricas/src/algebra/aggcat.spad#L1303">aggcat.spad line 1303</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/jfricas/src/algebra/aggcat.spad#L1303">[edit on github]</a></p>
 <ul class="simple">
 <li><p>S: <a class="reference internal" href="Type.html#l54797065"><span class="std std-ref">Type</span></a></p></li>
 </ul>
-<p>A unary-recursive aggregate is an aggregate where nodes may have either 0 or 1 children. This aggregate models, though not precisely, a linked list possibly with a single cycle. A node with one children models a non-empty list, with the <span class="spadfun">value</span> of the list designating the head, or <span class="spadfun">first</span>, of the list, and the child designating the tail, or <span class="spadfun">rest</span>, of the list. Since these aggregates are recursive aggregates, they may be cyclic.</p>
+<p>A unary-recursive aggregate is an aggregate where nodes may have either 0 or 1 children. This aggregate models, though not precisely, a linked list possibly with a single cycle. A node with one child models a non-empty list, with the <span class="spadfun">value</span> of the list designating the head, or <span class="spadfun">first</span>, of the list, and the child designating the tail, or <span class="spadfun">rest</span>, of the list. Since these aggregates are recursive aggregates, they may be cyclic.</p>
 <dl class="simple" id="l556e617279526563757273697665416767726567617465-23">
 <dt><a class="reference internal" href="Aggregate.html#l416767726567617465-23"><span class="std std-ref">#</span></a>: % -&gt; <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a> if % has <a class="reference internal" href="finiteAggregate.html#l66696e697465416767726567617465"><span class="std std-ref">finiteAggregate</span></a></dt><dd><p>from <a class="reference internal" href="Aggregate.html#l416767726567617465"><span class="std std-ref">Aggregate</span></a></p>
 </dd>
@@ -141,7 +141,7 @@
 </dd>
 </dl>
 <dl class="simple" id="index-12">
-<dt><span class="spadfun">elt</span>: (%, rest) -&gt; %</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">elt(%,</span> <span class="pre">&quot;rest&quot;)</span></code> (also written: <code class="code docutils literal notranslate"><span class="pre">u.rest</span></code>) is equivalent to <code class="code docutils literal notranslate"><span class="pre">rest</span> <span class="pre">u</span></code>.</p>
+<dt><span class="spadfun">elt</span>: (%, rest) -&gt; %</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">elt(u,</span> <span class="pre">&quot;rest&quot;)</span></code> (also written: <code class="code docutils literal notranslate"><span class="pre">u.rest</span></code>) is equivalent to <code class="code docutils literal notranslate"><span class="pre">rest</span> <span class="pre">u</span></code>.</p>
 </dd>
 <dt><a class="reference internal" href="RecursiveAggregate.html#l526563757273697665416767726567617465-656c74"><span class="std std-ref">elt</span></a>: (%, value) -&gt; S</dt><dd><p>from <a class="reference internal" href="RecursiveAggregate.html#l526563757273697665416767726567617465"><span class="std std-ref">RecursiveAggregate</span></a> S</p>
 </dd>

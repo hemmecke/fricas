@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>PseudoRemainderSequence(R, polR) &#8212; FriCAS</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
     
-    <script src="../_static/documentation_options.js?v=6505e2d8"></script>
-    <script src="../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/documentation_options.js?v=3191e198"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -45,7 +45,7 @@
             
   <section id="pseudoremaindersequence-r-polr">
 <span id="l50736575646f52656d61696e64657253657175656e6365"></span><span id="index-0"></span><h1>PseudoRemainderSequence(R, polR)<a class="headerlink" href="#pseudoremaindersequence-r-polr" title="Link to this heading">¶</a></h1>
-<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/docfix/src/algebra/prs.spad#L1">prs.spad line 1</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/docfix/src/algebra/prs.spad#L1">[edit on github]</a></p>
+<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/jfricas/src/algebra/prs.spad#L1">prs.spad line 1</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/jfricas/src/algebra/prs.spad#L1">[edit on github]</a></p>
 <ul class="simple">
 <li><p>R: <a class="reference internal" href="IntegralDomain.html#l496e74656772616c446f6d61696e"><span class="std std-ref">IntegralDomain</span></a></p></li>
 <li><p>polR: <a class="reference internal" href="UnivariatePolynomialCategory.html#l556e6976617269617465506f6c796e6f6d69616c43617465676f7279"><span class="std std-ref">UnivariatePolynomialCategory</span></a> R</p></li>
@@ -80,7 +80,7 @@
 </dd>
 </dl>
 <span id="l50736575646f52656d61696e64657253657175656e6365-696e64696365537562526573756c74616e74"></span><dl class="simple" id="index-8">
-<dt><span class="spadfun">indiceSubResultant</span>: (polR, polR, <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>) -&gt; polR</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">indiceSubResultant(P,</span> <span class="pre">Q,</span> <span class="pre">i)</span></code> returns the subresultant of indice <code class="code docutils literal notranslate"><span class="pre">i</span></code></p>
+<dt><span class="spadfun">indiceSubResultant</span>: (polR, polR, <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>) -&gt; polR</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">indiceSubResultant(P,</span> <span class="pre">Q,</span> <span class="pre">i)</span></code> returns the subresultant of index <code class="code docutils literal notranslate"><span class="pre">i</span></code>.</p>
 </dd>
 </dl>
 <span id="l50736575646f52656d61696e64657253657175656e6365-696e64696365537562526573756c74616e744575636c696465616e"></span><dl class="simple" id="index-9">
@@ -156,11 +156,11 @@
 </dd>
 </dl>
 <span id="l50736575646f52656d61696e64657253657175656e6365-73656d69537562526573756c74616e744763644575636c696465616e31"></span><dl class="simple" id="index-27">
-<dt><span class="spadfun">semiSubResultantGcdEuclidean1</span>: (polR, polR) -&gt; Record(coef1: polR, gcd: polR)</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">semiSubResultantGcdEuclidean1(P,</span> <span class="pre">Q)</span></code> carries out the equality <code class="code docutils literal notranslate"><span class="pre">coef1*P</span> <span class="pre">+</span> <span class="pre">...</span> <span class="pre">Q</span> <span class="pre">=</span> <span class="pre">+/-</span> <span class="pre">S_i(P,</span> <span class="pre">Q)</span></code> where the degree (not the indice) of the subresultant <code class="code docutils literal notranslate"><span class="pre">S_i(P,</span> <span class="pre">Q)</span></code> is as small as possible.</p>
+<dt><span class="spadfun">semiSubResultantGcdEuclidean1</span>: (polR, polR) -&gt; Record(coef1: polR, gcd: polR)</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">semiSubResultantGcdEuclidean1(P,</span> <span class="pre">Q)</span></code> carries out the equality <code class="code docutils literal notranslate"><span class="pre">coef1*P</span> <span class="pre">+</span> <span class="pre">...</span> <span class="pre">Q</span> <span class="pre">=</span> <span class="pre">+/-</span> <span class="pre">S_i(P,</span> <span class="pre">Q)</span></code> where the degree (not the index) of the subresultant <code class="code docutils literal notranslate"><span class="pre">S_i(P,</span> <span class="pre">Q)</span></code> is as small as possible.</p>
 </dd>
 </dl>
 <span id="l50736575646f52656d61696e64657253657175656e6365-73656d69537562526573756c74616e744763644575636c696465616e32"></span><dl class="simple" id="index-28">
-<dt><span class="spadfun">semiSubResultantGcdEuclidean2</span>: (polR, polR) -&gt; Record(coef2: polR, gcd: polR)</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">semiSubResultantGcdEuclidean2(P,</span> <span class="pre">Q)</span></code> carries out the equality <code class="code docutils literal notranslate"><span class="pre">...</span> <span class="pre">P</span> <span class="pre">+</span> <span class="pre">coef2*Q</span> <span class="pre">=</span> <span class="pre">+/-</span> <span class="pre">S_i(P,</span> <span class="pre">Q)</span></code> where the degree (not the indice) of the subresultant <code class="code docutils literal notranslate"><span class="pre">S_i(P,</span> <span class="pre">Q)</span></code> is as small as possible. Warning: <code class="code docutils literal notranslate"><span class="pre">degree(P)</span> <span class="pre">&gt;=</span> <span class="pre">degree(Q)</span></code>.</p>
+<dt><span class="spadfun">semiSubResultantGcdEuclidean2</span>: (polR, polR) -&gt; Record(coef2: polR, gcd: polR)</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">semiSubResultantGcdEuclidean2(P,</span> <span class="pre">Q)</span></code> carries out the equality <code class="code docutils literal notranslate"><span class="pre">...</span> <span class="pre">P</span> <span class="pre">+</span> <span class="pre">coef2*Q</span> <span class="pre">=</span> <span class="pre">+/-</span> <span class="pre">S_i(P,</span> <span class="pre">Q)</span></code> where the degree (not the index) of the subresultant <code class="code docutils literal notranslate"><span class="pre">S_i(P,</span> <span class="pre">Q)</span></code> is as small as possible. Warning: <code class="code docutils literal notranslate"><span class="pre">degree(P)</span> <span class="pre">&gt;=</span> <span class="pre">degree(Q)</span></code>.</p>
 </dd>
 </dl>
 <span id="l50736575646f52656d61696e64657253657175656e6365-737562526573756c74616e74476364"></span><dl class="simple" id="index-29">
@@ -168,7 +168,7 @@
 </dd>
 </dl>
 <span id="l50736575646f52656d61696e64657253657175656e6365-737562526573756c74616e744763644575636c696465616e"></span><dl class="simple" id="index-30">
-<dt><span class="spadfun">subResultantGcdEuclidean</span>: (polR, polR) -&gt; Record(coef1: polR, coef2: polR, gcd: polR)</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">subResultantGcdEuclidean(P,</span> <span class="pre">Q)</span></code> carries out the equality <code class="code docutils literal notranslate"><span class="pre">coef1*P</span> <span class="pre">+</span> <span class="pre">coef2*Q</span> <span class="pre">=</span> <span class="pre">+/-</span> <span class="pre">S_i(P,</span> <span class="pre">Q)</span></code> where the degree (not the indice) of the subresultant <code class="code docutils literal notranslate"><span class="pre">S_i(P,</span> <span class="pre">Q)</span></code> is as small as possible.</p>
+<dt><span class="spadfun">subResultantGcdEuclidean</span>: (polR, polR) -&gt; Record(coef1: polR, coef2: polR, gcd: polR)</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">subResultantGcdEuclidean(P,</span> <span class="pre">Q)</span></code> carries out the equality <code class="code docutils literal notranslate"><span class="pre">coef1*P</span> <span class="pre">+</span> <span class="pre">coef2*Q</span> <span class="pre">=</span> <span class="pre">+/-</span> <span class="pre">S_i(P,</span> <span class="pre">Q)</span></code> where the degree (not the index) of the subresultant <code class="code docutils literal notranslate"><span class="pre">S_i(P,</span> <span class="pre">Q)</span></code> is as small as possible.</p>
 </dd>
 </dl>
 </section>

@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>LexTriangularPackage(R, ls) &#8212; FriCAS</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
     
-    <script src="../_static/documentation_options.js?v=6505e2d8"></script>
-    <script src="../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/documentation_options.js?v=3191e198"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -45,12 +45,12 @@
             
   <section id="lextriangularpackage-r-ls">
 <span id="l4c6578547269616e67756c61725061636b616765"></span><span id="index-0"></span><h1>LexTriangularPackage(R, ls)<a class="headerlink" href="#lextriangularpackage-r-ls" title="Link to this heading">¶</a></h1>
-<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/docfix/src/algebra/zerodim.spad#L110">zerodim.spad line 110</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/docfix/src/algebra/zerodim.spad#L110">[edit on github]</a></p>
+<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/jfricas/src/algebra/zerodim.spad#L110">zerodim.spad line 110</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/jfricas/src/algebra/zerodim.spad#L110">[edit on github]</a></p>
 <ul class="simple">
 <li><p>R: <a class="reference internal" href="GcdDomain.html#l476364446f6d61696e"><span class="std std-ref">GcdDomain</span></a></p></li>
 <li><p>ls: <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> <a class="reference internal" href="Symbol.html#l53796d626f6c"><span class="std std-ref">Symbol</span></a></p></li>
 </ul>
-<p>A package for solving polynomial systems with finitely many solutions. The decompositions are given by means of regular triangular sets. The computations use lexicographical Groebner bases. The main operations are <a class="reference internal" href="#l4c6578547269616e67756c61725061636b616765-6c6578547269616e67756c6172"><span class="std std-ref">lexTriangular</span></a> and <a class="reference internal" href="#l4c6578547269616e67756c61725061636b616765-737175617265467265654c6578547269616e67756c6172"><span class="std std-ref">squareFreeLexTriangular</span></a>. The second one provide decompositions by means of square-free regular triangular sets. Both are based on the <em>lexTriangular</em> method described in [1]. They differ from the algorithm described in [2] by the fact that multiciplities of the roots are not kept. With the <a class="reference internal" href="#l4c6578547269616e67756c61725061636b616765-737175617265467265654c6578547269616e67756c6172"><span class="std std-ref">squareFreeLexTriangular</span></a> operation all multiciplities are removed. With the other operation some multiciplities may remain. Both operations admit an optional argument to produce normalized triangular sets.</p>
+<p>A package for solving polynomial systems with finitely many solutions. The decompositions are given by means of regular triangular sets. The computations use lexicographical Groebner bases. The main operations are <a class="reference internal" href="#l4c6578547269616e67756c61725061636b616765-6c6578547269616e67756c6172"><span class="std std-ref">lexTriangular</span></a> and <a class="reference internal" href="#l4c6578547269616e67756c61725061636b616765-737175617265467265654c6578547269616e67756c6172"><span class="std std-ref">squareFreeLexTriangular</span></a>. The second one provide decompositions by means of square-free regular triangular sets. Both are based on the <em>lexTriangular</em> method described in [1]. They differ from the algorithm described in [2] by the fact that multiplicities of the roots are not kept. With the <a class="reference internal" href="#l4c6578547269616e67756c61725061636b616765-737175617265467265654c6578547269616e67756c6172"><span class="std std-ref">squareFreeLexTriangular</span></a> operation all multiplicities are removed. With the other operation some multiplicities may remain. Both operations admit an optional argument to produce normalized triangular sets.</p>
 <span id="l4c6578547269616e67756c61725061636b616765-66676c6d496643616e"></span><dl class="simple" id="index-1">
 <dt><span class="spadfun">fglmIfCan</span>: <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> <a class="reference internal" href="NewSparseMultivariatePolynomial.html#l4e65775370617273654d756c746976617269617465506f6c796e6f6d69616c"><span class="std std-ref">NewSparseMultivariatePolynomial</span></a>(R, <a class="reference internal" href="OrderedVariableList.html#l4f7264657265645661726961626c654c697374"><span class="std std-ref">OrderedVariableList</span></a> ls) -&gt; Union(<a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> <a class="reference internal" href="NewSparseMultivariatePolynomial.html#l4e65775370617273654d756c746976617269617465506f6c796e6f6d69616c"><span class="std std-ref">NewSparseMultivariatePolynomial</span></a>(R, <a class="reference internal" href="OrderedVariableList.html#l4f7264657265645661726961626c654c697374"><span class="std std-ref">OrderedVariableList</span></a> ls), failed)</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">fglmIfCan(lp)</span></code> returns the lexicographical Groebner basis of <code class="code docutils literal notranslate"><span class="pre">lp</span></code> by using the <em>FGLM</em> strategy, if <code class="code docutils literal notranslate"><span class="pre">zeroDimensional?(lp)</span></code> holds .</p>
 </dd>

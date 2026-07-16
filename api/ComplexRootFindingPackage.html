@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>ComplexRootFindingPackage(R, UP) &#8212; FriCAS</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
     
-    <script src="../_static/documentation_options.js?v=6505e2d8"></script>
-    <script src="../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/documentation_options.js?v=3191e198"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -45,7 +45,7 @@
             
   <section id="complexrootfindingpackage-r-up">
 <span id="l436f6d706c6578526f6f7446696e64696e675061636b616765"></span><span id="index-0"></span><h1>ComplexRootFindingPackage(R, UP)<a class="headerlink" href="#complexrootfindingpackage-r-up" title="Link to this heading">¶</a></h1>
-<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/docfix/src/algebra/crfp.spad#L1">crfp.spad line 1</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/docfix/src/algebra/crfp.spad#L1">[edit on github]</a></p>
+<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/jfricas/src/algebra/crfp.spad#L1">crfp.spad line 1</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/jfricas/src/algebra/crfp.spad#L1">[edit on github]</a></p>
 <ul class="simple">
 <li><p>R: Join(<a class="reference internal" href="Field.html#l4669656c64"><span class="std std-ref">Field</span></a>, <a class="reference internal" href="OrderedRing.html#l4f72646572656452696e67"><span class="std std-ref">OrderedRing</span></a>)</p></li>
 <li><p>UP: <a class="reference internal" href="UnivariatePolynomialCategory.html#l556e6976617269617465506f6c796e6f6d69616c43617465676f7279"><span class="std std-ref">UnivariatePolynomialCategory</span></a> <a class="reference internal" href="Complex.html#l436f6d706c6578"><span class="std std-ref">Complex</span></a> R</p></li>
@@ -60,7 +60,7 @@
 </dd>
 </dl>
 <span id="l436f6d706c6578526f6f7446696e64696e675061636b616765-64697669736f7243617363616465"></span><dl class="simple" id="index-3">
-<dt><span class="spadfun">divisorCascade</span>: (UP, UP) -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> Record(factors: <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> UP, error: R)</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">divisorCascade(p,</span> <span class="pre">tp)</span></code> assumes that degree of polynomial <em>tp</em> is smaller than degree of polynomial <code class="code docutils literal notranslate"><span class="pre">p</span></code>, both monic. A sequence of divisions is calculated using the remainder, made monic, as divisor for the the next division. The result contains also the error of the factorizations, i.e. the norm of the remainder polynomial.</p>
+<dt><span class="spadfun">divisorCascade</span>: (UP, UP) -&gt; <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> Record(factors: <a class="reference internal" href="List.html#l4c697374"><span class="std std-ref">List</span></a> UP, error: R)</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">divisorCascade(p,</span> <span class="pre">tp)</span></code> assumes that degree of polynomial <em>tp</em> is smaller than degree of polynomial <code class="code docutils literal notranslate"><span class="pre">p</span></code>, both monic. A sequence of divisions is calculated using the remainder, made monic, as divisor for the next division. The result contains also the error of the factorizations, i.e. the norm of the remainder polynomial.</p>
 </dd>
 </dl>
 <dl class="simple" id="index-4">
@@ -88,7 +88,7 @@
 </dd>
 </dl>
 <span id="l436f6d706c6578526f6f7446696e64696e675061636b616765-706c65736b656e53706c6974"></span><dl class="simple" id="index-10">
-<dt><span class="spadfun">pleskenSplit</span>: (UP, R) -&gt; <a class="reference internal" href="Factored.html#l466163746f726564"><span class="std std-ref">Factored</span></a> UP</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">pleskenSplit(poly,</span> <span class="pre">eps)</span></code> determines a start polynomial <em>start</em>\ by using “startPolynomial” then it increases the exponent <code class="code docutils literal notranslate"><span class="pre">n</span></code> of <em>start ^ n mod poly</em> to get an approximate factor of <em>poly</em>, in general of degree “degree <code class="code docutils literal notranslate"><span class="pre">poly</span></code> <code class="code docutils literal notranslate"><span class="pre">-1&quot;</span></code>. Then a divisor cascade is calculated and the best splitting is chosen, as soon as the error is small enough.</p>
+<dt><span class="spadfun">pleskenSplit</span>: (UP, R) -&gt; <a class="reference internal" href="Factored.html#l466163746f726564"><span class="std std-ref">Factored</span></a> UP</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">pleskenSplit(poly,</span> <span class="pre">eps)</span></code> determines a start polynomial <em>start</em> by using “startPolynomial” then it increases the exponent <code class="code docutils literal notranslate"><span class="pre">n</span></code> of <em>start ^ n mod poly</em> to get an approximate factor of <em>poly</em>, in general of degree “degree <code class="code docutils literal notranslate"><span class="pre">poly</span></code> <code class="code docutils literal notranslate"><span class="pre">-1&quot;</span></code>. Then a divisor cascade is calculated and the best splitting is chosen, as soon as the error is small enough.</p>
 </dd>
 </dl>
 <dl class="simple" id="index-11">

@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>OneDimensionalArray S &#8212; FriCAS</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
     
-    <script src="../_static/documentation_options.js?v=6505e2d8"></script>
-    <script src="../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/documentation_options.js?v=3191e198"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -45,7 +45,7 @@
             
   <section id="onedimensionalarray-s">
 <span id="l4f6e6544696d656e73696f6e616c4172726179"></span><span id="index-0"></span><h1>OneDimensionalArray S<a class="headerlink" href="#onedimensionalarray-s" title="Link to this heading">¶</a></h1>
-<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/docfix/src/algebra/array1.spad#L460">array1.spad line 460</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/docfix/src/algebra/array1.spad#L460">[edit on github]</a></p>
+<p><a class="extlink-viewcode reference external" href="https://github.com/hemmecke/fricas/blob/wip/jfricas/src/algebra/array1.spad#L460">array1.spad line 460</a> <a class="extlink-editcode reference external" href="https://github.com/hemmecke/fricas/edit/wip/jfricas/src/algebra/array1.spad#L460">[edit on github]</a></p>
 <ul class="simple">
 <li><p>S: <a class="reference internal" href="Type.html#l54797065"><span class="std std-ref">Type</span></a></p></li>
 </ul>
@@ -250,6 +250,10 @@
 <dt><a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465-6d65726765"><span class="std std-ref">merge</span></a>: ((S, S) -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a>, %, %) -&gt; %</dt><dd><p>from <a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465"><span class="std std-ref">LinearAggregate</span></a> S</p>
 </dd>
 </dl>
+<dl class="simple" id="l4f6e6544696d656e73696f6e616c4172726179-6d657267655f756e69717565">
+<dt><a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465-6d657267655f756e69717565"><span class="std std-ref">merge_unique</span></a>: ((S, S) -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a>, %, %) -&gt; % if S has <a class="reference internal" href="BasicType.html#l426173696354797065"><span class="std std-ref">BasicType</span></a></dt><dd><p>from <a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465"><span class="std std-ref">LinearAggregate</span></a> S</p>
+</dd>
+</dl>
 <dl class="simple" id="l4f6e6544696d656e73696f6e616c4172726179-6d696e">
 <dt><a class="reference internal" href="HomogeneousAggregate.html#l486f6d6f67656e656f7573416767726567617465-6d696e"><span class="std std-ref">min</span></a>: % -&gt; S if S has <a class="reference internal" href="OrderedSet.html#l4f726465726564536574"><span class="std std-ref">OrderedSet</span></a></dt><dd><p>from <a class="reference internal" href="HomogeneousAggregate.html#l486f6d6f67656e656f7573416767726567617465"><span class="std std-ref">HomogeneousAggregate</span></a> S</p>
 </dd>
@@ -262,6 +266,10 @@
 </dl>
 <dl class="simple" id="l4f6e6544696d656e73696f6e616c4172726179-6d6f72653f">
 <dt><a class="reference internal" href="Aggregate.html#l416767726567617465-6d6f72653f"><span class="std std-ref">more?</span></a>: (%, <a class="reference internal" href="NonNegativeInteger.html#l4e6f6e4e65676174697665496e7465676572"><span class="std std-ref">NonNegativeInteger</span></a>) -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a></dt><dd><p>from <a class="reference internal" href="Aggregate.html#l416767726567617465"><span class="std std-ref">Aggregate</span></a></p>
+</dd>
+</dl>
+<dl class="simple" id="l4f6e6544696d656e73696f6e616c4172726179-6e656761746976653f">
+<dt><a class="reference internal" href="OrderedSet.html#l4f726465726564536574-6e656761746976653f"><span class="std std-ref">negative?</span></a>: % -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a> if S has <a class="reference internal" href="OrderedSet.html#l4f726465726564536574"><span class="std std-ref">OrderedSet</span></a> and % has <a class="reference internal" href="SetWithZero.html#l536574576974685a65726f"><span class="std std-ref">SetWithZero</span></a></dt><dd><p>from <a class="reference internal" href="OrderedSet.html#l4f726465726564536574"><span class="std std-ref">OrderedSet</span></a></p>
 </dd>
 </dl>
 <dl class="simple" id="l4f6e6544696d656e73696f6e616c4172726179-6e6577">
@@ -286,6 +294,10 @@
 <dt><a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465-706f736974696f6e"><span class="std std-ref">position</span></a>: (S, %) -&gt; <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a> if S has <a class="reference internal" href="BasicType.html#l426173696354797065"><span class="std std-ref">BasicType</span></a></dt><dd><p>from <a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465"><span class="std std-ref">LinearAggregate</span></a> S</p>
 </dd>
 <dt><a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465-706f736974696f6e"><span class="std std-ref">position</span></a>: (S, %, <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>) -&gt; <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a> if S has <a class="reference internal" href="BasicType.html#l426173696354797065"><span class="std std-ref">BasicType</span></a></dt><dd><p>from <a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465"><span class="std std-ref">LinearAggregate</span></a> S</p>
+</dd>
+</dl>
+<dl class="simple" id="l4f6e6544696d656e73696f6e616c4172726179-706f7369746976653f">
+<dt><a class="reference internal" href="OrderedSet.html#l4f726465726564536574-706f7369746976653f"><span class="std std-ref">positive?</span></a>: % -&gt; <a class="reference internal" href="Boolean.html#l426f6f6c65616e"><span class="std std-ref">Boolean</span></a> if S has <a class="reference internal" href="OrderedSet.html#l4f726465726564536574"><span class="std std-ref">OrderedSet</span></a> and % has <a class="reference internal" href="SetWithZero.html#l536574576974685a65726f"><span class="std std-ref">SetWithZero</span></a></dt><dd><p>from <a class="reference internal" href="OrderedSet.html#l4f726465726564536574"><span class="std std-ref">OrderedSet</span></a></p>
 </dd>
 </dl>
 <dl class="simple" id="l4f6e6544696d656e73696f6e616c4172726179-71656c74">
@@ -338,6 +350,10 @@
 <dt><a class="reference internal" href="EltableAggregate.html#l456c7461626c65416767726567617465-736574656c7421"><span class="std std-ref">setelt!</span></a>: (%, <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>, S) -&gt; S</dt><dd><p>from <a class="reference internal" href="EltableAggregate.html#l456c7461626c65416767726567617465"><span class="std std-ref">EltableAggregate</span></a>(<a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>, S)</p>
 </dd>
 <dt><a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465-736574656c7421"><span class="std std-ref">setelt!</span></a>: (%, <a class="reference internal" href="UniversalSegment.html#l556e6976657273616c5365676d656e74"><span class="std std-ref">UniversalSegment</span></a> <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a>, S) -&gt; S</dt><dd><p>from <a class="reference internal" href="LinearAggregate.html#l4c696e656172416767726567617465"><span class="std std-ref">LinearAggregate</span></a> S</p>
+</dd>
+</dl>
+<dl class="simple" id="l4f6e6544696d656e73696f6e616c4172726179-7369676e">
+<dt><a class="reference internal" href="OrderedSet.html#l4f726465726564536574-7369676e"><span class="std std-ref">sign</span></a>: % -&gt; <a class="reference internal" href="Integer.html#l496e7465676572"><span class="std std-ref">Integer</span></a> if S has <a class="reference internal" href="OrderedSet.html#l4f726465726564536574"><span class="std std-ref">OrderedSet</span></a> and % has <a class="reference internal" href="SetWithZero.html#l536574576974685a65726f"><span class="std std-ref">SetWithZero</span></a></dt><dd><p>from <a class="reference internal" href="OrderedSet.html#l4f726465726564536574"><span class="std std-ref">OrderedSet</span></a></p>
 </dd>
 </dl>
 <dl class="simple" id="l4f6e6544696d656e73696f6e616c4172726179-73697a653f">
