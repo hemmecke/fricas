@@ -1,0 +1,108 @@
+)abbrev package JVIEW JFriCASView
+JFriCASView() : Exports == Implementation where
+  rep x ==> (x@%) pretend Rep
+  per x ==> (x@Rep) pretend %
+
+  I    ==> Integer
+  XYP  ==> Record(X : PositiveInteger, Y : PositiveInteger)
+  XYNN ==> Record( X : NonNegativeInteger, Y : NonNegativeInteger )
+  SF   ==> DoubleFloat
+  FLAG ==> Record( showCP : I )
+  PAL  ==> Palette()
+  GS   ==> Record( scaleX : SF, scaleY : SF, deltaX : SF, deltaY : SF, _
+                  points : I, connect : I, spline : I, _
+                  axes : I, axesColor : PAL, units : I, unitsColor : PAL, _
+                  showing : I)
+  GU   ==> Union(GraphImage,"undefined")
+  LDO  ==> List(DrawOption)
+  RepView2D ==> Record(key : I, graphsField : Vector GU,_
+                       graphStatesField : Vector GS, title : String,_
+                       moveTo : XYNN, size : XYP, flags : FLAG,_
+                       optionsField : LDO)
+  VPnt ==> Record(theta : SF, phi : SF, scale : SF, scaleX : SF, scaleY : SF,
+                 scaleZ : SF, deltaX : SF, deltaY : SF)
+  COL   ==> Record( hueOffset : I, hueNumber : I)
+  LR  ==> Record(lightX : SF, lightY : SF, lightZ : SF, lightTheta : SF,
+                 lightPhi : SF, translucence : SF)
+  PR  ==> Record( perspectiveField : I, eyeDistance : SF, hitherPlane : SF)
+  VR  ==> Record(clipXMin : SF, clipXMax : SF, clipYMin : SF, clipYMax : SF,
+                   clipZMin : SF, clipZMax : SF, clipRegionField : I,
+                   clipSurfaceField : I)
+  RepView3D ==> Record(key : I, fun : I, title : String, moveTo : XYNN,_
+                       size : XYP, viewpoint : VPnt, colors : COL,
+                       flags : FLAG, lighting : LR, perspective : PR,_
+                       volume : VR, space3D : ThreeSpace SF,_
+                       optionsField : L DROP)
+
+  HANDLER ==> (Integer, List OutputForm) -> OutputBox
+  H ==> HANDLER
+  BOX ==> OutputBox
+  nl ==> (newline()$Character) :: String
+  Exports ==> with
+    coerce : TwoDimensionalViewport -> %
+    coerce : ThreeDimensionalViewport -> %
+    coerce : % -> OutputForm
+    concatHandler: H -> H
+  Implementation ==> add
+    Rep ==> String
+
+    -- local
+    escapeFileName(s: String): String ==
+        t: String := ""
+        for i in 1..#s repeat
+            p := position(s.i, ";$()[]")
+            if p>0 then t := concat(t, "\")
+            t := concat(t, s.i)
+        return t
+
+    readBase64(fname: FileName): String ==
+        fh := open(fname, "input")$TextFile
+        ls: List String := []
+        while not endOfFile? fh repeat ls := cons(readLine! fh, ls)
+        close! fh
+        join(nl, rest reverse! rest ls)
+
+    COMMONCOERCECODE dir ==>
+        fnbase: String := dir ".VIEW/image"
+        write(viewport, dir, "Postscript")
+        systemCommand(concat["system pstoimg -type png -crop a ",
+                             fnbase, ".ps"]) $ MoreSystemCommands
+        systemCommand(concat["system uuencode -m ", fnbase,_
+                             ".png /dev/stdout > ", fnbase ".b64"]_
+                     ) $ MoreSystemCommands
+        fn: FileName := concat(fnbase, ".b64") :: FileName
+        b64: String := readBase64 fn
+        img := concat["<img src=_"data:image/png;base64,", nl, b64, "_" />"]
+        per img
+
+    coerce(viewport: TwoDimensionalViewport): % ==
+        key viewport = 0$I =>
+            error["Closed or Undefined TwoDimensionalViewport: ",
+                  (viewport pretend RepView2D).title]
+        COMMONCOERCECODE "/tmp/v2d"
+
+    coerce(viewport: ThreeDimensionalViewport): % ==
+        key viewport = 0$I =>
+            error["Closed or Undefined ThreeDimensionalViewport: ",
+                  (viewport pretend RepView3D).title]
+        COMMONCOERCECODE "/tmp/v3d"
+
+    coerce(x: %): OutputForm ==
+        canvas := "CANVAS"::Symbol::OutputForm
+        jfricasview := "JFriCASView"::Symbol::OutputForm
+        hconcat([canvas, jfricasview, rep(x)::OutputForm])$OutputForm
+
+    concatHandler(hh: H): H == (prec: Integer, args: List OutputForm): BOX +->
+        MAX ==> maxPrecedence()$FormatMathJax
+        empty? args => box ""
+        -- For (CONCAT CANVAS "JFricasView" "image-data") we assume that
+        -- name/image.b64 is a file with the base64 data of a PNG
+        -- file.
+        canvas := "CANVAS"::Symbol::OutputForm
+        jfricasview := "JFriCASView"::Symbol::OutputForm
+        #args = 3 and args.1 = canvas and args.2 = jfricasview =>
+            img := string(convert(args.3)@InputForm)
+            box concat ["--CONTENT:TYPE:text/html", nl, img, nl]
+        l: List BOX := [hh(MAX, [first args])]
+        for a in rest args repeat l := cons(hh(prec, [a]), l)
+        hconcat reverse! l

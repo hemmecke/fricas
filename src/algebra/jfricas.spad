@@ -376,6 +376,7 @@ JFriCAS: Exports == Implementation where
                     step := nstep
 
             content: String := ""
+            contents: List String := []
             end_marker := "--FORMAT:END:" y
 
             -- Formatted is only a wrapper for the formatted
@@ -397,10 +398,29 @@ JFriCAS: Exports == Implementation where
                 fcontent: String := formatTypeTimeStorage content
                 outputs := cons("{_"text/html_": _"" fcontent "_"}", outputs)
 
+            -- number of lines to remove from the end of content.
+            contentLinesToRemove: NN := 0
+
             -- Map formats to content types (ignoring formats that
             -- default to content_type = 'text/plain')
             if f = "FormatMathJax" then
                 content_type := "text/latex"
+                -- According to setFormats $ JFriCASSupport, MathJax
+                -- output starts with '--FORMAT:BEG:FormatMathJax'
+                -- followed by the defaultPrologue of FormatMathJax.
+                -- In case the second line after
+                -- '--FORMAT:BEG:FormatMathJax' starts with
+                -- '--CONTENT:TYPE:', we take the value that follows
+                -- it as the new content type and additionally ignore
+                -- the last line of the content, i.e, we ignore the
+                -- closing epilogue of FormatMathJax.
+                if not empty? lines and not empty? rest lines then
+                    z: String := lines.2
+                    if #z >= 15 and z(1..15) = "--CONTENT:TYPE:" then
+                        content_type := z(16..)
+                        lines := rest rest lines
+                        contentLinesToRemove := 1
+
             else if member?(f, ["MathML", "HTML"]) then
                 content_type := "text/html"
             else if f = "TeX" then
@@ -419,8 +439,9 @@ JFriCAS: Exports == Implementation where
                 line: String := jsonEscapeString first lines
                 lines := rest lines
                 if line = end_marker then break
-                content := concat(content, line "\n")
+                contents := cons(line "\n", contents)
 
+            content := concat reverse! rest(contents, contentLinesToRemove)
             outputs := cons("{_"" content_type "_": _"" content "_"}", outputs)
 
         -- Append the final block of outputs after the loop finishes
@@ -774,7 +795,7 @@ JFriCAS: Exports == Implementation where
         w "    # Uncomment or edit as you like."
 
         w "    # Default:"
-        w "    ## pid = Popen(['fricas','-eval',start])"
+        w "    pid = Popen(['fricas','-eval',start])"
         w ""
         w "    # Start the FriCAS process in a separate terminal."
         w "    # That might be good for controlling FriCAS directly in case"
@@ -792,8 +813,8 @@ JFriCAS: Exports == Implementation where
         w "    # The following does currently not work."
         w "    ## pid = Popen(['fricas','-nosman','-eval',start])"
         w "    # but"
-        w "    pid = Popen(['gnome-terminal', '--title=jfricas', '--'] +"
-        w "                ['fricas','-nosman','-eval',start])"
+        w "    ##pid = Popen(['gnome-terminal', '--title=jfricas', '--'] +"
+        w "    ##            ['fricas','-nosman','-eval',start])"
         w "    # does."
         w ""
         w "    # Start the kernel."
